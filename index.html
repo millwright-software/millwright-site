@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Millwright Software</title>
+<meta name="description" content="Millwright Software — small, well-made software.">
+<link rel="icon" type="image/png" href="assets/millwright-mark-180.png">
+<link rel="apple-touch-icon" href="assets/millwright-mark-180.png">
+<meta property="og:title" content="Millwright Software">
+<meta property="og:description" content="Small, well-made software.">
+<meta property="og:image" content="https://millwrightsoftware.com/assets/millwright-mark.png">
+<style>
+  :root {
+    --paper: #eceae4;
+    --ink: #22241f;
+    --ink-soft: #55584f;
+    --line: #c9c6bc;
+    --brass: #9a7a2e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191a17;
+      --ink: #e4e2da;
+      --ink-soft: #9a9c92;
+      --line: #34362f;
+      --brass: #c89b4b;
+    }
+  }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1;
+    width: min(560px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 14vh 0 48px;
+  }
+
+  /* stamped nameplate */
+  .plate h1 img {
+    vertical-align: -5px;
+    margin: 0 .55em 0 .28em; /* right margin larger: the tracking already pads the left */
+  }
+  .plate {
+    display: inline-block;
+    border: 1.5px solid var(--ink);
+    padding: 14px 20px 12px;
+  }
+  .plate h1 {
+    margin: 0;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: clamp(17px, 4.4vw, 22px);
+    font-weight: 700;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+  }
+
+  .lede {
+    margin: 28px 0 0;
+    font-size: 17px;
+    color: var(--ink-soft);
+  }
+
+  .works {
+    margin-top: 44px;
+    border-top: 1px solid var(--line);
+  }
+  .work {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .work .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .work a {
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--brass);
+    padding-bottom: 1px;
+  }
+  .work a:hover { color: var(--brass); }
+  .work a:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+    border-bottom-color: transparent;
+  }
+  .work-name {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .tag {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+  .work p {
+    margin: 8px 0 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+
+  footer {
+    flex: none;
+    width: min(560px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 0 0 28px;
+  }
+  footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  footer img {
+    opacity: .85;
+  }
+  footer p {
+    margin: 0;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="plate">
+    <h1>Millwright<img src="assets/millwright-mark-180.png" alt="" width="28" height="28">Software</h1>
+  </div>
+
+  <div class="works">
+    <div class="work">
+      <div class="row">
+        <a href="https://xpose24.app">xpose24</a>
+        <span class="tag">Now developing</span>
+      </div>
+      <p>A slow film camera for iPhone. 24 shots on a roll, a real wait, a real reveal. Photos never leave your phone.</p>
+    </div>
+    <div class="work">
+      <div class="row">
+        <a href="https://github.com/millwright-software/brother-wifi-setup">Brother WiFi Setup</a>
+        <span class="tag">Released</span>
+      </div>
+      <p>A revival of Brother's discontinued wireless setup wizard, for legacy printers on modern macOS.</p>
+    </div>
+  </div>
+
+  <p class="lede">Small, well-made software.</p>
+</main>
+
+<footer>
+  <p>© 2026 Millwright Software</p>
+</footer>
+</body>
+</html>
