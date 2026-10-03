@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GeoFun — geocaching for the kid who wants to hold the phone</title>
+<meta name="description" content="GeoFun is a geocaching app for children 4 to 8 to hold themselves. Sonar, buzz, feet counted down, the clue read aloud, a sticker when they find it. Built by Millwright Software.">
+<link rel="icon" type="image/png" href="../assets/millwright-mark-180.png">
+<link rel="apple-touch-icon" href="../assets/millwright-mark-180.png">
+<meta property="og:title" content="GeoFun — geocaching for the kid who wants to hold the phone">
+<meta property="og:description" content="Every geocaching app is built for the adult doing the caching. GeoFun is built for the child.">
+<meta property="og:image" content="https://millwrightsoftware.com/geofun/img/og.png">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --paper: #eceae4;
+    --ink: #22241f;
+    --ink-soft: #55584f;
+    --line: #c9c6bc;
+    --brass: #9a7a2e;
+    --forest: #2f6b3e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191a17;
+      --ink: #e4e2da;
+      --ink-soft: #9a9c92;
+      --line: #34362f;
+      --brass: #c89b4b;
+      --forest: #7fbf8e;
+    }
+  }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--ink); }
+  a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+  main {
+    flex: 1;
+    width: min(920px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 7vh 0 48px;
+  }
+
+  /* nameplate, linking home */
+  .plate {
+    display: inline-block;
+    border: 1.5px solid var(--ink);
+    padding: 9px 14px 8px;
+    text-decoration: none;
+  }
+  .plate:hover { border-color: var(--brass); color: var(--brass); }
+  .plate span {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+  }
+  .plate img { vertical-align: -4px; margin: 0 .5em 0 .25em; }
+
+  .tag {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
+  header.hero { margin-top: 56px; max-width: 640px; }
+  header.hero .tag { display: block; margin-bottom: 14px; }
+  h1 {
+    margin: 0;
+    font-size: clamp(40px, 7vw, 64px);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1;
+    color: var(--forest);
+  }
+  .lede {
+    margin: 18px 0 0;
+    font-size: clamp(19px, 2.6vw, 23px);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+  .hero p.body {
+    margin: 18px 0 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+
+  /* the screens */
+  .screens {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px 18px;
+  }
+  @media (max-width: 760px) { .screens { grid-template-columns: repeat(2, 1fr); } }
+  .screens figure { margin: 0; }
+  .screens img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 9%/4.2%;
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  }
+  .screens figcaption {
+    margin-top: 10px;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+  .screens figcaption b {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  /* sections */
+  section { margin-top: 64px; }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 760px) { .cols { grid-template-columns: 1fr; gap: 32px; } }
+  h2 {
+    margin: 0 0 14px;
+    font-size: 13px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--brass);
+    font-weight: 700;
+  }
+  ul { margin: 0; padding: 0; list-style: none; }
+  li {
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  li:last-child { border-bottom: 1px solid var(--line); }
+  li b { color: var(--ink); font-weight: 600; }
+
+  .status {
+    margin-top: 64px;
+    padding: 22px 24px;
+    border: 1.5px solid var(--ink);
+    max-width: 640px;
+  }
+  .status p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); }
+  .status p + p { margin-top: 10px; }
+  .status a { border-bottom: 1px solid var(--brass); text-decoration: none; padding-bottom: 1px; }
+  .status a:hover { color: var(--brass); }
+
+  footer {
+    flex: none;
+    width: min(920px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 0 0 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  footer p {
+    margin: 0;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+<main>
+  <a class="plate" href="../"><span>Millwright<img src="../assets/millwright-mark-180.png" alt="" width="22" height="22">Software</span></a>
+
+  <header class="hero">
+    <span class="tag">iPhone · in family field test</span>
+    <h1>GeoFun</h1>
+    <p class="lede">Every geocaching app is built for the adult doing the caching. GeoFun is built for the kid who wants to hold the phone.</p>
+    <p class="body">Hand a five- or seven-year-old the phone. It pings faster as they get closer, buzzes when they point it the right way, counts the feet down, and reads the clue out loud in words they know. When they find the box, they take the picture and earn a sticker on their adventure map. In the car, it pings when treasure is nearby.</p>
+  </header>
+
+  <div class="screens">
+    <figure>
+      <img src="img/01-home.webp" alt="GeoFun home screen: Go Hunting, Sticker Map, Car Radar" width="720" height="1565" loading="eager">
+      <figcaption><b>Three buttons</b>A kid can read them. The leaf is the grown-up door.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/02-list.webp" alt="Treasure nearby list with distances in feet and a Grown-up help badge" width="720" height="1565">
+      <figcaption><b>Treasure nearby</b>Distances in feet. Hard ones wear a “Grown-up help” badge. Nothing is hidden.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/03-hunt-fun.webp" alt="Hunt screen: sonar rings, 300 feet, Clue and Looks like buttons, FOUND IT press and hold" width="720" height="1565">
+      <figcaption><b>The hunt</b>Sonar, buzz, feet counting down. FOUND IT is a press-and-hold, so it can’t happen by accident. “We can’t find it” still earns a sticker.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/04-tracker.webp" alt="Tracker mode: green motion-tracker fan with range 149 feet and bearing 180 degrees" width="720" height="1565">
+      <figcaption><b>Tracker mode</b>For the older kid. One blip, range and bearing, nothing announced.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/05-edgescan.webp" alt="Terrain scan: satellite edges in green, 40 feet, averaged GPS fix" width="720" height="1565">
+      <figcaption><b>Inside fifty feet</b>GPS can’t walk a kid to the box, so it stops pretending. Averaged fix, terrain edges, look around here.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/06-closeup.webp" alt="Close-up satellite map with the treasure star and 'Look for a shoebox-size green can-shaped box'" width="720" height="1565">
+      <figcaption><b>Looks like</b>The same moment for the younger kid: satellite, star, what the box looks like.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/07-map.webp" alt="Ranger Team's sticker map on satellite imagery with one sticker earned" width="720" height="1565">
+      <figcaption><b>Sticker map</b>Every find is a sticker with the photo they took. Photos stay in the app.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/08-radar.webp" alt="Car Radar: green radar scope over a map with nearby treasure listed by distance" width="720" height="1565">
+      <figcaption><b>Car radar</b>Pings when treasure is near on a drive. Road directions for the driver that speak twice per turn, no more.</figcaption>
+    </figure>
+  </div>
+
+  <section class="cols">
+    <div>
+      <h2>Built for small hands</h2>
+      <ul>
+        <li><b>The clue is rewritten for kids.</b> “Find the biggest oak tree you can see. Look at the bottom where flat stones are.”</li>
+        <li><b>It talks.</b> The clue, the countdown, the cheer. A real voice, not a robot.</li>
+        <li><b>Finding is a hold, not a tap.</b> A grown-up is beside them; the phone just makes sure.</li>
+        <li><b>A Brave Try sticker</b> when they can’t find it, so a DNF is still a good day.</li>
+        <li><b>Two moods.</b> Fun mode pings and chimes. Tracker mode is calm and sci-fi for the kid who’s outgrown chimes.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Built for grown-ups to trust</h2>
+      <ul>
+        <li><b>Every grown-up function</b> sits behind a two-second hold and a multiplication problem.</li>
+        <li><b>No child accounts.</b> The parent signs in. The kid never touches geocaching.com.</li>
+        <li><b>No ads, no analytics,</b> no third-party anything. Photos never leave the app.</li>
+        <li><b>Kid guidance locks</b> above walking speed. In the car, only the driver gets directions.</li>
+        <li><b>Honest about GPS.</b> Inside the search zone it says “look around here” instead of pointing at a spot it can’t know.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="status">
+    <p><b>Where it stands.</b> In field test with our own kids since September 2026. It imports GPX pocket queries today; an application to the Geocaching API partner program is in. Hints and full details need a Geocaching Premium membership, so GeoFun is a Premium household’s app.</p>
+    <p>Want to try it, or talk about it? <a href="mailto:erichey@gmail.com?subject=GeoFun">erichey@gmail.com</a>. A TestFlight build is available on request.</p>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 Millwright Software</p>
+</footer>
+</body>
+</html>
