@@ -283,6 +283,8 @@
   const mv = (pts, dx, dy) => pts.map(q => [q[0] + dx, q[1] + dy]), flip = pts => pts.map(q => [1000 - q[0], q[1]]);
   const spikes = (cx, cy, r, a0, a1, n, len) => { const o = [[cx, cy]]; for (let i = 0; i <= n * 2; i++) { const a = mix(a0, a1, i / (n * 2)) * RAD, rr = i % 2 ? r + len * (.12 + rnd() * .15) : r + len * (.55 + rnd() * .45); o.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]); } return o; };
   const locks = (x0, x1, y, len, n) => { const o = [[x0, y - 8], [x1, y - 8]], w = (x1 - x0) / n; for (let i = n; i >= 0; i--) { const x = x0 + i * w; o.push([x + 1, y + len * (.5 + rnd() * .5)], [x - w * .5, y + len * .12]); } return o; };
+  const fan = (cx, cy, r, a0, a1, n, len, w, sweep) => { const o = []; for (let i = 0; i < n; i++) { const a = mix(a0, a1, (i + .5) / n) * RAD, l = len * (.7 + rnd() * .5), s = sweep * RAD, ca = Math.cos(a), sa = Math.sin(a), cs = Math.cos(a + s), ss = Math.sin(a + s), px = -sa, py = ca;
+    o.push(cut([[cx + ca * r * .55 - px * w, cy + sa * r * .55 - py * w], [cx + ca * (r + l * .45) - px * w * .8, cy + sa * (r + l * .45) - py * w * .8], [cx + cs * (r + l), cy + ss * (r + l)], [cx + ca * (r + l * .3) + px * w * .7, cy + sa * (r + l * .3) + py * w * .7], [cx + ca * r * .55 + px * w, cy + sa * r * .55 + py * w]], w / 14, w * .7)); } return o; };
   const dome = (cx, cy, rx, ry, n = 10) => { const o = []; for (let i = 0; i <= n; i++) { const a = (180 + 180 * i / n) * RAD; o.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]); } return o; };
 
   // ---------- Sprites: a piece and its shadow, each drawn once ----------
@@ -323,7 +325,7 @@
     P.head = piece([hd, ear], head(0)); P.headG = piece([hd, ear], head(1));
     const hb = spikes(-4, -2, o.hr[0] + 1, 92, 300, 11, o.hl), hb2 = spikes(-7, -4, o.hr[0] - 5, 140, 270, 7, o.hl * .6);
     P.hairB = piece([hb], g => { paper(g, path(hb), o.hair); paper(g, path(hb2), o.hairL, null, 0); });
-    const fr = locks(-6, 31, -21, 11, 6), side = locks(-35, -10, -19, 24, 4);
+    const fr = locks(-6, 31, -21, 11, 6), side = locks(-36, -10, -19, o.freck ? 30 : 24, 4);
     P.fringe = piece([fr, side], g => { paper(g, path(side), o.hair, [2, 1, .3]); paper(g, path(fr), o.hair, [2, 1, .3]); paper(g, path(locks(0, 24, -22, 6, 4)), o.hairL, null, 0); });
     P.hat = o.hat();
     return P;
@@ -338,9 +340,9 @@
   const SMALL = { id: 1, s: .84, sk: '#f5cba4', sk2: '#dfb08a', rimS: '#fde2c4', sh: '#3f6e4c', sh2: '#2f553a', shoe: '#e0603f', shoe2: '#b84a30', top: '#f2c443', top2: '#d6a72a', rim: '#fde49a',
     hair: '#d6b066', hairL: '#ecd39a', brow: '#a87c3e', eye: 1.1, hr: [33, 32], hl: 13, freck: 1,
     shirtX: g => paper(g, path(cut([[-15, -92], [15, -92], [11, -82], [0, -78], [-11, -82]], .4, 6)), '#e3ad2c', [2, 1, .25], 0),
-    hat: () => { const hm = cut([...dome(0, -17, 38, 35, 12), [34, -16], [0, -22], [-30, -14]], .5, 9);
-      return piece([hm], g => { paper(g, path(hm), '#e0603f', [2.5, 1.2, .3]); paper(g, path(cut([...dome(-6, -18, 28, 28, 6).slice(0, 5), [-4, -22]], .4, 8)), '#f08a62', null, 0);
-        paper(g, path(cut(band(0, -17, 38, 35, .86, .72), .4, 8)), '#fbf3e6', null, 0); paper(g, path(cut(band(0, -17, 38, 35, .5, .38), .4, 8)), '#fbf3e6', null, 0); }); } };
+    hat: () => { const cr = spikes(0, -4, 31, 196, 344, 9, 14), cr2 = spikes(2, -8, 26, 210, 330, 6, 9), tuft = cut([[-6, -36], [-2, -52], [4, -38], [12, -50], [14, -34]], .4, 30);
+      return piece([cr, tuft], g => { paper(g, path(tuft), '#d6b066', [2, 1, .3]); paper(g, path(cr), '#d6b066', [2.5, 1.2, .3]); paper(g, path(cr2), '#ecd39a', null, 0);
+        paper(g, path(locks(-4, 28, -24, 13, 6)), '#d6b066', [2, 1, .3]); }); } };
   function dogParts() { const D = {}, W = '#fbfaf5', G = '#dde1ea', G2 = '#c9cfdc';
     const coat = cut(oval(0, -48, 60, 30, 16, .06), 2.6, 5), skirt = cut([[-58, -44], [58, -44], [56, -22], [40, -12], [20, -16], [0, -9], [-20, -15], [-42, -11], [-58, -24]], 3, 5);
     D.body = piece([coat, skirt], g => { paper(g, path(mv(skirt, 0, 3)), G2, null, 0); paper(g, path(skirt), G, [3, 1.5, .25], .5); paper(g, path(coat), W, [3, 1.5, .25], .6);
@@ -363,8 +365,10 @@
     const fw = cut([[0, 0], [-6, -15], [-19, -19], [-21, -6], [-8, 2]], .4, 5), hw = cut([[0, 1], [-12, 4], [-15, 13], [-5, 16], [0, 6]], .4, 5);
     BF = { w: piece([fw, hw], g => { paper(g, path(fw), '#f39a3d', [1.5, .8, .3], .4); paper(g, path(hw), '#f7b65a', [1.5, .8, .3], .4); paper(g, path(oval(-15, -13, 2.6, 2.6, 6)), '#5a2e10', null, 0); paper(g, path(oval(-10, 10, 2.2, 2.2, 6)), '#5a2e10', null, 0); }),
       b: piece([capP(18, 3.6, 3)], (g, p) => paper(g, p, '#3a2a1c', null, 0)) };
-    const bx = cut([[-30, -36], [30, -36], [30, 2], [-30, 2]], .6, 10), lid = cut([[-32, -43], [32, -43], [32, -29], [-32, -29]], .5, 10);
-    BOX = piece([bx, lid], g => { paper(g, path(bx), '#7a5636'); paper(g, path(lid), '#5f4128', [2, 1, .3]); paper(g, path(cut([[-30, -43], [8, -43], [8, -40], [-30, -40]], .3, 10)), '#a07a52', null, 0); paper(g, path(oval(0, -17, 5.5, 5.5, 8)), '#f7c948', [1, .5, .3], 0); });
+    const bx = cut([[-28, -30], [28, -30], [28, 2], [-28, 2]], .5, 10), lid = cut([[-30, -36], [30, -36], [30, -27], [-30, -27]], .4, 10), hdl = cut([[-12, -42], [12, -42], [12, -36], [8, -36], [8, -39], [-8, -39], [-8, -36], [-12, -36]], .2, 30);
+    BOX = piece([bx, lid, hdl], g => { paper(g, path(hdl), '#3f4428', [1, .5, .3], 0); paper(g, path(bx), '#5d6638'); paper(g, path(cut([[-28, -26], [-22, -26], [-22, 2], [-28, 2]], .3, 30)), '#6f7a45', null, 0);
+      paper(g, path(lid), '#4b522e', [2, 1, .3]); paper(g, path(cut([[22, -34], [31, -34], [31, -14], [22, -14]], .3, 30)), '#3f4428', [1.5, .8, .3], 0);
+      paper(g, path(cut([[-14, -20], [10, -20], [10, -10], [-14, -10]], .3, 30)), '#c9c39a', null, 0); [-11, -6, -1, 4].forEach(x => paper(g, path([[x, -17], [x + 3, -17], [x + 3, -13], [x, -13]]), '#4b522e', null, 0)); });
     const tf = cut([[-12, 0], [-8, -16], [-4, -5], [1, -20], [5, -6], [10, -14], [12, 0]], .5, 30); TUFT = piece([tf], (g, p) => paper(g, p, '#4f8a36', null, 0));
     const gs = oval(0, 0, 36, 7, 16, 0); GS = shade(bbox([gs]), path(gs), 5);
     const cols = ['#f7c948', '#5fa6d4', '#e4643b', '#9b6fd0', '#7fae48', '#fffaf0', '#f2897a', '#ffb347'];
@@ -425,7 +429,7 @@
     paper(g, path(cut([[150, 1400], [170, 1060], [280, 900], [360, 870], [300, 1000], [280, 1400]], 3, 30)), '#fde49a', null, 0);
     paper(g, path(cut([[440, 740], [560, 740], [565, 880], [435, 880]], 2, 20)), '#e2b28c', [10, 4, .3]);
     paper(g, path(cut([[400, 870], [500, 920], [600, 870], [612, 900], [500, 958], [388, 900]], 2, 20)), '#e3ad2c', [6, 2, .25]);
-    paper(g, path(spikes(495, 560, 252, 140, 400, 26, 58)), '#d6b066', [14, 5, .3]); paper(g, path(spikes(490, 550, 240, 165, 375, 18, 34)), '#ecd39a', null, 0);
+    fan(500, 600, 220, 110, 190, 6, 70, 40, 18).forEach(l => paper(g, path(l), '#d6b066', [12, 4, .3])); fan(500, 600, 220, 350, 430, 6, 70, 40, -18).forEach(l => paper(g, path(l), '#d6b066', [12, 4, .3]));
     paper(g, path(oval(268, 612, 34, 48, 12)), '#efc39b', [8, 3, .3]); paper(g, path(oval(732, 612, 34, 48, 12)), '#e3b28d', [8, 3, .3]);
     paper(g, path(hd), sk, [18, 6, .32]); g.save(); g.clip(path(hd)); paper(g, path(cut([[250, 300], [330, 320], [292, 560], [330, 800], [250, 820]], 3, 30)), '#fde0bf', null, 0);
     paper(g, path(cut([[760, 320], [702, 330], [722, 560], [692, 790], [760, 800]], 3, 30)), '#ecbb95', null, 0); g.restore();
@@ -435,12 +439,14 @@
     paper(g, path(cut([[470, 622], [500, 600], [528, 622], [518, 652], [482, 652]], 1.5, 14)), '#e8a985', [6, 2, .25], 0);
     [[440, 622], [462, 642], [420, 648], [560, 622], [538, 642], [580, 648], [452, 600], [548, 600]].forEach(f => paper(g, path(oval(f[0], f[1], 6, 5, 5)), '#c9845a', null, 0));
     paper(g, path(mo), '#7d2b22', [8, 3, .3], 0); g.save(); g.clip(path(mo)); paper(g, path(cut([[370, 670], [500, 692], [630, 670], [620, 710], [500, 726], [380, 710]], 1.5, 20)), '#fffaf0', null, 0); paper(g, path(oval(500, 790, 74, 34, 14)), '#e57b6c', null, 0); g.restore();
-    paper(g, path(locks(296, 694, 384, 70, 9)), '#d6b066', [10, 4, .3]); paper(g, path(locks(340, 650, 376, 40, 7)), '#ecd39a', null, 0);
-    const hm = cut([...dome(500, 392, 272, 176, 16), [752, 396], [500, 374], [248, 396]], 2.5, 24); paper(g, path(hm), '#e0603f', [16, 6, .32]);
-    paper(g, path(cut([...dome(470, 388, 210, 150, 10).slice(0, 6), [450, 320]], 2, 24)), '#f08a62', null, 0);
-    paper(g, path(cut(band(500, 392, 272, 176, .8, .7), 1.5, 24)), '#fbf3e6', null, 0); paper(g, path(cut(band(500, 392, 272, 176, .46, .37), 1.5, 24)), '#fbf3e6', null, 0);
-    paper(g, path(cut([[350, 900], [650, 900], [650, 1090], [350, 1090]], 2, 30)), '#7a5636', [14, 5, .3]); paper(g, path(cut([[338, 878], [662, 878], [662, 930], [338, 930]], 2, 30)), '#5f4128', [8, 3, .3]);
-    paper(g, path(cut([[338, 878], [500, 878], [500, 890], [338, 890]], 1, 30)), '#a07a52', null, 0); paper(g, path(oval(500, 978, 22, 22, 10)), '#f7c948', [4, 2, .3], 0);
+        fan(500, 540, 236, 188, 352, 13, 70, 44, 14).forEach((l, i) => paper(g, path(l), i % 3 ? '#d6b066' : '#c99f55', [10, 4, .28]));
+    fan(500, 530, 212, 200, 340, 9, 46, 34, -10).forEach(l => paper(g, path(l), '#e6c784', [8, 3, .25]));
+    fan(492, 520, 180, 215, 325, 6, 30, 26, 16).forEach(l => paper(g, path(l), '#f0d89e', null, 0));
+    paper(g, path(locks(300, 700, 400, 78, 10)), '#d6b066', [10, 4, .3]); paper(g, path(locks(360, 640, 392, 40, 6)), '#ecd39a', null, 0);
+    paper(g, path(cut([[420, 838], [580, 838], [580, 866], [556, 866], [556, 852], [444, 852], [444, 866], [420, 866]], 1, 40)), '#3f4428', [6, 2, .3], 0);
+    paper(g, path(cut([[340, 910], [660, 910], [660, 1100], [340, 1100]], 2, 30)), '#5d6638', [14, 5, .3]); paper(g, path(cut([[340, 910], [380, 910], [380, 1100], [340, 1100]], 1, 40)), '#6f7a45', null, 0);
+    paper(g, path(cut([[328, 872], [672, 872], [672, 924], [328, 924]], 2, 30)), '#4b522e', [8, 3, .3]); paper(g, path(cut([[612, 884], [668, 884], [668, 1000], [612, 1000]], 1.5, 40)), '#3f4428', [6, 2, .3], 0);
+    paper(g, path(cut([[420, 960], [570, 960], [570, 1018], [420, 1018]], 1.5, 40)), '#c9c39a', null, 0); [436, 466, 496, 526].forEach(x => paper(g, path([[x, 976], [x + 18, 976], [x + 18, 1002], [x, 1002]]), '#4b522e', null, 0));
     paper(g, path(oval(346, 980, 54, 60, 14)), sk, [10, 4, .3]); paper(g, path(oval(654, 980, 54, 60, 14)), '#e9bb95', [10, 4, .3]); } };
 
   // ---------- Stage ----------
@@ -491,7 +497,7 @@
   let Sw = 1, Sh = 1, A = 1, F = 600, FX = 0, FY = 0, C0, C1;
   const fit = (x, w, h, fy, fyAt) => { const vw = Math.max(w, h * A), vh = vw / A; return [x + w / 2, fy - fyAt * vh + vh / 2, vw]; };
   const runX = p => { const ds = travel(seg(p, 0, .6))[0] * TOTAL, db = travel(seg(p, 0, .62))[0] * (TOTAL - 100) - 45; return [ds, db]; };
-  const dogAt = dp => { const x = mix(-330, 1320, dp) + 40 * Math.sin(dp * 9), y = yAt(Math.min(x, 700)) + 110 + 200 * bump(dp, .15, .38, .6) + 30 * Math.sin(dp * 11) + 380 * Math.pow(seg(dp, .66, 1), 2); return [x, y]; };
+  const dogAt = dp => { const x = mix(-330, 1320, dp), y = yAt(Math.min(x, 700)) + 110 + 200 * bump(dp, .15, .38, .6) + 380 * Math.pow(seg(dp, .66, 1), 2); return [x, y]; };
   function frame(p, q) {
     // Puppets, on twos: everything below reads q (stepped), the camera reads p (smooth).
     const [ds, db] = runX(q), [, vs] = travel(seg(q, 0, .6)), [, vb] = travel(seg(q, 0, .62));
@@ -516,15 +522,15 @@
     if (!KIDS) return;
     Cam = [S * DPR, 0, 0, S * DPR, (Sw / 2 - cx * S) * DPR, (Sh / 2 - cy * S) * DPR]; SHX = 1.4 * S * DPR; SHY = 2.8 * S * DPR; boil = reduce ? 0 : Math.round(q * 900) * 7 + 1;
     const pick = seg(q, .645, .66), hs = small.hands, bsz = small.s, hx = mix((hs[0][0] + hs[1][0]) / 2, hs[0][0] + 6 * bsz, seg(q, .69, .73)), hy = mix((hs[0][1] + hs[1][1]) / 2 + 12 * bsz, hs[0][1] + 14 * bsz, seg(q, .69, .73));
-    const box = () => { put(BOX, mul(Cam, mul(T(mix(775, hx, pick), mix(1199, hy, pick)), Sc(mix(1, bsz, pick)))), 400); if (!pick) put(TUFT, mul(Cam, T(758, 1203)), 401); };
+    const box = () => { put(BOX, mul(Cam, mul(T(mix(775, hx, pick), mix(1199, hy, pick)), Sc(mix(.9, bsz * .9, pick)))), 400); if (!pick) put(TUFT, mul(Cam, T(758, 1203)), 401); };
     const dp = seg(q, 0, .66), items = [[yb, () => drawKid(big, KIDS[0], 0)], [ys, () => drawKid(small, KIDS[1], 1)]];
-    if (dp < 1) { const [dx, dy] = dogAt(dp), dk = mix(1, 1.9, clamp((dy - 1200) / 600)), ph = (dx + 330) / 64 * Math.PI, hop = Math.max(0, Math.sin(ph)), turn = Math.cos(dp * 9) < -.65 ? -1 : 1;
+    if (dp < 1) { const [dx, dy] = dogAt(dp), dk = mix(1, 1.9, clamp((dy - 1200) / 600)), ph = (dx + 330) / 64 * Math.PI, hop = Math.max(0, Math.sin(ph)), turn = 1;
       items.push([dy, () => { const base = mul(Cam, mul(T(dx, dy), Sc(dk * turn, dk))); blit(GS, mul(Cam, mul(T(dx, dy + 2), Sc(dk * 1.25 * (1 - hop * .3), dk))));
         const b = mul(base, mul(T(0, -hop * 24), Rt(-10 * Math.cos(ph)))), lg = (pc, x, a, j) => put(pc, mul(b, mul(T(x, -34), Rt(a))), 200 + j);
         lg(DOG.legB, -24, 40 * Math.sin(ph + 3.6), 0); lg(DOG.legB, 22, -40 * Math.sin(ph + 3.6), 1); put(DOG.tail, mul(b, mul(T(-48, -60), Rt(14 * Math.sin(ph * 2)))), 2);
         put(DOG.body, b, 3); lg(DOG.legF, -20, 40 * Math.sin(ph), 4); lg(DOG.legF, 26, -40 * Math.sin(ph), 5);
         const h = mul(b, mul(T(38, -56), Rt(8 * Math.sin(ph)))); put(DOG.head, h, 6); put(DOG.ear, mul(h, mul(T(4, -32), Rt(12 * Math.cos(ph) + 6))), 7);
-        const fx = dx + turn * (120 + 40 * Math.sin(dp * 23)) * dk, fy = dy - (130 + 45 * Math.sin(dp * 17)) * dk, fl = Math.cos(dp * 260), m = mul(Cam, mul(T(fx, fy), Sc(dk * 1.3)));
+        const fx = dx + (125 + 22 * Math.sin(dp * 23)) * dk, fy = dy - (125 + 40 * Math.sin(dp * 17)) * dk, fl = Math.cos(dp * 260), m = mul(Cam, mul(T(fx, fy), Sc(dk * 1.3)));
         put(BF.w, mul(m, Sc(fl, 1)), 300); put(BF.w, mul(m, Sc(-fl * .9, 1)), 301); put(BF.b, mul(m, T(0, -8)), 302); }]); }
     items.sort((a, b) => a[0] - b[0]); if (!pick) box(); items.forEach(i => i[1]()); if (pick) box();
     const ct = seg(q, .72, .9) * 1.1;
