@@ -216,241 +216,334 @@
   </header>
 </div>
 
-<!-- Found it: two brothers race to the cache. Scroll scrubs the scene; it holds wherever you stop. -->
+<!-- "I found it!": two brothers race across a watercolour meadow to a cache. Scroll scrubs it; it holds wherever you stop.
+     The painted layers are drawn once into canvases (SVG watercolour filters rasterised a single time), then only moved and scaled. -->
 <style>
-  .find { position: relative; padding: 0; height: auto; background: linear-gradient(transparent calc(100% - 10vh), var(--paper-deep)); }
-  .find.scrub { height: 270vh; }
-  .find-stage { position: relative; height: min(100vh, 900px); overflow: hidden;
-    -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 91%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 91%, transparent); }
-  .find.scrub .find-stage { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 0; }
-  .find-stage svg { display: block; width: 100%; height: 100%; }
-  .find-stage text { font-family: var(--display); font-weight: 700; }
-  .find-badge { position: absolute; left: max(6%, 18px); bottom: 12%; width: clamp(96px, 13vw, 136px); aspect-ratio: 1;
-    border-radius: 50%; background: var(--forest); color: #fff; display: grid; place-items: center; text-align: center;
-    font-family: var(--display); font-weight: 600; font-size: clamp(15px, 1.9vw, 19px); line-height: 1.05;
-    box-shadow: 0 10px 22px rgba(46,38,28,.25); opacity: 0; transform: scale(.2) rotate(-40deg); }
-  .find-badge::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; border: 2px dashed rgba(255,255,255,.7); }
-  .find-badge svg { width: 38%; height: auto; margin-bottom: -10%; }
-  .find-badge span { position: relative; padding: 0 12px; }
+  .find { position: relative; padding: 0; background: linear-gradient(#bcd6df, #f3e4ba 42%, #9fbb6c 52%, #86a957 80%, var(--paper-deep)); }
+  .find.scrub { height: 340vh; }
+  .find-stage { position: relative; height: min(100vh, 860px); overflow: hidden; contain: layout paint; }
+  .find.scrub .find-stage { position: sticky; top: 0; height: 100vh; }
+  .find-stage canvas { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; opacity: 0; transition: opacity .5s; }
+  .find-stage.ready canvas { opacity: 1; }
+  .find-kids { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .find-kids .e { stroke: rgba(80,50,30,.4); stroke-width: 2; stroke-linejoin: round; }
+  .find-kids .eg { stroke: rgba(120,135,160,.35); stroke-width: 1.5; }
+  .find-stage::before, .find-stage::after { content: ""; position: absolute; left: 0; right: 0; z-index: 3; pointer-events: none; }
+  .find-stage::before { top: 0; height: 6%; background: linear-gradient(var(--paper), rgba(250,243,222,0)); }
+  .find-stage::after { bottom: 0; height: 8%; background: linear-gradient(rgba(240,229,198,0), var(--paper-deep)); }
+  .find-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at var(--sx, 20%) var(--sy, 35%), rgba(255,208,128,.42), rgba(255,208,128,.12) 32%, rgba(255,208,128,0) 60%); }
+  .find-close { position: absolute; inset: 0; z-index: 2; visibility: hidden;
+    background: repeating-conic-gradient(from 4deg at var(--fx, 50%) var(--fy, 55%), rgba(255,246,214,.5) 0 7deg, rgba(255,246,214,0) 7deg 20deg),
+      radial-gradient(circle at var(--fx, 50%) var(--fy, 55%), #fff1b8 0, #fcd77e 28%, #f5ad62 62%, #e98a5e 100%); }
+  .find-close canvas { opacity: 1; }
+  .find-close svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .find-say { position: absolute; margin: 0; z-index: 2; font-family: var(--display); font-weight: 700; line-height: 1; color: var(--deep);
+    white-space: nowrap; -webkit-text-stroke: .16em var(--paper); paint-order: stroke fill; letter-spacing: -.01em; transform: rotate(-4deg); }
+  .find-say span { display: inline-block; opacity: 0; will-change: transform; }
 </style>
 <section class="find" aria-label="I found it">
-  <div class="find-stage">
-    <svg id="findSvg" viewBox="0 -40 700 1740" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cartoon: two brothers, about five and seven, run across a meadow toward a big tree. The little one crouches at its roots, lifts out a treasure box, and both jump with their arms up shouting I found it! while confetti flies.">
+  <div class="find-stage" role="img" aria-label="A watercolour cartoon: two brothers, about five and seven, run across a meadow to a big tree at the edge of a forest. The little one finds the treasure box at its roots, they jump with confetti flying, and then his big smiling face fills the screen: I found it!">
+    <svg class="find-kids" aria-hidden="true">
       <defs>
-        <linearGradient id="fSky" gradientUnits="userSpaceOnUse" x1="0" y1="-300" x2="0" y2="600"><stop offset="0" stop-color="#b6dcee"/><stop offset=".6" stop-color="#d7eaea"/><stop offset="1" stop-color="#f8eecb"/></linearGradient>
-        <radialGradient id="fGlow"><stop offset="0" stop-color="#facc3d" stop-opacity=".55"/><stop offset="1" stop-color="#facc3d" stop-opacity="0"/></radialGradient>
-        <linearGradient id="fField" gradientUnits="userSpaceOnUse" x1="0" y1="820" x2="0" y2="1700"><stop offset="0" stop-color="#8db357"/><stop offset=".55" stop-color="#6f9b40"/><stop offset=".8" stop-color="#7fa44b"/><stop offset="1" stop-color="#f0e5c6"/></linearGradient>
-        <g id="fPine"><path d="M0-78 22-30H10L28 0H-28L-10-30H-22Z" fill="#2e6b3d"/><rect x="-3" y="0" width="6" height="8" fill="#6e4d30"/></g>
-        <g id="fBush"><circle cx="-10" cy="-12" r="16"/><circle cx="10" cy="-16" r="18"/><circle cx="0" cy="-30" r="16"/></g>
+        <radialGradient id="fSk" cx=".42" cy=".38" r=".75"><stop offset="0" stop-color="#f8dcbd"/><stop offset="1" stop-color="#ecbd95"/></radialGradient>
+        <radialGradient id="fBs" cx=".38" cy=".3" r=".85"><stop offset="0" stop-color="#a9d0e4"/><stop offset="1" stop-color="#6fa9cc"/></radialGradient>
+        <radialGradient id="fYs" cx=".38" cy=".3" r=".85"><stop offset="0" stop-color="#fbe08a"/><stop offset="1" stop-color="#eebd3c"/></radialGradient>
+        <radialGradient id="fCp" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#5b9663"/><stop offset="1" stop-color="#386f43"/></radialGradient>
+        <radialGradient id="fHm" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#ef8a63"/><stop offset="1" stop-color="#cf5636"/></radialGradient>
       </defs>
-      <g id="fScene">
-        <rect x="-900" y="-1400" width="2600" height="2400" fill="url(#fSky)"/>
-        <circle cx="200" cy="330" r="230" fill="url(#fGlow)"/>
-        <circle cx="200" cy="330" r="66" fill="#facc3d"/>
-        <g id="fClouds" fill="#fff" opacity=".92"><path d="M60 150a34 34 0 0 1 60-22 40 40 0 0 1 74 10 26 26 0 0 1 4 52H66a20 20 0 0 1-6-40z"/><path d="M430 60a26 26 0 0 1 48-14 32 32 0 0 1 58 12 20 20 0 0 1 0 40H436a19 19 0 0 1-6-38z"/><path d="M380 300a22 22 0 0 1 40-12 27 27 0 0 1 50 10 17 17 0 0 1 0 34H386a16 16 0 0 1-6-32z"/><path d="M-330 210a30 30 0 0 1 54-18 36 36 0 0 1 66 10 23 23 0 0 1 2 46H-324a18 18 0 0 1-6-38z"/><path d="M900 180a30 30 0 0 1 54-18 36 36 0 0 1 66 10 23 23 0 0 1 2 46H906a18 18 0 0 1-6-38z"/></g>
-        <path d="M-900 660C-600 590-400 600-200 630S120 560 330 600 620 650 840 590 1300 600 1700 640V1200H-900Z" fill="#a8c9b4"/>
-        <path d="M-900 720C-500 660-300 700-80 680S300 650 480 700 900 690 1200 700 1700 730 1700 730V1200H-900Z" fill="#9dbd5f"/>
-        <g fill="#2e6b3d"><use href="#fPine" x="-40" y="690"/><use href="#fPine" x="-10" y="700"/><use href="#fPine" x="-520" y="700"/><use href="#fPine" x="1000" y="705"/></g>
-        <g fill="#24552f"><use href="#fBush" x="140" y="692"/><use href="#fBush" x="178" y="700"/><use href="#fBush" x="-300" y="690"/></g>
-        <g id="fForest" transform="translate(-150 0)">
-          <g fill="#24552f"><circle cx="760" cy="640" r="80"/><circle cx="880" cy="610" r="96"/><circle cx="1010" cy="640" r="86"/><circle cx="1140" cy="620" r="96"/><rect x="680" y="620" width="1200" height="180"/><circle cx="1290" cy="630" r="90"/><circle cx="1420" cy="610" r="96"/></g>
-          <use href="#fPine" transform="translate(712 780) scale(1.9)"/>
-          <use href="#fPine" transform="translate(830 790) scale(2.4)"/>
-          <use href="#fPine" transform="translate(960 800) scale(2.1)"/>
-          <use href="#fPine" transform="translate(1080 790) scale(2.5)"/>
-          <use href="#fPine" transform="translate(1200 800) scale(2.2)"/><use href="#fPine" transform="translate(1320 790) scale(2.4)"/><use href="#fPine" transform="translate(1440 800) scale(2.1)"/>
-        </g>
-        <path d="M-900 880C-500 820-200 860 100 850S520 790 760 806 1300 820 1700 830V2000H-900Z" fill="url(#fField)"/>
-        <path d="M-200 1760C40 1420 280 1080 440 872L530 868C400 1080 300 1420 260 1760Z" fill="#efe2b8" opacity=".85"/>
-        <g id="fTree" transform="translate(-60 0)">
-          <path d="M600 880c14-50 20-130 16-230l-40-70 24 4 30 46 4-80h34l2 70 34-52 22 4-40 86c-4 100 2 180 20 222z" fill="#6e4d30"/>
-          <path d="M576 884c12-6 28-6 34-14h74c8 8 24 8 38 14z" fill="#5a3e26"/>
-          <g fill="#24552f"><circle cx="540" cy="500" r="120"/><circle cx="770" cy="510" r="120"/><circle cx="650" cy="420" r="145"/><circle cx="480" cy="410" r="86"/><circle cx="830" cy="410" r="90"/></g>
-          <g fill="#2e6b3d"><circle cx="610" cy="360" r="100"/><circle cx="730" cy="350" r="90"/><circle cx="515" cy="445" r="78"/><circle cx="780" cy="450" r="78"/></g>
-          <g fill="#3f8048"><circle cx="600" cy="325" r="48"/><circle cx="715" cy="318" r="40"/><circle cx="510" cy="418" r="32"/></g>
-        </g>
-        <g fill="#5f8c37"><path d="M580 892l5-18 6 14 5-20 6 22z"/><path d="M40 1300l6-20 5 16 6-22 6 24 6-14 3 16z"/><path d="M420 1120l5-18 5 14 6-20 5 22z"/><path d="M-260 1180l5-16 5 12 5-18 5 22z"/><path d="M880 1060l5-16 5 12 5-18 5 22z"/></g>
-        <g id="fKids"></g>
-        <g id="fBox"><rect x="-30" y="-36" width="60" height="38" rx="6" fill="#6e4d30"/><rect x="-32" y="-40" width="64" height="12" rx="5" fill="#57391f"/><rect x="-8" y="-30" width="16" height="7" rx="3" fill="#57391f"/><circle cx="0" cy="-14" r="5" fill="#facc3d"/></g>
-        <path d="M485 888l6-22 5 18 6-24 5 26 6-16 3 18z" fill="#5f8c37"/>
-        <g id="fFx"></g>
-        <g id="fBubble" opacity="0">
-          <path d="M200 420h270a46 46 0 0 1 46 46v18a46 46 0 0 1-46 46h-40l14 56-70-56H200a46 46 0 0 1-46-46v-18a46 46 0 0 1 46-46z" fill="#fff" stroke="#2e261c" stroke-width="5" stroke-linejoin="round"/>
-          <text x="335" y="495" text-anchor="middle" font-size="58" fill="#173d24">I found it!</text>
-        </g>
-      </g>
+      <g id="fCam"><g id="fShadows" fill="#2d4a24" opacity=".2"></g><g id="fKids"></g>
+        <g id="fBox"><rect class="e" x="-30" y="-36" width="60" height="38" rx="7" fill="#7a5636"/><rect class="e" x="-32" y="-41" width="64" height="12" rx="5" fill="#5f4128"/><circle cy="-16" r="5" fill="#f7c948"/></g>
+        <path d="M748 1200l5-17 4 12 5-19 5 17 5-13 3 20z" fill="#6a9347"/>
+        <g id="fDog"></g><g id="fBf"></g>
+        <g id="fFx"></g></g>
     </svg>
-    <div class="find-badge" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 3l5 11 12 1-9 8 3 12-11-7-11 7 3-12-9-8 12-1z" fill="#facc3d"/></svg><span>Treasure found</span></div>
+    <div class="find-glow"></div>
+    <div class="find-close"><svg aria-hidden="true"><g id="fFx2"></g></svg></div>
+    <p class="find-say" aria-hidden="true"><span>I</span><span>&nbsp;</span><span>f</span><span>o</span><span>u</span><span>n</span><span>d</span><span>&nbsp;</span><span>i</span><span>t</span><span>!</span></p>
   </div>
 </section>
 <script>
 (() => {
-  const sec = document.querySelector('.find'), svg = document.getElementById('findSvg');
-  if (!sec || !svg) return;
-  const NS = 'http://www.w3.org/2000/svg', badge = sec.querySelector('.find-badge');
-  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
-  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
-  const seg = (p, a, b) => clamp((p - a) / (b - a));
-  const ease = t => t * t * (3 - 2 * t);
-  const back = t => { const c = 1.9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
-  const mix = (a, b, t) => a + (b - a) * t;
-  const L1 = 50, L2 = 48, U1 = 35, U2 = 33, RAD = Math.PI / 180;
+  const sec = document.querySelector('.find'); if (!sec) return;
+  const stage = sec.querySelector('.find-stage'), svg = stage.querySelector('.find-kids'), cam = document.getElementById('fCam');
+  const close = stage.querySelector('.find-close'), csvg = close.querySelector('svg'), say = stage.querySelector('.find-say'), letters = [...say.children];
+  const NS = 'http://www.w3.org/2000/svg', DPR = Math.min(devicePixelRatio || 1, 2), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, a = 0, b = 1) => v < a ? a : v > b ? b : v, seg = (p, a, b) => clamp((p - a) / (b - a)), mix = (a, b, t) => a + (b - a) * t;
+  const ease = t => t * t * (3 - 2 * t), back = t => 1 + 2.7 * Math.pow(t - 1, 3) + 1.7 * Math.pow(t - 1, 2);
+  const R = n => Math.round(n * 10) / 10;
+  const L1 = 54, L2 = 50, U1 = 34, U2 = 32, RAD = Math.PI / 180;
+  let seed = 11; const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
 
-  // A kid: legs and arms are nested groups rotated at hip/knee and shoulder/elbow.
+  // Shaggy hair: tufts around an arc (angles in degrees, 0 = facing direction, 90 = down).
+  const shag = (r, a0, a1, n, len, cx = 0, cy = 0, puff = .15) => { let d = `M${cx} ${cy}`; for (let i = 0; i <= n; i++) { const a = mix(a0, a1, i / n) * RAD, m = mix(a0, a1, (i - .5) / n) * RAD, rr = r + len * (.55 + .45 * Math.sin(i * 2.7));
+      if (i) d += `Q${R(cx + Math.cos(m) * (r + len * puff))} ${R(cy + Math.sin(m) * (r + len * puff))} `; else d += 'L'; d += `${R(cx + Math.cos(a) * rr)} ${R(cy + Math.sin(a) * rr)}`; } return d + 'Z'; };
+  // A lock hanging from a hairline: strands of varying length.
+  const lock = (x0, x1, y, len, n) => { let d = `M${x0} ${y - 6}L${x1} ${y - 6}`; for (let i = n; i >= 0; i--) { const x = mix(x0, x1, i / n), l = len * (.6 + .4 * Math.sin(i * 1.9 + 1));
+      d += `L${R(x + 2)} ${R(y + l)}L${R(x - 2)} ${R(y + l * .55)}`; } return d + 'Z'; };
+  // ---------- The painting: SVG watercolour, rasterised once per layer ----------
+  // w: wobbly edges + darker pooled rim + paper grain.  s: big soft washes.
+  const filt = (id, f, d, b, rim, grain) => `<filter id="${id}" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="${f}" numOctaves="3" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="${d}" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="${b}" result="b"/>` + (rim ? `
+    <feGaussianBlur in="d" stdDeviation="${rim}" result="bb"/><feComposite in="b" in2="bb" operator="out" result="e"/>
+    <feColorMatrix in="e" values=".6 0 0 0 0 0 .6 0 0 0 0 0 .62 0 0 0 0 0 .8 0" result="ed"/>` + (grain ? `
+    <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="1" seed="9" result="g"/>
+    <feColorMatrix in="g" values="0 0 0 0 .3 0 0 0 0 .22 0 0 0 0 .12 0 0 0 -.5 .3" result="ga"/>
+    <feComposite in="ga" in2="b" operator="in" result="gd"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="ed"/><feMergeNode in="gd"/></feMerge>` : `<feMerge><feMergeNode in="b"/><feMergeNode in="ed"/></feMerge>`) : '') + `</filter>`;
+  const DEFS = `<defs>${filt('w', .018, 14, .9, 6, 1)}${filt('t', .03, 6, .5, 3)}${filt('c', .012, 18, 2.2, 0)}${filt('s', .006, 60, 9, 0)}${filt('b', .02, 10, 3.2, 0)}
+    <linearGradient id="gS" gradientUnits="userSpaceOnUse" x1="0" y1="-400" x2="0" y2="1150"><stop offset="0" stop-color="#5fa6d4"/><stop offset=".5" stop-color="#a9d0e2"/><stop offset=".82" stop-color="#f7dfae"/><stop offset="1" stop-color="#fcc98a"/></linearGradient>
+    <radialGradient id="gG"><stop offset="0" stop-color="#ffd27a" stop-opacity=".85"/><stop offset=".35" stop-color="#ffd27a" stop-opacity=".3"/><stop offset="1" stop-color="#fbd56a" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gM" gradientUnits="userSpaceOnUse" x1="0" y1="1080" x2="0" y2="2200"><stop offset="0" stop-color="#a9cc5c"/><stop offset=".45" stop-color="#7fae48"/><stop offset="1" stop-color="#5f9440"/></linearGradient></defs>`;
+  const blobs = (n, x0, x1, y0, y1, r0, r1, cols) => { let s = ''; for (let i = 0; i < n; i++) s += `<ellipse cx="${R(mix(x0, x1, rnd()))}" cy="${R(mix(y0, y1, rnd()))}" rx="${R(mix(r0, r1, rnd()))}" ry="${R(mix(r0, r1, rnd()) * .55)}" fill="${cols[i % cols.length]}"/>`; return s; };
+  const cloud = (x, y, k) => `<circle cx="${x}" cy="${y}" r="${40 * k}"/><circle cx="${x + 46 * k}" cy="${y - 18 * k}" r="${52 * k}"/><circle cx="${x + 100 * k}" cy="${y}" r="${40 * k}"/><ellipse cx="${x + 50 * k}" cy="${y + 20 * k}" rx="${96 * k}" ry="${26 * k}"/>`;
+  const pine = (x, y, h) => `<path d="M${x} ${y - h}C${R(x + .12 * h)} ${R(y - .8 * h)} ${R(x + .34 * h)} ${R(y - .32 * h)} ${R(x + .3 * h)} ${R(y - .08 * h)}C${R(x + .16 * h)} ${y} ${R(x - .16 * h)} ${y} ${R(x - .3 * h)} ${R(y - .08 * h)}C${R(x - .34 * h)} ${R(y - .32 * h)} ${R(x - .12 * h)} ${R(y - .8 * h)} ${x} ${y - h}Z"/>`;
+  let canopy = ''; { const C = [['#245a3c', 230, .96], ['#3a7a45', 190, .88], ['#69a34f', 140, .8], ['#b9d465', 80, .7]];
+    C.forEach(([c, sp, o], j) => { let s = ''; for (let i = 0; i < 9 - j; i++) { const a = rnd() * 6.283, d = sp * Math.sqrt(rnd()) * .62;
+      s += `<circle cx="${R(860 + Math.cos(a) * d * 1.25 - j * 30)}" cy="${R(760 + Math.sin(a) * d * .8 - j * 30)}" r="${R(mix(70, 120, rnd()) - j * 12)}"/>`; }
+      canopy += `<g filter="url(#w)" fill="${c}" opacity="${o}">${s}</g>`; }); }
+  let flowers = ''; for (let i = 0; i < 70; i++) { const x = mix(-900, 1900, rnd()), y = mix(1130, 2250, rnd()); flowers += `<circle cx="${R(x)}" cy="${R(y)}" r="${R(mix(3, 6.5, rnd()) * (y / 1400))}" fill="${['#fffbe9', '#f7c948', '#c9a7de', '#f1a088'][i % 4]}"/>`; }
+  let tufts = ''; for (let i = 0; i < 46; i++) { const x = mix(-900, 1900, rnd()), y = mix(1120, 2250, rnd()), k = y / 1300; tufts += `<path d="M${R(x)} ${R(y)}l${R(4 * k)} ${R(-14 * k)} ${R(3 * k)} ${R(10 * k)} ${R(4 * k)} ${R(-16 * k)} ${R(4 * k)} ${R(14 * k)} ${R(3 * k)} ${R(-9 * k)} ${R(3 * k)} ${R(13 * k)}z"/>`; }
+
+  let blades = ''; for (let i = 0; i < 26; i++) { const x = mix(-900, 1900, (i + rnd() * .6) / 26), y = mix(1820, 2050, rnd());
+    for (let j = 0; j < 5; j++) { const h = mix(140, 300, rnd()), lean = mix(-70, 70, rnd()), w = mix(9, 16, rnd()), bx = x + j * 14;
+      blades += `<path d="M${R(bx - w)} ${R(y)}Q${R(bx + lean * .3)} ${R(y - h * .6)} ${R(bx + lean)} ${R(y - h)}Q${R(bx + lean * .2 + w * .4)} ${R(y - h * .5)} ${R(bx + w)} ${R(y)}Z" fill="${['#5a8c3c', '#6f9f45', '#4a7a36'][j % 3]}"/>`; } }
+  const L = [
+    { f: 0, x: -900, y: -400, w: 2800, h: 1600, px: 1.2e6, svg: `<rect x="-900" y="-400" width="2800" height="1600" fill="url(#gS)"/>
+      <g filter="url(#s)" opacity=".5">${blobs(9, -900, 1900, -300, 1000, 200, 520, ['#d8ecf4', '#8fc0de', '#ffe2b0'])}</g>
+      <circle cx="180" cy="820" r="420" fill="url(#gG)"/><g filter="url(#c)"><circle cx="180" cy="820" r="78" fill="#ffd257"/><circle cx="172" cy="812" r="58" fill="#fff0a8" opacity=".8"/></g>` },
+    { f: .3, drift: 90, x: -900, y: 100, w: 2800, h: 800, px: 1e6, svg: `<g filter="url(#c)" fill="#fffaf2" opacity=".95">${cloud(-560, 420, 1.3)}${cloud(40, 280, 1)}${cloud(470, 560, .75)}${cloud(860, 330, 1.25)}${cloud(1400, 500, 1)}${cloud(-220, 690, .7)}</g>` },
+    { f: .55, x: -900, y: 820, w: 2800, h: 680, px: 1.4e6, svg: `<g filter="url(#w)"><path d="M-900 960C-600 880-380 900-150 930S250 870 520 905 1000 950 1250 900 1700 890 1900 930V1500H-900Z" fill="#8fb6c4"/>
+      <path d="M-900 1000C-500 950-200 990 100 972S600 940 900 976 1500 982 1900 966V1500H-900Z" fill="#a3c08e" opacity=".92"/></g>
+      <g filter="url(#t)" fill="#6a98a0" opacity=".7">${pine(-420, 985, 46)}${pine(-390, 990, 38)}${pine(330, 975, 40)}${pine(360, 980, 52)}${pine(1080, 980, 44)}${pine(1500, 975, 50)}</g>` },
+    { f: 1, x: -900, y: 900, w: 2800, h: 1400, px: 3e6, svg: `<g filter="url(#w)"><path d="M-900 1040C-600 990-300 1010 0 1022S500 982 800 1010 1400 1030 1900 1000V2300H-900Z" fill="#b5cf6a"/>
+      <path d="M-900 1112C-500 1080-100 1112 300 1092S900 1102 1300 1122 1700 1110 1900 1100V2300H-900Z" fill="url(#gM)"/></g>
+      <g filter="url(#s)" opacity=".38">${blobs(16, -900, 1900, 1150, 2250, 120, 340, ['#5f9a3e', '#c9dc78', '#6fa548'])}</g>
+      <g filter="url(#w)"><path d="M-900 1770C-600 1660-400 1560-170 1490Q360 1235 716 1170Q744 1186 736 1214Q360 1366-170 1640C-400 1730-600 1830-900 1960Z" fill="#f4e2b0"/></g>
+      <g filter="url(#t)" fill="#5f8a42" opacity=".8">${tufts}</g><g filter="url(#t)">${flowers}</g>` },
+    { f: 1, x: 480, y: 470, w: 1100, h: 800, px: 3.4e6, svg: `<g filter="url(#w)" fill="#2f6150" opacity=".92"><circle cx="1010" cy="1010" r="110"/><circle cx="1180" cy="980" r="130"/><circle cx="1380" cy="1000" r="120"/><circle cx="1530" cy="990" r="110"/><rect x="960" y="1000" width="640" height="200"/></g>
+      <g filter="url(#w)" fill="#24503f">${pine(990, 1185, 250)}${pine(1110, 1190, 330)}${pine(1240, 1185, 280)}${pine(1360, 1190, 350)}${pine(1490, 1185, 300)}</g>
+      <g filter="url(#w)" fill="#3f7a52" opacity=".9">${pine(1050, 1200, 200)}${pine(1300, 1200, 230)}${pine(1440, 1205, 190)}</g>
+      <g filter="url(#w)"><path d="M816 1202C836 1160 842 1080 838 980C826 942 800 912 770 894L780 878C808 890 830 905 842 922C846 882 846 852 842 820L878 820C880 860 880 892 882 926C898 902 922 882 952 868L960 884C932 902 908 932 898 976C892 1080 900 1160 924 1202Z" fill="#7a5636"/>
+      <ellipse cx="868" cy="1202" rx="80" ry="12" fill="#5f4128" opacity=".7"/></g>${canopy}
+      <g filter="url(#t)" fill="#5f8a42">${tufts.slice(0, 0)}<path d="M800 1206l4-15 4 11 4-17 5 15 4-11 3 17z"/><path d="M930 1206l4-14 4 10 4-16 5 14 4-10 3 16z"/></g>` },
+    { f: 1.7, x: -900, y: 1560, w: 2800, h: 560, px: 9e5, svg: `<g filter="url(#b)">${blades}</g>` },
+  ];
+  // The close-up: the little brother's face, front on, holding the box.
+  // The close-up: the little brother, front on, lit from the low sun on the left, holding the box.
+  const curls = (pts, c) => pts.map(p => `<path d="${shag(p[2], p[3], p[4], 6, p[2] * .35, p[0], p[1], 1.25)}" fill="${c}"/>`).join('');
+  const FACE = { x: 0, y: 0, w: 1000, h: 1400, svg: `<g filter="url(#w)"><path d="M120 1400C110 1000 250 830 500 830S890 1000 880 1400Z" fill="#f3c94a"/><path d="M150 1400C150 1060 240 900 360 860C300 960 280 1150 300 1400Z" fill="#fde8a0" opacity=".55"/><path d="M420 845q80 50 160 0" fill="none" stroke="#d9ab2c" stroke-width="14"/>
+      <path d="${shag(258, 95, 300, 16, 50, 490, 520, 1.1)}" fill="#c99a52"/><path d="${shag(250, -120, 85, 12, 46, 510, 520, 1.1)}" fill="#c99a52"/>
+      <rect x="440" y="740" width="120" height="120" rx="40" fill="#e0b08a"/><ellipse cx="266" cy="610" rx="34" ry="46" fill="#efc39b"/><ellipse cx="734" cy="610" rx="34" ry="46" fill="#e0ad87"/>
+      <ellipse cx="500" cy="560" rx="236" ry="248" fill="#f5cfa8"/><path d="M560 318A236 248 0 0 1 560 802Q700 560 560 318Z" fill="#dda07c" opacity=".38"/><ellipse cx="440" cy="500" rx="150" ry="160" fill="#fde3c4" opacity=".6"/></g>
+      <g filter="url(#t)"><path d="M282 440Q250 560 290 700" fill="none" stroke="#fff1c4" stroke-width="16" stroke-linecap="round" opacity=".85"/>
+      <circle cx="350" cy="666" r="58" fill="#f2897a" opacity=".42"/><circle cx="650" cy="666" r="58" fill="#f2897a" opacity=".38"/>
+      <ellipse cx="404" cy="560" rx="33" ry="45" fill="#241a12"/><ellipse cx="596" cy="560" rx="33" ry="45" fill="#241a12"/><ellipse cx="404" cy="572" rx="22" ry="26" fill="#5a3a20" opacity=".55"/><ellipse cx="596" cy="572" rx="22" ry="26" fill="#5a3a20" opacity=".55"/>
+      <circle cx="418" cy="540" r="13" fill="#fff"/><circle cx="610" cy="540" r="13" fill="#fff"/><circle cx="394" cy="584" r="6" fill="#fff" opacity=".85"/><circle cx="586" cy="584" r="6" fill="#fff" opacity=".85"/>
+      <path d="M350 466q50-36 102-8M548 458q52-28 102 8" fill="none" stroke="#b07f3e" stroke-width="15" stroke-linecap="round"/>
+      <path d="M484 600q30 24-2 42" fill="none" stroke="#c48d68" stroke-width="11" stroke-linecap="round"/>
+      <g fill="#c9845a">${[[440, 622], [462, 642], [420, 648], [560, 622], [538, 642], [580, 648], [450, 600], [550, 600]].map(c => `<circle cx="${c[0]}" cy="${c[1]}" r="5.5"/>`).join('')}</g>
+      <path d="M384 676Q500 820 616 676Q500 702 384 676Z" fill="#7d2b22"/><path d="M404 683Q500 704 596 683L589 699Q500 719 411 699Z" fill="#fffaf0"/><path d="M444 752q56-34 112 0q-56 30-112 0" fill="#e57b6c"/></g>
+      <g filter="url(#w)">${curls([[300, 400, 52, 150, 300], [370, 360, 50, 170, 330], [450, 345, 50, 180, 350], [540, 345, 50, 190, 360], [620, 360, 50, 200, 370], [690, 400, 52, 230, 390], [255, 520, 46, 120, 260], [745, 520, 46, -80, 60], [262, 690, 40, 90, 250], [740, 690, 40, -70, 90]], '#d6b06a')}
+      ${curls([[380, 352, 30, 180, 320], [520, 340, 30, 190, 340], [650, 370, 28, 200, 350], [262, 560, 26, 130, 250]], '#ecd29a')}
+      <path d="M480 300q-30 70 6 130M560 296q24 60-8 120M420 318q-40 50-20 110" fill="none" stroke="#d6b06a" stroke-width="10" stroke-linecap="round"/>
+      <path d="M226 400C214 180 786 180 774 400C700 366 300 366 226 400Z" fill="#dd5f3c"/><path d="M300 280q200-90 400 0" fill="none" stroke="#ffb08a" stroke-width="30" stroke-linecap="round" opacity=".6"/><path d="M330 270q170-70 340 0M262 332q238-84 476 0" fill="none" stroke="#f6efe2" stroke-width="20" stroke-linecap="round" opacity=".8"/>
+      <path d="M242 396Q240 640 352 800" fill="none" stroke="#5a3b30" stroke-width="10"/><path d="M758 396Q760 640 648 800" fill="none" stroke="#5a3b30" stroke-width="10"/></g>
+      <g filter="url(#w)"><rect x="350" y="880" width="300" height="170" rx="20" fill="#7a5636"/><rect x="342" y="862" width="316" height="48" rx="16" fill="#5f4128"/><rect x="342" y="862" width="140" height="10" rx="5" fill="#a07a52" opacity=".6"/><circle cx="500" cy="960" r="20" fill="#f7c948"/>
+      <ellipse cx="346" cy="960" rx="52" ry="58" fill="#f5cfa8"/><ellipse cx="654" cy="960" rx="52" ry="58" fill="#e7b893"/></g>` };
+  function raster(o, d) { return new Promise(res => {
+    const W = Math.max(1, Math.round(o.w * d)), H = Math.max(1, Math.round(o.h * d)), img = new Image();
+    img.onload = () => { const c = o.c; c.width = W; c.height = H; c.style.width = W + 'px'; c.style.height = H + 'px'; c.getContext('2d').drawImage(img, 0, 0, W, H); o.d = d; o.k = null; res(); };
+    img.onerror = () => res();
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`<svg xmlns="${NS}" width="${W}" height="${H}" viewBox="${o.x} ${o.y} ${o.w} ${o.h}">${DEFS}${o.svg}</svg>`);
+  }); }
+  L.forEach(o => { o.c = document.createElement('canvas'); stage.insertBefore(o.c, svg); });
+  FACE.c = document.createElement('canvas'); close.insertBefore(FACE.c, csvg);
+
+  // ---------- The boys ----------
+    const cap = (l, a, b) => `M${-a / 2} 0A${a / 2} ${a / 2} 0 0 1 ${a / 2} 0L${b / 2} ${l}A${b / 2} ${b / 2} 0 0 1 ${-b / 2} ${l}Z`;
   function kid(o) {
-    const root = el('g', {}, document.getElementById('fKids'));
-    const body = el('g', {}, root);
-    const limb = (isLeg, back) => {
-      const g = el('g', {}, isLeg ? body : null);
-      const skin = back ? o.skin2 : o.skin;
-      if (isLeg) {
-        el('line', { x1: 0, y1: 0, x2: 0, y2: L1, stroke: skin, 'stroke-width': 21, 'stroke-linecap': 'round' }, g);
-        el('line', { x1: 0, y1: 0, x2: 0, y2: 22, stroke: back ? o.shorts2 : o.shorts, 'stroke-width': 27, 'stroke-linecap': 'round' }, g);
-        const k = el('g', { transform: `translate(0 ${L1})` }, g);
-        el('line', { x1: 0, y1: 0, x2: 0, y2: L2, stroke: skin, 'stroke-width': 19, 'stroke-linecap': 'round' }, k);
-        el('ellipse', { cx: 8, cy: L2 + 4, rx: 18, ry: 10, fill: back ? '#1f1a14' : '#3a3026' }, k);
-        return { g, k };
-      }
-      el('line', { x1: 0, y1: 0, x2: 0, y2: U1, stroke: skin, 'stroke-width': 15, 'stroke-linecap': 'round' }, g);
-      el('line', { x1: 0, y1: 0, x2: 0, y2: 16, stroke: back ? o.shirt2 : o.shirt, 'stroke-width': 21, 'stroke-linecap': 'round' }, g);
-      const k = el('g', { transform: `translate(0 ${U1})` }, g);
-      el('line', { x1: 0, y1: 0, x2: 0, y2: U2, stroke: skin, 'stroke-width': 14, 'stroke-linecap': 'round' }, k);
-      const hand = el('g', { transform: `translate(0 ${U2})` }, k);
-      el('circle', { r: 9.5, fill: skin }, hand);
-      return { g, k, hand };
-    };
-    const upper = el('g', {});
-    const armB = limb(false, true), legB = limb(true, true), legF = limb(true, false), armF = limb(false, false);
-    body.insertBefore(armB.g, legB.g); body.appendChild(upper);
-    el('rect', { x: -27, y: -80, width: 54, height: 86, rx: 24, fill: o.shirt }, upper);
-    el('rect', { x: -28, y: -12, width: 56, height: 22, rx: 10, fill: o.shorts }, upper);
-    const head = el('g', { transform: `translate(6 -112) rotate(0)` }, upper);
-    el('circle', { cx: -6, cy: 6, r: 38, fill: o.hair }, head);
-    el('circle', { r: 37, fill: o.skin }, head);
-    el('circle', { cx: -16, cy: 6, r: 9, fill: o.skin2 }, head);
-    el('circle', { cx: 13, cy: 0, r: 4.2, fill: '#2e261c' }, head);
-    el('circle', { cx: 29, cy: 0, r: 4.2, fill: '#2e261c' }, head);
-    el('circle', { cx: 24, cy: 14, r: 7, fill: '#f08f78', opacity: .45 }, head);
-    const mouth = el('path', { d: 'M12 16q9 9 18 0', fill: 'none', stroke: '#2e261c', 'stroke-width': 3.6, 'stroke-linecap': 'round' }, head);
-    head.insertAdjacentHTML('beforeend', o.hat);
-    upper.appendChild(armF.g);
-    armB.g.remove(); upper.insertBefore(armB.g, upper.firstChild);
-    armF.g.setAttribute('transform', 'translate(0 -66)'); armB.g.setAttribute('transform', 'translate(0 -66)');
-    return { root, body, upper, legs: [legF, legB], arms: [armF, armB], mouth, s: o.s };
+    const leg = bk => `<g><path d="${cap(L1, 22, 18)}" fill="${bk ? o.sk2 : o.sk}"/><path class="e" d="${cap(30, 30, 27)}" fill="${bk ? o.sh2 : o.sh}"/><g transform="translate(0 ${L1})"><path d="${cap(L2 - 6, 17, 14)}" fill="${bk ? o.sk2 : o.sk}"/><path d="${cap(9, 15, 15)}" transform="translate(0 ${L2 - 13})" fill="#fbf6ea"/><path class="e" d="M-10 ${L2 - 4}c0-9 8-11 13-11c11 0 21 6 22 12c1 4-2 6-6 6h-24c-4 0-5-3-5-7z" fill="${bk ? o.shoe2 : o.shoe}"/><path d="M-12 ${L2 + 4}h32" stroke="#fbf6ea" stroke-width="3.5" stroke-linecap="round"/></g></g>`;
+    const arm = bk => `<g><path d="${cap(U1, 14, 12.5)}" fill="${bk ? o.sk2 : o.sk}"/><path class="e" d="${cap(16, 20, 19)}" fill="${bk ? o.top2 : o.top}"/><g transform="translate(0 ${U1})"><path d="${cap(U2, 12.5, 11)}" fill="${bk ? o.sk2 : o.sk}"/><circle cy="${U2}" r="8.5" fill="${bk ? o.sk2 : o.sk}"/></g></g>`;
+    const g = document.createElementNS(NS, 'g'); document.getElementById('fKids').appendChild(g);
+    g.innerHTML = `<g>${leg(1)}${leg(0)}<g>${arm(1)}<path class="e" d="M-22-90C-33-90-33-74-30-54L-28 0C-28 10 28 10 28 0L30-54C33-74 33-90 22-90Z" fill="${o.shirt}"/>${o.x}<path d="M-27-80C-30-60-29-30-27-8" stroke="#ffe7b0" stroke-width="3" fill="none" opacity=".75" stroke-linecap="round"/><path class="e" d="M-29-8h58v10c0 8-58 8-58 0z" fill="${o.sh}"/><g transform="translate(5 -118)"><g>${o.back}</g>${o.head}<g>${o.front}</g>${o.hat}</g>${arm(0)}</g></g>`;
+    const body = g.firstChild, up = body.children[2], hd = up.children[up.children.length - 2];
+    return { root: g, body, up, legs: [body.children[1], body.children[0]], arms: [up.lastChild, up.firstChild], mouth: g.querySelector('.mo'), s: o.s, hair: [hd.firstChild, hd.children[hd.children.length - 2]] };
   }
-  const big = kid({ s: 1, skin: '#f0c49c', skin2: '#dba982', hair: '#6e4d30', shirt: '#6bb3db', shirt2: '#4f97c0', shorts: '#6e4d30', shorts2: '#57391f',
-    hat: '<path d="M-38-2a38 40 0 0 1 76 0z" fill="#2e6b3d"/><path d="M20-6h34a6 6 0 0 1 0 10H18z" fill="#173d24"/><circle cy="-40" r="5" fill="#173d24"/>' });
-  const small = kid({ s: .8, skin: '#f0c49c', skin2: '#dba982', hair: '#8a5f3a', shirt: '#facc3d', shirt2: '#dcae22', shorts: '#173d24', shorts2: '#0f2a18',
-    hat: '<path d="M-40 4a40 44 0 0 1 80-6l-6 6z" fill="#e4643b"/><path d="M-22-30q20-12 42-2" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M-4 4q8 30 18 24" fill="none" stroke="#2e261c" stroke-width="2.5"/>' });
-
-  // Running distance with ease-in and ease-out; stride phase is tied to distance so legs stop when the scroll stops.
-  function travel(u) { const a = .08, b = .82, c = 1 / (1 - a / 2 - (1 - b) / 2);
-    if (u < a) return { d: c * u * u / (2 * a), v: u / a };
-    if (u < b) return { d: c * (a / 2 + u - a), v: 1 };
-    const w = u - b; return { d: c * (a / 2 + b - a + w - w * w / (2 * (1 - b))), v: 1 - w / (1 - b) }; }
-  // The trail: a curve from off-frame lower left up the hill to the tree, sampled for arc length.
-  const P0 = [-120, 1760], C = [250, 1180], P1 = [462, 880], pts = [], N = 80;
-  for (let i = 0, len = 0; i <= N; i++) { const t = i / N, u = 1 - t;
-    const q = [u * u * P0[0] + 2 * u * t * C[0] + t * t * P1[0], u * u * P0[1] + 2 * u * t * C[1] + t * t * P1[1]];
+  const face = (eyeR, brow, extra) => `<path d="M-31-6Q-30 22-6 33" stroke="#ffe3a6" stroke-width="3.5" fill="none" opacity=".8" stroke-linecap="round"/><circle cx="19" cy="10" r="8" fill="#f2897a" opacity=".42"/>
+    <ellipse cx="9" cy="-1" rx="${eyeR}" ry="${eyeR * 1.4}" fill="#241a12"/><ellipse cx="24.5" cy="-1" rx="${eyeR * .82}" ry="${eyeR * 1.35}" fill="#241a12"/><circle cx="10.5" cy="-3.4" r="${eyeR * .45}" fill="#fff"/><circle cx="25.6" cy="-3.4" r="${eyeR * .4}" fill="#fff"/>
+    <path d="M3-11q6-4 11-1M19.5-12.5q5-3.5 9.5 0" stroke="${brow}" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M29 2q5.5 3 0 6.5" stroke="#c48d68" stroke-width="2.2" fill="none" stroke-linecap="round"/>${extra}<path class="mo" fill="#7a2e22"/>`;
+  const big = kid({ s: 1, sk: '#f3c9a1', sk2: '#dcab84', sh: '#8a6440', sh2: '#6f4f32', shoe: '#2f5f8f', shoe2: '#24496f', top: '#6fb0d8', top2: '#5591b6', shirt: 'url(#fBs)',
+    x: '<path d="M-29-64h59M-29-46h59M-28-28h57" stroke="#f1f7f8" stroke-width="5" opacity=".75"/>',
+    back: `<path d="${shag(34, 95, 300, 12, 9, -4, -2)}" fill="#5b3a22"/>`,
+    head: `<ellipse class="e" rx="32" ry="34" fill="url(#fSk)"/><ellipse class="e" cx="-14" cy="5" rx="6.5" ry="8.5" fill="#dcab84"/>${face(3.6, '#4a2f1c', '')}`,
+    front: `<path d="${lock(-34, -8, -20, 22, 5)}" fill="#5b3a22"/><path d="${lock(-6, 30, -24, 13, 6)}" fill="#6b4a2e"/>`,
+    hat: `<path class="e" d="M-35-20C-36-50 30-56 33-27C14-31-14-29-35-20Z" fill="url(#fCp)"/><path class="e" d="M22-28c10-3 22-1 27 4c-7 4-19 4-29 1z" fill="#2f5e39"/><circle cx="-1" cy="-48" r="3.5" fill="#2f5e39"/>` });
+  const small = kid({ s: .84, sk: '#f5cfa8', sk2: '#e0b38c', sh: '#3d6a4a', sh2: '#2c5038', shoe: '#d9603e', shoe2: '#b04a30', top: '#f3c94a', top2: '#d9ab2c', shirt: 'url(#fYs)',
+    x: '<path d="M-10-90q10 9 20 0" fill="none" stroke="#d9ab2c" stroke-width="3"/>',
+    back: `<path d="${shag(33, 90, 305, 13, 11, -4, -2)}" fill="#d2a75e"/><path d="${shag(30, 120, 260, 8, 7, -6, -2)}" fill="#e8c985"/>`,
+    head: `<ellipse class="e" rx="33" ry="32" fill="url(#fSk)"/><ellipse class="e" cx="-14" cy="5" rx="6.5" ry="8.5" fill="#e0b38c"/>${face(3.9, '#b88c4a', '<g fill="#c9845a"><circle cx="15" cy="5" r="1.1"/><circle cx="19" cy="7.5" r="1.1"/><circle cx="23" cy="5" r="1.1"/></g>')}`,
+    front: `<path d="${lock(-35, -8, -16, 24, 5)}" fill="#d2a75e"/><path d="${lock(-4, 30, -20, 14, 6)}" fill="#e8c985"/>`,
+    hat: `<path class="e" d="M-37-15C-39-52 32-56 35-22C16-28-14-26-37-15Z" fill="url(#fHm)"/><path d="M-20-41q16-8 36-2M-28-28q24-10 50-6" stroke="#f6efe2" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/><path d="M-12-18Q-13 14 4 30" stroke="#5a3b30" stroke-width="2" fill="none"/>` });
+  // The Coton de Tulear and her butterfly.
+  const dog = document.getElementById('fDog'), fluff = (pts, f) => pts.map(c => `<circle cx="${c[0]}" cy="${c[1]}" r="${c[2]}"${f ? ` fill="${f}"` : ''}/>`).join('');
+  dog.innerHTML = `<ellipse rx="34" ry="6" fill="#2d4a24" opacity=".22"/><g><g fill="#fff">${fluff([[-34, -58, 9], [-30, -70, 10], [-20, -76, 8], [-12, -72, 6]])}</g>
+    <g transform="translate(-22 -28)"><ellipse cy="10" rx="7.5" ry="13" fill="#e7ebf2"/></g><g transform="translate(18 -28)"><ellipse cy="10" rx="7.5" ry="13" fill="#e7ebf2"/></g>
+    <g fill="#fff" class="eg">${fluff([[0, -40, 24], [-22, -44, 17], [20, -44, 18], [-6, -56, 15], [10, -30, 14], [-14, -30, 14]])}</g><ellipse cx="0" cy="-24" rx="28" ry="8" fill="#c3cde0" opacity=".85"/><ellipse cx="-20" cy="-36" rx="12" ry="9" fill="#d5dcea" opacity=".7"/>
+    <g transform="translate(-22 -28)"><ellipse cy="12" rx="7.5" ry="13" fill="#fff"/></g><g transform="translate(18 -28)"><ellipse cy="12" rx="7.5" ry="13" fill="#fff"/></g>
+    <g transform="translate(34 -62)"><g fill="#fff" class="eg">${fluff([[0, 0, 19], [-8, -12, 10], [4, -14, 9]])}</g><ellipse cx="0" cy="12" rx="13" ry="7" fill="#dfe5ef"/><ellipse cx="-9" cy="6" rx="8.5" ry="16" fill="#e2e7f0" class="eg" transform="rotate(14 -9 6)"/>
+    <circle cx="5" cy="-3" r="3.6" fill="#1d1712"/><circle cx="15" cy="-3" r="3.1" fill="#1d1712"/><circle cx="7" cy="-4.2" r="1" fill="#fff"/><circle cx="15.8" cy="-4.2" r=".9" fill="#fff"/>
+    <ellipse cx="21" cy="4" rx="4.4" ry="3.6" fill="#1d1712"/><path d="M14 11q3.5 7 7 0" fill="#ef8f8f"/></g></g>`;
+  const dogBody = dog.lastChild, dogLegs = [dogBody.children[1], dogBody.children[2], dogBody.children[5], dogBody.children[6]];
+  const bf = document.getElementById('fBf'); bf.innerHTML = '<g><path d="M0 0C-6-14-20-16-18-4C-17 4-8 4 0 1C-8 6-12 14-6 15C-1 15 0 6 0 2Z" fill="#f39a3d" stroke="#7a3f12" stroke-width="1"/></g><g><path d="M0 0C6-14 20-16 18-4C17 4 8 4 0 1C8 6 12 14 6 15C1 15 0 6 0 2Z" fill="#f6b45a" stroke="#7a3f12" stroke-width="1"/></g><path d="M0-6v18" stroke="#3a2a1c" stroke-width="2.5" stroke-linecap="round"/>';
+  // Trail the boys follow: lower left, across and gently up to the tree. Sampled for arc length.
+  const P0 = [-170, 1560], PC = [360, 1300], P1 = [712, 1194], pts = [], N = 64;
+  for (let i = 0, len = 0; i <= N; i++) { const t = i / N, u = 1 - t, q = [u * u * P0[0] + 2 * u * t * PC[0] + t * t * P1[0], u * u * P0[1] + 2 * u * t * PC[1] + t * t * P1[1]];
     if (i) len += Math.hypot(q[0] - pts[i - 1][0], q[1] - pts[i - 1][1]); q[2] = len; pts.push(q); }
   const TOTAL = pts[N][2];
-  const at = d => { d = clamp(d, 0, TOTAL); let i = 1; while (i < N && pts[i][2] < d) i++;
-    const a = pts[i - 1], b = pts[i], f = (d - a[2]) / (b[2] - a[2] || 1); return [mix(a[0], b[0], f), mix(a[1], b[1], f)]; };
+  const at = d => { if (d <= 0) { const a = pts[0], b = pts[1], f = d / b[2]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]; }
+    d = Math.min(d, TOTAL); let i = 1; while (i < N && pts[i][2] < d) i++; const a = pts[i - 1], b = pts[i], f = (d - a[2]) / (b[2] - a[2]); return [mix(a[0], b[0], f), mix(a[1], b[1], f)]; };
+  const travel = u => { const a = .1, b = .8, c = 1 / (1 - a / 2 - (1 - b) / 2);
+    if (u < a) return [c * u * u / (2 * a), u / a]; if (u < b) return [c * (a / 2 + u - a), 1];
+    const w = u - b; return [c * (a / 2 + b - a + w - w * w / (2 * (1 - b))), 1 - w / (1 - b)]; };
+  const depth = y => mix(.88, 1.06, clamp((y - 1190) / 380));
 
-  const STAND = { lean: 0, lift: 0, legs: [[-3, 4], [4, 2]], arms: [[-10, -20], [10, -15]] };
-  function run(ph, A) { const leg = f => [-38 * A * Math.sin(ph + f), A * (8 + 72 * Math.pow(Math.max(0, Math.cos(ph + f)), 1.4))] ;
-    const arm = f => [48 * A * Math.sin(ph + f) - 6, -(18 + 62 * A)];
-    return { lean: 9 * A, lift: 0, legs: [leg(0), leg(Math.PI)], arms: [arm(0), arm(Math.PI)] }; }
-  function blend(a, b, t) { return { lean: mix(a.lean, b.lean, t), lift: mix(a.lift, b.lift, t),
-    legs: a.legs.map((l, i) => [mix(l[0], b.legs[i][0], t), mix(l[1], b.legs[i][1], t)]),
-    arms: a.arms.map((l, i) => [mix(l[0], b.arms[i][0], t), mix(l[1], b.arms[i][1], t)]) }; }
-  const CROUCH = { lean: 24, lift: 0, legs: [[-66, 116], [-30, 96]], arms: [[-40, -6], [-30, -10]] };
-  const HOLD = { lean: 4, lift: 0, legs: [[-10, 14], [6, 6]], arms: [[-78, -66], [-70, -70]] };
-  const SQUAT = { lean: 8, lift: 0, legs: [[-40, 72], [-26, 60]], arms: [[-80, -40], [40, -20]] };
-  const UP = { lean: -6, lift: 0, legs: [[-18, 30], [14, 38]], arms: [[-104, -10], [128, 14]] };
-  const LANDED = { lean: -6, lift: 0, legs: [[-4, 6], [6, 4]], arms: [[-104, -10], [128, 14]] };
-  const VUP = { lean: -6, lift: 0, legs: [[-6, 6], [8, 4]], arms: [[-118, -16], [122, 16]] };
-  const WOW = { lean: 10, lift: 0, legs: [[-6, 8], [8, 6]], arms: [[-60, -60], [-40, -70]] };
-
-  function place(k, x, y, sc, pose, smile) {
-    const ext = l => L1 * Math.cos(l[0] * RAD) + L2 * Math.cos((l[0] + l[1]) * RAD) + 12;
-    const hip = Math.max(ext(pose.legs[0]), ext(pose.legs[1]));
-    k.root.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(k.s * sc).toFixed(3)})`);
-    k.body.setAttribute('transform', `translate(0 ${(-hip - pose.lift).toFixed(1)})`);
-    k.upper.setAttribute('transform', `rotate(${pose.lean.toFixed(1)})`);
-    k.legs.forEach((l, i) => { l.g.setAttribute('transform', `rotate(${pose.legs[i][0].toFixed(1)})`); l.k.setAttribute('transform', `translate(0 ${L1}) rotate(${pose.legs[i][1].toFixed(1)})`); });
-    k.arms.forEach((a, i) => { a.g.setAttribute('transform', `translate(0 -66) rotate(${pose.arms[i][0].toFixed(1)})`); a.k.setAttribute('transform', `translate(0 ${U1}) rotate(${pose.arms[i][1].toFixed(1)})`); });
-    k.mouth.setAttribute('d', smile ? 'M10 12q11 18 22 0z' : 'M12 16q9 9 18 0');
-    k.mouth.setAttribute('fill', smile ? '#7a2e22' : 'none');
+  const P = (lean, legs, arms) => ({ lean, lift: 0, legs, arms });
+  const STAND = P(0, [[-3, 4], [4, 2]], [[-10, -20], [10, -15]]), CROUCH = P(24, [[-66, 116], [-30, 96]], [[-40, -6], [-30, -10]]),
+    HOLD = P(4, [[-10, 14], [6, 6]], [[-78, -66], [-70, -70]]), SQUAT = P(8, [[-40, 72], [-26, 60]], [[-80, -40], [40, -20]]),
+    UP = P(-6, [[-18, 30], [14, 38]], [[-104, -10], [128, 14]]), LANDED = P(-6, [[-4, 6], [6, 4]], [[-104, -10], [128, 14]]),
+    VUP = P(-6, [[-6, 6], [8, 4]], [[-118, -16], [122, 16]]), WOW = P(10, [[-6, 8], [8, 6]], [[-60, -60], [-40, -70]]);
+  const run = (ph, A) => { const leg = f => [-38 * A * Math.sin(ph + f), A * (8 + 72 * Math.pow(Math.max(0, Math.cos(ph + f)), 1.4))], arm = f => [48 * A * Math.sin(ph + f) - 6, -(18 + 62 * A)];
+    return P(9 * A, [leg(0), leg(Math.PI)], [arm(0), arm(Math.PI)]); };
+  const blend = (a, b, t) => t <= 0 ? P(a.lean, a.legs, a.arms) : P(mix(a.lean, b.lean, t), a.legs.map((l, i) => [mix(l[0], b.legs[i][0], t), mix(l[1], b.legs[i][1], t)]), a.arms.map((l, i) => [mix(l[0], b.arms[i][0], t), mix(l[1], b.arms[i][1], t)]));
+  const set = (n, v) => { if (n._v !== v) { n._v = v; n.setAttribute('transform', v); } };
+  const bump = (p, a, m, z) => p < a || p > z ? 0 : p < m ? ease((p - a) / (m - a)) : 1 - ease((p - m) / (z - m));
+  function place(k, x, y, sc, pose, lift, grin, q, ph) {
+    const ext = l => L1 * Math.cos(l[0] * RAD) + L2 * Math.cos((l[0] + l[1]) * RAD) + 9, hip = Math.max(ext(pose.legs[0]), ext(pose.legs[1])), s = k.s * sc, by = -hip - lift;
+    const sx = s * (1 + q * .6), sy = s * (1 - q);
+    set(k.root, `translate(${R(x)} ${R(y)}) scale(${sx.toFixed(3)} ${sy.toFixed(3)})`); set(k.body, `translate(0 ${R(by)})`); set(k.up, `rotate(${R(pose.lean)})`);
+    k.legs.forEach((l, i) => { set(l, `rotate(${R(pose.legs[i][0])})`); set(l.lastChild, `translate(0 ${L1}) rotate(${R(pose.legs[i][1])})`); });
+    k.arms.forEach((a, i) => { set(a, `translate(0 -76) rotate(${R(pose.arms[i][0])})`); set(a.lastChild, `translate(0 ${U1}) rotate(${R(pose.arms[i][1])})`); });
+    const flop = R(Math.sin(ph * 2) * 2.2 - lift * .03); set(k.hair[0], `translate(${R(-flop * .4)} ${flop})`); set(k.hair[1], `translate(0 ${R(flop * .6)})`);
+    const m = grin ? 'M7 8q12 18 24 0q-12 4-24 0z' : 'M9 9q10 10 20 0q-10 3-20 0z'; if (k.mouth._d !== m) { k.mouth._d = m; k.mouth.setAttribute('d', m); }
+    const c = Math.cos(pose.lean * RAD), sn = Math.sin(pose.lean * RAD); k.head = [x + sx * (5 * c + 118 * sn), y + sy * (by + 5 * sn - 118 * c), 33 * s];
+    const hand = a => { let ang = a[0] * RAD, hx = -Math.sin(ang) * U1, hy = Math.cos(ang) * U1; ang += a[1] * RAD; hx -= Math.sin(ang) * U2; hy += Math.cos(ang) * U2;
+      return [x + sx * (hx * c - (hy - 76) * sn), y + sy * (by + hx * sn + (hy - 76) * c)]; };
+    k.hands = [hand(pose.arms[0]), hand(pose.arms[1])];
+    set(k.shadow, `translate(${R(x + 6 * s)} ${R(y + 2)}) scale(${(s * (1 - lift / 220)).toFixed(3)})`);
   }
-  const depth = y => mix(.9, 1.1, clamp((y - 880) / 880));
+  const shadows = document.getElementById('fShadows');
+  [big, small].forEach(k => { k.shadow = shadows.appendChild(document.createElementNS(NS, 'ellipse')); k.shadow.setAttribute('rx', 36); k.shadow.setAttribute('ry', 7); });
+  const yAt = x => { let i = 1; while (i < N && pts[i][0] < x) i++; const a = pts[i - 1], b = pts[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); };
 
-  // Confetti and leaves: deterministic, positions are a pure function of progress.
-  const fx = document.getElementById('fFx'), bits = [];
-  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-  const cols = ['#facc3d', '#6bb3db', '#e4643b', '#9b6fd0', '#7d9e4a', '#fff'];
-  for (let i = 0; i < 46; i++) {
-    const leaf = i >= 34, ang = leaf ? Math.PI * (.2 + rnd() * .6) : -Math.PI * (.1 + rnd() * .8), sp = leaf ? 90 + rnd() * 120 : 380 + rnd() * 460;
-    const n = leaf ? el('ellipse', { rx: 10, ry: 5, fill: rnd() < .5 ? '#3f8048' : '#7d9e4a' }, fx)
-      : rnd() < .55 ? el('rect', { x: -9, y: -4, width: 18, height: 8, rx: 2, fill: cols[i % cols.length] }, fx) : el('circle', { r: 6, fill: cols[i % cols.length] }, fx);
-    bits.push({ n, leaf, ox: leaf ? 500 + rnd() * 300 : 470, oy: leaf ? 380 + rnd() * 140 : 650, vx: Math.cos(ang) * sp * (leaf ? .6 : 1), vy: Math.sin(ang) * sp, spin: (rnd() - .5) * 900, d: rnd() });
-  }
+  // Confetti in the scene (world units) and in the close-up (screen units): mixed sizes, spin, flutter.
+  const fx = document.getElementById('fFx'), fx2 = document.getElementById('fFx2'), cols = ['#f7c948', '#5fa6d4', '#e4643b', '#9b6fd0', '#7fae48', '#fffaf0', '#f2897a', '#ffb347'];
+  const bit = (parent, i, k) => { const g = document.createElementNS(NS, i % 3 ? 'rect' : 'circle');
+    if (i % 3) { g.setAttribute('x', R(-9 * k)); g.setAttribute('y', R(-3.5 * k)); g.setAttribute('width', R(18 * k)); g.setAttribute('height', R(7 * k)); g.setAttribute('rx', R(2 * k)); } else g.setAttribute('r', R(5.5 * k));
+    g.setAttribute('fill', cols[i % cols.length]); g.style.opacity = 0; parent.appendChild(g); return g; };
+  const bits = [], bits2 = [];
+  for (let i = 0; i < 52; i++) { const leaf = i >= 40, a = leaf ? Math.PI * (.2 + rnd() * .6) : -Math.PI * (.12 + rnd() * .76), sp = leaf ? 70 + rnd() * 110 : 320 + rnd() * 520, k = mix(.6, 1.7, rnd());
+    let n; if (leaf) { n = fx.appendChild(document.createElementNS(NS, 'path')); n.setAttribute('d', 'M-12 0Q0-9 12 0Q0 9-12 0Z'); n.setAttribute('fill', ['#3a7a45', '#69a34f', '#b9d465'][i % 3]); n.style.opacity = 0; } else n = bit(fx, i, k);
+    bits.push({ n, leaf, ox: leaf ? 700 + rnd() * 320 : 0, oy: leaf ? 600 + rnd() * 240 : 0, vx: Math.cos(a) * sp * (leaf ? .6 : 1), vy: Math.sin(a) * sp, spin: (rnd() - .5) * 1100, fl: rnd() * 6 }); }
+  for (let i = 0; i < 26; i++) bits2.push({ n: bit(fx2, i, mix(.8, 1.6, rnd())), x: rnd(), off: rnd() * .8, sway: 10 + rnd() * 30, spin: (rnd() - .5) * 1000, sp: .7 + rnd() * .6 });
 
-  const bubble = document.getElementById('fBubble'), box = document.getElementById('fBox'), scene = document.getElementById('fScene'), clouds = document.getElementById('fClouds');
-  const BOX0 = [506, 894], kidsG = document.getElementById('fKids');
-  let W = 700, H = 1500;
-
+  // ---------- Camera ----------
+  let Sw = 1, Sh = 1, A = 1, F = 600, FX = 0, FY = 0, C0, C1;
+  const fit = (x, w, h, fy, fyAt) => { const vw = Math.max(w, h * A), vh = vw / A; return [x + w / 2, fy - fyAt * vh + vh / 2, vw]; };
   function frame(p) {
-    // 1. The run, 0 to .68: the little one leads, the big one a step behind and to the left.
-    const us = travel(seg(p, 0, .66)), ub = travel(seg(p, 0, .68));
-    const ds = us.d * (TOTAL - 34), db = ub.d * (TOTAL - 120) - 30;
-    const [xs, ys0] = at(ds), [xb0, yb0] = at(db), xb = xb0 - 46, yb = yb0 - 14, ys = ys0 + 10;
-    const ss = depth(ys), sbg = depth(yb);
-    let ps = blend(STAND, run(ds / (130 * ss) * Math.PI + 1.3, 1), Math.min(us.v, 1) * (p > 0 ? 1 : 0));
-    let pb = blend(STAND, run(db / (160 * sbg) * Math.PI, 1), Math.min(ub.v, 1) * (p > 0 ? 1 : 0));
-    // 2. The little one crouches and lifts the box; the big one leans in.
-    ps = blend(blend(ps, CROUCH, ease(seg(p, .67, .72))), HOLD, ease(seg(p, .74, .79)));
-    pb = blend(pb, WOW, ease(seg(p, .69, .77)));
-    // 3. Jump: anticipation squat, air, land with arms up.
-    ps = blend(blend(ps, SQUAT, ease(seg(p, .8, .83))), UP, ease(seg(p, .83, .86))); ps.lift = Math.sin(Math.PI * seg(p, .83, .93)) * 80;
-    ps = blend(ps, LANDED, ease(seg(p, .93, .97)));
-    pb = blend(blend(pb, SQUAT, ease(seg(p, .81, .84))), VUP, ease(seg(p, .84, .87))); pb.lift = Math.sin(Math.PI * seg(p, .84, .95)) * 70;
-    place(big, xb, yb, sbg, pb, p > .72); place(small, xs, ys, ss, ps, p > .74);
-    if ((ys > yb) !== (kidsG.lastChild === small.root)) kidsG.appendChild(ys > yb ? small.root : big.root);
-    // The box follows the little one's hands once lifted.
-    const pick = seg(p, .735, .76);
-    if (pick > 0) { const inv = scene.getScreenCTM().inverse(), m = inv.multiply(small.arms[0].hand.getScreenCTM()), m2 = inv.multiply(small.arms[1].hand.getScreenCTM());
-      const bs = ss * small.s, hx = mix((m.e + m2.e) / 2, m.e + 10 * bs, seg(p, .8, .86)), hy = mix((m.f + m2.f) / 2 + 14 * bs, m.f + 12 * bs, seg(p, .8, .86));
-      box.setAttribute('transform', `translate(${mix(BOX0[0], hx, pick).toFixed(1)} ${mix(BOX0[1], hy, pick).toFixed(1)}) scale(${mix(1, bs, pick).toFixed(3)})`); }
-    else box.setAttribute('transform', `translate(${BOX0[0]} ${BOX0[1]})`);
-    // Confetti, bubble, badge.
-    bits.forEach(b => { const t = clamp((p - .85 - b.d * .03) / .15) * 1.1; b.n.style.opacity = t > 0 ? 1 : 0;
-      const g = b.leaf ? 120 : 900, x = b.ox + b.vx * t, y = b.oy + b.vy * t + g * t * t;
-      b.n.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(b.spin * t).toFixed(0)})`); });
-    const bt = seg(p, .86, .92), bs = bt > 0 ? back(bt) : 0;
-    bubble.setAttribute('opacity', bt > 0 ? 1 : 0);
-    bubble.setAttribute('transform', `translate(445 586) scale(${bs.toFixed(3)}) translate(-445 -586)`);
-    const gt = seg(p, .9, .97); badge.style.opacity = gt > 0 ? 1 : 0;
-    badge.style.transform = `scale(${(.2 + .8 * (gt > 0 ? back(gt) : 0)).toFixed(3)}) rotate(${mix(-40, -8, ease(gt)).toFixed(1)}deg)`;
-    clouds.setAttribute('transform', `translate(${(p * 120).toFixed(1)} 0)`);
-    // Camera: portrait-first. Phones see the whole hill; wide screens get a band that rises with the boys.
-    const y0 = clamp(Math.min(ys, yb) - .62 * H, -40, 1700 - H);
-    svg.setAttribute('viewBox', `${(350 - W / 2).toFixed(1)} ${y0.toFixed(1)} ${W.toFixed(1)} ${H.toFixed(1)}`);
+    // 1. The run (0 to .62): the little one leads, his brother a stride behind and up the bank.
+    const [us, vs] = travel(seg(p, 0, .6)), [ub, vb] = travel(seg(p, 0, .62));
+    const ds = us * TOTAL, db = ub * (TOTAL - 100) - 45;
+    const [xs, ys] = at(ds), [xb0, yb0] = at(db), xb = xb0 - 4, yb = yb0 - 16, ss = depth(ys), sb = depth(yb);
+    const phs = ds / (120 * ss) * Math.PI + 1.3, phb = db / (150 * sb) * Math.PI;
+    let ps = blend(STAND, run(phs, 1), Math.min(vs, 1) * (p > 0)), pb = blend(STAND, run(phb, 1), Math.min(vb, 1) * (p > 0));
+    ps.lean -= 16 * bump(p, .56, .6, .63); pb.lean -= 12 * bump(p, .58, .62, .65);
+    // 2. The little one crouches at the roots and lifts the box; his brother leans in.
+    ps = blend(blend(ps, CROUCH, ease(seg(p, .6, .645))), HOLD, ease(seg(p, .655, .69)));
+    pb = blend(pb, WOW, ease(seg(p, .62, .68)));
+    // 3. Both jump, arms up, with squash and stretch.
+    ps = blend(blend(blend(ps, SQUAT, ease(seg(p, .69, .71))), UP, ease(seg(p, .71, .73))), LANDED, ease(seg(p, .79, .82)));
+    pb = blend(blend(pb, SQUAT, ease(seg(p, .7, .72))), VUP, ease(seg(p, .72, .74)));
+    const qs = .1 * bump(p, .69, .71, .72) - .1 * bump(p, .71, .725, .77) + .09 * bump(p, .785, .8, .83), qb = .09 * bump(p, .7, .72, .73) - .09 * bump(p, .72, .735, .78) + .08 * bump(p, .795, .81, .84);
+    place(big, xb, yb, sb, pb, Math.sin(Math.PI * seg(p, .72, .8)) * 62, p > .62, qb, phb);
+    place(small, xs, ys, ss, ps, Math.sin(Math.PI * seg(p, .71, .79)) * 78, p > .6, qs, phs);
+    const kids = document.getElementById('fKids'); if ((ys > yb) !== (kids.lastChild === small.root)) kids.appendChild(ys > yb ? small.root : big.root);
+    const pick = seg(p, .645, .66), hs = small.hands, bs = small.s * ss;
+    const hx = mix((hs[0][0] + hs[1][0]) / 2, hs[0][0] + 6 * bs, seg(p, .69, .73)), hy = mix((hs[0][1] + hs[1][1]) / 2 + 12 * bs, hs[0][1] + 14 * bs, seg(p, .69, .73));
+    set(document.getElementById('fBox'), `translate(${R(mix(775, hx, pick))} ${R(mix(1199, hy, pick))}) scale(${mix(1, bs, pick).toFixed(3)})`);
+    // The Coton bounds along the near side after a butterfly, then veers off as the camera closes in.
+    const dp = seg(p, 0, .64), dOn = dp < 1;
+    if (dog._on !== dOn) { dog._on = dOn; dog.style.display = bf.style.display = dOn ? '' : 'none'; }
+    if (dOn) { const dx = mix(-330, 1320, dp) + 40 * Math.sin(dp * 9), dy = yAt(Math.min(dx, 700)) + 120 + 30 * Math.sin(dp * 11) + 360 * Math.pow(seg(dp, .62, 1), 2), dk = depth(dy) * 1.45, ph = (dx + 330) / 62 * Math.PI;
+      const hop = Math.max(0, Math.sin(ph)), turn = Math.cos(dp * 9) < -.6 ? -1 : 1;
+      set(dog, `translate(${R(dx)} ${R(dy)}) scale(${R(dk * turn * 100) / 100} ${R(dk * 100) / 100})`); set(dog.firstChild, `scale(${(1 - hop * .35).toFixed(2)} 1)`);
+      set(dogBody, `translate(0 ${R(-hop * 24)}) rotate(${R(-12 * Math.cos(ph))})`);
+      dogLegs.forEach((l, i) => set(l, `translate(${i % 2 ? 18 : -22} -28) rotate(${R((i % 2 ? 45 : -45) * Math.sin(ph + (i > 1) * .5))})`));
+      const bx = dx + turn * (110 + 40 * Math.sin(dp * 23)) * dk, by = dy - (120 + 45 * Math.sin(dp * 17)) * dk, fl = Math.cos(dp * 260);
+      set(bf, `translate(${R(bx)} ${R(by)}) scale(${(dk * 1.2).toFixed(2)})`); set(bf.firstChild, `scale(${fl.toFixed(2)} 1)`); set(bf.children[1], `scale(${fl.toFixed(2)} 1)`); }
+    // Confetti and shaken leaves.
+    const ct = seg(p, .72, .9) * 1.1;
+    bits.forEach((b, i) => { const on = ct > 0 && ct < 1.1; if (b.on !== on) { b.on = on; b.n.style.opacity = on ? 1 : 0; } if (!on) return;
+      const ox = b.leaf ? b.ox : 740, oy = b.leaf ? b.oy : 960;
+      set(b.n, `translate(${R(ox + b.vx * ct + Math.sin(ct * 10 + b.fl) * 14 * ct)} ${R(oy + b.vy * ct + (b.leaf ? 120 : 820) * ct * ct)}) rotate(${Math.round(b.spin * ct)}) scale(1 ${Math.cos(ct * 14 + b.fl).toFixed(2)})`); });
+    // Camera: wide on the meadow, easing in on the boys and the tree, a last push on the find.
+    const e = ease(seg(p, 0, .66)), push = ease(seg(p, .64, .8)) * .12, vw = Math.exp(mix(Math.log(C0[2]), Math.log(C1[2]), e)) * (1 - push);
+    const cx = mix(C0[0], (xs + xb) / 2 + 70, e) - push * 160, cy = mix(mix(C0[1], C1[1], e), small.head[1] + 60, push * 3), S = Sw / vw, S0 = Sw / C0[2];
+    set(cam, `translate(${R(Sw / 2)} ${R(Sh / 2)}) scale(${S.toFixed(4)}) translate(${R(-cx)} ${R(-cy)})`);
+    L.forEach(o => { if (!o.d) return; const Sl = S0 * Math.pow(S / S0, o.f), lx = mix(C0[0], cx, o.f) - (o.drift || 0) * p, ly = mix(C0[1], cy, o.f);
+      const t = `translate3d(${R(Sw / 2 + (o.x - lx) * Sl)}px,${R(Sh / 2 + (o.y - ly) * Sl)}px,0) scale(${(Sl / o.d).toFixed(4)})`; if (o.k !== t) { o.k = t; o.c.style.transform = t; } });
+    // 4. Iris into his face.
+    const it = seg(p, .78, .88), show = it > 0;
+    if (close._on !== show) { close._on = show; close.style.visibility = show ? 'visible' : 'hidden'; }
+    if (show) { const [hx2, hy2, hr] = small.head, sx = Sw / 2 + (hx2 - cx) * S, sy = Sh / 2 + (hy2 - cy) * S, r0 = hr * S, rF = .245 * F, q = ease(it);
+      const k = Math.exp(mix(Math.log(r0 / rF), 0, q)), px = mix(sx, FX, q), py = mix(sy, FY, q);
+      FACE.c.style.transform = `translate3d(${R(px - .5 * F * k)}px,${R(py - .56 * F * k)}px,0) scale(${(k * F / (1000 * FACE.d || 1)).toFixed(4)})`;
+      close.style.clipPath = `circle(${R(mix(r0 * 1.15, Math.hypot(Sw, Sh), Math.pow(q, 1.6)))}px at ${R(px)}px ${R(py)}px)`;
+      close.style.opacity = seg(it, 0, .3);
+      const ft = seg(p, .8, 1);
+      bits2.forEach(b => { const u = ft * b.sp * 1.2 - b.off * .5, on = u > 0 && u < 1.05; if (b.on !== on) { b.on = on; b.n.style.opacity = on ? 1 : 0; } if (!on) return;
+        set(b.n, `translate(${R(b.x * Sw + Math.sin(u * 9) * b.sway)} ${R(-30 + u * (Sh + 60))}) rotate(${Math.round(b.spin * u)}) scale(1 ${Math.cos(u * 12).toFixed(2)})`); }); }
+    letters.forEach((s, i) => { const t = seg(p, .85 + i * .006, .9 + i * .006), v = t > 0 ? back(t) : 0;
+      if (s._t !== v) { s._t = v; s.style.opacity = t > 0 ? 1 : 0; s.style.transform = `translateY(${R((1 - v) * .6)}em) scale(${v.toFixed(3)})`; } });
   }
 
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // ---------- Sizing, painting, scroll ----------
+  let secTop = 0, secH = 1, vh = 1, ready = false;
+  function measure() {
+    vh = innerHeight; Sw = stage.clientWidth; Sh = stage.clientHeight; A = Sw / Sh; secH = sec.offsetHeight; secTop = sec.getBoundingClientRect().top + scrollY;
+    svg.setAttribute('viewBox', `0 0 ${Sw} ${Sh}`); csvg.setAttribute('viewBox', `0 0 ${Sw} ${Sh}`);
+    C0 = fit(0, 1000, 1000, 1200, .52); C1 = fit(560, 440, 540, 1150, .6);
+    const tall = A < 1; F = tall ? Math.min(Sw * 1.67, Sh * .78) : Sh * .9; FX = tall ? Sw / 2 : Sw * .66; FY = tall ? Sh * .57 : Sh * .53;
+    const S0 = Sw / C0[2]; stage.style.setProperty('--sx', R(Sw / 2 + (180 - C0[0]) * S0) + 'px'); stage.style.setProperty('--sy', R(Sh / 2 + (820 - C0[1]) * S0) + 'px');
+    close.style.setProperty('--fx', R(FX) + 'px'); close.style.setProperty('--fy', R(FY) + 'px');
+    const fs = tall ? Math.min(Sw * .165, Sh * .1) : Math.min(Sh * .13, Sw * .085);
+    Object.assign(say.style, { fontSize: R(fs) + 'px', top: R(tall ? Sh * .09 : Sh * .4 - fs / 2) + 'px', left: R(tall ? Sw / 2 : Sw * .06) + 'px', transform: tall ? 'translateX(-50%) rotate(-4deg)' : 'rotate(-4deg)' });
+  }
+  const need = o => { const zoom = Sw / (C1[2] * .88), S0 = Sw / C0[2], Sl = S0 * Math.pow(zoom / S0, o.f); return Math.min(Sl * DPR, Math.sqrt(o.px / (o.w * o.h))); };
+  let painting = null;
+  function paint() { if (painting) return painting;
+    painting = (async () => { for (const o of L) { const d = need(o); if (!o.d || d > o.d * 1.3) { await raster(o, d); await new Promise(r => setTimeout(r, 0)); } }
+      const fd = Math.min(F * DPR / 1000, Math.sqrt(3.2e6 / 1.4) / 1000); if (!FACE.d || fd > FACE.d * 1.3) await raster(FACE, fd);
+      ready = true; stage.classList.add('ready'); last = -1; draw(x); painting = null; })(); return painting; }
+
+  const target = () => reduce ? 1 : clamp((scrollY - secTop + vh * .3) / (secH - vh + vh * .3));
+  let x = 0, v = 0, last = -1, running = false, lastT = 0, visible = false;
+  const draw = p => { if (Math.abs(p - last) < 1e-5) return; last = p; frame(p); };
+  function loop(now) {
+    const T = target(), dt = Math.min(.064, (now - lastT) / 1000 || .016); lastT = now;
+    if (!visible) { x = T; v = 0; running = false; return; }
+    const w = 24, d = x - T, c = v + w * d, ex = Math.exp(-w * dt); x = T + (d + c * dt) * ex; v = (v - w * c * dt) * ex;
+    if (Math.abs(x - T) < 1e-4 && Math.abs(v) < 1e-3) { x = T; v = 0; }
+    draw(x); if (x !== T || v) requestAnimationFrame(loop); else running = false;
+  }
+  const kick = () => { if (!running && visible) { running = true; lastT = performance.now(); requestAnimationFrame(loop); } };
   if (!reduce) sec.classList.add('scrub');
-  const stage = sec.querySelector('.find-stage');
-  function size() { const a = stage.clientWidth / Math.max(1, stage.clientHeight);
-    H = clamp(700 / a, 1250, 1740); W = H * a; }
-  let pending = false, last = -1;
-  function progress() { if (reduce) return 1; const r = sec.getBoundingClientRect(), vh = innerHeight, lead = vh * .35;
-    return clamp((lead - r.top) / (r.height - vh + lead)); }
-  function tick() { pending = false; const p = progress(); if (Math.abs(p - last) > 1e-4) { last = p; frame(p); } }
-  const ask = () => { if (!pending) { pending = true; requestAnimationFrame(tick); } };
-  addEventListener('scroll', ask, { passive: true });
-  addEventListener('resize', () => { size(); last = -1; ask(); });
-  size(); frame(progress());
+  measure(); x = target(); draw(x);
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) { if (document.readyState === 'complete') paint(); kick(); } }, { rootMargin: '100% 0px' }).observe(sec);
+  addEventListener('scroll', kick, { passive: true });
+  let rt; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { const w = Sw; measure(); if (Math.abs(Sw - w) > 40 || !ready) paint(); last = -1; draw(x); kick(); }, 120); }).observe(document.body);
+  addEventListener('load', () => (window.requestIdleCallback || setTimeout)(() => paint()));
 })();
 </script>
 
