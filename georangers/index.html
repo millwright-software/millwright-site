@@ -97,7 +97,7 @@
     background: #15181a; border-radius: 48px; padding: 10px;
     box-shadow: 0 30px 60px rgba(46,38,28,.22), 0 2px 0 rgba(255,255,255,.25) inset;
   }
-  .phone img { border-radius: 38px; width: 100%; }
+  .phone img, .phone video { display:block; border-radius: 38px; width: 100%; height:auto; aspect-ratio: 720 / 1565; object-fit: cover; background:#0f1512; }
   .hero-phone { position: relative; width: min(340px, 78%); margin: 0 auto; transform: rotate(-3deg); }
   @media (max-width: 820px) { .hero-phone { width: min(300px, 70%); } }
   .sticker {
@@ -213,18 +213,18 @@
     <p class="intro">The arrow gets them close. Then a map with their own dot. Then the truth: look around here.</p>
     <div class="row">
       <figure class="step">
-        <p class="dist">250 ft</p>
+        <p class="dist">210 ft</p>
         <div class="phone"><img src="img/03-ranger-far.webp" alt="" width="720" height="1565"></div>
         <figcaption><b>Follow the arrow</b>Pings quicken. A buzz when they face it. FOUND IT takes a hold, not a tap.</figcaption>
       </figure>
       <figure class="step">
-        <p class="dist">93 ft</p>
-        <div class="phone"><img src="img/04-ranger-near.webp" alt="Inside 100 feet: satellite map with the kid's dot, a heading wedge, the treasure star" width="720" height="1565"></div>
-        <figcaption><b>Now it’s a map</b>Their dot, their heading, the treasure. The ring shrinks when they stand still.</figcaption>
+        <p class="dist">Inside 100 ft</p>
+        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/04-ranger-mid.webp" width="720" height="1565" aria-label="The arrow shrinks onto a satellite map as the kid walks the last hundred feet"><source src="img/ranger-walk.webm" type="video/webm"><source src="img/ranger-walk.mp4" type="video/mp4"><img src="img/04-ranger-mid.webp" alt="The arrow shrinks onto a satellite map as the kid walks the last hundred feet" width="720" height="1565"></video></div>
+        <figcaption><b>The arrow becomes them</b>Inside a hundred feet the map fades up and the arrow shrinks onto their dot. The ring shrinks when they stand still.</figcaption>
       </figure>
       <figure class="step">
         <p class="dist quiet">Search zone</p>
-        <div class="phone"><img src="img/05-ranger-close.webp" alt="In the search zone: a dashed ring on the satellite map, 'Look around here!' and what the box looks like" width="720" height="1565"></div>
+        <div class="phone"><img src="img/05-ranger-zone.webp" alt="In the search zone: a dashed ring on the satellite map, 'Look around here!' and what the box looks like" width="720" height="1565"></div>
         <figcaption><b>Look around here</b>GPS can’t walk them to the box. The app says so instead of pretending.</figcaption>
       </figure>
     </div>
@@ -243,7 +243,7 @@
       </figure>
       <figure class="step">
         <p class="dist">149 ft</p>
-        <div class="phone"><img src="img/07-tracker-near.webp" alt="Tracker motion-tracker fan with the treasure as a blip" width="720" height="1565"></div>
+        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/07-tracker-near.webp" width="720" height="1565" aria-label="Tracker mode: the long-range arrow, then the motion-tracker fan as the kid closes in"><source src="img/tracker-walk.webm" type="video/webm"><source src="img/tracker-walk.mp4" type="video/mp4"><img src="img/07-tracker-near.webp" alt="Tracker mode: the long-range arrow, then the motion-tracker fan as the kid closes in" width="720" height="1565"></video></div>
         <figcaption><b>Motion tracker</b>The blip is the treasure.</figcaption>
       </figure>
       <figure class="step">
@@ -272,8 +272,8 @@
         <figcaption><b>Sticker map</b>Every find, with their photo. Photos stay in the app.</figcaption>
       </figure>
       <figure class="step">
-        <div class="phone"><img src="img/10-radar-ranger.webp" alt="Car radar on the paper palette with nearby treasure listed by distance" width="720" height="1565"></div>
-        <figcaption><b>Car radar</b>Pings when treasure is near the road. You get directions, twice per turn.</figcaption>
+        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/12-radar-route.webp" width="720" height="1565" aria-label="Car radar sweeping while tracking a treasure, with the route line and a turn instruction"><source src="img/radar-route.webm" type="video/webm"><source src="img/radar-route.mp4" type="video/mp4"><img src="img/12-radar-route.webp" alt="Car radar sweeping while tracking a treasure, with the route line and a turn instruction" width="720" height="1565"></video></div>
+        <figcaption><b>Car radar</b>Pings when treasure is near the road. Track one and you get directions, twice per turn.</figcaption>
       </figure>
     </div>
 
@@ -317,5 +317,11 @@
   </div>
 </section>
 
+<script>
+  // Reduced motion: leave the poster frame up instead of looping the clips.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video.clip').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+  }
+</script>
 </body>
 </html>
