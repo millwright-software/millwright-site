@@ -216,333 +216,378 @@
   </header>
 </div>
 
-<!-- "I found it!": two brothers race across a watercolour meadow to a cache. Scroll scrubs it; it holds wherever you stop.
-     The painted layers are drawn once into canvases (SVG watercolour filters rasterised a single time), then only moved and scaled. -->
+<!-- "I found it!": a cut-paper stop-motion made in code. Two brothers and their Coton race across a paper meadow to a cache.
+     Scroll scrubs it and it holds wherever you stop. Every paper piece is cut, textured and shadowed once into a canvas sprite;
+     the puppets then move on twos (with a little boil) while the camera glides at full frame rate. -->
 <style>
-  .find { position: relative; padding: 0; background: linear-gradient(#bcd6df, #f3e4ba 42%, #9fbb6c 52%, #86a957 80%, var(--paper-deep)); }
+  .find { position: relative; padding: 0; background: linear-gradient(#a9d0e6, #fbe3ad 42%, #a5cb5c 52%, #73a443 80%, var(--paper-deep)); }
   .find.scrub { height: 340vh; }
   .find-stage { position: relative; height: min(100vh, 860px); overflow: hidden; contain: layout paint; }
   .find.scrub .find-stage { position: sticky; top: 0; height: 100vh; }
-  .find-stage canvas { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; opacity: 0; transition: opacity .5s; }
+  .find-stage canvas { position: absolute; left: 0; top: 0; transform-origin: 0 0; opacity: 0; transition: opacity .5s; }
+  .find-stage .pl { will-change: transform; }
+  .find-stage .full { width: 100%; height: 100%; }
   .find-stage.ready canvas { opacity: 1; }
-  .find-kids { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .find-kids .e { stroke: rgba(80,50,30,.4); stroke-width: 2; stroke-linejoin: round; }
-  .find-kids .eg { stroke: rgba(120,135,160,.35); stroke-width: 1.5; }
   .find-stage::before, .find-stage::after { content: ""; position: absolute; left: 0; right: 0; z-index: 3; pointer-events: none; }
   .find-stage::before { top: 0; height: 6%; background: linear-gradient(var(--paper), rgba(250,243,222,0)); }
   .find-stage::after { bottom: 0; height: 8%; background: linear-gradient(rgba(240,229,198,0), var(--paper-deep)); }
-  .find-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at var(--sx, 20%) var(--sy, 35%), rgba(255,208,128,.42), rgba(255,208,128,.12) 32%, rgba(255,208,128,0) 60%); }
-  .find-close { position: absolute; inset: 0; z-index: 2; visibility: hidden;
-    background: repeating-conic-gradient(from 4deg at var(--fx, 50%) var(--fy, 55%), rgba(255,246,214,.5) 0 7deg, rgba(255,246,214,0) 7deg 20deg),
-      radial-gradient(circle at var(--fx, 50%) var(--fy, 55%), #fff1b8 0, #fcd77e 28%, #f5ad62 62%, #e98a5e 100%); }
+  .find-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at var(--sx, 20%) var(--sy, 35%), rgba(255,214,140,.38), rgba(255,214,140,.1) 30%, rgba(255,214,140,0) 58%); }
+  .find-close { position: absolute; inset: 0; z-index: 2; visibility: hidden; background: #fbe9c2; }
   .find-close canvas { opacity: 1; }
-  .find-close svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .find-say { position: absolute; margin: 0; z-index: 2; font-family: var(--display); font-weight: 700; line-height: 1; color: var(--deep);
-    white-space: nowrap; -webkit-text-stroke: .16em var(--paper); paint-order: stroke fill; letter-spacing: -.01em; transform: rotate(-4deg); }
+  .find-say { position: absolute; margin: 0; z-index: 2; font-family: var(--display); font-weight: 700; line-height: 1; color: #2e6b3d; white-space: nowrap;
+    -webkit-text-stroke: .17em #fffaf0; paint-order: stroke fill; text-shadow: 0 .07em .06em rgba(70,45,20,.3); }
   .find-say span { display: inline-block; opacity: 0; will-change: transform; }
 </style>
 <section class="find" aria-label="I found it">
-  <div class="find-stage" role="img" aria-label="A watercolour cartoon: two brothers, about five and seven, run across a meadow to a big tree at the edge of a forest. The little one finds the treasure box at its roots, they jump with confetti flying, and then his big smiling face fills the screen: I found it!">
-    <svg class="find-kids" aria-hidden="true">
-      <defs>
-        <radialGradient id="fSk" cx=".42" cy=".38" r=".75"><stop offset="0" stop-color="#f8dcbd"/><stop offset="1" stop-color="#ecbd95"/></radialGradient>
-        <radialGradient id="fBs" cx=".38" cy=".3" r=".85"><stop offset="0" stop-color="#a9d0e4"/><stop offset="1" stop-color="#6fa9cc"/></radialGradient>
-        <radialGradient id="fYs" cx=".38" cy=".3" r=".85"><stop offset="0" stop-color="#fbe08a"/><stop offset="1" stop-color="#eebd3c"/></radialGradient>
-        <radialGradient id="fCp" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#5b9663"/><stop offset="1" stop-color="#386f43"/></radialGradient>
-        <radialGradient id="fHm" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#ef8a63"/><stop offset="1" stop-color="#cf5636"/></radialGradient>
-      </defs>
-      <g id="fCam"><g id="fShadows" fill="#2d4a24" opacity=".2"></g><g id="fKids"></g>
-        <g id="fBox"><rect class="e" x="-30" y="-36" width="60" height="38" rx="7" fill="#7a5636"/><rect class="e" x="-32" y="-41" width="64" height="12" rx="5" fill="#5f4128"/><circle cy="-16" r="5" fill="#f7c948"/></g>
-        <path d="M748 1200l5-17 4 12 5-19 5 17 5-13 3 20z" fill="#6a9347"/>
-        <g id="fDog"></g><g id="fBf"></g>
-        <g id="fFx"></g></g>
-    </svg>
-    <div class="find-glow"></div>
-    <div class="find-close"><svg aria-hidden="true"><g id="fFx2"></g></svg></div>
+  <div class="find-stage" role="img" aria-label="A cut-paper cartoon: two brothers, about five and seven, run across a paper meadow with their fluffy white dog chasing a butterfly beside them, to a big tree at the edge of a forest. The little one finds the treasure box at its roots, they jump as paper confetti flies, and then his big smiling face fills the screen: I found it!">
+    <div class="find-close"></div>
     <p class="find-say" aria-hidden="true"><span>I</span><span>&nbsp;</span><span>f</span><span>o</span><span>u</span><span>n</span><span>d</span><span>&nbsp;</span><span>i</span><span>t</span><span>!</span></p>
   </div>
 </section>
 <script>
 (() => {
   const sec = document.querySelector('.find'); if (!sec) return;
-  const stage = sec.querySelector('.find-stage'), svg = stage.querySelector('.find-kids'), cam = document.getElementById('fCam');
-  const close = stage.querySelector('.find-close'), csvg = close.querySelector('svg'), say = stage.querySelector('.find-say'), letters = [...say.children];
-  const NS = 'http://www.w3.org/2000/svg', DPR = Math.min(devicePixelRatio || 1, 2), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stage = sec.querySelector('.find-stage'), close = stage.querySelector('.find-close'), say = stage.querySelector('.find-say'), letters = [...say.children];
+  const DPR = Math.min(devicePixelRatio || 1, 2), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, RAD = Math.PI / 180;
   const clamp = (v, a = 0, b = 1) => v < a ? a : v > b ? b : v, seg = (p, a, b) => clamp((p - a) / (b - a)), mix = (a, b, t) => a + (b - a) * t;
-  const ease = t => t * t * (3 - 2 * t), back = t => 1 + 2.7 * Math.pow(t - 1, 3) + 1.7 * Math.pow(t - 1, 2);
-  const R = n => Math.round(n * 10) / 10;
-  const L1 = 54, L2 = 50, U1 = 34, U2 = 32, RAD = Math.PI / 180;
-  let seed = 11; const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
+  const ease = t => t * t * (3 - 2 * t), back = t => 1 + 2.7 * Math.pow(t - 1, 3) + 1.7 * Math.pow(t - 1, 2), R = n => Math.round(n * 10) / 10;
+  const rng = s => () => (s = s * 16807 % 2147483647) / 2147483647;
+  let rnd = rng(7);
+  const can = (cls, parent, before) => { const c = document.createElement('canvas'); c.className = cls; parent.insertBefore(c, before || null); return c; };
 
-  // Shaggy hair: tufts around an arc (angles in degrees, 0 = facing direction, 90 = down).
-  const shag = (r, a0, a1, n, len, cx = 0, cy = 0, puff = .15) => { let d = `M${cx} ${cy}`; for (let i = 0; i <= n; i++) { const a = mix(a0, a1, i / n) * RAD, m = mix(a0, a1, (i - .5) / n) * RAD, rr = r + len * (.55 + .45 * Math.sin(i * 2.7));
-      if (i) d += `Q${R(cx + Math.cos(m) * (r + len * puff))} ${R(cy + Math.sin(m) * (r + len * puff))} `; else d += 'L'; d += `${R(cx + Math.cos(a) * rr)} ${R(cy + Math.sin(a) * rr)}`; } return d + 'Z'; };
-  // A lock hanging from a hairline: strands of varying length.
-  const lock = (x0, x1, y, len, n) => { let d = `M${x0} ${y - 6}L${x1} ${y - 6}`; for (let i = n; i >= 0; i--) { const x = mix(x0, x1, i / n), l = len * (.6 + .4 * Math.sin(i * 1.9 + 1));
-      d += `L${R(x + 2)} ${R(y + l)}L${R(x - 2)} ${R(y + l * .55)}`; } return d + 'Z'; };
-  // ---------- The painting: SVG watercolour, rasterised once per layer ----------
-  // w: wobbly edges + darker pooled rim + paper grain.  s: big soft washes.
-  const filt = (id, f, d, b, rim, grain) => `<filter id="${id}" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
-    <feTurbulence type="fractalNoise" baseFrequency="${f}" numOctaves="3" seed="4" result="n"/>
-    <feDisplacementMap in="SourceGraphic" in2="n" scale="${d}" xChannelSelector="R" yChannelSelector="G" result="d"/>
-    <feGaussianBlur in="d" stdDeviation="${b}" result="b"/>` + (rim ? `
-    <feGaussianBlur in="d" stdDeviation="${rim}" result="bb"/><feComposite in="b" in2="bb" operator="out" result="e"/>
-    <feColorMatrix in="e" values=".6 0 0 0 0 0 .6 0 0 0 0 0 .62 0 0 0 0 0 .8 0" result="ed"/>` + (grain ? `
-    <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="1" seed="9" result="g"/>
-    <feColorMatrix in="g" values="0 0 0 0 .3 0 0 0 0 .22 0 0 0 0 .12 0 0 0 -.5 .3" result="ga"/>
-    <feComposite in="ga" in2="b" operator="in" result="gd"/>
-    <feMerge><feMergeNode in="b"/><feMergeNode in="ed"/><feMergeNode in="gd"/></feMerge>` : `<feMerge><feMergeNode in="b"/><feMergeNode in="ed"/></feMerge>`) : '') + `</filter>`;
-  const DEFS = `<defs>${filt('w', .018, 14, .9, 6, 1)}${filt('t', .03, 6, .5, 3)}${filt('c', .012, 18, 2.2, 0)}${filt('s', .006, 60, 9, 0)}${filt('b', .02, 10, 3.2, 0)}
-    <linearGradient id="gS" gradientUnits="userSpaceOnUse" x1="0" y1="-400" x2="0" y2="1150"><stop offset="0" stop-color="#5fa6d4"/><stop offset=".5" stop-color="#a9d0e2"/><stop offset=".82" stop-color="#f7dfae"/><stop offset="1" stop-color="#fcc98a"/></linearGradient>
-    <radialGradient id="gG"><stop offset="0" stop-color="#ffd27a" stop-opacity=".85"/><stop offset=".35" stop-color="#ffd27a" stop-opacity=".3"/><stop offset="1" stop-color="#fbd56a" stop-opacity="0"/></radialGradient>
-    <linearGradient id="gM" gradientUnits="userSpaceOnUse" x1="0" y1="1080" x2="0" y2="2200"><stop offset="0" stop-color="#a9cc5c"/><stop offset=".45" stop-color="#7fae48"/><stop offset="1" stop-color="#5f9440"/></linearGradient></defs>`;
-  const blobs = (n, x0, x1, y0, y1, r0, r1, cols) => { let s = ''; for (let i = 0; i < n; i++) s += `<ellipse cx="${R(mix(x0, x1, rnd()))}" cy="${R(mix(y0, y1, rnd()))}" rx="${R(mix(r0, r1, rnd()))}" ry="${R(mix(r0, r1, rnd()) * .55)}" fill="${cols[i % cols.length]}"/>`; return s; };
-  const cloud = (x, y, k) => `<circle cx="${x}" cy="${y}" r="${40 * k}"/><circle cx="${x + 46 * k}" cy="${y - 18 * k}" r="${52 * k}"/><circle cx="${x + 100 * k}" cy="${y}" r="${40 * k}"/><ellipse cx="${x + 50 * k}" cy="${y + 20 * k}" rx="${96 * k}" ry="${26 * k}"/>`;
-  const pine = (x, y, h) => `<path d="M${x} ${y - h}C${R(x + .12 * h)} ${R(y - .8 * h)} ${R(x + .34 * h)} ${R(y - .32 * h)} ${R(x + .3 * h)} ${R(y - .08 * h)}C${R(x + .16 * h)} ${y} ${R(x - .16 * h)} ${y} ${R(x - .3 * h)} ${R(y - .08 * h)}C${R(x - .34 * h)} ${R(y - .32 * h)} ${R(x - .12 * h)} ${R(y - .8 * h)} ${x} ${y - h}Z"/>`;
-  let canopy = ''; { const C = [['#245a3c', 230, .96], ['#3a7a45', 190, .88], ['#69a34f', 140, .8], ['#b9d465', 80, .7]];
-    C.forEach(([c, sp, o], j) => { let s = ''; for (let i = 0; i < 9 - j; i++) { const a = rnd() * 6.283, d = sp * Math.sqrt(rnd()) * .62;
-      s += `<circle cx="${R(860 + Math.cos(a) * d * 1.25 - j * 30)}" cy="${R(760 + Math.sin(a) * d * .8 - j * 30)}" r="${R(mix(70, 120, rnd()) - j * 12)}"/>`; }
-      canopy += `<g filter="url(#w)" fill="${c}" opacity="${o}">${s}</g>`; }); }
-  let flowers = ''; for (let i = 0; i < 70; i++) { const x = mix(-900, 1900, rnd()), y = mix(1130, 2250, rnd()); flowers += `<circle cx="${R(x)}" cy="${R(y)}" r="${R(mix(3, 6.5, rnd()) * (y / 1400))}" fill="${['#fffbe9', '#f7c948', '#c9a7de', '#f1a088'][i % 4]}"/>`; }
-  let tufts = ''; for (let i = 0; i < 46; i++) { const x = mix(-900, 1900, rnd()), y = mix(1120, 2250, rnd()), k = y / 1300; tufts += `<path d="M${R(x)} ${R(y)}l${R(4 * k)} ${R(-14 * k)} ${R(3 * k)} ${R(10 * k)} ${R(4 * k)} ${R(-16 * k)} ${R(4 * k)} ${R(14 * k)} ${R(3 * k)} ${R(-9 * k)} ${R(3 * k)} ${R(13 * k)}z"/>`; }
-
-  let blades = ''; for (let i = 0; i < 26; i++) { const x = mix(-900, 1900, (i + rnd() * .6) / 26), y = mix(1820, 2050, rnd());
-    for (let j = 0; j < 5; j++) { const h = mix(140, 300, rnd()), lean = mix(-70, 70, rnd()), w = mix(9, 16, rnd()), bx = x + j * 14;
-      blades += `<path d="M${R(bx - w)} ${R(y)}Q${R(bx + lean * .3)} ${R(y - h * .6)} ${R(bx + lean)} ${R(y - h)}Q${R(bx + lean * .2 + w * .4)} ${R(y - h * .5)} ${R(bx + w)} ${R(y)}Z" fill="${['#5a8c3c', '#6f9f45', '#4a7a36'][j % 3]}"/>`; } }
-  const L = [
-    { f: 0, x: -900, y: -400, w: 2800, h: 1600, px: 1.2e6, svg: `<rect x="-900" y="-400" width="2800" height="1600" fill="url(#gS)"/>
-      <g filter="url(#s)" opacity=".5">${blobs(9, -900, 1900, -300, 1000, 200, 520, ['#d8ecf4', '#8fc0de', '#ffe2b0'])}</g>
-      <circle cx="180" cy="820" r="420" fill="url(#gG)"/><g filter="url(#c)"><circle cx="180" cy="820" r="78" fill="#ffd257"/><circle cx="172" cy="812" r="58" fill="#fff0a8" opacity=".8"/></g>` },
-    { f: .3, drift: 90, x: -900, y: 100, w: 2800, h: 800, px: 1e6, svg: `<g filter="url(#c)" fill="#fffaf2" opacity=".95">${cloud(-560, 420, 1.3)}${cloud(40, 280, 1)}${cloud(470, 560, .75)}${cloud(860, 330, 1.25)}${cloud(1400, 500, 1)}${cloud(-220, 690, .7)}</g>` },
-    { f: .55, x: -900, y: 820, w: 2800, h: 680, px: 1.4e6, svg: `<g filter="url(#w)"><path d="M-900 960C-600 880-380 900-150 930S250 870 520 905 1000 950 1250 900 1700 890 1900 930V1500H-900Z" fill="#8fb6c4"/>
-      <path d="M-900 1000C-500 950-200 990 100 972S600 940 900 976 1500 982 1900 966V1500H-900Z" fill="#a3c08e" opacity=".92"/></g>
-      <g filter="url(#t)" fill="#6a98a0" opacity=".7">${pine(-420, 985, 46)}${pine(-390, 990, 38)}${pine(330, 975, 40)}${pine(360, 980, 52)}${pine(1080, 980, 44)}${pine(1500, 975, 50)}</g>` },
-    { f: 1, x: -900, y: 900, w: 2800, h: 1400, px: 3e6, svg: `<g filter="url(#w)"><path d="M-900 1040C-600 990-300 1010 0 1022S500 982 800 1010 1400 1030 1900 1000V2300H-900Z" fill="#b5cf6a"/>
-      <path d="M-900 1112C-500 1080-100 1112 300 1092S900 1102 1300 1122 1700 1110 1900 1100V2300H-900Z" fill="url(#gM)"/></g>
-      <g filter="url(#s)" opacity=".38">${blobs(16, -900, 1900, 1150, 2250, 120, 340, ['#5f9a3e', '#c9dc78', '#6fa548'])}</g>
-      <g filter="url(#w)"><path d="M-900 1770C-600 1660-400 1560-170 1490Q360 1235 716 1170Q744 1186 736 1214Q360 1366-170 1640C-400 1730-600 1830-900 1960Z" fill="#f4e2b0"/></g>
-      <g filter="url(#t)" fill="#5f8a42" opacity=".8">${tufts}</g><g filter="url(#t)">${flowers}</g>` },
-    { f: 1, x: 480, y: 470, w: 1100, h: 800, px: 3.4e6, svg: `<g filter="url(#w)" fill="#2f6150" opacity=".92"><circle cx="1010" cy="1010" r="110"/><circle cx="1180" cy="980" r="130"/><circle cx="1380" cy="1000" r="120"/><circle cx="1530" cy="990" r="110"/><rect x="960" y="1000" width="640" height="200"/></g>
-      <g filter="url(#w)" fill="#24503f">${pine(990, 1185, 250)}${pine(1110, 1190, 330)}${pine(1240, 1185, 280)}${pine(1360, 1190, 350)}${pine(1490, 1185, 300)}</g>
-      <g filter="url(#w)" fill="#3f7a52" opacity=".9">${pine(1050, 1200, 200)}${pine(1300, 1200, 230)}${pine(1440, 1205, 190)}</g>
-      <g filter="url(#w)"><path d="M816 1202C836 1160 842 1080 838 980C826 942 800 912 770 894L780 878C808 890 830 905 842 922C846 882 846 852 842 820L878 820C880 860 880 892 882 926C898 902 922 882 952 868L960 884C932 902 908 932 898 976C892 1080 900 1160 924 1202Z" fill="#7a5636"/>
-      <ellipse cx="868" cy="1202" rx="80" ry="12" fill="#5f4128" opacity=".7"/></g>${canopy}
-      <g filter="url(#t)" fill="#5f8a42">${tufts.slice(0, 0)}<path d="M800 1206l4-15 4 11 4-17 5 15 4-11 3 17z"/><path d="M930 1206l4-14 4 10 4-16 5 14 4-10 3 16z"/></g>` },
-    { f: 1.7, x: -900, y: 1560, w: 2800, h: 560, px: 9e5, svg: `<g filter="url(#b)">${blades}</g>` },
-  ];
-  // The close-up: the little brother's face, front on, holding the box.
-  // The close-up: the little brother, front on, lit from the low sun on the left, holding the box.
-  const curls = (pts, c) => pts.map(p => `<path d="${shag(p[2], p[3], p[4], 6, p[2] * .35, p[0], p[1], 1.25)}" fill="${c}"/>`).join('');
-  const FACE = { x: 0, y: 0, w: 1000, h: 1400, svg: `<g filter="url(#w)"><path d="M120 1400C110 1000 250 830 500 830S890 1000 880 1400Z" fill="#f3c94a"/><path d="M150 1400C150 1060 240 900 360 860C300 960 280 1150 300 1400Z" fill="#fde8a0" opacity=".55"/><path d="M420 845q80 50 160 0" fill="none" stroke="#d9ab2c" stroke-width="14"/>
-      <path d="${shag(258, 95, 300, 16, 50, 490, 520, 1.1)}" fill="#c99a52"/><path d="${shag(250, -120, 85, 12, 46, 510, 520, 1.1)}" fill="#c99a52"/>
-      <rect x="440" y="740" width="120" height="120" rx="40" fill="#e0b08a"/><ellipse cx="266" cy="610" rx="34" ry="46" fill="#efc39b"/><ellipse cx="734" cy="610" rx="34" ry="46" fill="#e0ad87"/>
-      <ellipse cx="500" cy="560" rx="236" ry="248" fill="#f5cfa8"/><path d="M560 318A236 248 0 0 1 560 802Q700 560 560 318Z" fill="#dda07c" opacity=".38"/><ellipse cx="440" cy="500" rx="150" ry="160" fill="#fde3c4" opacity=".6"/></g>
-      <g filter="url(#t)"><path d="M282 440Q250 560 290 700" fill="none" stroke="#fff1c4" stroke-width="16" stroke-linecap="round" opacity=".85"/>
-      <circle cx="350" cy="666" r="58" fill="#f2897a" opacity=".42"/><circle cx="650" cy="666" r="58" fill="#f2897a" opacity=".38"/>
-      <ellipse cx="404" cy="560" rx="33" ry="45" fill="#241a12"/><ellipse cx="596" cy="560" rx="33" ry="45" fill="#241a12"/><ellipse cx="404" cy="572" rx="22" ry="26" fill="#5a3a20" opacity=".55"/><ellipse cx="596" cy="572" rx="22" ry="26" fill="#5a3a20" opacity=".55"/>
-      <circle cx="418" cy="540" r="13" fill="#fff"/><circle cx="610" cy="540" r="13" fill="#fff"/><circle cx="394" cy="584" r="6" fill="#fff" opacity=".85"/><circle cx="586" cy="584" r="6" fill="#fff" opacity=".85"/>
-      <path d="M350 466q50-36 102-8M548 458q52-28 102 8" fill="none" stroke="#b07f3e" stroke-width="15" stroke-linecap="round"/>
-      <path d="M484 600q30 24-2 42" fill="none" stroke="#c48d68" stroke-width="11" stroke-linecap="round"/>
-      <g fill="#c9845a">${[[440, 622], [462, 642], [420, 648], [560, 622], [538, 642], [580, 648], [450, 600], [550, 600]].map(c => `<circle cx="${c[0]}" cy="${c[1]}" r="5.5"/>`).join('')}</g>
-      <path d="M384 676Q500 820 616 676Q500 702 384 676Z" fill="#7d2b22"/><path d="M404 683Q500 704 596 683L589 699Q500 719 411 699Z" fill="#fffaf0"/><path d="M444 752q56-34 112 0q-56 30-112 0" fill="#e57b6c"/></g>
-      <g filter="url(#w)">${curls([[300, 400, 52, 150, 300], [370, 360, 50, 170, 330], [450, 345, 50, 180, 350], [540, 345, 50, 190, 360], [620, 360, 50, 200, 370], [690, 400, 52, 230, 390], [255, 520, 46, 120, 260], [745, 520, 46, -80, 60], [262, 690, 40, 90, 250], [740, 690, 40, -70, 90]], '#d6b06a')}
-      ${curls([[380, 352, 30, 180, 320], [520, 340, 30, 190, 340], [650, 370, 28, 200, 350], [262, 560, 26, 130, 250]], '#ecd29a')}
-      <path d="M480 300q-30 70 6 130M560 296q24 60-8 120M420 318q-40 50-20 110" fill="none" stroke="#d6b06a" stroke-width="10" stroke-linecap="round"/>
-      <path d="M226 400C214 180 786 180 774 400C700 366 300 366 226 400Z" fill="#dd5f3c"/><path d="M300 280q200-90 400 0" fill="none" stroke="#ffb08a" stroke-width="30" stroke-linecap="round" opacity=".6"/><path d="M330 270q170-70 340 0M262 332q238-84 476 0" fill="none" stroke="#f6efe2" stroke-width="20" stroke-linecap="round" opacity=".8"/>
-      <path d="M242 396Q240 640 352 800" fill="none" stroke="#5a3b30" stroke-width="10"/><path d="M758 396Q760 640 648 800" fill="none" stroke="#5a3b30" stroke-width="10"/></g>
-      <g filter="url(#w)"><rect x="350" y="880" width="300" height="170" rx="20" fill="#7a5636"/><rect x="342" y="862" width="316" height="48" rx="16" fill="#5f4128"/><rect x="342" y="862" width="140" height="10" rx="5" fill="#a07a52" opacity=".6"/><circle cx="500" cy="960" r="20" fill="#f7c948"/>
-      <ellipse cx="346" cy="960" rx="52" ry="58" fill="#f5cfa8"/><ellipse cx="654" cy="960" rx="52" ry="58" fill="#e7b893"/></g>` };
-  function raster(o, d) { return new Promise(res => {
-    const W = Math.max(1, Math.round(o.w * d)), H = Math.max(1, Math.round(o.h * d)), img = new Image();
-    img.onload = () => { const c = o.c; c.width = W; c.height = H; c.style.width = W + 'px'; c.style.height = H + 'px'; c.getContext('2d').drawImage(img, 0, 0, W, H); o.d = d; o.k = null; res(); };
-    img.onerror = () => res();
-    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`<svg xmlns="${NS}" width="${W}" height="${H}" viewBox="${o.x} ${o.y} ${o.w} ${o.h}">${DEFS}${o.svg}</svg>`);
-  }); }
-  L.forEach(o => { o.c = document.createElement('canvas'); stage.insertBefore(o.c, svg); });
-  FACE.c = document.createElement('canvas'); close.insertBefore(FACE.c, csvg);
-
-  // ---------- The boys ----------
-    const cap = (l, a, b) => `M${-a / 2} 0A${a / 2} ${a / 2} 0 0 1 ${a / 2} 0L${b / 2} ${l}A${b / 2} ${b / 2} 0 0 1 ${-b / 2} ${l}Z`;
-  function kid(o) {
-    const leg = bk => `<g><path d="${cap(L1, 22, 18)}" fill="${bk ? o.sk2 : o.sk}"/><path class="e" d="${cap(30, 30, 27)}" fill="${bk ? o.sh2 : o.sh}"/><g transform="translate(0 ${L1})"><path d="${cap(L2 - 6, 17, 14)}" fill="${bk ? o.sk2 : o.sk}"/><path d="${cap(9, 15, 15)}" transform="translate(0 ${L2 - 13})" fill="#fbf6ea"/><path class="e" d="M-10 ${L2 - 4}c0-9 8-11 13-11c11 0 21 6 22 12c1 4-2 6-6 6h-24c-4 0-5-3-5-7z" fill="${bk ? o.shoe2 : o.shoe}"/><path d="M-12 ${L2 + 4}h32" stroke="#fbf6ea" stroke-width="3.5" stroke-linecap="round"/></g></g>`;
-    const arm = bk => `<g><path d="${cap(U1, 14, 12.5)}" fill="${bk ? o.sk2 : o.sk}"/><path class="e" d="${cap(16, 20, 19)}" fill="${bk ? o.top2 : o.top}"/><g transform="translate(0 ${U1})"><path d="${cap(U2, 12.5, 11)}" fill="${bk ? o.sk2 : o.sk}"/><circle cy="${U2}" r="8.5" fill="${bk ? o.sk2 : o.sk}"/></g></g>`;
-    const g = document.createElementNS(NS, 'g'); document.getElementById('fKids').appendChild(g);
-    g.innerHTML = `<g>${leg(1)}${leg(0)}<g>${arm(1)}<path class="e" d="M-22-90C-33-90-33-74-30-54L-28 0C-28 10 28 10 28 0L30-54C33-74 33-90 22-90Z" fill="${o.shirt}"/>${o.x}<path d="M-27-80C-30-60-29-30-27-8" stroke="#ffe7b0" stroke-width="3" fill="none" opacity=".75" stroke-linecap="round"/><path class="e" d="M-29-8h58v10c0 8-58 8-58 0z" fill="${o.sh}"/><g transform="translate(5 -118)"><g>${o.back}</g>${o.head}<g>${o.front}</g>${o.hat}</g>${arm(0)}</g></g>`;
-    const body = g.firstChild, up = body.children[2], hd = up.children[up.children.length - 2];
-    return { root: g, body, up, legs: [body.children[1], body.children[0]], arms: [up.lastChild, up.firstChild], mouth: g.querySelector('.mo'), s: o.s, hair: [hd.firstChild, hd.children[hd.children.length - 2]] };
+  // ---------- Paper kit ----------
+  const tex = document.createElement('canvas'); tex.width = tex.height = 128;
+  { const g = tex.getContext('2d'), d = g.createImageData(128, 128), r = rng(5);
+    for (let i = 0; i < d.data.length; i += 4) { const v = 226 + r() * 29 | 0; d.data[i] = v; d.data[i + 1] = v - 2; d.data[i + 2] = v - 8; d.data[i + 3] = 255; } g.putImageData(d, 0, 0);
+    for (let i = 0; i < 90; i++) { const x = r() * 128, y = r() * 128, a = r() * 6.3, l = 4 + r() * 12; g.strokeStyle = i % 3 ? 'rgba(255,255,255,.75)' : 'rgba(110,90,70,.25)'; g.lineWidth = .7;
+      g.beginPath(); g.moveTo(x, y); g.quadraticCurveTo(x + Math.cos(a + .5) * l / 2, y + Math.sin(a + .5) * l / 2, x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke(); } }
+  let K = 1, PAT = null;
+  const begin = (g, k) => { K = k; PAT = g.createPattern(tex, 'repeat'); try { PAT.setTransform(new DOMMatrix([1 / k, 0, 0, 1 / k, 0, 0])); } catch (e) {} };
+  // One paper piece: flat colour (casting a soft shadow on what is below), fibre texture, a light cut edge.
+  function paper(g, p, col, sh, edge = .32) {
+    g.save(); if (sh) { g.shadowColor = `rgba(48,30,14,${sh[2]})`; g.shadowBlur = sh[0] * K; g.shadowOffsetX = sh[1] * .35 * K; g.shadowOffsetY = sh[1] * K; }
+    g.fillStyle = col; g.fill(p); g.restore();
+    g.save(); g.globalCompositeOperation = 'multiply'; g.globalAlpha = .2; g.fillStyle = PAT; g.fill(p);
+    if (edge) { g.globalCompositeOperation = 'source-over'; g.clip(p); g.globalAlpha = edge; g.strokeStyle = '#fffdf6'; g.lineWidth = 2.4 / K; g.stroke(p); }
+    g.restore();
   }
-  const face = (eyeR, brow, extra) => `<path d="M-31-6Q-30 22-6 33" stroke="#ffe3a6" stroke-width="3.5" fill="none" opacity=".8" stroke-linecap="round"/><circle cx="19" cy="10" r="8" fill="#f2897a" opacity=".42"/>
-    <ellipse cx="9" cy="-1" rx="${eyeR}" ry="${eyeR * 1.4}" fill="#241a12"/><ellipse cx="24.5" cy="-1" rx="${eyeR * .82}" ry="${eyeR * 1.35}" fill="#241a12"/><circle cx="10.5" cy="-3.4" r="${eyeR * .45}" fill="#fff"/><circle cx="25.6" cy="-3.4" r="${eyeR * .4}" fill="#fff"/>
-    <path d="M3-11q6-4 11-1M19.5-12.5q5-3.5 9.5 0" stroke="${brow}" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M29 2q5.5 3 0 6.5" stroke="#c48d68" stroke-width="2.2" fill="none" stroke-linecap="round"/>${extra}<path class="mo" fill="#7a2e22"/>`;
-  const big = kid({ s: 1, sk: '#f3c9a1', sk2: '#dcab84', sh: '#8a6440', sh2: '#6f4f32', shoe: '#2f5f8f', shoe2: '#24496f', top: '#6fb0d8', top2: '#5591b6', shirt: 'url(#fBs)',
-    x: '<path d="M-29-64h59M-29-46h59M-28-28h57" stroke="#f1f7f8" stroke-width="5" opacity=".75"/>',
-    back: `<path d="${shag(34, 95, 300, 12, 9, -4, -2)}" fill="#5b3a22"/>`,
-    head: `<ellipse class="e" rx="32" ry="34" fill="url(#fSk)"/><ellipse class="e" cx="-14" cy="5" rx="6.5" ry="8.5" fill="#dcab84"/>${face(3.6, '#4a2f1c', '')}`,
-    front: `<path d="${lock(-34, -8, -20, 22, 5)}" fill="#5b3a22"/><path d="${lock(-6, 30, -24, 13, 6)}" fill="#6b4a2e"/>`,
-    hat: `<path class="e" d="M-35-20C-36-50 30-56 33-27C14-31-14-29-35-20Z" fill="url(#fCp)"/><path class="e" d="M22-28c10-3 22-1 27 4c-7 4-19 4-29 1z" fill="#2f5e39"/><circle cx="-1" cy="-48" r="3.5" fill="#2f5e39"/>` });
-  const small = kid({ s: .84, sk: '#f5cfa8', sk2: '#e0b38c', sh: '#3d6a4a', sh2: '#2c5038', shoe: '#d9603e', shoe2: '#b04a30', top: '#f3c94a', top2: '#d9ab2c', shirt: 'url(#fYs)',
-    x: '<path d="M-10-90q10 9 20 0" fill="none" stroke="#d9ab2c" stroke-width="3"/>',
-    back: `<path d="${shag(33, 90, 305, 13, 11, -4, -2)}" fill="#d2a75e"/><path d="${shag(30, 120, 260, 8, 7, -6, -2)}" fill="#e8c985"/>`,
-    head: `<ellipse class="e" rx="33" ry="32" fill="url(#fSk)"/><ellipse class="e" cx="-14" cy="5" rx="6.5" ry="8.5" fill="#e0b38c"/>${face(3.9, '#b88c4a', '<g fill="#c9845a"><circle cx="15" cy="5" r="1.1"/><circle cx="19" cy="7.5" r="1.1"/><circle cx="23" cy="5" r="1.1"/></g>')}`,
-    front: `<path d="${lock(-35, -8, -16, 24, 5)}" fill="#d2a75e"/><path d="${lock(-4, 30, -20, 14, 6)}" fill="#e8c985"/>`,
-    hat: `<path class="e" d="M-37-15C-39-52 32-56 35-22C16-28-14-26-37-15Z" fill="url(#fHm)"/><path d="M-20-41q16-8 36-2M-28-28q24-10 50-6" stroke="#f6efe2" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/><path d="M-12-18Q-13 14 4 30" stroke="#5a3b30" stroke-width="2" fill="none"/>` });
-  // The Coton de Tulear and her butterfly.
-  const dog = document.getElementById('fDog'), fluff = (pts, f) => pts.map(c => `<circle cx="${c[0]}" cy="${c[1]}" r="${c[2]}"${f ? ` fill="${f}"` : ''}/>`).join('');
-  dog.innerHTML = `<ellipse rx="34" ry="6" fill="#2d4a24" opacity=".22"/><g><g fill="#fff">${fluff([[-34, -58, 9], [-30, -70, 10], [-20, -76, 8], [-12, -72, 6]])}</g>
-    <g transform="translate(-22 -28)"><ellipse cy="10" rx="7.5" ry="13" fill="#e7ebf2"/></g><g transform="translate(18 -28)"><ellipse cy="10" rx="7.5" ry="13" fill="#e7ebf2"/></g>
-    <g fill="#fff" class="eg">${fluff([[0, -40, 24], [-22, -44, 17], [20, -44, 18], [-6, -56, 15], [10, -30, 14], [-14, -30, 14]])}</g><ellipse cx="0" cy="-24" rx="28" ry="8" fill="#c3cde0" opacity=".85"/><ellipse cx="-20" cy="-36" rx="12" ry="9" fill="#d5dcea" opacity=".7"/>
-    <g transform="translate(-22 -28)"><ellipse cy="12" rx="7.5" ry="13" fill="#fff"/></g><g transform="translate(18 -28)"><ellipse cy="12" rx="7.5" ry="13" fill="#fff"/></g>
-    <g transform="translate(34 -62)"><g fill="#fff" class="eg">${fluff([[0, 0, 19], [-8, -12, 10], [4, -14, 9]])}</g><ellipse cx="0" cy="12" rx="13" ry="7" fill="#dfe5ef"/><ellipse cx="-9" cy="6" rx="8.5" ry="16" fill="#e2e7f0" class="eg" transform="rotate(14 -9 6)"/>
-    <circle cx="5" cy="-3" r="3.6" fill="#1d1712"/><circle cx="15" cy="-3" r="3.1" fill="#1d1712"/><circle cx="7" cy="-4.2" r="1" fill="#fff"/><circle cx="15.8" cy="-4.2" r=".9" fill="#fff"/>
-    <ellipse cx="21" cy="4" rx="4.4" ry="3.6" fill="#1d1712"/><path d="M14 11q3.5 7 7 0" fill="#ef8f8f"/></g></g>`;
-  const dogBody = dog.lastChild, dogLegs = [dogBody.children[1], dogBody.children[2], dogBody.children[5], dogBody.children[6]];
-  const bf = document.getElementById('fBf'); bf.innerHTML = '<g><path d="M0 0C-6-14-20-16-18-4C-17 4-8 4 0 1C-8 6-12 14-6 15C-1 15 0 6 0 2Z" fill="#f39a3d" stroke="#7a3f12" stroke-width="1"/></g><g><path d="M0 0C6-14 20-16 18-4C17 4 8 4 0 1C8 6 12 14 6 15C1 15 0 6 0 2Z" fill="#f6b45a" stroke="#7a3f12" stroke-width="1"/></g><path d="M0-6v18" stroke="#3a2a1c" stroke-width="2.5" stroke-linecap="round"/>';
-  // Trail the boys follow: lower left, across and gently up to the tree. Sampled for arc length.
+  const path = (...rings) => { const p = new Path2D(); rings.forEach(r => { r.forEach((q, i) => i ? p.lineTo(q[0], q[1]) : p.moveTo(q[0], q[1])); p.closePath(); }); return p; };
+  // Scissor shapes: faceted ovals, edges cut in short straight runs with a little wander, torn edges for fluff.
+  const oval = (cx, cy, rx, ry, n = 14, j = .05) => { const a0 = rnd() * 6.283, o = []; for (let i = 0; i < n; i++) { const a = a0 + (i + (rnd() - .5) * .4) / n * 6.283, k = 1 + (rnd() - .5) * 2 * j; o.push([cx + Math.cos(a) * rx * k, cy + Math.sin(a) * ry * k]); } return o; };
+  const cut = (pts, j = 1, step = 12, closed = true) => { const o = [], m = closed ? pts.length : pts.length - 1;
+    for (let i = 0; i < m; i++) { const a = pts[i], b = pts[(i + 1) % pts.length], n = Math.max(1, Math.round(Math.hypot(b[0] - a[0], b[1] - a[1]) / step));
+      for (let s = 0; s < n; s++) o.push([mix(a[0], b[0], s / n) + (s ? (rnd() - .5) * 2 * j : 0), mix(a[1], b[1], s / n) + (s ? (rnd() - .5) * 2 * j : 0)]); }
+    if (!closed) o.push(pts[pts.length - 1]); return o; };
+  const capP = (l, a, b, n = 5) => { const o = []; for (let i = 0; i <= n; i++) { const t = Math.PI + i / n * Math.PI; o.push([Math.cos(t) * a / 2, Math.sin(t) * a / 2]); }
+    for (let i = 0; i <= n; i++) { const t = i / n * Math.PI; o.push([Math.cos(t) * b / 2, l + Math.sin(t) * b / 2]); } return o.map(q => [q[0] + (rnd() - .5) * .8, q[1] + (rnd() - .5) * .8]); };
+  const mv = (pts, dx, dy) => pts.map(q => [q[0] + dx, q[1] + dy]), flip = pts => pts.map(q => [1000 - q[0], q[1]]);
+  const spikes = (cx, cy, r, a0, a1, n, len) => { const o = [[cx, cy]]; for (let i = 0; i <= n * 2; i++) { const a = mix(a0, a1, i / (n * 2)) * RAD, rr = i % 2 ? r + len * (.12 + rnd() * .15) : r + len * (.55 + rnd() * .45); o.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]); } return o; };
+  const locks = (x0, x1, y, len, n) => { const o = [[x0, y - 8], [x1, y - 8]], w = (x1 - x0) / n; for (let i = n; i >= 0; i--) { const x = x0 + i * w; o.push([x + 1, y + len * (.5 + rnd() * .5)], [x - w * .5, y + len * .12]); } return o; };
+  const dome = (cx, cy, rx, ry, n = 10) => { const o = []; for (let i = 0; i <= n; i++) { const a = (180 + 180 * i / n) * RAD; o.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]); } return o; };
+
+  // ---------- Sprites: a piece and its shadow, each drawn once ----------
+  let SK = 2;
+  function sprite(bb, draw, k = SK) { const pd = 3, c = document.createElement('canvas'); c.width = Math.ceil((bb[2] - bb[0] + 2 * pd) * k); c.height = Math.ceil((bb[3] - bb[1] + 2 * pd) * k);
+    const g = c.getContext('2d'); begin(g, k); g.setTransform(k, 0, 0, k, (pd - bb[0]) * k, (pd - bb[1]) * k); draw(g); return { c, ox: (pd - bb[0]) * k, oy: (pd - bb[1]) * k, k }; }
+  function shade(bb, p, blur) { const X = bb[2] - bb[0] + 60; return sprite([bb[0] - blur * 2.5, bb[1] - blur * 2.5, bb[2] + blur * 2.5, bb[3] + blur * 2.5], g => {
+    g.translate(-X, 0); g.shadowColor = 'rgba(48,30,14,.34)'; g.shadowBlur = blur * K; g.shadowOffsetX = X * K; g.fill(p); }, SK * .5); }
+  const bbox = rings => { let a = 1e9, b = 1e9, c = -1e9, d = -1e9; rings.forEach(r => r.forEach(q => { a = Math.min(a, q[0]); b = Math.min(b, q[1]); c = Math.max(c, q[0]); d = Math.max(d, q[1]); })); return [a - 2, b - 2, c + 2, d + 2]; };
+  const piece = (rings, draw, blur = 2.6) => { const bb = bbox(rings), p = path(...rings); return { sp: sprite(bb, g => draw(g, p)), sh: shade(bb, p, blur) }; };
+
+  // ---------- Puppets ----------
+  const L1 = 54, L2 = 50, U1 = 34, U2 = 32;
+  function kidParts(o) {
+    const P = {};
+    const leg = bk => { const sk = bk ? o.sk2 : o.sk, th = capP(L1, 21, 17), sh = capP(30, 30, 27), sn = capP(L2 - 8, 17, 14), sock = mv(capP(9, 16, 16), 0, L2 - 16),
+      shoe = cut([[-11, L2 - 4], [-9, L2 - 13], [4, L2 - 15], [15, L2 - 12], [25, L2 - 5], [25, L2 + 3], [-12, L2 + 3]], .6, 8), sole = [[-12, L2], [25, L2 - .5], [25, L2 + 4], [-12, L2 + 4]];
+      return [piece([th, sh], g => { paper(g, path(th), sk); paper(g, path(sh), bk ? o.sh2 : o.sh, [3, 1.5, .25]); }),
+        piece([sn, shoe], g => { paper(g, path(sn), sk); paper(g, path(sock), '#f6f1e4', [2, 1, .2]); paper(g, path(shoe), bk ? o.shoe2 : o.shoe, [2.5, 1.2, .3]); paper(g, path(sole), '#f6f1e4', null, 0); })]; };
+    const arm = bk => { const sk = bk ? o.sk2 : o.sk, ua = capP(U1, 14, 12.5), sl = capP(17, 22, 20), fa = capP(U2, 12.5, 11), hd = oval(1, U2 + 1, 9, 9.5, 9);
+      return [piece([ua, sl], g => { paper(g, path(ua), sk); paper(g, path(sl), bk ? o.top2 : o.top, [3, 1.5, .25]); }), piece([fa, hd], g => { paper(g, path(fa), sk); paper(g, path(hd), sk, [2, 1, .2]); })]; };
+    P.legB = leg(1); P.legF = leg(0); P.armB = arm(1); P.armF = arm(0);
+    const shirt = cut([[-22, -91], [22, -91], [31, -75], [30, -54], [28, 0], [-28, 0], [-30, -54], [-31, -75]], .8, 10), waist = cut([[-29, -10], [29, -10], [30, 4], [22, 12], [-22, 12], [-30, 4]], .6, 10), neck = [[-6, -102], [7, -102], [7, -84], [-6, -84]];
+    P.torso = piece([shirt, waist, neck], g => { paper(g, path(neck), o.sk2); paper(g, path(shirt), o.top, [3, 1.5, .25]); g.save(); g.clip(path(shirt)); o.shirtX(g);
+      paper(g, path(cut([[-33, -80], [-25, -86], [-23, -2], [-31, -2]], .5, 12)), o.rim, null, 0); g.restore(); paper(g, path(waist), o.sh, [3, 1.5, .28]); });
+    const hd = oval(0, 0, o.hr[0], o.hr[1], 18, .025), ear = oval(-14, 5, 6.5, 8.8, 9);
+    const head = grin => g => { paper(g, path(ear), o.sk2, [2, 1, .25]); paper(g, path(hd), o.sk);
+      g.save(); g.clip(path(hd)); paper(g, path(cut([[-40, -40], [-27, -38], [-31, 0], [-24, 30], [-40, 40]], .6, 10)), o.rimS, null, 0); g.restore();
+      paper(g, path(oval(19, 10, 7, 6, 9)), '#f3a493', null, 0);
+      [[9, -1, 1], [24.5, -1, .85]].forEach(e => { paper(g, path(oval(e[0], e[1], 3.5 * e[2] * o.eye, 4.9 * o.eye, 8)), '#241a12', [1, .5, .3], 0); paper(g, path(oval(e[0] + 1.3, e[1] - 2.2, 1.35 * o.eye, 1.35 * o.eye, 5, 0)), '#fff', null, 0); });
+      paper(g, path([[3, -10], [8, -13.6], [14, -12], [13.5, -9.8], [8, -11.2], [3.6, -8.3]]), o.brow, [1, .5, .3], 0);
+      paper(g, path([[19.5, -11.5], [24, -14.2], [29, -12.5], [28.5, -10.4], [24.5, -12], [20.2, -9.6]]), o.brow, [1, .5, .3], 0);
+      paper(g, path([[28, 0], [33.5, 3.5], [29.5, 7.5], [27.5, 6]]), o.sk2, [1, .5, .25], 0);
+      if (o.freck) [[14, 5], [18.5, 7.5], [22.5, 5], [16, 2]].forEach(f => paper(g, path(oval(f[0], f[1], 1.1, 1, 5, 0)), '#c9845a', null, 0));
+      if (grin) { const m = cut([[6, 8], [31, 7], [28, 15], [20, 21], [11, 17]], .3, 6); paper(g, path(m), '#7a2e22', [1, .5, .3], 0);
+        g.save(); g.clip(path(m)); paper(g, path([[6, 6], [31, 5], [30, 10.2], [7, 11]]), '#fffaf0', null, 0); paper(g, path(oval(19, 18, 6, 3.4, 7)), '#e57b6c', null, 0); g.restore(); }
+      else paper(g, path([[9, 9], [19, 12], [28, 8.5], [27, 11], [19, 15.5], [10, 11.5]]), '#7a2e22', [1, .5, .3], 0); };
+    P.head = piece([hd, ear], head(0)); P.headG = piece([hd, ear], head(1));
+    const hb = spikes(-4, -2, o.hr[0] + 1, 92, 300, 11, o.hl), hb2 = spikes(-7, -4, o.hr[0] - 5, 140, 270, 7, o.hl * .6);
+    P.hairB = piece([hb], g => { paper(g, path(hb), o.hair); paper(g, path(hb2), o.hairL, null, 0); });
+    const fr = locks(-6, 31, -21, 11, 6), side = locks(-35, -10, -19, 24, 4);
+    P.fringe = piece([fr, side], g => { paper(g, path(side), o.hair, [2, 1, .3]); paper(g, path(fr), o.hair, [2, 1, .3]); paper(g, path(locks(0, 24, -22, 6, 4)), o.hairL, null, 0); });
+    P.hat = o.hat();
+    return P;
+  }
+  const band = (cx, cy, rx, ry, a, b) => [...dome(cx, cy, rx * a, ry * a, 12), ...dome(cx, cy, rx * b, ry * b, 12).reverse()];
+  const BIG = { id: 0, s: 1, sk: '#f0c39c', sk2: '#d9a77f', rimS: '#fbdcb9', sh: '#7a5636', sh2: '#62452b', shoe: '#2f5f8f', shoe2: '#24496f', top: '#5ea6d6', top2: '#4a8cb8', rim: '#a3cfec',
+    hair: '#5b3a22', hairL: '#7d5434', brow: '#4a2f1c', eye: 1, hr: [32, 34], hl: 11,
+    shirtX: g => [-66, -48, -30].forEach(y => paper(g, path(cut([[-34, y], [34, y - 1], [34, y + 6], [-34, y + 7]], .5, 10)), '#eaf4f8', null, 0)),
+    hat: () => { const cr = cut([...dome(0, -22, 35, 30), [30, -21], [0, -26], [-24, -23]], .5, 9), br = cut([[18, -29], [34, -31], [49, -27], [51, -22], [36, -21], [18, -24]], .4, 8);
+      return piece([cr, br], g => { paper(g, path(cr), '#3f7d4a', [2.5, 1.2, .3]); paper(g, path(cut([...dome(-4, -24, 24, 24, 6).slice(0, 5), [-2, -26]], .4, 8)), '#5a9a5e', null, 0);
+        paper(g, path(br), '#2c5e38', [2, 1, .3]); paper(g, path(oval(-1, -52, 3.6, 3.6, 6)), '#2c5e38', [1, .5, .3], 0); }); } };
+  const SMALL = { id: 1, s: .84, sk: '#f5cba4', sk2: '#dfb08a', rimS: '#fde2c4', sh: '#3f6e4c', sh2: '#2f553a', shoe: '#e0603f', shoe2: '#b84a30', top: '#f2c443', top2: '#d6a72a', rim: '#fde49a',
+    hair: '#d6b066', hairL: '#ecd39a', brow: '#a87c3e', eye: 1.1, hr: [33, 32], hl: 13, freck: 1,
+    shirtX: g => paper(g, path(cut([[-15, -92], [15, -92], [11, -82], [0, -78], [-11, -82]], .4, 6)), '#e3ad2c', [2, 1, .25], 0),
+    hat: () => { const hm = cut([...dome(0, -17, 38, 35, 12), [34, -16], [0, -22], [-30, -14]], .5, 9);
+      return piece([hm], g => { paper(g, path(hm), '#e0603f', [2.5, 1.2, .3]); paper(g, path(cut([...dome(-6, -18, 28, 28, 6).slice(0, 5), [-4, -22]], .4, 8)), '#f08a62', null, 0);
+        paper(g, path(cut(band(0, -17, 38, 35, .86, .72), .4, 8)), '#fbf3e6', null, 0); paper(g, path(cut(band(0, -17, 38, 35, .5, .38), .4, 8)), '#fbf3e6', null, 0); }); } };
+  function dogParts() { const D = {}, W = '#fbfaf5', G = '#dde1ea', G2 = '#c9cfdc';
+    const coat = cut(oval(0, -48, 60, 30, 16, .06), 2.6, 5), skirt = cut([[-58, -44], [58, -44], [56, -22], [40, -12], [20, -16], [0, -9], [-20, -15], [-42, -11], [-58, -24]], 3, 5);
+    D.body = piece([coat, skirt], g => { paper(g, path(mv(skirt, 0, 3)), G2, null, 0); paper(g, path(skirt), G, [3, 1.5, .25], .5); paper(g, path(coat), W, [3, 1.5, .25], .6);
+      paper(g, path(cut(oval(-6, -58, 40, 14, 10), 2, 5)), '#ffffff', null, 0); });
+    const leg = c => { const l = cut(capP(28, 17, 20), 1.8, 4); return piece([l], g => paper(g, path(l), c, null, .5)); };
+    D.legF = leg(W); D.legB = leg(G);
+    const tl = cut([[-6, 0], [-14, -22], [-8, -44], [12, -56], [32, -52], [40, -40], [26, -42], [12, -36], [6, -20], [8, 0]], 3, 4);
+    D.tail = piece([tl], g => { paper(g, path(tl), W, [3, 1.5, .25], .6); paper(g, path(cut([[0, -30], [10, -46], [28, -48], [14, -40], [6, -28]], 1.5, 4)), G, null, 0); });
+    const hd = cut(oval(14, -16, 27, 25, 14, .05), 2.4, 4.5), mz = cut(oval(33, -6, 14, 10, 10), 1.5, 4);
+    D.head = piece([hd, mz], g => { paper(g, path(mv(hd, 1, 4)), G, null, 0); paper(g, path(hd), W, [2.5, 1.2, .25], .6); paper(g, path(mz), '#fffdf8', [2, 1, .2], .5);
+      paper(g, path(oval(14, -18, 4, 4.5, 8)), '#1d1712', null, 0); paper(g, path(oval(27, -19, 3.4, 4.1, 8)), '#1d1712', null, 0);
+      paper(g, path(oval(15.4, -19.8, 1.4, 1.4, 5)), '#fff', null, 0); paper(g, path(oval(28.1, -20.7, 1.2, 1.2, 5)), '#fff', null, 0);
+      paper(g, path(oval(44, -9, 5, 4, 8)), '#1d1712', [1, .5, .3], 0); paper(g, path([[38, -1], [44, -1], [43, 7], [39, 6]]), '#ef8f8f', null, 0); });
+    const ear = cut([[-4, 0], [8, -2], [12, 14], [10, 32], [0, 39], [-8, 30], [-9, 12]], 2.2, 4);
+    D.ear = piece([ear], g => { paper(g, path(ear), '#f3f0e9', [2.5, 1.2, .3], .5); paper(g, path(cut([[0, 14], [6, 16], [4, 32], [-4, 30]], 1.5, 4)), G, null, 0); });
+    return D; }
+  let KIDS, DOG, BF, BOX, TUFT, GS, CF = [], LEAF = [];
+  function buildPuppets() { rnd = rng(3);
+    KIDS = [kidParts(BIG), kidParts(SMALL)]; DOG = dogParts();
+    const fw = cut([[0, 0], [-6, -15], [-19, -19], [-21, -6], [-8, 2]], .4, 5), hw = cut([[0, 1], [-12, 4], [-15, 13], [-5, 16], [0, 6]], .4, 5);
+    BF = { w: piece([fw, hw], g => { paper(g, path(fw), '#f39a3d', [1.5, .8, .3], .4); paper(g, path(hw), '#f7b65a', [1.5, .8, .3], .4); paper(g, path(oval(-15, -13, 2.6, 2.6, 6)), '#5a2e10', null, 0); paper(g, path(oval(-10, 10, 2.2, 2.2, 6)), '#5a2e10', null, 0); }),
+      b: piece([capP(18, 3.6, 3)], (g, p) => paper(g, p, '#3a2a1c', null, 0)) };
+    const bx = cut([[-30, -36], [30, -36], [30, 2], [-30, 2]], .6, 10), lid = cut([[-32, -43], [32, -43], [32, -29], [-32, -29]], .5, 10);
+    BOX = piece([bx, lid], g => { paper(g, path(bx), '#7a5636'); paper(g, path(lid), '#5f4128', [2, 1, .3]); paper(g, path(cut([[-30, -43], [8, -43], [8, -40], [-30, -40]], .3, 10)), '#a07a52', null, 0); paper(g, path(oval(0, -17, 5.5, 5.5, 8)), '#f7c948', [1, .5, .3], 0); });
+    const tf = cut([[-12, 0], [-8, -16], [-4, -5], [1, -20], [5, -6], [10, -14], [12, 0]], .5, 30); TUFT = piece([tf], (g, p) => paper(g, p, '#4f8a36', null, 0));
+    const gs = oval(0, 0, 36, 7, 16, 0); GS = shade(bbox([gs]), path(gs), 5);
+    const cols = ['#f7c948', '#5fa6d4', '#e4643b', '#9b6fd0', '#7fae48', '#fffaf0', '#f2897a', '#ffb347'];
+    CF = cols.flatMap((c, i) => [0, 1].map(j => { const s = j ? cut([[-7, 5], [0, -7], [7, 5]], .6, 20) : cut([[-9, -3.5], [9, -4.5], [8, 3.5], [-8, 4]], .6, 20); return piece([s], (g, p) => paper(g, p, c, null, .3), 1.6); }));
+    LEAF = ['#3a7a45', '#69a34f', '#b9d465'].map(c => { const s = cut([[-12, 0], [-4, -6], [8, -5], [13, 0], [6, 5], [-5, 5]], .5, 30); return piece([s], g => { paper(g, path(s), c, null, .3); paper(g, path([[-10, -.6], [11, -.4], [11, .6], [-10, .6]]), 'rgba(255,255,255,.35)', null, 0); }, 1.6); });
+  }
+
+  // ---------- The paper world (multiplane), painted once per layer ----------
   const P0 = [-170, 1560], PC = [360, 1300], P1 = [712, 1194], pts = [], N = 64;
   for (let i = 0, len = 0; i <= N; i++) { const t = i / N, u = 1 - t, q = [u * u * P0[0] + 2 * u * t * PC[0] + t * t * P1[0], u * u * P0[1] + 2 * u * t * PC[1] + t * t * P1[1]];
     if (i) len += Math.hypot(q[0] - pts[i - 1][0], q[1] - pts[i - 1][1]); q[2] = len; pts.push(q); }
   const TOTAL = pts[N][2];
   const at = d => { if (d <= 0) { const a = pts[0], b = pts[1], f = d / b[2]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]; }
     d = Math.min(d, TOTAL); let i = 1; while (i < N && pts[i][2] < d) i++; const a = pts[i - 1], b = pts[i], f = (d - a[2]) / (b[2] - a[2]); return [mix(a[0], b[0], f), mix(a[1], b[1], f)]; };
+  const yAt = x => { let i = 1; while (i < N && pts[i][0] < x) i++; const a = pts[i - 1], b = pts[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); };
+  const wave = (x0, x1, y, amps) => { const o = []; for (let x = x0; x <= x1; x += 40) o.push([x, y + amps.reduce((s, a) => s + a[0] * Math.sin(x / a[1] + a[2]), 0)]); return o; };
+  const strip = (y, amps, bottom, j = 3) => [...cut(wave(-900, 1900, y, amps), j, 9, false), [1900, bottom], [-900, bottom]];
+  const pine = (x, y, h) => { const r = [cut([[x - h * .04, y], [x + h * .04, y], [x + h * .04, y - h * .2], [x - h * .04, y - h * .2]], .5, 20)];
+    for (let t = 0; t < 3; t++) { const ty = y - h * (.12 + t * .26), w = h * (.36 - t * .08); r.push(cut([[x, ty - h * .44], [x + w, ty], [x + w * .3, ty - h * .04], [x - w * .3, ty - h * .04], [x - w, ty]], h / 90, 14)); } return r; };
+  const L = [
+    { f: 0, x: -900, y: -400, w: 2800, h: 1600, px: 1.2e6, draw: g => { const gr = g.createLinearGradient(0, -400, 0, 1150); gr.addColorStop(0, '#68aedb'); gr.addColorStop(.55, '#b4d9ea'); gr.addColorStop(.86, '#fbe3ad'); gr.addColorStop(1, '#fcd08e');
+      paper(g, path([[-900, -400], [1900, -400], [1900, 1200], [-900, 1200]]), gr, null, 0);
+      [[210, '#fde6b4', .1], [140, '#fdd98c', .14], [84, '#ffc547', .25], [58, '#ffe189', 0]].forEach(([r, c, a]) => paper(g, path(oval(180, 820, r, r, Math.round(12 + r / 12), .02)), c, a ? [14, 3, a] : null, .4)); } },
+    { f: .3, drift: 90, x: -900, y: 100, w: 2800, h: 800, px: 1e6, draw: g => [[-560, 420, 1.3], [40, 280, 1], [470, 560, .75], [860, 330, 1.25], [1400, 500, 1], [-220, 690, .7]].forEach(([x, y, k]) => {
+      const c = [oval(x, y, 40 * k, 38 * k, 11), oval(x + 46 * k, y - 18 * k, 52 * k, 48 * k, 13), oval(x + 100 * k, y, 40 * k, 36 * k, 11), cut([[x - 30 * k, y + 8 * k], [x + 130 * k, y + 8 * k], [x + 128 * k, y + 34 * k], [x - 28 * k, y + 34 * k]], 1.5, 14)];
+      paper(g, path(...c.map(r => mv(r, 0, 9 * k))), '#e3ebf2', null, 0); paper(g, path(...c), '#fffaf2', [10, 4, .16], .5); }) },
+    { f: .55, x: -900, y: 820, w: 2800, h: 680, px: 1.4e6, draw: g => { paper(g, path(strip(935, [[30, 260, 0], [16, 97, 1]], 1500)), '#86b2c6', [12, -3, .18]);
+      paper(g, path(...[-420, -385, 330, 365, 1080, 1500, 1530].flatMap((x, i) => pine(x, 992, 40 + (i % 3) * 9))), '#5f8f99', [6, 2, .2]);
+      paper(g, path(strip(985, [[18, 300, 2], [10, 80, 0]], 1500)), '#a6c58c', [12, -3, .22]); } },
+    { f: 1, x: -900, y: 900, w: 2800, h: 1400, px: 3e6, draw: g => {
+      [[1030, '#bcd56e', [[18, 240, 0], [8, 70, 1]]], [1095, '#a5cb5c', [[14, 300, 1], [7, 90, 2]]], [1240, '#8dbd4e', [[20, 340, 2], [8, 110, 0]]], [1470, '#79ad45', [[26, 380, 0], [10, 120, 1]]], [1760, '#669c3c', [[30, 420, 1], [10, 130, 2]]]]
+        .forEach(([y, c, a]) => paper(g, path(strip(y, a, 2300, 2.5)), c, [16, -5, .2]));
+      const top = [], bot = []; for (let d = -1000; d < TOTAL - 4; d += 36) { const a = at(d), b = at(d + 4), l = Math.hypot(b[0] - a[0], b[1] - a[1]), nx = -(b[1] - a[1]) / l, ny = (b[0] - a[0]) / l, w = mix(78, 26, clamp(d / TOTAL, -.45, 1));
+        top.push([a[0] - nx * w, a[1] - ny * w]); bot.push([a[0] + nx * w, a[1] + ny * w]); }
+      const e = at(TOTAL); paper(g, path(cut([...top, [e[0] + 24, e[1] - 6], ...bot.reverse()], 2, 16)), '#f3dfac', [8, 2.5, .22]);
+      for (let i = 0; i < 46; i++) { const x = mix(-900, 1900, rnd()), y = mix(1120, 2250, rnd()), k = y / 1300;
+        paper(g, path(cut([[x - 9 * k, y], [x - 6 * k, y - 18 * k], [x - 2 * k, y - 6 * k], [x + 2 * k, y - 22 * k], [x + 5 * k, y - 7 * k], [x + 10 * k, y - 15 * k], [x + 9 * k, y]], .5, 30)), '#4f8a36', [3, 1, .25], 0); }
+      for (let i = 0; i < 56; i++) { const x = mix(-900, 1900, rnd()), y = mix(1130, 2250, rnd()), k = y / 1300, c = ['#fffbe9', '#ffd447', '#c9a7de', '#f39a7f'][i % 4];
+        paper(g, path(...[0, 1, 2, 3, 4].map(j => oval(x + Math.cos(j * 1.256) * 5 * k, y + Math.sin(j * 1.256) * 5 * k, 3.8 * k, 3.8 * k, 6, .1))), c, [2, 1, .25], 0); paper(g, path(oval(x, y, 2.4 * k, 2.4 * k, 6)), '#e9a13a', null, 0); } } },
+    { f: 1, x: 480, y: 470, w: 1300, h: 800, px: 3.4e6, draw: g => {
+      paper(g, path(...[990, 1110, 1240, 1360, 1490, 1620, 1740].flatMap((x, i) => pine(x, 1185, [250, 330, 280, 350, 300, 280, 320][i]))), '#2a5a48', [10, 3, .25]);
+      paper(g, path(cut([[940, 1120], [1780, 1100], [1780, 1230], [940, 1230]], 3, 16)), '#2f6146', [10, -3, .2]);
+      paper(g, path(...[1050, 1300, 1440, 1580, 1700].flatMap((x, i) => pine(x, 1205, [200, 230, 190, 220, 200][i]))), '#3d7a55', [10, 3, .25]);
+      const tk = cut([[816, 1202], [834, 1150], [840, 1060], [838, 980], [818, 945], [770, 894], [780, 878], [818, 905], [842, 922], [846, 870], [842, 820], [878, 820], [880, 880], [882, 926], [905, 898], [952, 868], [960, 884], [915, 925], [898, 976], [894, 1080], [902, 1160], [924, 1202]], 1.2, 12);
+      paper(g, path(tk), '#7a5636', [10, 3, .3]); g.save(); g.clip(path(tk)); paper(g, path(cut([[808, 1210], [828, 1000], [842, 830], [854, 830], [844, 1000], [824, 1210]], 1, 14)), '#9c7650', null, 0);
+      paper(g, path(cut([[872, 1190], [880, 1000], [886, 1000], [880, 1190]], .8, 20)), '#5f4128', null, 0); paper(g, path(cut([[893, 1150], [890, 1040], [895, 1040], [899, 1150]], .8, 20)), '#5f4128', null, 0); g.restore();
+      paper(g, path(cut([[780, 1206], [812, 1192], [930, 1192], [962, 1208], [870, 1214]], 1, 10)), '#5f4128', [6, 2, .25]);
+      [['#2e6a45', 9, 1, 80, 120, 0], ['#3f8a4d', 9, .85, 64, 100, -20], ['#5ea657', 8, .7, 50, 80, -40], ['#9ccc5e', 6, .55, 30, 50, -62]].forEach(([c, n, sp, r0, r1, o]) => {
+        for (let i = 0; i < n; i++) { const a = rnd() * 6.283, d = 210 * sp * Math.sqrt(rnd()) * .62, r = mix(r0, r1, rnd()); paper(g, path(oval(860 + Math.cos(a) * d * 1.25 + o, 760 + Math.sin(a) * d * .8 + o, r, r * .9, 12, .07)), c, [12, 4, .3]); } });
+      [[800, 1206], [930, 1206], [990, 1214]].forEach(([x, y]) => paper(g, path(cut([[x - 12, y], [x - 8, y - 16], [x - 4, y - 5], [x + 1, y - 20], [x + 5, y - 6], [x + 10, y - 14], [x + 12, y]], .5, 30)), '#4f8a36', [3, 1, .25], 0)); } },
+    { f: 1.7, x: -900, y: 1560, w: 2800, h: 560, px: 9e5, fg: 1, draw: g => { for (let i = 0; i < 24; i++) { const x = mix(-900, 1900, (i + rnd() * .6) / 24), y = mix(1860, 2060, rnd());
+      for (let j = 0; j < 4; j++) { const h = mix(140, 300, rnd()), ln = mix(-70, 70, rnd()), w = mix(10, 17, rnd()), bx = x + j * 16;
+        paper(g, path(cut([[bx - w, y], [bx + ln * .3 - w * .3, y - h * .55], [bx + ln, y - h], [bx + ln * .2 + w * .5, y - h * .5], [bx + w, y]], 1.5, 30)), ['#5a8c3c', '#6f9f45', '#4a7a36'][j % 3], [10, 4, .28]); } } } },
+  ];
+  // The close-up: the little brother, front on, lit from the low sun on the left, holding the box.
+  const FACE = { x: 0, y: 0, w: 1000, h: 1400, draw: g => { const sk = '#f5cba4', hd = oval(500, 560, 236, 248, 30, .012), mo = cut([[378, 676], [500, 696], [622, 676], [600, 742], [548, 800], [500, 812], [452, 800], [400, 742]], 2, 20);
+    paper(g, path(cut([[110, 1400], [130, 1040], [250, 880], [500, 840], [750, 880], [870, 1040], [890, 1400]], 3, 30)), '#f2c443', [16, 6, .3]);
+    paper(g, path(cut([[150, 1400], [170, 1060], [280, 900], [360, 870], [300, 1000], [280, 1400]], 3, 30)), '#fde49a', null, 0);
+    paper(g, path(cut([[440, 740], [560, 740], [565, 880], [435, 880]], 2, 20)), '#e2b28c', [10, 4, .3]);
+    paper(g, path(cut([[400, 870], [500, 920], [600, 870], [612, 900], [500, 958], [388, 900]], 2, 20)), '#e3ad2c', [6, 2, .25]);
+    paper(g, path(spikes(495, 560, 252, 140, 400, 26, 58)), '#d6b066', [14, 5, .3]); paper(g, path(spikes(490, 550, 240, 165, 375, 18, 34)), '#ecd39a', null, 0);
+    paper(g, path(oval(268, 612, 34, 48, 12)), '#efc39b', [8, 3, .3]); paper(g, path(oval(732, 612, 34, 48, 12)), '#e3b28d', [8, 3, .3]);
+    paper(g, path(hd), sk, [18, 6, .32]); g.save(); g.clip(path(hd)); paper(g, path(cut([[250, 300], [330, 320], [292, 560], [330, 800], [250, 820]], 3, 30)), '#fde0bf', null, 0);
+    paper(g, path(cut([[760, 320], [702, 330], [722, 560], [692, 790], [760, 800]], 3, 30)), '#ecbb95', null, 0); g.restore();
+    paper(g, path(oval(350, 672, 58, 50, 14)), '#f4a493', [5, 2, .2], 0); paper(g, path(oval(650, 672, 58, 50, 14)), '#f2a08e', [5, 2, .2], 0);
+    [404, 596].forEach(x => { paper(g, path(oval(x, 560, 35, 47, 16)), '#2a1d12', [6, 2, .3], 0); paper(g, path(oval(x, 576, 23, 27, 12)), '#6a4424', null, 0); paper(g, path(oval(x + 14, 540, 13, 13, 10)), '#fff', null, 0); paper(g, path(oval(x - 10, 588, 6, 6, 8)), '#fff', null, 0); });
+    const br = cut([[345, 478], [400, 440], [455, 455], [452, 474], [400, 462], [352, 494]], 1.5, 20); paper(g, path(br), '#a87c3e', [5, 2, .3], 0); paper(g, path(mv(flip(br), 0, -6)), '#a87c3e', [5, 2, .3], 0);
+    paper(g, path(cut([[470, 622], [500, 600], [528, 622], [518, 652], [482, 652]], 1.5, 14)), '#e8a985', [6, 2, .25], 0);
+    [[440, 622], [462, 642], [420, 648], [560, 622], [538, 642], [580, 648], [452, 600], [548, 600]].forEach(f => paper(g, path(oval(f[0], f[1], 6, 5, 5)), '#c9845a', null, 0));
+    paper(g, path(mo), '#7d2b22', [8, 3, .3], 0); g.save(); g.clip(path(mo)); paper(g, path(cut([[370, 670], [500, 692], [630, 670], [620, 710], [500, 726], [380, 710]], 1.5, 20)), '#fffaf0', null, 0); paper(g, path(oval(500, 790, 74, 34, 14)), '#e57b6c', null, 0); g.restore();
+    paper(g, path(locks(296, 694, 384, 70, 9)), '#d6b066', [10, 4, .3]); paper(g, path(locks(340, 650, 376, 40, 7)), '#ecd39a', null, 0);
+    const hm = cut([...dome(500, 392, 272, 176, 16), [752, 396], [500, 374], [248, 396]], 2.5, 24); paper(g, path(hm), '#e0603f', [16, 6, .32]);
+    paper(g, path(cut([...dome(470, 388, 210, 150, 10).slice(0, 6), [450, 320]], 2, 24)), '#f08a62', null, 0);
+    paper(g, path(cut(band(500, 392, 272, 176, .8, .7), 1.5, 24)), '#fbf3e6', null, 0); paper(g, path(cut(band(500, 392, 272, 176, .46, .37), 1.5, 24)), '#fbf3e6', null, 0);
+    paper(g, path(cut([[350, 900], [650, 900], [650, 1090], [350, 1090]], 2, 30)), '#7a5636', [14, 5, .3]); paper(g, path(cut([[338, 878], [662, 878], [662, 930], [338, 930]], 2, 30)), '#5f4128', [8, 3, .3]);
+    paper(g, path(cut([[338, 878], [500, 878], [500, 890], [338, 890]], 1, 30)), '#a07a52', null, 0); paper(g, path(oval(500, 978, 22, 22, 10)), '#f7c948', [4, 2, .3], 0);
+    paper(g, path(oval(346, 980, 54, 60, 14)), sk, [10, 4, .3]); paper(g, path(oval(654, 980, 54, 60, 14)), '#e9bb95', [10, 4, .3]); } };
+
+  // ---------- Stage ----------
+  const planes = L.map(o => { o.c = can('pl', stage, close); return o; });
+  const glow = document.createElement('div'); glow.className = 'find-glow'; stage.insertBefore(glow, L[3].c);
+  const act = can('full', stage, L[5].c), bg = can('', close), face = can('pl', close), fx2 = can('full', close);
+  let ax = act.getContext('2d'), Cam = [1, 0, 0, 1, 0, 0], SHX = 0, SHY = 0, boil = 0;
+  const mul = (A, B) => [A[0] * B[0] + A[2] * B[1], A[1] * B[0] + A[3] * B[1], A[0] * B[2] + A[2] * B[3], A[1] * B[2] + A[3] * B[3], A[0] * B[4] + A[2] * B[5] + A[4], A[1] * B[4] + A[3] * B[5] + A[5]];
+  const T = (x, y) => [1, 0, 0, 1, x, y], Rt = d => { const c = Math.cos(d * RAD), s = Math.sin(d * RAD); return [c, s, -s, c, 0, 0]; }, Sc = (x, y = x) => [x, 0, 0, y, 0, 0];
+  const hsh = n => { const s = Math.sin(n * 12.9898) * 43758.5453; return (s - Math.floor(s)) * 2 - 1; };
+  const blit = (s, m, dx = 0, dy = 0) => { ax.setTransform(m[0] / s.k, m[1] / s.k, m[2] / s.k, m[3] / s.k, m[4] + dx, m[5] + dy); ax.drawImage(s.c, -s.ox, -s.oy); };
+  function put(pc, m, i) { if (boil) m = mul(m, mul(T(hsh(boil + i) * .7, hsh(boil + i + 50) * .7), Rt(hsh(boil + i + 99) * 1.2))); blit(pc.sh, m, SHX, SHY); blit(pc.sp, m); }
+
+  // ---------- Motion ----------
   const travel = u => { const a = .1, b = .8, c = 1 / (1 - a / 2 - (1 - b) / 2);
     if (u < a) return [c * u * u / (2 * a), u / a]; if (u < b) return [c * (a / 2 + u - a), 1];
     const w = u - b; return [c * (a / 2 + b - a + w - w * w / (2 * (1 - b))), 1 - w / (1 - b)]; };
   const depth = y => mix(.88, 1.06, clamp((y - 1190) / 380));
-
-  const P = (lean, legs, arms) => ({ lean, lift: 0, legs, arms });
-  const STAND = P(0, [[-3, 4], [4, 2]], [[-10, -20], [10, -15]]), CROUCH = P(24, [[-66, 116], [-30, 96]], [[-40, -6], [-30, -10]]),
-    HOLD = P(4, [[-10, 14], [6, 6]], [[-78, -66], [-70, -70]]), SQUAT = P(8, [[-40, 72], [-26, 60]], [[-80, -40], [40, -20]]),
-    UP = P(-6, [[-18, 30], [14, 38]], [[-104, -10], [128, 14]]), LANDED = P(-6, [[-4, 6], [6, 4]], [[-104, -10], [128, 14]]),
-    VUP = P(-6, [[-6, 6], [8, 4]], [[-118, -16], [122, 16]]), WOW = P(10, [[-6, 8], [8, 6]], [[-60, -60], [-40, -70]]);
+  const PO = (lean, legs, arms) => ({ lean, legs, arms });
+  const STAND = PO(0, [[-3, 4], [4, 2]], [[-10, -20], [10, -15]]), CROUCH = PO(24, [[-66, 116], [-30, 96]], [[-40, -6], [-30, -10]]),
+    HOLD = PO(4, [[-10, 14], [6, 6]], [[-78, -66], [-70, -70]]), SQUAT = PO(8, [[-40, 72], [-26, 60]], [[-80, -40], [40, -20]]),
+    UP = PO(-6, [[-18, 30], [14, 38]], [[-104, -10], [128, 14]]), LANDED = PO(-6, [[-4, 6], [6, 4]], [[-104, -10], [128, 14]]),
+    VUP = PO(-6, [[-6, 6], [8, 4]], [[-118, -16], [122, 16]]), WOW = PO(10, [[-6, 8], [8, 6]], [[-60, -60], [-40, -70]]);
   const run = (ph, A) => { const leg = f => [-38 * A * Math.sin(ph + f), A * (8 + 72 * Math.pow(Math.max(0, Math.cos(ph + f)), 1.4))], arm = f => [48 * A * Math.sin(ph + f) - 6, -(18 + 62 * A)];
-    return P(9 * A, [leg(0), leg(Math.PI)], [arm(0), arm(Math.PI)]); };
-  const blend = (a, b, t) => t <= 0 ? P(a.lean, a.legs, a.arms) : P(mix(a.lean, b.lean, t), a.legs.map((l, i) => [mix(l[0], b.legs[i][0], t), mix(l[1], b.legs[i][1], t)]), a.arms.map((l, i) => [mix(l[0], b.arms[i][0], t), mix(l[1], b.arms[i][1], t)]));
-  const set = (n, v) => { if (n._v !== v) { n._v = v; n.setAttribute('transform', v); } };
+    return PO(9 * A, [leg(0), leg(Math.PI)], [arm(0), arm(Math.PI)]); };
+  const blend = (a, b, t) => t <= 0 ? PO(a.lean, a.legs, a.arms) : PO(mix(a.lean, b.lean, t), a.legs.map((l, i) => [mix(l[0], b.legs[i][0], t), mix(l[1], b.legs[i][1], t)]), a.arms.map((l, i) => [mix(l[0], b.arms[i][0], t), mix(l[1], b.arms[i][1], t)]));
   const bump = (p, a, m, z) => p < a || p > z ? 0 : p < m ? ease((p - a) / (m - a)) : 1 - ease((p - m) / (z - m));
-  function place(k, x, y, sc, pose, lift, grin, q, ph) {
-    const ext = l => L1 * Math.cos(l[0] * RAD) + L2 * Math.cos((l[0] + l[1]) * RAD) + 9, hip = Math.max(ext(pose.legs[0]), ext(pose.legs[1])), s = k.s * sc, by = -hip - lift;
-    const sx = s * (1 + q * .6), sy = s * (1 - q);
-    set(k.root, `translate(${R(x)} ${R(y)}) scale(${sx.toFixed(3)} ${sy.toFixed(3)})`); set(k.body, `translate(0 ${R(by)})`); set(k.up, `rotate(${R(pose.lean)})`);
-    k.legs.forEach((l, i) => { set(l, `rotate(${R(pose.legs[i][0])})`); set(l.lastChild, `translate(0 ${L1}) rotate(${R(pose.legs[i][1])})`); });
-    k.arms.forEach((a, i) => { set(a, `translate(0 -76) rotate(${R(pose.arms[i][0])})`); set(a.lastChild, `translate(0 ${U1}) rotate(${R(pose.arms[i][1])})`); });
-    const flop = R(Math.sin(ph * 2) * 2.2 - lift * .03); set(k.hair[0], `translate(${R(-flop * .4)} ${flop})`); set(k.hair[1], `translate(0 ${R(flop * .6)})`);
-    const m = grin ? 'M7 8q12 18 24 0q-12 4-24 0z' : 'M9 9q10 10 20 0q-10 3-20 0z'; if (k.mouth._d !== m) { k.mouth._d = m; k.mouth.setAttribute('d', m); }
-    const c = Math.cos(pose.lean * RAD), sn = Math.sin(pose.lean * RAD); k.head = [x + sx * (5 * c + 118 * sn), y + sy * (by + 5 * sn - 118 * c), 33 * s];
+  const K2 = [{ s0: 1 }, { s0: .84 }];
+  function st(k, x, y, sc, pose, lift, grin, q, ph) {
+    const ext = l => L1 * Math.cos(l[0] * RAD) + L2 * Math.cos((l[0] + l[1]) * RAD) + 9, hip = Math.max(ext(pose.legs[0]), ext(pose.legs[1])), s = k.s0 * sc, by = -hip - lift;
+    const sx = s * (1 + q * .6), sy = s * (1 - q), c = Math.cos(pose.lean * RAD), sn = Math.sin(pose.lean * RAD);
     const hand = a => { let ang = a[0] * RAD, hx = -Math.sin(ang) * U1, hy = Math.cos(ang) * U1; ang += a[1] * RAD; hx -= Math.sin(ang) * U2; hy += Math.cos(ang) * U2;
       return [x + sx * (hx * c - (hy - 76) * sn), y + sy * (by + hx * sn + (hy - 76) * c)]; };
-    k.hands = [hand(pose.arms[0]), hand(pose.arms[1])];
-    set(k.shadow, `translate(${R(x + 6 * s)} ${R(y + 2)}) scale(${(s * (1 - lift / 220)).toFixed(3)})`);
+    Object.assign(k, { x, y, s, sx, sy, by, lift, grin, pose, flop: Math.sin(ph * 2) * 2.2 - lift * .03, head: [x + sx * (5 * c + 118 * sn), y + sy * (by + 5 * sn - 118 * c), 33 * s], hands: [hand(pose.arms[0]), hand(pose.arms[1])] });
   }
-  const shadows = document.getElementById('fShadows');
-  [big, small].forEach(k => { k.shadow = shadows.appendChild(document.createElementNS(NS, 'ellipse')); k.shadow.setAttribute('rx', 36); k.shadow.setAttribute('ry', 7); });
-  const yAt = x => { let i = 1; while (i < N && pts[i][0] < x) i++; const a = pts[i - 1], b = pts[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); };
+  function drawKid(k, P, id) { const i0 = id * 40, base = mul(Cam, mul(T(k.x, k.y), Sc(k.sx, k.sy))), body = mul(base, T(0, k.by)), up = mul(body, Rt(k.pose.lean));
+    blit(GS, mul(Cam, mul(T(k.x + 6 * k.s, k.y + 2), Sc(k.s * (1 - k.lift / 220)))));
+    const leg = (Lg, a, j) => { const m = mul(body, Rt(a[0])); put(Lg[0], m, i0 + j); put(Lg[1], mul(m, mul(T(0, L1), Rt(a[1]))), i0 + j + 1); };
+    const arm = (A, a, j) => { const m = mul(up, mul(T(0, -76), Rt(a[0]))); put(A[0], m, i0 + j); put(A[1], mul(m, mul(T(0, U1), Rt(a[1]))), i0 + j + 1); };
+    leg(P.legB, k.pose.legs[1], 0); leg(P.legF, k.pose.legs[0], 2); arm(P.armB, k.pose.arms[1], 4); put(P.torso, up, 6);
+    const hd = mul(up, T(5, -118)); put(P.hairB, mul(hd, T(-k.flop * .4, k.flop)), 7); put(k.grin ? P.headG : P.head, hd, 8); put(P.fringe, mul(hd, T(0, k.flop * .6)), 9); put(P.hat, hd, 10);
+    arm(P.armF, k.pose.arms[0], 11); }
+  const bits = [], bits2 = []; { const r = rng(19);
+    for (let i = 0; i < 52; i++) { const leaf = i >= 40, a = leaf ? Math.PI * (.2 + r() * .6) : -Math.PI * (.12 + r() * .76), sp = leaf ? 70 + r() * 110 : 320 + r() * 520;
+      bits.push({ leaf, sp: i % 16, k: mix(.7, 1.8, r()), ox: leaf ? 700 + r() * 320 : 740, oy: leaf ? 600 + r() * 240 : 960, vx: Math.cos(a) * sp * (leaf ? .6 : 1), vy: Math.sin(a) * sp, spin: (r() - .5) * 1100, fl: r() * 6 }); }
+    for (let i = 0; i < 28; i++) bits2.push({ sp: i % 16, k: mix(1.2, 2.6, r()), x: r(), off: r() * .8, sway: 10 + r() * 30, spin: (r() - .5) * 1000, v: .7 + r() * .6 }); }
 
-  // Confetti in the scene (world units) and in the close-up (screen units): mixed sizes, spin, flutter.
-  const fx = document.getElementById('fFx'), fx2 = document.getElementById('fFx2'), cols = ['#f7c948', '#5fa6d4', '#e4643b', '#9b6fd0', '#7fae48', '#fffaf0', '#f2897a', '#ffb347'];
-  const bit = (parent, i, k) => { const g = document.createElementNS(NS, i % 3 ? 'rect' : 'circle');
-    if (i % 3) { g.setAttribute('x', R(-9 * k)); g.setAttribute('y', R(-3.5 * k)); g.setAttribute('width', R(18 * k)); g.setAttribute('height', R(7 * k)); g.setAttribute('rx', R(2 * k)); } else g.setAttribute('r', R(5.5 * k));
-    g.setAttribute('fill', cols[i % cols.length]); g.style.opacity = 0; parent.appendChild(g); return g; };
-  const bits = [], bits2 = [];
-  for (let i = 0; i < 52; i++) { const leaf = i >= 40, a = leaf ? Math.PI * (.2 + rnd() * .6) : -Math.PI * (.12 + rnd() * .76), sp = leaf ? 70 + rnd() * 110 : 320 + rnd() * 520, k = mix(.6, 1.7, rnd());
-    let n; if (leaf) { n = fx.appendChild(document.createElementNS(NS, 'path')); n.setAttribute('d', 'M-12 0Q0-9 12 0Q0 9-12 0Z'); n.setAttribute('fill', ['#3a7a45', '#69a34f', '#b9d465'][i % 3]); n.style.opacity = 0; } else n = bit(fx, i, k);
-    bits.push({ n, leaf, ox: leaf ? 700 + rnd() * 320 : 0, oy: leaf ? 600 + rnd() * 240 : 0, vx: Math.cos(a) * sp * (leaf ? .6 : 1), vy: Math.sin(a) * sp, spin: (rnd() - .5) * 1100, fl: rnd() * 6 }); }
-  for (let i = 0; i < 26; i++) bits2.push({ n: bit(fx2, i, mix(.8, 1.6, rnd())), x: rnd(), off: rnd() * .8, sway: 10 + rnd() * 30, spin: (rnd() - .5) * 1000, sp: .7 + rnd() * .6 });
-
-  // ---------- Camera ----------
   let Sw = 1, Sh = 1, A = 1, F = 600, FX = 0, FY = 0, C0, C1;
   const fit = (x, w, h, fy, fyAt) => { const vw = Math.max(w, h * A), vh = vw / A; return [x + w / 2, fy - fyAt * vh + vh / 2, vw]; };
-  function frame(p) {
-    // 1. The run (0 to .62): the little one leads, his brother a stride behind and up the bank.
-    const [us, vs] = travel(seg(p, 0, .6)), [ub, vb] = travel(seg(p, 0, .62));
-    const ds = us * TOTAL, db = ub * (TOTAL - 100) - 45;
-    const [xs, ys] = at(ds), [xb0, yb0] = at(db), xb = xb0 - 4, yb = yb0 - 16, ss = depth(ys), sb = depth(yb);
+  const runX = p => { const ds = travel(seg(p, 0, .6))[0] * TOTAL, db = travel(seg(p, 0, .62))[0] * (TOTAL - 100) - 45; return [ds, db]; };
+  const dogAt = dp => { const x = mix(-330, 1320, dp) + 40 * Math.sin(dp * 9), y = yAt(Math.min(x, 700)) + 110 + 200 * bump(dp, .15, .38, .6) + 30 * Math.sin(dp * 11) + 380 * Math.pow(seg(dp, .66, 1), 2); return [x, y]; };
+  function frame(p, q) {
+    // Puppets, on twos: everything below reads q (stepped), the camera reads p (smooth).
+    const [ds, db] = runX(q), [, vs] = travel(seg(q, 0, .6)), [, vb] = travel(seg(q, 0, .62));
+    const [xs, ys0] = at(ds), [xb0, yb0] = at(db), xs1 = xs, ys = ys0, xb = xb0 - 4, yb = yb0 - 16, ss = depth(ys), sb = depth(yb);
     const phs = ds / (120 * ss) * Math.PI + 1.3, phb = db / (150 * sb) * Math.PI;
-    let ps = blend(STAND, run(phs, 1), Math.min(vs, 1) * (p > 0)), pb = blend(STAND, run(phb, 1), Math.min(vb, 1) * (p > 0));
-    ps.lean -= 16 * bump(p, .56, .6, .63); pb.lean -= 12 * bump(p, .58, .62, .65);
-    // 2. The little one crouches at the roots and lifts the box; his brother leans in.
-    ps = blend(blend(ps, CROUCH, ease(seg(p, .6, .645))), HOLD, ease(seg(p, .655, .69)));
-    pb = blend(pb, WOW, ease(seg(p, .62, .68)));
-    // 3. Both jump, arms up, with squash and stretch.
-    ps = blend(blend(blend(ps, SQUAT, ease(seg(p, .69, .71))), UP, ease(seg(p, .71, .73))), LANDED, ease(seg(p, .79, .82)));
-    pb = blend(blend(pb, SQUAT, ease(seg(p, .7, .72))), VUP, ease(seg(p, .72, .74)));
-    const qs = .1 * bump(p, .69, .71, .72) - .1 * bump(p, .71, .725, .77) + .09 * bump(p, .785, .8, .83), qb = .09 * bump(p, .7, .72, .73) - .09 * bump(p, .72, .735, .78) + .08 * bump(p, .795, .81, .84);
-    place(big, xb, yb, sb, pb, Math.sin(Math.PI * seg(p, .72, .8)) * 62, p > .62, qb, phb);
-    place(small, xs, ys, ss, ps, Math.sin(Math.PI * seg(p, .71, .79)) * 78, p > .6, qs, phs);
-    const kids = document.getElementById('fKids'); if ((ys > yb) !== (kids.lastChild === small.root)) kids.appendChild(ys > yb ? small.root : big.root);
-    const pick = seg(p, .645, .66), hs = small.hands, bs = small.s * ss;
-    const hx = mix((hs[0][0] + hs[1][0]) / 2, hs[0][0] + 6 * bs, seg(p, .69, .73)), hy = mix((hs[0][1] + hs[1][1]) / 2 + 12 * bs, hs[0][1] + 14 * bs, seg(p, .69, .73));
-    set(document.getElementById('fBox'), `translate(${R(mix(775, hx, pick))} ${R(mix(1199, hy, pick))}) scale(${mix(1, bs, pick).toFixed(3)})`);
-    // The Coton bounds along the near side after a butterfly, then veers off as the camera closes in.
-    const dp = seg(p, 0, .64), dOn = dp < 1;
-    if (dog._on !== dOn) { dog._on = dOn; dog.style.display = bf.style.display = dOn ? '' : 'none'; }
-    if (dOn) { const dx = mix(-330, 1320, dp) + 40 * Math.sin(dp * 9), dy = yAt(Math.min(dx, 700)) + 120 + 30 * Math.sin(dp * 11) + 360 * Math.pow(seg(dp, .62, 1), 2), dk = depth(dy) * 1.45, ph = (dx + 330) / 62 * Math.PI;
-      const hop = Math.max(0, Math.sin(ph)), turn = Math.cos(dp * 9) < -.6 ? -1 : 1;
-      set(dog, `translate(${R(dx)} ${R(dy)}) scale(${R(dk * turn * 100) / 100} ${R(dk * 100) / 100})`); set(dog.firstChild, `scale(${(1 - hop * .35).toFixed(2)} 1)`);
-      set(dogBody, `translate(0 ${R(-hop * 24)}) rotate(${R(-12 * Math.cos(ph))})`);
-      dogLegs.forEach((l, i) => set(l, `translate(${i % 2 ? 18 : -22} -28) rotate(${R((i % 2 ? 45 : -45) * Math.sin(ph + (i > 1) * .5))})`));
-      const bx = dx + turn * (110 + 40 * Math.sin(dp * 23)) * dk, by = dy - (120 + 45 * Math.sin(dp * 17)) * dk, fl = Math.cos(dp * 260);
-      set(bf, `translate(${R(bx)} ${R(by)}) scale(${(dk * 1.2).toFixed(2)})`); set(bf.firstChild, `scale(${fl.toFixed(2)} 1)`); set(bf.children[1], `scale(${fl.toFixed(2)} 1)`); }
-    // Confetti and shaken leaves.
-    const ct = seg(p, .72, .9) * 1.1;
-    bits.forEach((b, i) => { const on = ct > 0 && ct < 1.1; if (b.on !== on) { b.on = on; b.n.style.opacity = on ? 1 : 0; } if (!on) return;
-      const ox = b.leaf ? b.ox : 740, oy = b.leaf ? b.oy : 960;
-      set(b.n, `translate(${R(ox + b.vx * ct + Math.sin(ct * 10 + b.fl) * 14 * ct)} ${R(oy + b.vy * ct + (b.leaf ? 120 : 820) * ct * ct)}) rotate(${Math.round(b.spin * ct)}) scale(1 ${Math.cos(ct * 14 + b.fl).toFixed(2)})`); });
-    // Camera: wide on the meadow, easing in on the boys and the tree, a last push on the find.
-    const e = ease(seg(p, 0, .66)), push = ease(seg(p, .64, .8)) * .12, vw = Math.exp(mix(Math.log(C0[2]), Math.log(C1[2]), e)) * (1 - push);
-    const cx = mix(C0[0], (xs + xb) / 2 + 70, e) - push * 160, cy = mix(mix(C0[1], C1[1], e), small.head[1] + 60, push * 3), S = Sw / vw, S0 = Sw / C0[2];
-    set(cam, `translate(${R(Sw / 2)} ${R(Sh / 2)}) scale(${S.toFixed(4)}) translate(${R(-cx)} ${R(-cy)})`);
+    let ps = blend(STAND, run(phs, 1), Math.min(vs, 1) * (q > 0)), pb = blend(STAND, run(phb, 1), Math.min(vb, 1) * (q > 0));
+    ps.lean -= 16 * bump(q, .56, .6, .63); pb.lean -= 12 * bump(q, .58, .62, .65);
+    ps = blend(blend(ps, CROUCH, ease(seg(q, .6, .645))), HOLD, ease(seg(q, .655, .69))); pb = blend(pb, WOW, ease(seg(q, .62, .68)));
+    ps = blend(blend(blend(ps, SQUAT, ease(seg(q, .69, .71))), UP, ease(seg(q, .71, .73))), LANDED, ease(seg(q, .79, .82)));
+    pb = blend(blend(pb, SQUAT, ease(seg(q, .7, .72))), VUP, ease(seg(q, .72, .74)));
+    const qs = .1 * bump(q, .69, .71, .72) - .1 * bump(q, .71, .725, .77) + .09 * bump(q, .785, .8, .83), qb = .09 * bump(q, .7, .72, .73) - .09 * bump(q, .72, .735, .78) + .08 * bump(q, .795, .81, .84);
+    const big = K2[0], small = K2[1];
+    st(big, xb, yb, sb, pb, Math.sin(Math.PI * seg(q, .72, .8)) * 62, q > .62, qb, phb);
+    st(small, xs1, ys, ss, ps, Math.sin(Math.PI * seg(q, .71, .79)) * 78, q > .6, qs, phs);
+    // Camera (smooth): wide on the meadow, easing in on the boys and the tree, a last push on the find.
+    const [cds, cdb] = runX(p), mid = (at(cds)[0] + at(cdb)[0]) / 2, e = ease(seg(p, 0, .66)), push = ease(seg(p, .64, .8)) * .12, vw = Math.exp(mix(Math.log(C0[2]), Math.log(C1[2]), e)) * (1 - push);
+    const cx = mix(C0[0], mid + 70, e) - push * 160, cy = mix(mix(C0[1], C1[1], e), 1000, push * 3), S = Sw / vw, S0 = Sw / C0[2];
     L.forEach(o => { if (!o.d) return; const Sl = S0 * Math.pow(S / S0, o.f), lx = mix(C0[0], cx, o.f) - (o.drift || 0) * p, ly = mix(C0[1], cy, o.f);
       const t = `translate3d(${R(Sw / 2 + (o.x - lx) * Sl)}px,${R(Sh / 2 + (o.y - ly) * Sl)}px,0) scale(${(Sl / o.d).toFixed(4)})`; if (o.k !== t) { o.k = t; o.c.style.transform = t; } });
-    // 4. Iris into his face.
+    // Draw the puppets.
+    ax = act.getContext('2d'); ax.setTransform(1, 0, 0, 1, 0, 0); ax.clearRect(0, 0, act.width, act.height);
+    if (!KIDS) return;
+    Cam = [S * DPR, 0, 0, S * DPR, (Sw / 2 - cx * S) * DPR, (Sh / 2 - cy * S) * DPR]; SHX = 1.4 * S * DPR; SHY = 2.8 * S * DPR; boil = reduce ? 0 : Math.round(q * 900) * 7 + 1;
+    const pick = seg(q, .645, .66), hs = small.hands, bsz = small.s, hx = mix((hs[0][0] + hs[1][0]) / 2, hs[0][0] + 6 * bsz, seg(q, .69, .73)), hy = mix((hs[0][1] + hs[1][1]) / 2 + 12 * bsz, hs[0][1] + 14 * bsz, seg(q, .69, .73));
+    const box = () => { put(BOX, mul(Cam, mul(T(mix(775, hx, pick), mix(1199, hy, pick)), Sc(mix(1, bsz, pick)))), 400); if (!pick) put(TUFT, mul(Cam, T(758, 1203)), 401); };
+    const dp = seg(q, 0, .66), items = [[yb, () => drawKid(big, KIDS[0], 0)], [ys, () => drawKid(small, KIDS[1], 1)]];
+    if (dp < 1) { const [dx, dy] = dogAt(dp), dk = mix(1, 1.9, clamp((dy - 1200) / 600)), ph = (dx + 330) / 64 * Math.PI, hop = Math.max(0, Math.sin(ph)), turn = Math.cos(dp * 9) < -.65 ? -1 : 1;
+      items.push([dy, () => { const base = mul(Cam, mul(T(dx, dy), Sc(dk * turn, dk))); blit(GS, mul(Cam, mul(T(dx, dy + 2), Sc(dk * 1.25 * (1 - hop * .3), dk))));
+        const b = mul(base, mul(T(0, -hop * 24), Rt(-10 * Math.cos(ph)))), lg = (pc, x, a, j) => put(pc, mul(b, mul(T(x, -34), Rt(a))), 200 + j);
+        lg(DOG.legB, -24, 40 * Math.sin(ph + 3.6), 0); lg(DOG.legB, 22, -40 * Math.sin(ph + 3.6), 1); put(DOG.tail, mul(b, mul(T(-48, -60), Rt(14 * Math.sin(ph * 2)))), 2);
+        put(DOG.body, b, 3); lg(DOG.legF, -20, 40 * Math.sin(ph), 4); lg(DOG.legF, 26, -40 * Math.sin(ph), 5);
+        const h = mul(b, mul(T(38, -56), Rt(8 * Math.sin(ph)))); put(DOG.head, h, 6); put(DOG.ear, mul(h, mul(T(4, -32), Rt(12 * Math.cos(ph) + 6))), 7);
+        const fx = dx + turn * (120 + 40 * Math.sin(dp * 23)) * dk, fy = dy - (130 + 45 * Math.sin(dp * 17)) * dk, fl = Math.cos(dp * 260), m = mul(Cam, mul(T(fx, fy), Sc(dk * 1.3)));
+        put(BF.w, mul(m, Sc(fl, 1)), 300); put(BF.w, mul(m, Sc(-fl * .9, 1)), 301); put(BF.b, mul(m, T(0, -8)), 302); }]); }
+    items.sort((a, b) => a[0] - b[0]); if (!pick) box(); items.forEach(i => i[1]()); if (pick) box();
+    const ct = seg(q, .72, .9) * 1.1;
+    if (ct > 0 && ct < 1.1) bits.forEach((b, i) => { const pc = b.leaf ? LEAF[i % 3] : CF[b.sp];
+      put(pc, mul(Cam, mul(T(b.ox + b.vx * ct + Math.sin(ct * 10 + b.fl) * 14 * ct, b.oy + b.vy * ct + (b.leaf ? 120 : 820) * ct * ct), mul(Rt(b.spin * ct), Sc(b.k, b.k * Math.cos(ct * 14 + b.fl))))), 500 + i); });
+    // The close-up: an iris opens from his head into his face.
     const it = seg(p, .78, .88), show = it > 0;
     if (close._on !== show) { close._on = show; close.style.visibility = show ? 'visible' : 'hidden'; }
-    if (show) { const [hx2, hy2, hr] = small.head, sx = Sw / 2 + (hx2 - cx) * S, sy = Sh / 2 + (hy2 - cy) * S, r0 = hr * S, rF = .245 * F, q = ease(it);
-      const k = Math.exp(mix(Math.log(r0 / rF), 0, q)), px = mix(sx, FX, q), py = mix(sy, FY, q);
-      FACE.c.style.transform = `translate3d(${R(px - .5 * F * k)}px,${R(py - .56 * F * k)}px,0) scale(${(k * F / (1000 * FACE.d || 1)).toFixed(4)})`;
-      close.style.clipPath = `circle(${R(mix(r0 * 1.15, Math.hypot(Sw, Sh), Math.pow(q, 1.6)))}px at ${R(px)}px ${R(py)}px)`;
-      close.style.opacity = seg(it, 0, .3);
-      const ft = seg(p, .8, 1);
-      bits2.forEach(b => { const u = ft * b.sp * 1.2 - b.off * .5, on = u > 0 && u < 1.05; if (b.on !== on) { b.on = on; b.n.style.opacity = on ? 1 : 0; } if (!on) return;
-        set(b.n, `translate(${R(b.x * Sw + Math.sin(u * 9) * b.sway)} ${R(-30 + u * (Sh + 60))}) rotate(${Math.round(b.spin * u)}) scale(1 ${Math.cos(u * 12).toFixed(2)})`); }); }
+    if (show && FACE.d) { const sx = Sw / 2 + (small.head[0] - cx) * S, sy = Sh / 2 + (small.head[1] - cy) * S, r0 = small.head[2] * S, rF = .245 * F, qq = ease(it);
+      const k = Math.exp(mix(Math.log(r0 / rF), 0, qq)), px = mix(sx, FX, qq), py = mix(sy, FY, qq);
+      face.style.transform = `translate3d(${R(px - .5 * F * k)}px,${R(py - .56 * F * k)}px,0) scale(${(k * F / (1000 * FACE.d)).toFixed(4)})`;
+      close.style.clipPath = `circle(${R(mix(r0 * 1.15, Math.hypot(Sw, Sh), Math.pow(qq, 1.6)))}px at ${R(px)}px ${R(py)}px)`; close.style.opacity = seg(it, 0, .3);
+      ax = fx2.getContext('2d'); ax.setTransform(1, 0, 0, 1, 0, 0); ax.clearRect(0, 0, fx2.width, fx2.height); SHX = 2 * DPR; SHY = 4 * DPR;
+      const ft = seg(q, .8, 1); bits2.forEach((b, i) => { const u = ft * b.v * 1.2 - b.off * .5; if (u <= 0 || u > 1.05) return;
+        put(CF[b.sp], mul([DPR, 0, 0, DPR, 0, 0], mul(T(b.x * Sw + Math.sin(u * 9) * b.sway, -30 + u * (Sh + 60)), mul(Rt(b.spin * u), Sc(b.k, b.k * Math.cos(u * 12))))), 600 + i); }); }
     letters.forEach((s, i) => { const t = seg(p, .85 + i * .006, .9 + i * .006), v = t > 0 ? back(t) : 0;
-      if (s._t !== v) { s._t = v; s.style.opacity = t > 0 ? 1 : 0; s.style.transform = `translateY(${R((1 - v) * .6)}em) scale(${v.toFixed(3)})`; } });
+      if (s._t !== v) { s._t = v; s.style.opacity = t > 0 ? 1 : 0; s.style.transform = `translateY(${R((1 - v) * .6)}em) rotate(${[-5, 0, 3, -3, 4, -2, 5, 0, -4, 3, 7][i]}deg) scale(${v.toFixed(3)})`; } });
   }
 
   // ---------- Sizing, painting, scroll ----------
-  let secTop = 0, secH = 1, vh = 1, ready = false;
+  let secTop = 0, secH = 1, vh = 1, ready = false, built = 0;
   function measure() {
     vh = innerHeight; Sw = stage.clientWidth; Sh = stage.clientHeight; A = Sw / Sh; secH = sec.offsetHeight; secTop = sec.getBoundingClientRect().top + scrollY;
-    svg.setAttribute('viewBox', `0 0 ${Sw} ${Sh}`); csvg.setAttribute('viewBox', `0 0 ${Sw} ${Sh}`);
+    [act, fx2].forEach(c => { c.width = Math.round(Sw * DPR); c.height = Math.round(Sh * DPR); });
     C0 = fit(0, 1000, 1000, 1200, .52); C1 = fit(560, 440, 540, 1150, .6);
     const tall = A < 1; F = tall ? Math.min(Sw * 1.67, Sh * .78) : Sh * .9; FX = tall ? Sw / 2 : Sw * .66; FY = tall ? Sh * .57 : Sh * .53;
     const S0 = Sw / C0[2]; stage.style.setProperty('--sx', R(Sw / 2 + (180 - C0[0]) * S0) + 'px'); stage.style.setProperty('--sy', R(Sh / 2 + (820 - C0[1]) * S0) + 'px');
-    close.style.setProperty('--fx', R(FX) + 'px'); close.style.setProperty('--fy', R(FY) + 'px');
     const fs = tall ? Math.min(Sw * .165, Sh * .1) : Math.min(Sh * .13, Sw * .085);
     Object.assign(say.style, { fontSize: R(fs) + 'px', top: R(tall ? Sh * .09 : Sh * .4 - fs / 2) + 'px', left: R(tall ? Sw / 2 : Sw * .06) + 'px', transform: tall ? 'translateX(-50%) rotate(-4deg)' : 'rotate(-4deg)' });
   }
+  function paintBg() { bg.width = Math.round(Sw * DPR); bg.height = Math.round(Sh * DPR); bg.style.width = Sw + 'px'; bg.style.height = Sh + 'px';
+    const g = bg.getContext('2d'); begin(g, DPR); g.setTransform(DPR, 0, 0, DPR, 0, 0); rnd = rng(31); const Rr = Math.hypot(Sw, Sh);
+    for (let i = 0; i < 18; i++) { const a0 = i / 18 * 6.283 + .1, a1 = a0 + 6.283 / 36; paper(g, path(cut([[FX, FY], [FX + Math.cos(a0) * Rr, FY + Math.sin(a0) * Rr], [FX + Math.cos(a1) * Rr, FY + Math.sin(a1) * Rr]], 3, 40)), i % 2 ? '#f6cf95' : '#f8d9a6', [8, 2, .14], 0); }
+    paper(g, path(oval(FX, FY, F * .38, F * .38, 26, .02)), '#fdf0cf', [16, 4, .18]); }
   const need = o => { const zoom = Sw / (C1[2] * .88), S0 = Sw / C0[2], Sl = S0 * Math.pow(zoom / S0, o.f); return Math.min(Sl * DPR, Math.sqrt(o.px / (o.w * o.h))); };
+  function paintPlane(o, d, seed) { const c = o.c; c.width = Math.round(o.w * d); c.height = Math.round(o.h * d); c.style.width = c.width + 'px'; c.style.height = c.height + 'px';
+    const g = c.getContext('2d'); begin(g, d); g.setTransform(d, 0, 0, d, -o.x * d, -o.y * d); rnd = rng(seed); o.draw(g); o.d = d; o.k = null; }
+  const yieldNow = () => new Promise(r => setTimeout(r, 0));
   let painting = null;
   function paint() { if (painting) return painting;
-    painting = (async () => { for (const o of L) { const d = need(o); if (!o.d || d > o.d * 1.3) { await raster(o, d); await new Promise(r => setTimeout(r, 0)); } }
-      const fd = Math.min(F * DPR / 1000, Math.sqrt(3.2e6 / 1.4) / 1000); if (!FACE.d || fd > FACE.d * 1.3) await raster(FACE, fd);
-      ready = true; stage.classList.add('ready'); last = -1; draw(x); painting = null; })(); return painting; }
+    painting = (async () => { const sk = clamp(DPR * Sw / (C1[2] * .88), 1, 3);
+      if (!built || sk > built * 1.25) { SK = sk; buildPuppets(); built = sk; await yieldNow(); }
+      for (let i = 0; i < L.length; i++) { const o = L[i], d = need(o); if (!o.d || d > o.d * 1.3) { paintPlane(o, d, 100 + i); await yieldNow(); } }
+      const fd = Math.min(F * DPR / 1000, Math.sqrt(3.2e6 / 1.4) / 1000); if (!FACE.d || fd > FACE.d * 1.3) { paintPlane(Object.assign(FACE, { c: face }), fd, 77); await yieldNow(); }
+      paintBg(); ready = true; stage.classList.add('ready'); last = -1; draw(x, q); painting = null; })(); return painting; }
 
   const target = () => reduce ? 1 : clamp((scrollY - secTop + vh * .3) / (secH - vh + vh * .3));
-  let x = 0, v = 0, last = -1, running = false, lastT = 0, visible = false;
-  const draw = p => { if (Math.abs(p - last) < 1e-5) return; last = p; frame(p); };
+  let x = 0, v = 0, q = 0, qT = 0, last = -1, lastQ = -1, running = false, lastT = 0, visible = false;
+  const draw = (p, s) => { if (p === last && s === lastQ) return; last = p; lastQ = s; frame(p, s); };
   function loop(now) {
-    const T = target(), dt = Math.min(.064, (now - lastT) / 1000 || .016); lastT = now;
-    if (!visible) { x = T; v = 0; running = false; return; }
-    const w = 24, d = x - T, c = v + w * d, ex = Math.exp(-w * dt); x = T + (d + c * dt) * ex; v = (v - w * c * dt) * ex;
-    if (Math.abs(x - T) < 1e-4 && Math.abs(v) < 1e-3) { x = T; v = 0; }
-    draw(x); if (x !== T || v) requestAnimationFrame(loop); else running = false;
+    const T0 = target(), dt = Math.min(.064, (now - lastT) / 1000 || .016); lastT = now;
+    if (!visible) { x = q = T0; v = 0; running = false; return; }
+    const w = 24, d = x - T0, c = v + w * d, ex = Math.exp(-w * dt); x = T0 + (d + c * dt) * ex; v = (v - w * c * dt) * ex;
+    if (Math.abs(x - T0) < 1e-4 && Math.abs(v) < 1e-3) { x = T0; v = 0; }
+    if (q !== x && (now - qT > 80 || (x === T0 && !v))) { q = x; qT = now; }   // puppets on twos: a new pose at most every 80 ms
+    draw(x, q); if (x !== T0 || v || q !== x) requestAnimationFrame(loop); else running = false;
   }
   const kick = () => { if (!running && visible) { running = true; lastT = performance.now(); requestAnimationFrame(loop); } };
   if (!reduce) sec.classList.add('scrub');
-  measure(); x = target(); draw(x);
+  measure(); x = q = target(); draw(x, q);
   new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) { if (document.readyState === 'complete') paint(); kick(); } }, { rootMargin: '100% 0px' }).observe(sec);
   addEventListener('scroll', kick, { passive: true });
-  let rt; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { const w = Sw; measure(); if (Math.abs(Sw - w) > 40 || !ready) paint(); last = -1; draw(x); kick(); }, 120); }).observe(document.body);
+  let rt; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { const w = Sw, h = Sh; measure(); if (Math.abs(Sw - w) > 40 || !ready) paint(); else if (Math.abs(Sh - h) > 1) paintBg(); last = -1; draw(x, q); kick(); }, 120); }).observe(document.body);
   addEventListener('load', () => (window.requestIdleCallback || setTimeout)(() => paint()));
 })();
 </script>
