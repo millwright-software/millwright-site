@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GeoRangers — geocaching for the kid who wants to hold the phone</title>
-<meta name="description" content="GeoRangers is a geocaching app for kids to hold themselves. Sonar, buzz, feet counted down, the clue read aloud, a satellite close-up when GPS runs out, a sticker when they find it. Two looks: Ranger for little kids, Tracker for big ones.">
+<meta name="description" content="GeoRangers is a geocaching app for kids to hold themselves. An arrow that pings, feet counted down, the clue read aloud, a satellite close-up when GPS runs out, a sticker when they find it.">
 <link rel="icon" type="image/png" href="img/icon.png">
 <link rel="apple-touch-icon" href="img/icon.png">
 <meta property="og:title" content="GeoRangers — geocaching for the kid who wants to hold the phone">
@@ -143,28 +143,37 @@
   .step figcaption { margin-top: 16px; font-size: 16px; color: var(--ink-soft); max-width: 32ch; }
   .step figcaption b { display: block; color: var(--ink); font-weight: 600; font-family: var(--display); font-size: 19px; margin-bottom: 4px; }
 
-  /* tracker band */
-  .tracker { background: var(--black); color: var(--phosphor); }
-  .tracker h2, .tracker .dist, .tracker figcaption b { color: var(--phosphor); font-family: ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .02em; }
-  .tracker h2 { font-weight: 700; font-size: clamp(28px, 4vw, 40px); }
-  .tracker .intro, .tracker figcaption { color: #9fd9ad; }
-  .tracker .intro b { color: var(--phosphor); }
-  .tracker .step .dist { text-shadow: 0 0 18px rgba(67,224,106,.55); font-size: 34px; }
-  .tracker .phone { background: #0f1512; box-shadow: 0 0 0 1px rgba(67,224,106,.25), 0 30px 60px rgba(0,0,0,.6); }
-
-  /* around band */
-  .around { background: var(--paper-deep); }
-  .around figcaption b { font-size: 18px; }
+  /* the scroll walk: one phone stays put, the features scroll past it */
+  .walk { background: var(--paper-deep); }
+  .walk-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; margin-top: 8px; }
+  .walk-phone { position: sticky; top: 8vh; height: 84vh; display: grid; place-items: center; }
+  .walk-phone .phone { width: min(320px, 100%); }
+  .walk-phone .phone .clip, .walk-phone .phone img { position: absolute; inset: 10px; width: calc(100% - 20px); height: calc(100% - 20px); opacity: 0; transition: opacity .45s ease; }
+  .walk-phone .phone { aspect-ratio: 740 / 1585; }
+  .walk-phone .phone .is-on { opacity: 1; }
+  .feat { min-height: 84vh; display: flex; flex-direction: column; justify-content: center; padding: 24px 0; }
+  .feat .k { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--forest); margin: 0 0 10px; }
+  .feat h3 { font-size: clamp(30px, 3.6vw, 40px); line-height: 1.05; margin-bottom: 14px; }
+  .feat p { margin: 0; font-size: 18px; color: var(--ink-soft); max-width: 42ch; }
+  .feat p + p { margin-top: 12px; }
+  .feat .phone-m { display: none; }
+  @media (max-width: 820px) {
+    .walk-grid { grid-template-columns: 1fr; gap: 0; }
+    .walk-phone { display: none; }
+    .feat { min-height: 0; padding: 36px 0; }
+    .feat .phone-m { display: block; margin: 22px auto 0; max-width: 260px; }
+    .feat .phone-m .clip, .feat .phone-m img { position: static; opacity: 1; width: 100%; height: auto; }
+  }
 
   /* lists */
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; }
+  .lists { padding-top: 56px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 8px; }
   @media (max-width: 760px) { .cols { grid-template-columns: 1fr; gap: 36px; } }
   h3 { margin: 0 0 10px; font-family: var(--display); font-weight: 600; font-size: 26px; color: var(--deep); }
   ul { margin: 0; padding: 0; list-style: none; }
   li { position: relative; padding: 12px 0 12px 30px; font-size: 16.5px; color: var(--ink-soft); border-top: 1px solid rgba(46,38,28,.12); }
   li:last-child { border-bottom: 1px solid rgba(46,38,28,.12); }
   li::before { content: ""; position: absolute; left: 4px; top: 20px; width: 12px; height: 12px; border-radius: 50%; background: var(--sun); box-shadow: 0 0 0 3px var(--paper), 0 0 0 4.5px var(--forest); }
-  .around li::before { box-shadow: 0 0 0 3px var(--paper-deep), 0 0 0 4.5px var(--forest); }
   li b { color: var(--ink); font-weight: 600; }
 
   /* status + footer */
@@ -196,87 +205,56 @@
       <p class="body">Your kid holds the phone. It points, pings, and counts the feet down. It reads the clue in words they know. When they find the box, they get a sticker.</p>
       <div class="cta">
         <span class="pill">Coming to the App Store</span>
-        <a class="pill quiet" href="#hunt">See a hunt</a>
+        <a class="pill quiet" href="#more">See more</a>
         <small>iPhone, iOS 18 and later. $3.99. No ads, no accounts, nothing collected.</small>
       </div>
     </div>
     <div class="hero-phone">
-      <div class="phone"><video class="clip" autoplay muted loop playsinline preload="auto" poster="img/hero-far-poster.jpg" width="720" height="1565" aria-label="GeoRangers hunt screen: the big yellow arrow and sonar rings pulsing at 350 feet"><source src="img/hero-far.webm" type="video/webm"><source src="img/hero-far.mp4" type="video/mp4"></video></div>
+      <div class="phone"><video class="clip" autoplay muted loop playsinline preload="auto" poster="img/04-ranger-mid.webp" width="720" height="1565" aria-label="One hunt: the big yellow arrow pings at 340 feet, shrinks onto a satellite map inside a hundred feet, and the search zone says look around here"><source src="img/ranger-walk.webm" type="video/webm"><source src="img/ranger-walk.mp4" type="video/mp4"></video></div>
       <div class="sticker" aria-hidden="true"><span>Ages 4 to 8</span></div>
     </div>
   </header>
 </div>
 
-<section id="hunt">
-  <div class="wrap">
-    <h2>How a hunt goes</h2>
-    <p class="intro">The arrow gets them close. Then a map with their own dot. Then the truth: look around here.</p>
-    <div class="row">
-      <figure class="step">
-        <p class="dist">350 ft</p>
-        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/hero-far-poster.jpg" width="720" height="1565" aria-label="Sonar rings pulsing around the arrow"><source src="img/hero-far.webm" type="video/webm"><source src="img/hero-far.mp4" type="video/mp4"></video></div>
-        <figcaption><b>Follow the arrow</b>Pings quicken. A buzz when they face it. FOUND IT takes a hold, not a tap.</figcaption>
-      </figure>
-      <figure class="step">
-        <p class="dist">Inside 100 ft</p>
-        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/04-ranger-mid.webp" width="720" height="1565" aria-label="The arrow shrinks onto a satellite map as the kid walks the last hundred feet"><source src="img/ranger-walk.webm" type="video/webm"><source src="img/ranger-walk.mp4" type="video/mp4"></video></div>
-        <figcaption><b>The arrow becomes them</b>Inside a hundred feet the map fades up and the arrow shrinks onto their dot. The ring shrinks when they stand still.</figcaption>
-      </figure>
-      <figure class="step">
-        <p class="dist quiet">Search zone</p>
-        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/05-ranger-zone.webp" width="720" height="1565" aria-label="In the search zone: the dashed ring on the satellite map and Look around here"><source src="img/ranger-zone.webm" type="video/webm"><source src="img/ranger-zone.mp4" type="video/mp4"></video></div>
-        <figcaption><b>Look around here</b>GPS can’t walk them to the box. The app says so instead of pretending.</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section class="tracker">
-  <div class="wrap">
-    <h2>Tracker, for the big kid</h2>
-    <p class="intro">One setting, and the whole hunt goes black and green. One blip. Nothing announced.</p>
-    <div class="row">
-      <figure class="step">
-        <p class="dist">377 ft</p>
-        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/06-tracker-far.webp" width="720" height="1565" aria-label="Tracker long range: the thin arrow with range and bearing"><source src="img/tracker-far.webm" type="video/webm"><source src="img/tracker-far.mp4" type="video/mp4"></video></div>
-        <figcaption><b>Long range</b>Range, bearing, a thin arrow.</figcaption>
-      </figure>
-      <figure class="step">
-        <p class="dist">149 ft</p>
-        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/07-tracker-near.webp" width="720" height="1565" aria-label="Tracker mode: the long-range arrow, then the motion-tracker fan as the kid closes in"><source src="img/tracker-walk.webm" type="video/webm"><source src="img/tracker-walk.mp4" type="video/mp4"></video></div>
-        <figcaption><b>Motion tracker</b>The blip is the treasure.</figcaption>
-      </figure>
-      <figure class="step">
-        <p class="dist">40 ft</p>
-        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/08-tracker-close.webp" width="720" height="1565" aria-label="Tracker terrain scan sweeping the ground edges in phosphor green"><source src="img/tracker-scan.webm" type="video/webm"><source src="img/tracker-scan.mp4" type="video/mp4"></video></div>
-        <figcaption><b>Terrain scan</b>The ground’s edges and their averaged spot.</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section class="around">
+<section class="walk" id="more">
   <div class="wrap">
     <h2>Around the hunt</h2>
-    <div class="row four">
-      <figure class="step">
-        <div class="phone"><img src="img/01-home.webp" alt="GeoRangers home screen: Go Hunting, Sticker Map, Car Radar" width="720" height="1565"></div>
-        <figcaption><b>Three buttons</b>They can read them. The leaf is your door.</figcaption>
-      </figure>
-      <figure class="step">
-        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/02-list.webp" width="720" height="1565" aria-label="Treasure nearby list while the Learning the land ring fills"><source src="img/list-ring.webm" type="video/webm"><source src="img/list-ring.mp4" type="video/mp4"></video></div>
-        <figcaption><b>Treasure nearby</b>Feet, not miles. Hard ones say so. The ring fills as it learns the land.</figcaption>
-      </figure>
-      <figure class="step">
-        <div class="phone"><img src="img/09-map.webp" alt="The team's sticker map on satellite imagery with a sticker earned" width="720" height="1565"></div>
-        <figcaption><b>Sticker map</b>Every find, with their photo. Photos stay in the app.</figcaption>
-      </figure>
-      <figure class="step">
-        <div class="phone"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/12-radar-route.webp" width="720" height="1565" aria-label="Car radar sweeping while tracking a treasure, with the route line and a turn instruction"><source src="img/radar-route.webm" type="video/webm"><source src="img/radar-route.mp4" type="video/mp4"></video></div>
-        <figcaption><b>Car radar</b>Pings when treasure is near the road. Track one and you get directions, twice per turn.</figcaption>
-      </figure>
+    <div class="walk-grid">
+      <div class="walk-phone" aria-hidden="true">
+        <div class="phone">
+          <video class="clip is-on" data-feat="list" muted loop playsinline preload="metadata" poster="img/02-list.webp" width="720" height="1565"><source src="img/list-ring.webm" type="video/webm"><source src="img/list-ring.mp4" type="video/mp4"></video>
+          <img data-feat="map" src="img/09-map.webp" alt="" width="720" height="1565" loading="lazy">
+          <video class="clip" data-feat="radar" muted loop playsinline preload="metadata" poster="img/12-radar-route.webp" width="720" height="1565"><source src="img/radar-route.webm" type="video/webm"><source src="img/radar-route.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+      <div class="feats">
+        <article class="feat" data-feat="list">
+          <p class="k">Treasure nearby</p>
+          <h3>Feet, not miles.</h3>
+          <p>Every cache in walking range, closest first, with a color for how easy it is to find. Hard ones say so, so you can pick the first one they will actually get.</p>
+          <p>After a load, the ring fills while the app learns the land: the hills and dips it draws under the map when they get close.</p>
+          <div class="phone phone-m"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/02-list.webp" width="720" height="1565" aria-label="Treasure nearby list while the Learning the land ring fills"><source src="img/list-ring.webm" type="video/webm"><source src="img/list-ring.mp4" type="video/mp4"></video></div>
+        </article>
+        <article class="feat" data-feat="map">
+          <p class="k">Sticker map</p>
+          <h3>Every find, with their photo.</h3>
+          <p>A sticker lands on the map for each treasure they find, and a Brave Try sticker when they looked hard and it was not there. Photos stay in the app, never in the camera roll.</p>
+          <div class="phone phone-m"><img src="img/09-map.webp" alt="The team's sticker map on satellite imagery with a sticker earned" width="720" height="1565" loading="lazy"></div>
+        </article>
+        <article class="feat" data-feat="radar">
+          <p class="k">Car radar</p>
+          <h3>Treasure near the road.</h3>
+          <p>On a drive it sweeps and pings when a cache is coming up ahead. Never more than one nudge every ten minutes.</p>
+          <p>Track one and you get road directions, spoken twice per turn and no more. Kid guidance stays locked above walking speed.</p>
+          <div class="phone phone-m"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/12-radar-route.webp" width="720" height="1565" aria-label="Car radar sweeping while tracking a treasure, with the route line and a turn instruction"><source src="img/radar-route.webm" type="video/webm"><source src="img/radar-route.mp4" type="video/mp4"></video></div>
+        </article>
+      </div>
     </div>
+  </div>
+</section>
 
+<section class="lists">
+  <div class="wrap">
     <div class="cols">
       <div>
         <h3>Built for your kid</h3>
@@ -292,10 +270,10 @@
         <h3>Built for you</h3>
         <ul>
           <li><b>Everything grown-up</b> sits behind a multiplication problem. Links out, too.</li>
-          <li><b>No child accounts.</b> You sign in. They never touch geocaching.com.</li>
+          <li><b>No child accounts.</b> You load the caches. They never touch geocaching.com.</li>
           <li><b>No ads, no analytics.</b> Photos never leave the phone.</li>
           <li><b>Kid guidance locks</b> above walking speed.</li>
-          <li><b>You pick the look.</b> Ranger or Tracker.</li>
+          <li><b>Caches come from a GPX file.</b> A pocket query, AirDropped or opened from Files.</li>
         </ul>
       </div>
     </div>
@@ -307,7 +285,7 @@
     <div class="status">
       <h2>Where it stands</h2>
       <p>In field test with real kids and real boxes. Caches come in from GPX pocket queries today; we are applying to the Geocaching API program so you can search from the app. Hints need a Geocaching Premium membership.</p>
-      <p>On TestFlight now. App Store soon, $3.99. Not affiliated with Geocaching HQ. <a href="privacy/">Privacy policy</a>.</p>
+      <p>On TestFlight now. App Store soon, $3.99. Not affiliated with Geocaching HQ. Questions: <a href="mailto:support@millwrightsoftware.com">support@millwrightsoftware.com</a>. <a href="privacy/">Privacy policy</a>.</p>
     </div>
     <footer>
       <a class="plate" href="../">Millwright Software</a>
@@ -318,13 +296,31 @@
 </section>
 
 <script>
-  // Clips play when they scroll into view and pause when they leave; no controls, no chips.
+  // Clips play when on screen and pause when off.
   const clips = document.querySelectorAll('video.clip');
   const io = new IntersectionObserver(entries => entries.forEach(e => {
     const v = e.target;
-    if (e.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+    if (e.isIntersecting && !v.closest('.walk-phone')) { v.play().catch(() => {}); } else if (!v.closest('.walk-phone')) { v.pause(); }
   }), { threshold: 0.25 });
   clips.forEach(v => io.observe(v));
+
+  // The scroll walk: whichever feature block is nearest the middle of the screen owns the phone.
+  const stage = document.querySelector('.walk-phone .phone');
+  if (stage) {
+    const layers = [...stage.querySelectorAll('[data-feat]')];
+    const show = name => layers.forEach(l => {
+      const on = l.dataset.feat === name;
+      l.classList.toggle('is-on', on);
+      if (l.tagName === 'VIDEO') { if (on) l.play().catch(() => {}); else l.pause(); }
+    });
+    const feats = [...document.querySelectorAll('.feat')];
+    const pick = new IntersectionObserver(entries => {
+      const hit = entries.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (hit) show(hit.target.dataset.feat);
+    }, { rootMargin: '-40% 0px -40% 0px', threshold: [0, .2, .5, 1] });
+    feats.forEach(f => pick.observe(f));
+    show('list');
+  }
 </script>
 </body>
 </html>
