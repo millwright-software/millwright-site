@@ -5,167 +5,317 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GeoRangers — geocaching for the kid who wants to hold the phone</title>
 <meta name="description" content="GeoRangers is a geocaching app for kids to hold themselves. Sonar, buzz, feet counted down, the clue read aloud, a satellite close-up when GPS runs out, a sticker when they find it. Two looks: Ranger for little kids, Tracker for big ones.">
-<link rel="icon" type="image/png" href="../assets/millwright-mark-180.png">
-<link rel="apple-touch-icon" href="../assets/millwright-mark-180.png">
+<link rel="icon" type="image/png" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
 <meta property="og:title" content="GeoRangers — geocaching for the kid who wants to hold the phone">
 <meta property="og:description" content="Every geocaching app is built for the adult doing the caching. GeoRangers is built for the child.">
 <meta property="og:image" content="https://millwrightsoftware.com/geofun/img/og.png">
 <meta property="og:type" content="website">
 <style>
-  :root { --paper:#eceae4; --ink:#22241f; --ink-soft:#55584f; --line:#c9c6bc; --brass:#9a7a2e; --forest:#2f6b3e; }
-  @media (prefers-color-scheme: dark) { :root { --paper:#191a17; --ink:#e4e2da; --ink-soft:#9a9c92; --line:#34362f; --brass:#c89b4b; --forest:#7fbf8e; } }
-  html, body { height: 100%; }
-  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; display:flex; flex-direction:column; min-height:100vh; -webkit-font-smoothing:antialiased; }
-  a { color:var(--ink); }
-  a:focus-visible { outline:2px solid var(--brass); outline-offset:3px; }
-  main { flex:1; width:min(920px, calc(100% - 48px)); margin:0 auto; padding:7vh 0 48px; }
-  .plate { display:inline-block; border:1.5px solid var(--ink); padding:9px 14px 8px; text-decoration:none; }
-  .plate:hover { border-color:var(--brass); color:var(--brass); }
-  .plate span { font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:12px; font-weight:700; letter-spacing:.32em; text-transform:uppercase; }
-  .plate img { vertical-align:-4px; margin:0 .5em 0 .25em; }
-  .tag { font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--brass); }
-  header.hero { margin-top:56px; max-width:640px; }
-  header.hero .tag { display:block; margin-bottom:14px; }
-  h1 { margin:0; font-size:clamp(40px,7vw,64px); font-weight:800; letter-spacing:-.02em; line-height:1; color:var(--forest); }
-  .lede { margin:18px 0 0; font-size:clamp(19px,2.6vw,23px); line-height:1.35; font-weight:500; }
-  .hero p.body { margin:18px 0 0; font-size:17px; line-height:1.6; color:var(--ink-soft); max-width:58ch; }
+  @font-face{font-family:'Fredoka';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/fredoka-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Fredoka';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/fredoka-600.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Fredoka';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/fredoka-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  :root {
+    --paper: #faf3de;
+    --paper-deep: #f0e5c6;
+    --forest: #2e6b3d;
+    --deep: #173d24;
+    --moss: #7d9e4a;
+    --sun: #facc3d;
+    --sky: #6bb3db;
+    --bark: #6e4d30;
+    --ink: #2e261c;
+    --ink-soft: #675b4b;
+    --black: #0a0f0b;
+    --phosphor: #43e06a;
+    --phosphor-dim: #1f7a3a;
+    --display: "Fredoka", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 6px; }
+  img { display: block; max-width: 100%; height: auto; }
 
-  section { margin-top:64px; }
-  h2 { margin:0 0 6px; font-size:13px; font-family:ui-monospace,"SF Mono",Menlo,monospace; letter-spacing:.18em; text-transform:uppercase; color:var(--brass); font-weight:700; }
-  .sub { margin:0 0 22px; font-size:17px; line-height:1.5; color:var(--ink-soft); max-width:60ch; }
-  .sub b { color:var(--ink); font-weight:600; }
+  /* paper with faint contour lines, like the app's background */
+  .paper {
+    background-color: var(--paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520' viewBox='0 0 520 520'%3E%3Cg fill='none' stroke='%232e6b3d' stroke-opacity='.10' stroke-width='1.2'%3E%3Cpath d='M-40 120c90-70 190-40 260-80s170-60 340 10'/%3E%3Cpath d='M-40 180c90-70 190-20 260-60s170-70 340-10'/%3E%3Cpath d='M-40 250c100-40 180 10 270-30s160-80 330-30'/%3E%3Cpath d='M-40 330c110-20 170 40 270 0s160-90 330-50'/%3E%3Cpath d='M-40 420c110 0 170 50 270 20s150-100 330-70'/%3E%3Cpath d='M-40 500c110 10 180 50 280 30s140-110 320-90'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 520px 520px;
+  }
 
-  .screens { display:grid; grid-template-columns:repeat(4,1fr); gap:22px 18px; }
-  .screens.three { grid-template-columns:repeat(3,1fr); max-width:690px; }
-  @media (max-width:760px) { .screens, .screens.three { grid-template-columns:repeat(2,1fr); } }
-  .screens figure { margin:0; }
-  .screens img { display:block; width:100%; height:auto; border-radius:9%/4.2%; border:1px solid var(--line); box-shadow:0 10px 30px rgba(0,0,0,.08); }
-  .screens figcaption { margin-top:10px; font-size:13.5px; line-height:1.45; color:var(--ink-soft); }
-  .screens figcaption b { display:block; color:var(--ink); font-weight:600; margin-bottom:2px; }
+  .wrap { width: min(1080px, calc(100% - 48px)); margin: 0 auto; }
+  @media (max-width: 600px) { .wrap { width: calc(100% - 36px); } }
 
-  .cols { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
-  @media (max-width:760px) { .cols { grid-template-columns:1fr; gap:32px; } }
-  ul { margin:0; padding:0; list-style:none; }
-  li { padding:10px 0; border-top:1px solid var(--line); font-size:15.5px; line-height:1.5; color:var(--ink-soft); }
-  li:last-child { border-bottom:1px solid var(--line); }
-  li b { color:var(--ink); font-weight:600; }
+  /* top bar */
+  .top { display: flex; align-items: center; justify-content: space-between; padding: 22px 0 0; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--deep); }
+  .brand img { width: 40px; height: 40px; border-radius: 10px; }
+  .top .studio { font-size: 14px; color: var(--ink-soft); text-decoration: none; }
+  .top .studio:hover { color: var(--forest); }
 
-  .status { margin-top:64px; padding:22px 24px; border:1.5px solid var(--ink); max-width:640px; }
-  .status p { margin:0; font-size:15.5px; line-height:1.55; color:var(--ink-soft); }
-  .status p + p { margin-top:10px; }
-  .status a { border-bottom:1px solid var(--brass); text-decoration:none; padding-bottom:1px; }
-  .status a:hover { color:var(--brass); }
-  footer { flex:none; width:min(920px, calc(100% - 48px)); margin:0 auto; padding:0 0 28px; display:flex; align-items:center; gap:10px; }
-  footer p { margin:0; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:11px; letter-spacing:.08em; color:var(--ink-soft); }
+  /* hero */
+  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: 56px 0 72px; }
+  @media (max-width: 820px) { .hero { grid-template-columns: 1fr; gap: 28px; padding: 40px 0 56px; } }
+  .hero h1 {
+    margin: 0;
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(52px, 8.5vw, 96px); line-height: .95; letter-spacing: -.01em;
+    color: var(--forest);
+  }
+  .hero .lede {
+    margin: 22px 0 0; max-width: 24ch;
+    font-family: var(--display); font-weight: 500;
+    font-size: clamp(22px, 2.8vw, 30px); line-height: 1.2; color: var(--ink);
+  }
+  .hero .body { margin: 20px 0 0; max-width: 50ch; font-size: 17px; color: var(--ink-soft); }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 30px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--display); font-weight: 600; font-size: 18px;
+    padding: 14px 22px; border-radius: 999px; text-decoration: none;
+    background: var(--sun); color: var(--ink);
+    box-shadow: 0 6px 0 #c9a02a;
+  }
+  .pill.quiet { background: transparent; color: var(--forest); box-shadow: inset 0 0 0 2px var(--forest); }
+  .pill.quiet:hover { background: rgba(46,107,61,.08); }
+  .cta small { display: block; width: 100%; font-size: 14px; color: var(--ink-soft); }
+
+  /* phones */
+  .phone {
+    position: relative;
+    background: #15181a; border-radius: 48px; padding: 10px;
+    box-shadow: 0 30px 60px rgba(46,38,28,.22), 0 2px 0 rgba(255,255,255,.25) inset;
+  }
+  .phone img { border-radius: 38px; width: 100%; }
+  .hero-phone { position: relative; width: min(340px, 78%); margin: 0 auto; transform: rotate(-3deg); }
+  @media (max-width: 820px) { .hero-phone { width: min(300px, 70%); } }
+  .sticker {
+    position: absolute; right: -9%; bottom: 9%; width: 118px; height: 118px;
+    border-radius: 50%; background: var(--sky); color: #fff;
+    display: grid; place-items: center; text-align: center;
+    font-family: var(--display); font-weight: 600; font-size: 17px; line-height: 1.1;
+    transform: rotate(-8deg);
+    box-shadow: 0 10px 24px rgba(46,38,28,.25);
+  }
+  .sticker::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; border: 2px dashed rgba(255,255,255,.75); }
+  .sticker span { position: relative; padding: 0 14px; }
+
+  /* sections */
+  section { padding: 72px 0; }
+  @media (max-width: 600px) { section { padding: 56px 0; } }
+  h2 {
+    margin: 0; font-family: var(--display); font-weight: 700;
+    font-size: clamp(34px, 4.6vw, 48px); line-height: 1.05; letter-spacing: -.01em; color: var(--forest);
+  }
+  .intro { margin: 14px 0 0; max-width: 56ch; font-size: 18px; color: var(--ink-soft); }
+  .intro b { color: var(--ink); font-weight: 600; }
+
+  /* a row of phones, scrolls sideways on small screens */
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+  .row.four { grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  @media (max-width: 760px) {
+    .row, .row.four {
+      display: flex; overflow-x: auto; gap: 18px; padding: 8px 4px 20px;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      margin-left: -18px; margin-right: -18px; padding-left: 18px; padding-right: 18px;
+    }
+    .row > * { flex: 0 0 72%; scroll-snap-align: center; }
+    .row.four > * { flex: 0 0 62%; }
+  }
+  .step { margin: 0; }
+  .step .phone { margin: 0 auto; max-width: 300px; }
+  .step .dist {
+    font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1; color: var(--sun);
+    text-shadow: 0 2px 0 var(--bark); margin: 0 0 14px;
+  }
+  .step .dist.quiet { color: var(--forest); text-shadow: none; font-size: 32px; }
+  .step figcaption { margin-top: 16px; font-size: 16px; color: var(--ink-soft); max-width: 32ch; }
+  .step figcaption b { display: block; color: var(--ink); font-weight: 600; font-family: var(--display); font-size: 19px; margin-bottom: 4px; }
+
+  /* tracker band */
+  .tracker { background: var(--black); color: var(--phosphor); }
+  .tracker h2, .tracker .dist, .tracker figcaption b { color: var(--phosphor); font-family: ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .02em; }
+  .tracker h2 { font-weight: 700; font-size: clamp(28px, 4vw, 40px); }
+  .tracker .intro, .tracker figcaption { color: #9fd9ad; }
+  .tracker .intro b { color: var(--phosphor); }
+  .tracker .step .dist { text-shadow: 0 0 18px rgba(67,224,106,.55); font-size: 34px; }
+  .tracker .phone { background: #0f1512; box-shadow: 0 0 0 1px rgba(67,224,106,.25), 0 30px 60px rgba(0,0,0,.6); }
+
+  /* around band */
+  .around { background: var(--paper-deep); }
+  .around figcaption b { font-size: 18px; }
+
+  /* lists */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; }
+  @media (max-width: 760px) { .cols { grid-template-columns: 1fr; gap: 36px; } }
+  h3 { margin: 0 0 10px; font-family: var(--display); font-weight: 600; font-size: 26px; color: var(--deep); }
+  ul { margin: 0; padding: 0; list-style: none; }
+  li { position: relative; padding: 12px 0 12px 30px; font-size: 16.5px; color: var(--ink-soft); border-top: 1px solid rgba(46,38,28,.12); }
+  li:last-child { border-bottom: 1px solid rgba(46,38,28,.12); }
+  li::before { content: ""; position: absolute; left: 4px; top: 20px; width: 12px; height: 12px; border-radius: 50%; background: var(--sun); box-shadow: 0 0 0 3px var(--paper), 0 0 0 4.5px var(--forest); }
+  .around li::before { box-shadow: 0 0 0 3px var(--paper-deep), 0 0 0 4.5px var(--forest); }
+  li b { color: var(--ink); font-weight: 600; }
+
+  /* status + footer */
+  .status {
+    margin-top: 0; padding: 28px 30px; border-radius: 28px;
+    background: var(--deep); color: #e9f1e6;
+  }
+  .status h2 { color: var(--sun); font-size: 30px; }
+  .status p { margin: 12px 0 0; font-size: 16.5px; color: #cfe0cc; max-width: 64ch; }
+  .status a { color: #fff; text-decoration-color: var(--sun); text-underline-offset: 3px; }
+  footer { padding: 36px 0 40px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--ink-soft); }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--forest); }
+  footer .plate { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; border: 1.5px solid var(--ink); padding: 7px 12px 6px; color: var(--ink); }
 </style>
 </head>
-<body>
-<main>
-  <a class="plate" href="../"><span>Millwright<img src="../assets/millwright-mark-180.png" alt="" width="22" height="22">Software</span></a>
+<body class="paper">
+
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="./"><img src="img/icon.png" alt="" width="40" height="40">GeoRangers</a>
+    <a class="studio" href="../">by Millwright Software</a>
+  </div>
 
   <header class="hero">
-    <span class="tag">iPhone · public preview</span>
-    <h1>GeoRangers</h1>
-    <p class="lede">Every geocaching app is built for the adult doing the caching. GeoRangers is built for the kid who wants to hold the phone.</p>
-    <p class="body">Hand a kid the phone. It pings faster as they get closer, buzzes when they point it the right way, counts the feet down, and reads the clue out loud in words they know. When GPS runs out of precision, it says so and shows them where to look. When they find the box, they take the picture and earn a sticker on their adventure map.</p>
+    <div>
+      <h1>Hand the kid<br>the phone.</h1>
+      <p class="lede">A geocaching app built for the child, not the grown-up.</p>
+      <p class="body">It pings faster as they get closer, buzzes when they point it the right way, counts the feet down, and reads the clue out loud in words they know. When GPS runs out of precision, it says so and shows them where to look. When they find the box, they take the picture and earn a sticker on their adventure map.</p>
+      <div class="cta">
+        <span class="pill">Coming to the App Store</span>
+        <a class="pill quiet" href="#hunt">See a hunt</a>
+        <small>iPhone, iOS 18 and later. $3.99, no ads, no accounts, nothing collected.</small>
+      </div>
+    </div>
+    <div class="hero-phone">
+      <div class="phone"><img src="img/03-ranger-far.webp" alt="GeoRangers hunt screen: a big yellow arrow, 250 feet, Clue and Looks like buttons, FOUND IT press and hold" width="720" height="1565" loading="eager" fetchpriority="high"></div>
+      <div class="sticker" aria-hidden="true"><span>Ages 4 to 8</span></div>
+    </div>
   </header>
+</div>
 
-  <section>
-    <h2>Two looks, one hunt</h2>
-    <p class="sub">A grown-up picks the look in settings. <b>Ranger</b> is for the little one: paper, big yellow arrow, a friendly voice. <b>Tracker</b> is for the big one who has outgrown chimes: black and green, one blip, range and bearing, nothing announced. Underneath they are the same hunt.</p>
-  </section>
-
-  <section>
-    <h2>Ranger</h2>
-    <p class="sub">The arrow gets them close. Inside a hundred feet it shrinks onto a satellite map, and their own dot takes over.</p>
-    <div class="screens three">
-      <figure>
-        <img src="img/03-ranger-far.webp" alt="Ranger hunt: big yellow arrow, 250 feet, Clue and Looks like buttons, FOUND IT press and hold" width="720" height="1565" loading="eager">
-        <figcaption><b>Far</b>Sonar, buzz, feet counting down. FOUND IT is a press-and-hold, so it can’t happen by accident.</figcaption>
+<section id="hunt">
+  <div class="wrap">
+    <h2>How a hunt goes</h2>
+    <p class="intro">The arrow gets them close. Inside a hundred feet it shrinks onto a satellite map and their own dot takes over. When the phone can’t know any better, it says so.</p>
+    <div class="row">
+      <figure class="step">
+        <p class="dist">250 ft</p>
+        <div class="phone"><img src="img/03-ranger-far.webp" alt="" width="720" height="1565"></div>
+        <figcaption><b>Follow the arrow</b>Sonar quickens, a buzz when they face the treasure, the clue in a friendly voice. FOUND IT is a press-and-hold, so it can’t happen by accident.</figcaption>
       </figure>
-      <figure>
-        <img src="img/04-ranger-near.webp" alt="Ranger hunt inside 100 feet: satellite map with the kid's dot, a heading wedge, the treasure star, 93 feet" width="720" height="1565">
-        <figcaption><b>Inside 100 feet</b>Their dot, which way they’re facing, the treasure star, and a ring that shrinks as they stand still.</figcaption>
+      <figure class="step">
+        <p class="dist">93 ft</p>
+        <div class="phone"><img src="img/04-ranger-near.webp" alt="Inside 100 feet: satellite map with the kid's dot, a heading wedge, the treasure star" width="720" height="1565"></div>
+        <figcaption><b>Now it’s a map</b>Their dot, which way they’re facing, the treasure star, and a ring that shrinks the longer they stand still.</figcaption>
       </figure>
-      <figure>
-        <img src="img/05-ranger-close.webp" alt="Ranger hunt in the search zone: dashed ring on the satellite map, 'Look around here!' and what the box looks like" width="720" height="1565">
-        <figcaption><b>The search zone</b>GPS can’t walk a kid to the box, so it stops pretending. Look around here. Here’s what it looks like.</figcaption>
+      <figure class="step">
+        <p class="dist quiet">Search zone</p>
+        <div class="phone"><img src="img/05-ranger-close.webp" alt="In the search zone: a dashed ring on the satellite map, 'Look around here!' and what the box looks like" width="720" height="1565"></div>
+        <figcaption><b>Look around here</b>GPS can’t walk a kid to the box, so it stops pretending. Here’s the zone. Here’s what the box looks like.</figcaption>
       </figure>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <h2>Tracker</h2>
-    <p class="sub">Black and green from the list tap to the find. One blip, faster and higher as they close in.</p>
-    <div class="screens three">
-      <figure>
-        <img src="img/06-tracker-far.webp" alt="Tracker long range: green ring, a thin arrow, range 377 feet, bearing 180" width="720" height="1565">
-        <figcaption><b>Long range</b>A thin arrow, range and bearing, the word AHEAD. Nothing else.</figcaption>
+<section class="tracker">
+  <div class="wrap">
+    <h2>Tracker, for the big kid</h2>
+    <p class="intro">A grown-up can switch the whole hunt to <b>Tracker</b>. Black and green from the list tap to the find. One blip, faster and higher as they close in. Nothing announced.</p>
+    <div class="row">
+      <figure class="step">
+        <p class="dist">377 ft</p>
+        <div class="phone"><img src="img/06-tracker-far.webp" alt="Tracker long range: a green ring, a thin arrow, range and bearing readout" width="720" height="1565"></div>
+        <figcaption><b>Long range</b>A thin arrow, range and bearing, the word AHEAD.</figcaption>
       </figure>
-      <figure>
-        <img src="img/07-tracker-near.webp" alt="Tracker motion-tracker fan at 149 feet with range and bearing readout" width="720" height="1565">
-        <figcaption><b>Inside 200 feet</b>The motion-tracker fan. The blip is the treasure.</figcaption>
+      <figure class="step">
+        <p class="dist">149 ft</p>
+        <div class="phone"><img src="img/07-tracker-near.webp" alt="Tracker motion-tracker fan with the treasure as a blip" width="720" height="1565"></div>
+        <figcaption><b>Motion tracker</b>The fan. The blip is the treasure.</figcaption>
       </figure>
-      <figure>
-        <img src="img/08-tracker-close.webp" alt="Tracker terrain scan: satellite edges in phosphor green, 40 feet, averaged fixes" width="720" height="1565">
-        <figcaption><b>Terrain scan</b>Inside fifty feet: the ground’s edges in phosphor green, their averaged position, the finders’ pin.</figcaption>
+      <figure class="step">
+        <p class="dist">40 ft</p>
+        <div class="phone"><img src="img/08-tracker-close.webp" alt="Tracker terrain scan: satellite edges in phosphor green with the averaged position" width="720" height="1565"></div>
+        <figcaption><b>Terrain scan</b>The ground’s edges in phosphor green, their averaged position, the finders’ pin.</figcaption>
       </figure>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
+<section class="around">
+  <div class="wrap">
     <h2>Around the hunt</h2>
-    <div class="screens">
-      <figure>
-        <img src="img/01-home.webp" alt="GeoRangers home screen: Go Hunting, Sticker Map, Car Radar" width="720" height="1565">
+    <div class="row four">
+      <figure class="step">
+        <div class="phone"><img src="img/01-home.webp" alt="GeoRangers home screen: Go Hunting, Sticker Map, Car Radar" width="720" height="1565"></div>
         <figcaption><b>Three buttons</b>A kid can read them. The leaf is the grown-up door.</figcaption>
       </figure>
-      <figure>
-        <img src="img/02-list.webp" alt="Treasure nearby list with distances in feet and a Grown-up help badge" width="720" height="1565">
-        <figcaption><b>Treasure nearby</b>Distances in feet. Hard ones wear a “Grown-up help” badge. Nothing is hidden.</figcaption>
+      <figure class="step">
+        <div class="phone"><img src="img/02-list.webp" alt="Treasure nearby list with distances in feet and a Grown-up help badge" width="720" height="1565"></div>
+        <figcaption><b>Treasure nearby</b>Distances in feet. Hard ones wear a Grown-up help badge. Nothing is hidden.</figcaption>
       </figure>
-      <figure>
-        <img src="img/09-map.webp" alt="Ranger Team's sticker map on satellite imagery with one sticker earned" width="720" height="1565">
+      <figure class="step">
+        <div class="phone"><img src="img/09-map.webp" alt="The team's sticker map on satellite imagery with a sticker earned" width="720" height="1565"></div>
         <figcaption><b>Sticker map</b>Every find is a sticker with the photo they took. Photos stay in the app.</figcaption>
       </figure>
-      <figure>
-        <img src="img/10-radar-ranger.webp" alt="Car Radar in Ranger colours: paper map, forest rings, nearby treasure listed by distance" width="720" height="1565">
-        <figcaption><b>Car radar</b>Pings when treasure is near on a drive. Road directions for the driver that speak twice per turn, no more. Green in Tracker.</figcaption>
+      <figure class="step">
+        <div class="phone"><img src="img/10-radar-ranger.webp" alt="Car radar on the paper palette with nearby treasure listed by distance" width="720" height="1565"></div>
+        <figcaption><b>Car radar</b>Pings when treasure is near on a drive. Directions for the driver that speak twice per turn, no more.</figcaption>
       </figure>
     </div>
-  </section>
 
-  <section class="cols">
-    <div>
-      <h2>Built for small hands</h2>
-      <ul>
-        <li><b>The clue is rewritten for kids.</b> “Find the biggest oak tree you can see. Look at the bottom where flat stones are.”</li>
-        <li><b>It talks.</b> The clue, the countdown, the cheer. A real voice, not a robot.</li>
-        <li><b>Finding is a hold, not a tap.</b> A grown-up is beside them; the phone just makes sure.</li>
-        <li><b>A Brave Try sticker</b> when they can’t find it, so a DNF is still a good day.</li>
-        <li><b>Honest about GPS.</b> The averaging ring shows how sure the phone is, and it stops pointing when it can’t know.</li>
-      </ul>
+    <div class="cols">
+      <div>
+        <h3>Built for small hands</h3>
+        <ul>
+          <li><b>The clue is rewritten for kids.</b> “Find the biggest oak tree you can see. Look at the bottom where flat stones are.”</li>
+          <li><b>It talks.</b> The clue, the countdown, the cheer. A real voice, not a robot.</li>
+          <li><b>Finding is a hold, not a tap.</b> A grown-up is beside them; the phone just makes sure.</li>
+          <li><b>A Brave Try sticker</b> when they can’t find it, so a miss is still a good day.</li>
+          <li><b>Honest about GPS.</b> The ring shows how sure the phone is, and it stops pointing when it can’t know.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Built for grown-ups to trust</h3>
+        <ul>
+          <li><b>Every grown-up function,</b> and every link out of the app, sits behind a multiplication problem.</li>
+          <li><b>No child accounts.</b> The parent signs in. The kid never touches geocaching.com.</li>
+          <li><b>No ads, no analytics,</b> no third-party anything. Photos never leave the app.</li>
+          <li><b>Kid guidance locks</b> above walking speed. In the car, only the driver gets directions.</li>
+          <li><b>One setting for the look.</b> Ranger or Tracker, chosen by the grown-up, so the kid never changes modes mid-hunt.</li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h2>Built for grown-ups to trust</h2>
-      <ul>
-        <li><b>Every grown-up function</b> and every link out of the app sits behind a multiplication problem.</li>
-        <li><b>No child accounts.</b> The parent signs in. The kid never touches geocaching.com.</li>
-        <li><b>No ads, no analytics,</b> no third-party anything. Photos never leave the app.</li>
-        <li><b>Kid guidance locks</b> above walking speed. In the car, only the driver gets directions.</li>
-        <li><b>One setting for the look.</b> Ranger or Tracker, chosen by the grown-up, so the kid never changes modes mid-hunt.</li>
-      </ul>
-    </div>
-  </section>
-
-  <div class="status">
-    <p><b>Where it stands.</b> A public preview of an app in field test, for families with children around four to eight. It imports GPX pocket queries today, and we are applying to the Geocaching API partner program so a parent can search and fetch hints in the app. Hints need a Geocaching Premium membership, so GeoRangers is a Premium household’s app.</p>
-    <p>On TestFlight now; App Store soon. GeoRangers is not affiliated with Geocaching HQ. <a href="privacy/">Privacy policy</a>.</p>
   </div>
-</main>
+</section>
 
-<footer>
-  <p>© 2026 Millwright Software</p>
-</footer>
+<section>
+  <div class="wrap">
+    <div class="status">
+      <h2>Where it stands</h2>
+      <p>A public preview of an app in field test with real kids, real woods and real boxes. It imports GPX pocket queries today, and we are applying to the Geocaching API partner program so a parent can search and fetch hints inside the app. Hints need a Geocaching Premium membership, so GeoRangers is a Premium household’s app.</p>
+      <p>On TestFlight now; App Store soon at $3.99. GeoRangers is not affiliated with Geocaching HQ. Read the <a href="privacy/">privacy policy</a>.</p>
+    </div>
+    <footer>
+      <a class="plate" href="../">Millwright Software</a>
+      <span>© 2026 Millwright Software</span>
+      <a href="privacy/">Privacy</a>
+    </footer>
+  </div>
+</section>
+
 </body>
 </html>
