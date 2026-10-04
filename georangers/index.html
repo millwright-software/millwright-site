@@ -222,12 +222,18 @@
     <div class="walk-grid">
       <div class="walk-phone" aria-hidden="true">
         <div class="phone">
-          <video class="clip is-on" data-feat="list" muted loop playsinline preload="metadata" poster="img/02-list.webp" width="720" height="1565"><source src="img/list-ring.webm" type="video/webm"><source src="img/list-ring.mp4" type="video/mp4"></video>
-          <video class="clip" data-feat="map" muted loop playsinline preload="metadata" poster="img/09-map.webp" width="720" height="1565"><source src="img/sticker-map.webm" type="video/webm"><source src="img/sticker-map.mp4" type="video/mp4"></video>
-          <video class="clip" data-feat="radar" muted loop playsinline preload="metadata" poster="img/12-radar-route.webp" width="720" height="1565"><source src="img/radar-route.webm" type="video/webm"><source src="img/radar-route.mp4" type="video/mp4"></video>
-        </div>
+          <video class="clip is-on" data-feat="radar" muted loop playsinline preload="metadata" poster="img/10-radar-dense.webp" width="720" height="1565"><source src="img/radar-dense.webm" type="video/webm"><source src="img/radar-dense.mp4" type="video/mp4"></video>
+          <video class="clip" data-feat="list" muted loop playsinline preload="metadata" poster="img/02-list.webp" width="720" height="1565"><source src="img/list-ring.webm" type="video/webm"><source src="img/list-ring.mp4" type="video/mp4"></video>
+          <video class="clip" data-feat="map" muted loop playsinline preload="metadata" poster="img/09-map.webp" width="720" height="1565"><source src="img/sticker-map.webm" type="video/webm"><source src="img/sticker-map.mp4" type="video/mp4"></video></div>
       </div>
       <div class="feats">
+        <article class="feat" data-feat="radar">
+          <p class="k">Car radar</p>
+          <h3>Treasure all around you.</h3>
+          <p>On a drive it sweeps and pings when a cache is coming up ahead. Never more than one nudge every ten minutes.</p>
+          <p>Track one and you get road directions, spoken twice per turn and no more. Kid guidance stays locked above walking speed.</p>
+          <div class="phone phone-m"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/10-radar-dense.webp" width="720" height="1565" aria-label="Car radar sweeping over dozens of treasures within a mile"><source src="img/radar-dense.webm" type="video/webm"><source src="img/radar-dense.mp4" type="video/mp4"></video></div>
+        </article>
         <article class="feat" data-feat="list">
           <p class="k">Treasure nearby</p>
           <h3>Feet, not miles.</h3>
@@ -240,13 +246,6 @@
           <h3>Every find, with their photo.</h3>
           <p>A sticker lands on the map for each treasure they find, and a Brave Try sticker when they looked hard and it was not there. Photos stay in the app, never in the camera roll.</p>
           <div class="phone phone-m"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/09-map.webp" width="720" height="1565" aria-label="The team's sticker map on satellite imagery, six stickers and the strip below"><source src="img/sticker-map.webm" type="video/webm"><source src="img/sticker-map.mp4" type="video/mp4"></video></div>
-        </article>
-        <article class="feat" data-feat="radar">
-          <p class="k">Car radar</p>
-          <h3>Treasure near the road.</h3>
-          <p>On a drive it sweeps and pings when a cache is coming up ahead. Never more than one nudge every ten minutes.</p>
-          <p>Track one and you get road directions, spoken twice per turn and no more. Kid guidance stays locked above walking speed.</p>
-          <div class="phone phone-m"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="img/12-radar-route.webp" width="720" height="1565" aria-label="Car radar sweeping while tracking a treasure, with the route line and a turn instruction"><source src="img/radar-route.webm" type="video/webm"><source src="img/radar-route.mp4" type="video/mp4"></video></div>
         </article>
       </div>
     </div>
@@ -319,7 +318,7 @@
       if (hit) show(hit.target.dataset.feat);
     }, { rootMargin: '-40% 0px -40% 0px', threshold: [0, .2, .5, 1] });
     feats.forEach(f => pick.observe(f));
-    show('list');
+    show('radar');
   }
 </script>
 </body>
