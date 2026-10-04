@@ -98,6 +98,9 @@
     box-shadow: 0 30px 60px rgba(46,38,28,.22), 0 2px 0 rgba(255,255,255,.25) inset;
   }
   .phone img, .phone video { display:block; border-radius: 38px; width: 100%; height:auto; aspect-ratio: 720 / 1565; object-fit: cover; background:#0f1512; }
+  .phone .play { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:none; padding:10px 18px; border:0; border-radius:999px; background:var(--sun); color:var(--ink); font-family:var(--display); font-weight:600; font-size:16px; box-shadow:0 6px 0 #c9a02a; cursor:pointer; }
+  .phone .play::before { content:"▶ "; font-size:12px; }
+  .phone.paused .play { display:inline-block; }
   .hero-phone { position: relative; width: min(340px, 78%); margin: 0 auto; transform: rotate(-3deg); }
   @media (max-width: 820px) { .hero-phone { width: min(300px, 70%); } }
   .sticker {
@@ -318,9 +321,18 @@
 </section>
 
 <script>
-  // Reduced motion: leave the poster frame up instead of looping the clips.
+  // Reduced motion: the clips hold their poster frame and play on tap or hover instead of looping.
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('video.clip').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+    document.querySelectorAll('video.clip').forEach(v => {
+      v.removeAttribute('autoplay'); v.pause();
+      const phone = v.parentElement; phone.classList.add('paused');
+      const chip = document.createElement('button'); chip.className = 'play'; chip.type = 'button'; chip.textContent = 'Play'; chip.setAttribute('aria-label', 'Play clip');
+      phone.appendChild(chip);
+      const toggle = () => { if (v.paused) { v.play(); phone.classList.remove('paused'); } else { v.pause(); phone.classList.add('paused'); } };
+      chip.addEventListener('click', toggle); v.addEventListener('click', toggle);
+      phone.addEventListener('mouseenter', () => { if (v.paused) { v.play(); phone.classList.remove('paused'); } });
+      phone.addEventListener('mouseleave', () => { v.pause(); phone.classList.add('paused'); });
+    });
   }
 </script>
 </body>
