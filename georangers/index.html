@@ -216,6 +216,244 @@
   </header>
 </div>
 
+<!-- Found it: two brothers race to the cache. Scroll scrubs the scene; it holds wherever you stop. -->
+<style>
+  .find { position: relative; padding: 0; height: auto; background: linear-gradient(transparent calc(100% - 10vh), var(--paper-deep)); }
+  .find.scrub { height: 270vh; }
+  .find-stage { position: relative; height: min(100vh, 900px); overflow: hidden;
+    -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 91%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 91%, transparent); }
+  .find.scrub .find-stage { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 0; }
+  .find-stage svg { display: block; width: 100%; height: 100%; }
+  .find-stage text { font-family: var(--display); font-weight: 700; }
+  .find-badge { position: absolute; left: max(6%, 18px); bottom: 12%; width: clamp(96px, 13vw, 136px); aspect-ratio: 1;
+    border-radius: 50%; background: var(--forest); color: #fff; display: grid; place-items: center; text-align: center;
+    font-family: var(--display); font-weight: 600; font-size: clamp(15px, 1.9vw, 19px); line-height: 1.05;
+    box-shadow: 0 10px 22px rgba(46,38,28,.25); opacity: 0; transform: scale(.2) rotate(-40deg); }
+  .find-badge::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; border: 2px dashed rgba(255,255,255,.7); }
+  .find-badge svg { width: 38%; height: auto; margin-bottom: -10%; }
+  .find-badge span { position: relative; padding: 0 12px; }
+</style>
+<section class="find" aria-label="I found it">
+  <div class="find-stage">
+    <svg id="findSvg" viewBox="0 -40 700 1740" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cartoon: two brothers, about five and seven, run across a meadow toward a big tree. The little one crouches at its roots, lifts out a treasure box, and both jump with their arms up shouting I found it! while confetti flies.">
+      <defs>
+        <linearGradient id="fSky" gradientUnits="userSpaceOnUse" x1="0" y1="-300" x2="0" y2="600"><stop offset="0" stop-color="#b6dcee"/><stop offset=".6" stop-color="#d7eaea"/><stop offset="1" stop-color="#f8eecb"/></linearGradient>
+        <radialGradient id="fGlow"><stop offset="0" stop-color="#facc3d" stop-opacity=".55"/><stop offset="1" stop-color="#facc3d" stop-opacity="0"/></radialGradient>
+        <linearGradient id="fField" gradientUnits="userSpaceOnUse" x1="0" y1="820" x2="0" y2="1700"><stop offset="0" stop-color="#8db357"/><stop offset=".55" stop-color="#6f9b40"/><stop offset=".8" stop-color="#7fa44b"/><stop offset="1" stop-color="#f0e5c6"/></linearGradient>
+        <g id="fPine"><path d="M0-78 22-30H10L28 0H-28L-10-30H-22Z" fill="#2e6b3d"/><rect x="-3" y="0" width="6" height="8" fill="#6e4d30"/></g>
+        <g id="fBush"><circle cx="-10" cy="-12" r="16"/><circle cx="10" cy="-16" r="18"/><circle cx="0" cy="-30" r="16"/></g>
+      </defs>
+      <g id="fScene">
+        <rect x="-900" y="-1400" width="2600" height="2400" fill="url(#fSky)"/>
+        <circle cx="200" cy="330" r="230" fill="url(#fGlow)"/>
+        <circle cx="200" cy="330" r="66" fill="#facc3d"/>
+        <g id="fClouds" fill="#fff" opacity=".92"><path d="M60 150a34 34 0 0 1 60-22 40 40 0 0 1 74 10 26 26 0 0 1 4 52H66a20 20 0 0 1-6-40z"/><path d="M430 60a26 26 0 0 1 48-14 32 32 0 0 1 58 12 20 20 0 0 1 0 40H436a19 19 0 0 1-6-38z"/><path d="M380 300a22 22 0 0 1 40-12 27 27 0 0 1 50 10 17 17 0 0 1 0 34H386a16 16 0 0 1-6-32z"/><path d="M-330 210a30 30 0 0 1 54-18 36 36 0 0 1 66 10 23 23 0 0 1 2 46H-324a18 18 0 0 1-6-38z"/><path d="M900 180a30 30 0 0 1 54-18 36 36 0 0 1 66 10 23 23 0 0 1 2 46H906a18 18 0 0 1-6-38z"/></g>
+        <path d="M-900 660C-600 590-400 600-200 630S120 560 330 600 620 650 840 590 1300 600 1700 640V1200H-900Z" fill="#a8c9b4"/>
+        <path d="M-900 720C-500 660-300 700-80 680S300 650 480 700 900 690 1200 700 1700 730 1700 730V1200H-900Z" fill="#9dbd5f"/>
+        <g fill="#2e6b3d"><use href="#fPine" x="-40" y="690"/><use href="#fPine" x="-10" y="700"/><use href="#fPine" x="-520" y="700"/><use href="#fPine" x="1000" y="705"/></g>
+        <g fill="#24552f"><use href="#fBush" x="140" y="692"/><use href="#fBush" x="178" y="700"/><use href="#fBush" x="-300" y="690"/></g>
+        <g id="fForest" transform="translate(-150 0)">
+          <g fill="#24552f"><circle cx="760" cy="640" r="80"/><circle cx="880" cy="610" r="96"/><circle cx="1010" cy="640" r="86"/><circle cx="1140" cy="620" r="96"/><rect x="680" y="620" width="1200" height="180"/><circle cx="1290" cy="630" r="90"/><circle cx="1420" cy="610" r="96"/></g>
+          <use href="#fPine" transform="translate(712 780) scale(1.9)"/>
+          <use href="#fPine" transform="translate(830 790) scale(2.4)"/>
+          <use href="#fPine" transform="translate(960 800) scale(2.1)"/>
+          <use href="#fPine" transform="translate(1080 790) scale(2.5)"/>
+          <use href="#fPine" transform="translate(1200 800) scale(2.2)"/><use href="#fPine" transform="translate(1320 790) scale(2.4)"/><use href="#fPine" transform="translate(1440 800) scale(2.1)"/>
+        </g>
+        <path d="M-900 880C-500 820-200 860 100 850S520 790 760 806 1300 820 1700 830V2000H-900Z" fill="url(#fField)"/>
+        <path d="M-200 1760C40 1420 280 1080 440 872L530 868C400 1080 300 1420 260 1760Z" fill="#efe2b8" opacity=".85"/>
+        <g id="fTree" transform="translate(-60 0)">
+          <path d="M600 880c14-50 20-130 16-230l-40-70 24 4 30 46 4-80h34l2 70 34-52 22 4-40 86c-4 100 2 180 20 222z" fill="#6e4d30"/>
+          <path d="M576 884c12-6 28-6 34-14h74c8 8 24 8 38 14z" fill="#5a3e26"/>
+          <g fill="#24552f"><circle cx="540" cy="500" r="120"/><circle cx="770" cy="510" r="120"/><circle cx="650" cy="420" r="145"/><circle cx="480" cy="410" r="86"/><circle cx="830" cy="410" r="90"/></g>
+          <g fill="#2e6b3d"><circle cx="610" cy="360" r="100"/><circle cx="730" cy="350" r="90"/><circle cx="515" cy="445" r="78"/><circle cx="780" cy="450" r="78"/></g>
+          <g fill="#3f8048"><circle cx="600" cy="325" r="48"/><circle cx="715" cy="318" r="40"/><circle cx="510" cy="418" r="32"/></g>
+        </g>
+        <g fill="#5f8c37"><path d="M580 892l5-18 6 14 5-20 6 22z"/><path d="M40 1300l6-20 5 16 6-22 6 24 6-14 3 16z"/><path d="M420 1120l5-18 5 14 6-20 5 22z"/><path d="M-260 1180l5-16 5 12 5-18 5 22z"/><path d="M880 1060l5-16 5 12 5-18 5 22z"/></g>
+        <g id="fKids"></g>
+        <g id="fBox"><rect x="-30" y="-36" width="60" height="38" rx="6" fill="#6e4d30"/><rect x="-32" y="-40" width="64" height="12" rx="5" fill="#57391f"/><rect x="-8" y="-30" width="16" height="7" rx="3" fill="#57391f"/><circle cx="0" cy="-14" r="5" fill="#facc3d"/></g>
+        <path d="M485 888l6-22 5 18 6-24 5 26 6-16 3 18z" fill="#5f8c37"/>
+        <g id="fFx"></g>
+        <g id="fBubble" opacity="0">
+          <path d="M200 420h270a46 46 0 0 1 46 46v18a46 46 0 0 1-46 46h-40l14 56-70-56H200a46 46 0 0 1-46-46v-18a46 46 0 0 1 46-46z" fill="#fff" stroke="#2e261c" stroke-width="5" stroke-linejoin="round"/>
+          <text x="335" y="495" text-anchor="middle" font-size="58" fill="#173d24">I found it!</text>
+        </g>
+      </g>
+    </svg>
+    <div class="find-badge" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 3l5 11 12 1-9 8 3 12-11-7-11 7 3-12-9-8 12-1z" fill="#facc3d"/></svg><span>Treasure found</span></div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.querySelector('.find'), svg = document.getElementById('findSvg');
+  if (!sec || !svg) return;
+  const NS = 'http://www.w3.org/2000/svg', badge = sec.querySelector('.find-badge');
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+  const ease = t => t * t * (3 - 2 * t);
+  const back = t => { const c = 1.9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+  const mix = (a, b, t) => a + (b - a) * t;
+  const L1 = 50, L2 = 48, U1 = 35, U2 = 33, RAD = Math.PI / 180;
+
+  // A kid: legs and arms are nested groups rotated at hip/knee and shoulder/elbow.
+  function kid(o) {
+    const root = el('g', {}, document.getElementById('fKids'));
+    const body = el('g', {}, root);
+    const limb = (isLeg, back) => {
+      const g = el('g', {}, isLeg ? body : null);
+      const skin = back ? o.skin2 : o.skin;
+      if (isLeg) {
+        el('line', { x1: 0, y1: 0, x2: 0, y2: L1, stroke: skin, 'stroke-width': 21, 'stroke-linecap': 'round' }, g);
+        el('line', { x1: 0, y1: 0, x2: 0, y2: 22, stroke: back ? o.shorts2 : o.shorts, 'stroke-width': 27, 'stroke-linecap': 'round' }, g);
+        const k = el('g', { transform: `translate(0 ${L1})` }, g);
+        el('line', { x1: 0, y1: 0, x2: 0, y2: L2, stroke: skin, 'stroke-width': 19, 'stroke-linecap': 'round' }, k);
+        el('ellipse', { cx: 8, cy: L2 + 4, rx: 18, ry: 10, fill: back ? '#1f1a14' : '#3a3026' }, k);
+        return { g, k };
+      }
+      el('line', { x1: 0, y1: 0, x2: 0, y2: U1, stroke: skin, 'stroke-width': 15, 'stroke-linecap': 'round' }, g);
+      el('line', { x1: 0, y1: 0, x2: 0, y2: 16, stroke: back ? o.shirt2 : o.shirt, 'stroke-width': 21, 'stroke-linecap': 'round' }, g);
+      const k = el('g', { transform: `translate(0 ${U1})` }, g);
+      el('line', { x1: 0, y1: 0, x2: 0, y2: U2, stroke: skin, 'stroke-width': 14, 'stroke-linecap': 'round' }, k);
+      const hand = el('g', { transform: `translate(0 ${U2})` }, k);
+      el('circle', { r: 9.5, fill: skin }, hand);
+      return { g, k, hand };
+    };
+    const upper = el('g', {});
+    const armB = limb(false, true), legB = limb(true, true), legF = limb(true, false), armF = limb(false, false);
+    body.insertBefore(armB.g, legB.g); body.appendChild(upper);
+    el('rect', { x: -27, y: -80, width: 54, height: 86, rx: 24, fill: o.shirt }, upper);
+    el('rect', { x: -28, y: -12, width: 56, height: 22, rx: 10, fill: o.shorts }, upper);
+    const head = el('g', { transform: `translate(6 -112) rotate(0)` }, upper);
+    el('circle', { cx: -6, cy: 6, r: 38, fill: o.hair }, head);
+    el('circle', { r: 37, fill: o.skin }, head);
+    el('circle', { cx: -16, cy: 6, r: 9, fill: o.skin2 }, head);
+    el('circle', { cx: 13, cy: 0, r: 4.2, fill: '#2e261c' }, head);
+    el('circle', { cx: 29, cy: 0, r: 4.2, fill: '#2e261c' }, head);
+    el('circle', { cx: 24, cy: 14, r: 7, fill: '#f08f78', opacity: .45 }, head);
+    const mouth = el('path', { d: 'M12 16q9 9 18 0', fill: 'none', stroke: '#2e261c', 'stroke-width': 3.6, 'stroke-linecap': 'round' }, head);
+    head.insertAdjacentHTML('beforeend', o.hat);
+    upper.appendChild(armF.g);
+    armB.g.remove(); upper.insertBefore(armB.g, upper.firstChild);
+    armF.g.setAttribute('transform', 'translate(0 -66)'); armB.g.setAttribute('transform', 'translate(0 -66)');
+    return { root, body, upper, legs: [legF, legB], arms: [armF, armB], mouth, s: o.s };
+  }
+  const big = kid({ s: 1, skin: '#f0c49c', skin2: '#dba982', hair: '#6e4d30', shirt: '#6bb3db', shirt2: '#4f97c0', shorts: '#6e4d30', shorts2: '#57391f',
+    hat: '<path d="M-38-2a38 40 0 0 1 76 0z" fill="#2e6b3d"/><path d="M20-6h34a6 6 0 0 1 0 10H18z" fill="#173d24"/><circle cy="-40" r="5" fill="#173d24"/>' });
+  const small = kid({ s: .8, skin: '#f0c49c', skin2: '#dba982', hair: '#8a5f3a', shirt: '#facc3d', shirt2: '#dcae22', shorts: '#173d24', shorts2: '#0f2a18',
+    hat: '<path d="M-40 4a40 44 0 0 1 80-6l-6 6z" fill="#e4643b"/><path d="M-22-30q20-12 42-2" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M-4 4q8 30 18 24" fill="none" stroke="#2e261c" stroke-width="2.5"/>' });
+
+  // Running distance with ease-in and ease-out; stride phase is tied to distance so legs stop when the scroll stops.
+  function travel(u) { const a = .08, b = .82, c = 1 / (1 - a / 2 - (1 - b) / 2);
+    if (u < a) return { d: c * u * u / (2 * a), v: u / a };
+    if (u < b) return { d: c * (a / 2 + u - a), v: 1 };
+    const w = u - b; return { d: c * (a / 2 + b - a + w - w * w / (2 * (1 - b))), v: 1 - w / (1 - b) }; }
+  // The trail: a curve from off-frame lower left up the hill to the tree, sampled for arc length.
+  const P0 = [-120, 1760], C = [250, 1180], P1 = [462, 880], pts = [], N = 80;
+  for (let i = 0, len = 0; i <= N; i++) { const t = i / N, u = 1 - t;
+    const q = [u * u * P0[0] + 2 * u * t * C[0] + t * t * P1[0], u * u * P0[1] + 2 * u * t * C[1] + t * t * P1[1]];
+    if (i) len += Math.hypot(q[0] - pts[i - 1][0], q[1] - pts[i - 1][1]); q[2] = len; pts.push(q); }
+  const TOTAL = pts[N][2];
+  const at = d => { d = clamp(d, 0, TOTAL); let i = 1; while (i < N && pts[i][2] < d) i++;
+    const a = pts[i - 1], b = pts[i], f = (d - a[2]) / (b[2] - a[2] || 1); return [mix(a[0], b[0], f), mix(a[1], b[1], f)]; };
+
+  const STAND = { lean: 0, lift: 0, legs: [[-3, 4], [4, 2]], arms: [[-10, -20], [10, -15]] };
+  function run(ph, A) { const leg = f => [-38 * A * Math.sin(ph + f), A * (8 + 72 * Math.pow(Math.max(0, Math.cos(ph + f)), 1.4))] ;
+    const arm = f => [48 * A * Math.sin(ph + f) - 6, -(18 + 62 * A)];
+    return { lean: 9 * A, lift: 0, legs: [leg(0), leg(Math.PI)], arms: [arm(0), arm(Math.PI)] }; }
+  function blend(a, b, t) { return { lean: mix(a.lean, b.lean, t), lift: mix(a.lift, b.lift, t),
+    legs: a.legs.map((l, i) => [mix(l[0], b.legs[i][0], t), mix(l[1], b.legs[i][1], t)]),
+    arms: a.arms.map((l, i) => [mix(l[0], b.arms[i][0], t), mix(l[1], b.arms[i][1], t)]) }; }
+  const CROUCH = { lean: 24, lift: 0, legs: [[-66, 116], [-30, 96]], arms: [[-40, -6], [-30, -10]] };
+  const HOLD = { lean: 4, lift: 0, legs: [[-10, 14], [6, 6]], arms: [[-78, -66], [-70, -70]] };
+  const SQUAT = { lean: 8, lift: 0, legs: [[-40, 72], [-26, 60]], arms: [[-80, -40], [40, -20]] };
+  const UP = { lean: -6, lift: 0, legs: [[-18, 30], [14, 38]], arms: [[-104, -10], [128, 14]] };
+  const LANDED = { lean: -6, lift: 0, legs: [[-4, 6], [6, 4]], arms: [[-104, -10], [128, 14]] };
+  const VUP = { lean: -6, lift: 0, legs: [[-6, 6], [8, 4]], arms: [[-118, -16], [122, 16]] };
+  const WOW = { lean: 10, lift: 0, legs: [[-6, 8], [8, 6]], arms: [[-60, -60], [-40, -70]] };
+
+  function place(k, x, y, sc, pose, smile) {
+    const ext = l => L1 * Math.cos(l[0] * RAD) + L2 * Math.cos((l[0] + l[1]) * RAD) + 12;
+    const hip = Math.max(ext(pose.legs[0]), ext(pose.legs[1]));
+    k.root.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(k.s * sc).toFixed(3)})`);
+    k.body.setAttribute('transform', `translate(0 ${(-hip - pose.lift).toFixed(1)})`);
+    k.upper.setAttribute('transform', `rotate(${pose.lean.toFixed(1)})`);
+    k.legs.forEach((l, i) => { l.g.setAttribute('transform', `rotate(${pose.legs[i][0].toFixed(1)})`); l.k.setAttribute('transform', `translate(0 ${L1}) rotate(${pose.legs[i][1].toFixed(1)})`); });
+    k.arms.forEach((a, i) => { a.g.setAttribute('transform', `translate(0 -66) rotate(${pose.arms[i][0].toFixed(1)})`); a.k.setAttribute('transform', `translate(0 ${U1}) rotate(${pose.arms[i][1].toFixed(1)})`); });
+    k.mouth.setAttribute('d', smile ? 'M10 12q11 18 22 0z' : 'M12 16q9 9 18 0');
+    k.mouth.setAttribute('fill', smile ? '#7a2e22' : 'none');
+  }
+  const depth = y => mix(.9, 1.1, clamp((y - 880) / 880));
+
+  // Confetti and leaves: deterministic, positions are a pure function of progress.
+  const fx = document.getElementById('fFx'), bits = [];
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const cols = ['#facc3d', '#6bb3db', '#e4643b', '#9b6fd0', '#7d9e4a', '#fff'];
+  for (let i = 0; i < 46; i++) {
+    const leaf = i >= 34, ang = leaf ? Math.PI * (.2 + rnd() * .6) : -Math.PI * (.1 + rnd() * .8), sp = leaf ? 90 + rnd() * 120 : 380 + rnd() * 460;
+    const n = leaf ? el('ellipse', { rx: 10, ry: 5, fill: rnd() < .5 ? '#3f8048' : '#7d9e4a' }, fx)
+      : rnd() < .55 ? el('rect', { x: -9, y: -4, width: 18, height: 8, rx: 2, fill: cols[i % cols.length] }, fx) : el('circle', { r: 6, fill: cols[i % cols.length] }, fx);
+    bits.push({ n, leaf, ox: leaf ? 500 + rnd() * 300 : 470, oy: leaf ? 380 + rnd() * 140 : 650, vx: Math.cos(ang) * sp * (leaf ? .6 : 1), vy: Math.sin(ang) * sp, spin: (rnd() - .5) * 900, d: rnd() });
+  }
+
+  const bubble = document.getElementById('fBubble'), box = document.getElementById('fBox'), scene = document.getElementById('fScene'), clouds = document.getElementById('fClouds');
+  const BOX0 = [506, 894], kidsG = document.getElementById('fKids');
+  let W = 700, H = 1500;
+
+  function frame(p) {
+    // 1. The run, 0 to .68: the little one leads, the big one a step behind and to the left.
+    const us = travel(seg(p, 0, .66)), ub = travel(seg(p, 0, .68));
+    const ds = us.d * (TOTAL - 34), db = ub.d * (TOTAL - 120) - 30;
+    const [xs, ys0] = at(ds), [xb0, yb0] = at(db), xb = xb0 - 46, yb = yb0 - 14, ys = ys0 + 10;
+    const ss = depth(ys), sbg = depth(yb);
+    let ps = blend(STAND, run(ds / (130 * ss) * Math.PI + 1.3, 1), Math.min(us.v, 1) * (p > 0 ? 1 : 0));
+    let pb = blend(STAND, run(db / (160 * sbg) * Math.PI, 1), Math.min(ub.v, 1) * (p > 0 ? 1 : 0));
+    // 2. The little one crouches and lifts the box; the big one leans in.
+    ps = blend(blend(ps, CROUCH, ease(seg(p, .67, .72))), HOLD, ease(seg(p, .74, .79)));
+    pb = blend(pb, WOW, ease(seg(p, .69, .77)));
+    // 3. Jump: anticipation squat, air, land with arms up.
+    ps = blend(blend(ps, SQUAT, ease(seg(p, .8, .83))), UP, ease(seg(p, .83, .86))); ps.lift = Math.sin(Math.PI * seg(p, .83, .93)) * 80;
+    ps = blend(ps, LANDED, ease(seg(p, .93, .97)));
+    pb = blend(blend(pb, SQUAT, ease(seg(p, .81, .84))), VUP, ease(seg(p, .84, .87))); pb.lift = Math.sin(Math.PI * seg(p, .84, .95)) * 70;
+    place(big, xb, yb, sbg, pb, p > .72); place(small, xs, ys, ss, ps, p > .74);
+    if ((ys > yb) !== (kidsG.lastChild === small.root)) kidsG.appendChild(ys > yb ? small.root : big.root);
+    // The box follows the little one's hands once lifted.
+    const pick = seg(p, .735, .76);
+    if (pick > 0) { const inv = scene.getScreenCTM().inverse(), m = inv.multiply(small.arms[0].hand.getScreenCTM()), m2 = inv.multiply(small.arms[1].hand.getScreenCTM());
+      const bs = ss * small.s, hx = mix((m.e + m2.e) / 2, m.e + 10 * bs, seg(p, .8, .86)), hy = mix((m.f + m2.f) / 2 + 14 * bs, m.f + 12 * bs, seg(p, .8, .86));
+      box.setAttribute('transform', `translate(${mix(BOX0[0], hx, pick).toFixed(1)} ${mix(BOX0[1], hy, pick).toFixed(1)}) scale(${mix(1, bs, pick).toFixed(3)})`); }
+    else box.setAttribute('transform', `translate(${BOX0[0]} ${BOX0[1]})`);
+    // Confetti, bubble, badge.
+    bits.forEach(b => { const t = clamp((p - .85 - b.d * .03) / .15) * 1.1; b.n.style.opacity = t > 0 ? 1 : 0;
+      const g = b.leaf ? 120 : 900, x = b.ox + b.vx * t, y = b.oy + b.vy * t + g * t * t;
+      b.n.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(b.spin * t).toFixed(0)})`); });
+    const bt = seg(p, .86, .92), bs = bt > 0 ? back(bt) : 0;
+    bubble.setAttribute('opacity', bt > 0 ? 1 : 0);
+    bubble.setAttribute('transform', `translate(445 586) scale(${bs.toFixed(3)}) translate(-445 -586)`);
+    const gt = seg(p, .9, .97); badge.style.opacity = gt > 0 ? 1 : 0;
+    badge.style.transform = `scale(${(.2 + .8 * (gt > 0 ? back(gt) : 0)).toFixed(3)}) rotate(${mix(-40, -8, ease(gt)).toFixed(1)}deg)`;
+    clouds.setAttribute('transform', `translate(${(p * 120).toFixed(1)} 0)`);
+    // Camera: portrait-first. Phones see the whole hill; wide screens get a band that rises with the boys.
+    const y0 = clamp(Math.min(ys, yb) - .62 * H, -40, 1700 - H);
+    svg.setAttribute('viewBox', `${(350 - W / 2).toFixed(1)} ${y0.toFixed(1)} ${W.toFixed(1)} ${H.toFixed(1)}`);
+  }
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) sec.classList.add('scrub');
+  const stage = sec.querySelector('.find-stage');
+  function size() { const a = stage.clientWidth / Math.max(1, stage.clientHeight);
+    H = clamp(700 / a, 1250, 1740); W = H * a; }
+  let pending = false, last = -1;
+  function progress() { if (reduce) return 1; const r = sec.getBoundingClientRect(), vh = innerHeight, lead = vh * .35;
+    return clamp((lead - r.top) / (r.height - vh + lead)); }
+  function tick() { pending = false; const p = progress(); if (Math.abs(p - last) > 1e-4) { last = p; frame(p); } }
+  const ask = () => { if (!pending) { pending = true; requestAnimationFrame(tick); } };
+  addEventListener('scroll', ask, { passive: true });
+  addEventListener('resize', () => { size(); last = -1; ask(); });
+  size(); frame(progress());
+})();
+</script>
+
 <section class="walk" id="more">
   <div class="wrap">
     <h2>Around the hunt</h2>
