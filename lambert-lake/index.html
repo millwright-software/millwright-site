@@ -2,281 +2,116 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Lambert Lake, 1856–2026</title>
+<title>Lambert Lake and the family it's named for</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="vendor/leaflet.css">
 <style>
-  :root { --ink: #16130f; --paper: #e9e1cf; --dim: #8f8573; --accent: #b8a27a; }
+  :root { --ink: #16130f; --paper: #efe7d6; --soft: #d9cfba; --dim: #8f8573; --accent: #b8a27a; }
   * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; background: var(--ink); color: var(--paper);
-    font-family: "Iowan Old Style", "Palatino", Georgia, serif; }
-  main { height: 100vh; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
-  .stage { position: relative; min-height: 0; }
-  #map { position: absolute; inset: 0; background: var(--ink); }
-  .leaflet-container { font: 12px ui-sans-serif, -apple-system, sans-serif; }
-  .leaflet-bar a { background: rgba(22,19,15,.8); color: var(--paper); border-color: #3a342b; }
-  .leaflet-bar a:hover { background: #2a251e; color: #fff; }
-  .leaflet-control-attribution { background: rgba(22,19,15,.6) !important; color: var(--dim); }
-  .leaflet-control-attribution a { color: var(--dim); }
-  .leaflet-tile { image-rendering: auto; }
-  .chips { display: flex; flex-direction: column; gap: 6px; }
-  .chips button { border: 1px solid #3a342b; background: rgba(22,19,15,.8); color: var(--paper); border-radius: 15px;
-    padding: 5px 11px; font: 12px ui-sans-serif, -apple-system, sans-serif; cursor: pointer; }
-  .chips button:hover { border-color: var(--paper); }
-  .house-tip { background: rgba(22,19,15,.85); color: #fff; border: 0; box-shadow: none; font-weight: 600; }
-  .house-tip::before { display: none; }
-  footer { display: grid; grid-template-columns: auto 1fr; gap: 6px 28px; align-items: end; padding: 14px 36px 22px; }
-  .year { font-size: clamp(44px, 6vw, 80px); line-height: .9; font-variant-numeric: oldstyle-nums; letter-spacing: -.01em; min-width: 3.2ch; }
-  .text { padding-bottom: 8px; }
-  .caption { font-size: 18px; font-style: italic; min-height: 1.3em; }
-  .history { font-size: 15px; color: #cfc5b0; margin-top: 4px; max-width: 70ch; min-height: 1.2em; }
-  .credit { font: 12px/1.4 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
-  .timeline { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; margin-top: 14px; }
-  #play { background: none; border: 1px solid var(--paper); color: var(--paper); width: 44px; height: 44px;
-    border-radius: 50%; cursor: pointer; font-size: 13px; flex: none; }
-  .track { position: relative; flex: 1; height: 44px; cursor: pointer; touch-action: none; }
-  .track::before { content: ""; position: absolute; left: 0; right: 0; top: 18px; height: 3px; border-radius: 2px; background: #4a4337; }
-  .tick { position: absolute; top: 0; transform: translateX(-50%); text-align: center;
-    font: 12px ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
-  .tick::before { content: ""; display: block; width: 7px; height: 7px; margin: 16px auto 5px; border-radius: 50%; background: var(--dim); }
-  .tick.on { color: var(--paper); }
-  .tick.on::before { background: var(--paper); }
-  .knob { position: absolute; top: 10px; width: 19px; height: 19px; margin-left: -9.5px; border-radius: 50%;
-    background: var(--accent); box-shadow: 0 0 0 4px rgba(184,162,122,.25); pointer-events: none; }
-  .modes { grid-column: 1 / -1; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-  .modes button, .pick select, .pick button { background: none; border: 1px solid #4a4337; color: var(--paper); border-radius: 15px;
-    padding: 5px 12px; font: 12px ui-sans-serif, -apple-system, sans-serif; cursor: pointer; }
-  .modes button.on { border-color: var(--accent); color: #fff; background: rgba(184,162,122,.18); }
-  .pick { display: none; align-items: center; gap: 8px; margin-left: 14px; font: 12px ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
-  .pick select { background: var(--ink); }
-  body.compare .pick { display: flex; }
-  body.compare .timeline { display: none; }
-  .divider { position: absolute; z-index: 600; display: none; pointer-events: none; }
-  .divider .bar { position: absolute; background: #f3ead6; box-shadow: 0 0 6px rgba(0,0,0,.7); }
-  .divider .grip { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: #f3ead6;
-    box-shadow: 0 1px 6px rgba(0,0,0,.6); pointer-events: auto; cursor: grab; display: grid; place-items: center; color: #16130f; font: 14px sans-serif; }
-  .lens { position: absolute; z-index: 600; display: none; pointer-events: none; border-radius: 50%;
-    box-shadow: 0 0 0 3px #f3ead6, 0 0 18px 4px rgba(0,0,0,.55); }
-  .tag { position: absolute; z-index: 601; display: none; pointer-events: none; padding: 3px 8px; border-radius: 10px;
-    background: rgba(22,19,15,.8); color: #fff; font: 600 12px ui-sans-serif, -apple-system, sans-serif; }
+  body { margin: 0; background: var(--ink); color: var(--paper); font: 19px/1.6 "Iowan Old Style", Palatino, Georgia, serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+  .kicker { font: 600 12px ui-sans-serif, -apple-system, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+  h1 { font-size: clamp(36px, 6vw, 54px); line-height: 1.05; font-weight: normal; margin: 10px 0 18px; }
+  h2 { font-size: 27px; font-weight: normal; margin: 52px 0 10px; }
+  p { margin: 0 0 16px; color: var(--soft); }
+  a { color: var(--accent); }
+  .cta { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 30px 0 8px; }
+  .cta a { display: block; text-decoration: none; border: 1px solid #4a4337; border-radius: 10px; padding: 16px 18px; color: var(--paper); }
+  .cta a:hover { border-color: var(--accent); }
+  .cta b { display: block; font-size: 20px; font-weight: normal; }
+  .cta span { font: 13px/1.4 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
+  blockquote { margin: 20px 0; padding: 4px 0 4px 20px; border-left: 2px solid var(--accent); font-style: italic; color: var(--paper); }
+  figure { margin: 26px 0; }
+  figure img { width: 100%; max-width: 460px; margin: 0 auto; border-radius: 4px; display: block; }
+  figcaption { font: 13px/1.5 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); margin-top: 8px; }
+  .line { list-style: none; padding: 0; margin: 18px 0; }
+  .line li { padding: 8px 0 8px 22px; border-left: 2px solid #4a4337; position: relative; color: var(--soft); }
+  .line li::before { content: ""; position: absolute; left: -6px; top: 17px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+  .line b { color: var(--paper); font-weight: normal; }
+  table { width: 100%; border-collapse: collapse; font: 15px/1.45 ui-sans-serif, -apple-system, sans-serif; margin: 10px 0 18px; }
+  td { padding: 7px 8px 7px 0; border-bottom: 1px solid #2c271f; vertical-align: top; color: var(--soft); }
+  td:first-child { color: var(--accent); white-space: nowrap; width: 1%; padding-right: 16px; }
+  .note { font: 14px/1.55 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
+  .src { font: 13px/1.6 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
+  .src li { margin-bottom: 4px; }
+  @media (max-width: 560px) { .cta { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <main>
-  <div class="stage" id="stage"><div id="map"></div>
-    <div class="divider" id="divider"><div class="bar" id="bar"></div><div class="grip" id="grip">&#8596;</div></div>
-    <div class="lens" id="lens"></div><div class="tag" id="tagA"></div><div class="tag" id="tagB"></div></div>
-  <footer>
-    <div class="year" id="year"></div>
-    <div class="text"><div class="caption" id="caption"></div><div class="history" id="history"></div><div class="credit" id="credit"></div></div>
-    <div class="modes" id="modes">
-      <button data-m="fade" class="on" title="f">Fade</button><button data-m="x" title="s">Swipe &#8596;</button>
-      <button data-m="y" title="d">Swipe &#8597;</button><button data-m="lens" title="l">Looking glass</button>
-      <span class="pick"><span id="labOver">left</span> <select id="selOver"></select>
-        <button id="swap" title="Swap (x)">&#8644;</button>
-        <span id="labUnder">right</span> <select id="selUnder"></select></span>
-    </div>
-    <div class="timeline">
-      <button id="play" title="Play (space)">&#9654;</button>
-      <div class="track" id="track"><div class="knob" id="knob"></div></div>
-    </div>
-  </footer>
+  <div class="kicker">Vadnais Heights · Little Canada · 1792 to now</div>
+  <h1>Lambert Lake, and the family it's named for</h1>
+  <p>Three-quarters of a mile east of our house on Woodview Court there used to be a lake shaped like a ring, with an island in the middle. The maps called it Lambert Lake and Lambert Island. It was drained in the 1940s, and today it's a wetland that most people drive past on I-35E without knowing it was ever there.</p>
+  <p>The Lambert it's named for is family. Abraham Lambert, Eric's fourth-great-grandfather, bought that island from the United States government in 1849.</p>
+
+  <div class="cta">
+    <a href="fade.html"><b>The maps, 1856–2026</b><span>170 years of maps and air photos laid on top of each other. Fade through them, swipe between two years, or look through a looking glass.</span></a>
+    <a href="family.html"><b>The family land</b><span>Abraham's island, his farm on Lake Gervais, his son Louis's land, St. John's church, and our house, on one map.</span></a>
+  </div>
+
+  <h2>From Quebec to Little Canada</h2>
+  <p>Abraham Lambert was born on 5 June 1792 at Lauzon, across the St. Lawrence from Quebec City, the son of Louis Joseph Lambert and Judith Magnon. On 29 December 1821, at Lévis, he married Rose Angèle Demers. They had at least nine children.</p>
+  <p>In 1841, when Abraham was nearly fifty, the family left Lower Canada. The county history of 1881 tells it this way:</p>
+  <blockquote>Abram Lambert with his family of wife and three sons and three daughters left Lower Canada, in 1841…</blockquote>
+  <p>They traveled by way of St. Louis, headed for Oregon. They stopped instead at St. Boniface on the Red River, where their daughter Rose Angélique married Alexander Ducharme in November 1844. The next year both families came south together and settled at Little Canada, among the French-Canadian families around Lake Gervais.</p>
+
+  <h2>25 March 1849</h2>
+  <p>On a single day the federal land office at the Falls of St. Croix issued Abraham two land patents. One was 91 acres on the west shore of Lake Gervais, the family farm. The other was the whole island in the middle of the lake that already carried his name: lots 6 and 7 of section 29, 94.39 acres.</p>
+  <figure>
+    <img src="records/1849-patent-island.jpg" alt="The 1849 land patent to Abraham Lombert for lots 6 and 7 of section 29">
+    <figcaption>The island patent, certificate No. 137, issued in the name of President Zachary Taylor. The clerk spelled him "Abraham Lombert, of St. Croix County, Wisconsin": Minnesota Territory was only three weeks old, and the land office still wrote the old county. <a href="records/1849-patent-island.pdf">PDF</a> · Bureau of Land Management, General Land Office Records.</figcaption>
+  </figure>
+  <p>Those two lots are exactly the island. On the government's original survey plat, lot 6 is 58.69 acres and lot 7 is 35.70; together that's 94.39, the patent's figure to the hundredth of an acre.</p>
+
+  <h2>A founder of Little Canada</h2>
+  <p>In 1850 Abraham was an election judge for the Little Canada precinct. Around then he was named its postmaster, at what an 1857 newspaper called the first post office in Minnesota outside St. Paul. He gave the land for St. John's cemetery in 1851, and the timbers for the first log church there came mostly from Lambert land.</p>
+  <p>He was also, in the words of a 1964 county history article, "the stubborn Abraham Lambert": when the parish started charging rent for pews, he carried his own folding chair to Mass instead. He died at Little Canada on 30 August 1875, at 83, and is buried in the family lot at St. John's. Rose Angèle died the next year.</p>
+
+  <h2>How long the family held the land</h2>
+  <table>
+    <tr><td>1849</td><td>Abraham buys the island and the Lake Gervais farm from the government.</td></tr>
+    <tr><td>1853</td><td>His son Louis A. Lambert buys the 80 acres next to the farm.</td></tr>
+    <tr><td>1867</td><td>The county map shows Lamberts across the west side of Lake Gervais: "P. &amp; J. M. Lambert" (likely sons Pierre and Joseph Modeste), "Louis Lambert", about 100–150 acres. The island is already someone else's (P. Jervais).</td></tr>
+    <tr><td>1874–86</td><td>Pierre Lambert holds 63 acres with a house; Louis still has the shore lots.</td></tr>
+    <tr><td>1898</td><td>The west shore of Lake Gervais is platted as "Gervais Lake Park". No Lamberts left on the maps there.</td></tr>
+    <tr><td>1931</td><td>The Ducharmes, Rose Angélique's family, are still there, along what is still called Ducharme Road.</td></tr>
+  </table>
+  <p>The island left the family within twenty years, but the name stayed on the lake. The 1881 county history says the lake was "named in honor of Louis Lambert, who purchased a portion of the island located near its center in an early day." Louis was Abraham's son, and our direct ancestor.</p>
+
+  <h2>Our line</h2>
+  <ul class="line">
+    <li><b>Abraham Lambert</b> (1792–1875) and Rose Angèle Demers (1797–1876)</li>
+    <li><b>Louis Abraham Thomas Lambert</b> (1825–1900)</li>
+    <li><b>David J. Lambert</b></li>
+    <li><b>Joseph E. Lambert</b> (1894–1968)</li>
+    <li><b>Marjorie Jane Delyea</b> (1919–1998)</li>
+    <li><b>Mary Elizabeth Richey</b> (1950)</li>
+    <li><b>Eric Joseph Richey</b> (1981), who lives on Woodview Court, a short walk from where the island was</li>
+  </ul>
+  <p>Abraham and Rose Angèle's children: Rose Angélique (1824, married Alexander Ducharme), Louis Abraham Thomas (1825), Félicité (1833, married F.-X. Constant LeMay), Pierre (1833), Le Sanges (1834), Esther (1836, married Nazaire Augé), Elizabeth (1837), Joseph Modeste (1838), and Marie (born at Little Canada, 1849).</p>
+
+  <h2>What happened to the lake</h2>
+  <p>The 1902 government topographic map already draws marsh where the ring of water was. In the 1940s County Ditch 14, the channel now called Lambert Creek, drained what was left, for a development that was later abandoned. Lambert Creek still runs from the old lakebed into East Vadnais Lake, St. Paul's drinking-water reservoir. A pond was dug inside the old lake in 2005, and in the winter of 2020–21 the straightened ditch was given its bends back.</p>
+
+  <div class="cta">
+    <a href="fade.html"><b>The maps, 1856–2026</b><span>See the ring, the island and the drained marsh year by year.</span></a>
+    <a href="family.html"><b>The family land</b><span>Where they lived and owned land, next to where we live.</span></a>
+  </div>
+
+  <h2>Still to find</h2>
+  <p class="note">When and to whom the island was sold (Ramsey County deed books). The land office's own file for the 1849 purchase, which may carry Abraham's signature or mark (National Archives). Census entries for 1850–1880. And George Belland's family history, "The Abraham Lambert Family", which was at St. John's parish in 1964.</p>
+
+  <h2>Sources</h2>
+  <ul class="src">
+    <li>Bureau of Land Management, General Land Office Records: patents MN2090__.032 and MN2090__.005 (1849), MN2090__.155 (1853).</li>
+    <li>Edward D. Neill, <i>History of Ramsey County and the City of St. Paul</i> (1881), pp. 281, 289.</li>
+    <li>Margaret Whitney Wall, "Little Canada—Heritage from the French," <i>Ramsey County History</i> 1:2 (Fall 1964).</li>
+    <li>Warren Upham, <i>Minnesota Geographic Names</i> (1920).</li>
+    <li>Plat maps: L. G. Bennett (1867), G. M. Hopkins (1886), P. M. Dahl (1898), Ramsey County atlas (1931), University of Minnesota Libraries; Andreas atlas (1874), David Rumsey Map Collection.</li>
+    <li>Find a Grave, St. John the Evangelist Cemetery, Little Canada. Family tree on Ancestry.</li>
+    <li>Vadnais Lake Area Water Management Organization (VLAWMO): Lambert Creek and Lambert Lake Pond.</li>
+    <li>Air photos: Ramsey County GIS; University of Minnesota Borchert Map Library (MHAPO). Survey plat: MnGeo / Minnesota Historical Society.</li>
+  </ul>
+  <p class="note" style="margin-top:30px">Made by Eric Richey, October 2026. <a href="/">Millwright Software</a></p>
 </main>
-<script src="vendor/leaflet.js"></script>
-<script>
-const FRAMES = [{"year": "1856", "caption": "Government survey plat. A ring of water around an island, no name yet.", "credit": "MnGeo / Minnesota Historical Society", "history": "In 1846-47 French-Canadian families led by Jean Vadnais and Jean Garceau came up from St. Paul by ox-cart. The township was surveyed in 1848.", "native": 4}, {"year": "1859", "caption": "The first map here to name it: Lamberts Lake.", "credit": "Minnesota Historical Society", "history": "White Bear Township was organized at John Lamb's hotel on Goose Lake on May 11, 1858, the day Minnesota became a state. 27 votes were cast.", "native": 2}, {"year": "1867", "caption": "Lambert's Lake. P. Jervais on the island.", "credit": "L. G. Bennett, Map of Ramsey County, 1867 \u00b7 UMN Libraries", "history": "The Lake Superior & Mississippi Railroad is building its line from St. Paul to White Bear; trains run from 1868.", "native": 4}, {"year": "1886", "caption": "Lambert Lake and Lambert Island. A. K. Barnum owns the island and most of the shore.", "credit": "G. M. Hopkins, Atlas of the Environs of St. Paul, 1886, plate 19 \u00b7 UMN Libraries", "history": "White Bear is a resort town, 20 minutes from St. Paul by train. White Bear Village left the township in 1881.", "native": 5}, {"year": "1898", "caption": "Lambert Lake. N.W. Realty Co. owns the island.", "credit": "P. M. Dahl, Plat Book of Ramsey County, 1898 \u00b7 UMN Libraries", "history": "Truck farms line County Road E. In the 1890s the Andersons start a 20-acre farm where Walmart stands today.", "native": 3}, {"year": "1902", "caption": "USGS topographic map. Where the ring was, it draws marsh.", "credit": "USGS", "history": "St. Paul bought Vadnais Lake and its shore in 1899 for $22,000, per local history; it's the city's reservoir.", "native": 3}, {"year": "1940", "caption": "Lambert Creek is a ditch now: County Ditches 13 and 14.", "credit": "Ramsey County GIS", "history": "In 1936 the CCC and St. Paul Water dug channels feeding East Vadnais. County Ditch 14 drains Lambert Lake in the 1940s.", "native": 5}, {"year": "1947", "caption": "Air photo. The dark corner is a frame that wouldn't line up.", "credit": "MHAPO, UMN Borchert Map Library (USGS, 1947)", "history": "Still farms and wetlands. After the war the Vadnais area grows from about 750 people toward 2,000.", "native": 5}, {"year": "1953", "caption": "", "credit": "Ramsey County GIS", "history": "White Bear Lake keeps annexing township land; in 1956 township voters reject a 1,850-acre annexation.", "native": 5}, {"year": "1957", "caption": "Air photo.", "credit": "MHAPO, UMN Borchert Map Library (Ramsey County, 1957)", "history": "July 1957: the Lake Vadnais area votes 277 to 83 to become a village, over a fight about sewers. North Oaks left the township in 1956; Gem Lake follows in 1959.", "native": 5}, {"year": "1974", "caption": "Drained for development that never came. I-35E cuts through.", "credit": "Ramsey County GIS", "history": "I-35E construction began in 1964 and the I-35E/I-694 'weave' opened by the early 1970s. Vadnais Heights: 3,411 people (1970).", "native": 5}, {"year": "1985", "caption": "", "credit": "Ramsey County GIS", "history": "A city since 1974, when state law made every village a city. 5,111 people (1980). In 1986 VLAWMO takes over the Lambert Creek ditches.", "native": 5}, {"year": "1991", "caption": "", "credit": "Ramsey County GIS", "history": "11,041 people (1990). Walmart anchors the city's first shopping center. Minnesota passes its Wetland Conservation Act.", "native": 5}, {"year": "2003", "caption": "", "credit": "Ramsey County GIS", "history": "City Hall opened in 2000; the farms along County Road E are gone. 13,069 people (2000), the city's peak.", "native": 5}, {"year": "2006", "caption": "", "credit": "Ramsey County GIS", "history": "'Unweave the Weave' (2004-08) splits I-35E from I-694. Lambert Lake Pond is dug in 2005 inside the old lakebed.", "native": 5}, {"year": "2011", "caption": "", "credit": "Ramsey County GIS", "history": "The Vadnais Sports Center opened in 2010. 12,302 people (2010).", "native": 5}, {"year": "2017", "caption": "", "credit": "Ramsey County GIS", "history": "Lambert Creek has been on the state's impaired-waters list for bacteria since 2008.", "native": 5}, {"year": "2024", "caption": "Lambert: a wetland on Lambert Creek, flowing to East Vadnais.", "credit": "Ramsey County GIS", "history": "In winter 2020-21 crews put the bends back into about 2,000 feet of straightened Lambert Creek beside the old lakebed.", "native": 5}, {"year": "2026", "caption": "Today.", "credit": "Google Maps imagery, stitched from 18 screenshots", "history": "Vadnais Heights 12,912 and Gem Lake 528 people (2020). Lambert Creek still runs into St. Paul's drinking-water reservoir.", "native": 5}];
-const META = {"width": 8033, "height": 3456, "mpp": 0.9, "frame_utm15n": [492100, 4987920, 499330, 4991030], "house": null, "zmax": 5, "native": {"1974": 5, "1898": 3, "1867": 4, "2017": 5, "2003": 5, "1859": 2, "2011": 5, "1902": 3, "2006": 5, "1886": 5, "1931": 5, "2024": 5, "2026": 5, "1856": 4, "1991": 5, "1985": 5, "1947": 5, "1953": 5, "1957": 5, "1940": 5}};
-const N = FRAMES.length, $ = id => document.getElementById(id);
-const Z = META.zmax, K = 2 ** Z;                       // map units: frame px / K
-const toLL = (x, y) => L.latLng(-y / K, x / K);
-const bounds = L.latLngBounds(toLL(0, META.height), toLL(META.width, 0));
-
-const map = L.map("map", { crs: L.CRS.Simple, fadeAnimation: false, minZoom: 0, maxZoom: Z + 2, zoomSnap: 0.25, zoomDelta: 0.5,
-  wheelPxPerZoomLevel: 90, maxBounds: bounds.pad(0.15), maxBoundsViscosity: 0.8, attributionControl: false });
-map.fitBounds(bounds);
-map.setMinZoom(map.getZoom() - 0.5);
-
-const layers = FRAMES.map(f => L.tileLayer(`tiles/${f.year}/{z}/{x}_{y}.webp`, {
-  bounds, noWrap: true, tileSize: 256, minZoom: 0, maxZoom: Z + 2, maxNativeZoom: f.native,
-  keepBuffer: 4, updateWhenZooming: false, attribution: f.credit, opacity: 0 }));
-
-const HOME = META.house || { x: 0.263 * META.width, y: 0.283 * META.height };   // no pin: "Lambert" aims at the ring (UTM 494000 E, 4990150 N)
-const house = META.house ? L.circleMarker(toLL(META.house.x, META.house.y), { radius: 8, color: "#ff5a3c", weight: 3, fill: false })
-  .bindTooltip(META.house.label, { permanent: true, direction: "right", offset: [10, 0], className: "house-tip" }).addTo(map) : null;
-
-const Chips = L.Control.extend({ options: { position: "topright" }, onAdd() {
-  const d = L.DomUtil.create("div", "chips"); L.DomEvent.disableClickPropagation(d);
-  d.innerHTML = META.house
-    ? '<button id="zhome" title="Zoom to the house (h)">house</button><button id="zall" title="Whole map (0)">all</button><button id="zpin" title="Hide or show the pin (m)">pin</button>'
-    : '<button id="zhome" title="Zoom to Lambert Lake (h)">Lambert</button><button id="zall" title="Whole map (0)">all</button>';
-  return d; } });
-new Chips().addTo(map);
-const goHouse = () => map.flyTo(toLL(HOME.x, HOME.y), META.house ? Z : Z - 2, { duration: 1.2 });
-const goAll = () => map.flyToBounds(bounds, { duration: 1.0 });
-const togglePin = () => { if (house) map.hasLayer(house) ? map.removeLayer(house) : house.addTo(map); };
-$("zhome").onclick = goHouse; $("zall").onclick = goAll; if ($("zpin")) $("zpin").onclick = togglePin;
-
-// two layers live at a time: the frame below and the next one fading in over it
-const ticks = FRAMES.map((f, i) => {
-  const el = document.createElement("div");
-  el.className = "tick"; el.textContent = f.year; el.style.left = (100 * i / (N - 1)) + "%";
-  $("track").appendChild(el); return el;
-});
-let t = 0, playing = false, live = new Set();
-function render() {
-  if (mode !== "fade") return renderCompare();
-  const i = Math.min(Math.floor(t), N - 2), f = t - i, want = new Set([i, i + 1]);
-  // keep the years on either side loaded (invisible) so scrubbing either way doesn't wait on tiles
-  if (i + 2 < N) want.add(i + 2);
-  if (i > 0) want.add(i - 1);
-  for (const k of live) if (!want.has(k)) { map.removeLayer(layers[k]); live.delete(k); }
-  for (const k of want) if (!live.has(k)) { layers[k].addTo(map); live.add(k); }
-  layers[i].setZIndex(1).setOpacity(1);
-  layers[i + 1].setZIndex(2).setOpacity(f);
-  if (i + 2 < N) layers[i + 2].setZIndex(0).setOpacity(0);
-  if (i > 0) layers[i - 1].setZIndex(0).setOpacity(0);
-  const near = Math.round(t), fr = FRAMES[near];
-  $("year").textContent = fr.year; $("caption").textContent = fr.caption; $("history").textContent = fr.history; $("credit").textContent = fr.credit;
-  ticks.forEach((el, k) => el.classList.toggle("on", k === near));
-  $("knob").style.left = (100 * t / (N - 1)) + "%";
-}
-
-const FADE = 2200, HOLD = 1400;
-let phase = 0, last = 0;
-function step(now) {
-  if (!playing) return;
-  phase += now - last; last = now;
-  const k = Math.floor(t);
-  if (phase > HOLD) t = Math.min(k + (phase - HOLD) / FADE, N - 1);
-  if (phase > HOLD + FADE) { t = Math.min(k + 1, N - 1); phase = 0; }
-  if (t >= N - 1) setPlaying(false);
-  render(); requestAnimationFrame(step);
-}
-function setPlaying(on) {
-  playing = on; $("play").innerHTML = on ? "&#10074;&#10074;" : "&#9654;";
-  if (on) { if (t >= N - 1) t = 0; t = Math.floor(t); phase = 0; last = performance.now(); requestAnimationFrame(step); }
-}
-$("play").onclick = () => setPlaying(!playing);
-
-const track = $("track");
-function seek(e) {
-  const r = track.getBoundingClientRect();
-  t = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * (N - 1);
-  setPlaying(false); render();
-}
-track.addEventListener("pointerdown", e => { track.setPointerCapture(e.pointerId); seek(e); track.onpointermove = seek; });
-track.addEventListener("pointerup", () => { track.onpointermove = null; });
-
-// ---- compare: two years, a divider (left/right or top/bottom) or a looking glass ----
-let mode = "fade", over = FRAMES.findIndex(f => f.year === "1886"), under = FRAMES.findIndex(f => f.year === "2024");
-let pos = 0.5, lensPt = null, lensR = 150;
-const selOver = $("selOver"), selUnder = $("selUnder");
-for (const sel of [selOver, selUnder]) FRAMES.forEach((f, i) => sel.add(new Option(f.year, i)));
-selOver.onchange = () => { over = +selOver.value; showPair(); };
-selUnder.onchange = () => { under = +selUnder.value; showPair(); };
-$("swap").onclick = () => { [over, under] = [under, over]; showPair(); };
-function clearClips() { layers.forEach(l => { const c = l.getContainer && l.getContainer(); if (c) c.style.clipPath = ""; }); }
-function showPair() {
-  for (const k of live) { map.removeLayer(layers[k]); }
-  live = new Set([under, over]);
-  layers[under].addTo(map).setZIndex(1).setOpacity(1);
-  layers[over].addTo(map).setZIndex(2).setOpacity(1);
-  selOver.value = over; selUnder.value = under;
-  renderCompare();
-}
-function renderCompare() {
-  const c = layers[over].getContainer(); if (!c) return;
-  const size = map.getSize(), nw = map.containerPointToLayerPoint([0, 0]), se = map.containerPointToLayerPoint(size);
-  const st = $("stage").getBoundingClientRect(), mp = $("map").getBoundingClientRect(), ox = mp.left - st.left, oy = mp.top - st.top;
-  const dv = $("divider"), bar = $("bar"), grip = $("grip"), lens = $("lens"), A = $("tagA"), B = $("tagB");
-  A.textContent = FRAMES[over].year; B.textContent = FRAMES[under].year;
-  dv.style.display = lens.style.display = "none"; A.style.display = B.style.display = "block";
-  if (mode === "x") {
-    const x = nw.x + pos * size.x;
-    c.style.clipPath = `polygon(${nw.x}px ${nw.y}px, ${x}px ${nw.y}px, ${x}px ${se.y}px, ${nw.x}px ${se.y}px)`;
-    Object.assign(dv.style, { display: "block", left: ox + pos * size.x + "px", top: oy + "px", width: 0, height: size.y + "px" });
-    Object.assign(bar.style, { left: "-1.5px", top: 0, width: "3px", height: size.y + "px" });
-    Object.assign(grip.style, { left: 0, top: size.y / 2 + "px" }); grip.innerHTML = "&#8596;";
-    Object.assign(A.style, { left: ox + pos * size.x - 60 + "px", top: oy + 12 + "px" });
-    Object.assign(B.style, { left: ox + pos * size.x + 14 + "px", top: oy + 12 + "px" });
-  } else if (mode === "y") {
-    const y = nw.y + pos * size.y;
-    c.style.clipPath = `polygon(${nw.x}px ${nw.y}px, ${se.x}px ${nw.y}px, ${se.x}px ${y}px, ${nw.x}px ${y}px)`;
-    Object.assign(dv.style, { display: "block", left: ox + "px", top: oy + pos * size.y + "px", width: size.x + "px", height: 0 });
-    Object.assign(bar.style, { left: 0, top: "-1.5px", width: size.x + "px", height: "3px" });
-    Object.assign(grip.style, { left: size.x / 2 + "px", top: 0 }); grip.innerHTML = "&#8597;";
-    Object.assign(A.style, { left: ox + 12 + "px", top: oy + pos * size.y - 30 + "px" });
-    Object.assign(B.style, { left: ox + 12 + "px", top: oy + pos * size.y + 10 + "px" });
-  } else {
-    const p = lensPt || L.point(size.x / 2, size.y / 2), lp = map.containerPointToLayerPoint(p);
-    c.style.clipPath = `circle(${lensR}px at ${lp.x}px ${lp.y}px)`;
-    Object.assign(lens.style, { display: "block", left: ox + p.x - lensR + "px", top: oy + p.y - lensR + "px", width: 2 * lensR + "px", height: 2 * lensR + "px" });
-    Object.assign(A.style, { left: ox + p.x - 20 + "px", top: oy + p.y - lensR - 28 + "px" });
-    Object.assign(B.style, { left: ox + 56 + "px", top: oy + 14 + "px" });
-  }
-  $("year").textContent = `${FRAMES[over].year} · ${FRAMES[under].year}`;
-  $("caption").textContent = mode === "lens" ? `${FRAMES[over].year} inside the glass, ${FRAMES[under].year} around it.`
-    : mode === "x" ? `${FRAMES[over].year} on the left, ${FRAMES[under].year} on the right. Drag the handle.`
-    : `${FRAMES[over].year} above, ${FRAMES[under].year} below. Drag the handle.`;
-  $("history").textContent = FRAMES[over].history;
-  $("credit").textContent = FRAMES[over].credit === FRAMES[under].credit ? FRAMES[over].credit : `${FRAMES[over].credit} · ${FRAMES[under].credit}`;
-}
-function setMode(m) {
-  mode = m;
-  document.querySelectorAll("#modes [data-m]").forEach(b => b.classList.toggle("on", b.dataset.m === m));
-  document.body.classList.toggle("compare", m !== "fade");
-  $("labOver").textContent = m === "x" ? "left" : m === "y" ? "top" : "glass";
-  $("labUnder").textContent = m === "x" ? "right" : m === "y" ? "bottom" : "around";
-  clearClips();
-  if (m === "fade") {
-    $("divider").style.display = $("lens").style.display = $("tagA").style.display = $("tagB").style.display = "none";
-    for (const k of live) map.removeLayer(layers[k]);
-    live = new Set(); render();
-  } else { setPlaying(false); showPair(); }
-}
-document.querySelectorAll("#modes [data-m]").forEach(b => b.onclick = () => setMode(b.dataset.m));
-map.on("move zoom zoomend resize viewreset", () => { if (mode !== "fade") renderCompare(); });
-const grip = $("grip");
-grip.addEventListener("pointerdown", e => {
-  e.stopPropagation(); grip.setPointerCapture(e.pointerId); map.dragging.disable();
-  grip.onpointermove = ev => {
-    const r = $("map").getBoundingClientRect();
-    pos = mode === "x" ? (ev.clientX - r.left) / r.width : (ev.clientY - r.top) / r.height;
-    pos = Math.max(0.02, Math.min(0.98, pos)); renderCompare();
-  };
-});
-grip.addEventListener("pointerup", () => { grip.onpointermove = null; map.dragging.enable(); });
-$("map").addEventListener("pointermove", e => {
-  if (mode !== "lens") return;
-  const r = $("map").getBoundingClientRect(); lensPt = L.point(e.clientX - r.left, e.clientY - r.top); renderCompare();
-});
-
-addEventListener("keydown", e => {
-  if (e.target.tagName === "SELECT") return;
-  if (e.key === "f") setMode("fade");
-  if (e.key === "s") setMode("x");
-  if (e.key === "d") setMode("y");
-  if (e.key === "l") setMode("lens");
-  if (mode !== "fade") {
-    if (e.key === "x") $("swap").onclick();
-    if (e.key === "]" || e.key === "[") { lensR = Math.max(50, Math.min(450, lensR * (e.key === "]" ? 1.2 : 1 / 1.2))); renderCompare(); }
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); over = (over + (e.key === "ArrowRight" ? 1 : N - 1)) % N; showPair(); return; }
-    if (e.key === " ") { e.preventDefault(); return; }
-  }
-  if (e.key === " ") { e.preventDefault(); setPlaying(!playing); }
-  if (e.key === "ArrowRight") { e.preventDefault(); setPlaying(false); t = Math.min(N - 1, Math.floor(t + 1e-6) + 1); render(); }
-  if (e.key === "ArrowLeft") { e.preventDefault(); setPlaying(false); t = Math.max(0, Math.ceil(t - 1e-6) - 1); render(); }
-  if (e.key === "h") goHouse();
-  if (e.key === "0") goAll();
-  if (e.key === "m") togglePin();
-});
-render();
-const hash = location.hash.slice(1).split(",");
-const hm = { swipe: "x", updown: "y", lens: "lens" };
-const hmode = hash.find(h => hm[h]);
-if (hash.includes("house")) setTimeout(goHouse, 300);
-if (hmode) setTimeout(() => setMode(hm[hmode]), 400);
-else if (!hash.includes("house")) setTimeout(() => setPlaying(true), 900);
-</script>
 </body>
 </html>

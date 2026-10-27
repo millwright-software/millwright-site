@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Lambert land, 1849 and now</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<style>
+  :root { --ink: #16130f; --paper: #e9e1cf; --dim: #8f8573; --accent: #b8a27a; --fam: #ffcc4d; }
+  html, body { margin: 0; height: 100%; background: var(--ink); color: var(--paper); font-family: "Iowan Old Style", Palatino, Georgia, serif; }
+  #map { position: absolute; inset: 0 0 0 340px; background: #222; }
+  aside { position: absolute; left: 0; top: 0; bottom: 0; width: 340px; box-sizing: border-box; padding: 22px 22px 18px; overflow-y: auto; border-right: 1px solid #2c271f; }
+  h1 { font-size: 26px; font-weight: normal; margin: 0 0 4px; }
+  .sub { color: var(--dim); font: 12px ui-sans-serif, -apple-system, sans-serif; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 18px; }
+  h2 { font: 600 11px ui-sans-serif, -apple-system, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); margin: 20px 0 8px; }
+  .years { display: flex; flex-wrap: wrap; gap: 6px; }
+  .years button, .places button { background: none; border: 1px solid #4a4337; color: var(--paper); border-radius: 14px; padding: 4px 10px; font: 12px ui-sans-serif, -apple-system, sans-serif; cursor: pointer; }
+  .years button.on { border-color: var(--accent); background: rgba(184,162,122,.2); color: #fff; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .row { display: flex; justify-content: space-between; font: 12px ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
+  .places { display: flex; flex-direction: column; gap: 8px; }
+  .places button { text-align: left; border-radius: 8px; padding: 8px 10px; line-height: 1.35; }
+  .places button b { display: block; font: 600 13px ui-sans-serif, -apple-system, sans-serif; }
+  .places button span { color: var(--dim); font-size: 12px; }
+  .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+  .line { font-size: 14px; line-height: 1.5; color: #d9cfba; }
+  .credit { color: var(--dim); font: 11px/1.5 ui-sans-serif, -apple-system, sans-serif; margin-top: 18px; }
+  .leaflet-tooltip.lbl { background: rgba(22,19,15,.85); color: #fff; border: 0; box-shadow: none; font: 600 12px ui-sans-serif, -apple-system, sans-serif; }
+  .leaflet-tooltip.lbl::before { display: none; }
+  .leaflet-popup-content { font: 13px/1.45 ui-sans-serif, -apple-system, sans-serif; }
+  @media (max-width: 700px) {
+    aside { right: 0; width: auto; bottom: auto; height: 42vh; border-right: 0; border-bottom: 1px solid #2c271f; }
+    #map { inset: 42vh 0 0 0; }
+  }
+</style>
+</head>
+<body>
+<aside>
+  <h1>The Lambert land</h1>
+  <div class="sub">Little Canada · Vadnais Heights · 1849 to now</div>
+  <div class="line" id="lineage"></div>
+  <h2>Places</h2>
+  <div class="places" id="places"></div>
+  <h2>Underneath</h2>
+  <div class="years" id="years"></div>
+  <div style="margin-top:10px"><div class="row"><span>today's map</span><span>the year</span></div>
+  <input type="range" id="op" min="0" max="100" value="100"></div>
+  <div class="credit">Parcels: BLM PLSS (CadNSDI) government lots, as patented in 1849 and 1853 (BLM GLO records). Air photos: Ramsey County GIS. Survey plat 1847–55: MnGeo / Minnesota Historical Society. Streets: © OpenStreetMap contributors, © CARTO. Satellite: Esri World Imagery.</div>
+</aside>
+<div id="map"></div>
+<script src="vendor/leaflet.js"></script>
+<script>
+const DATA = {"parcels": {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[-93.07151038648395, 45.05595820820646], [-93.07115016938728, 45.05583380623636], [-93.06876691485374, 45.056890421528564], [-93.06888380005788, 45.05824693771548], [-93.06792769318815, 45.060691486156735], [-93.06814745130035, 45.06167587626606], [-93.06980690880934, 45.06162548116857], [-93.07148910143857, 45.06277798019065], [-93.07151038648395, 45.05595820820646]]]}, "properties": {"SECDIVID": "MN460300N0220W0SN290L7", "SECDIVLAB": "L 7", "GISACRE": 36.90391935, "group": "abraham-island", "owner": "Abraham Lambert", "label": "Lambert Island", "detail": "Sec. 29 lots 6\u20137, T30N R22W \u00b7 94.39 acres \u00b7 federal patent 25 Mar 1849 (cert. 137, \"Abraham Lombert\")"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[-93.07148910143857, 45.06277798019065], [-93.07219641773344, 45.06326255426499], [-93.07412951217141, 45.06279198602199], [-93.07500113542383, 45.06241403691834], [-93.07567838151903, 45.061646803745276], [-93.07683275578607, 45.06120332560319], [-93.07543039704078, 45.058971496359035], [-93.07505324672154, 45.05718165112955], [-93.07151038648395, 45.05595820820646], [-93.07148910143857, 45.06277798019065]]]}, "properties": {"SECDIVID": "MN460300N0220W0SN290L6", "SECDIVLAB": "L 6", "GISACRE": 56.33715777, "group": "abraham-island", "owner": "Abraham Lambert", "label": "Lambert Island", "detail": "Sec. 29 lots 6\u20137, T30N R22W \u00b7 94.39 acres \u00b7 federal patent 25 Mar 1849 (cert. 137, \"Abraham Lombert\")"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[-93.07616192749829, 45.01716819522645], [-93.07642472957014, 45.01717083718337], [-93.08149492598804, 45.01712326788926], [-93.08146705552309, 45.01350377732392], [-93.07639904006095, 45.013546701687], [-93.07523008773187, 45.013554391781426], [-93.07587561717264, 45.015142802984144], [-93.07641709342815, 45.016093475028605], [-93.07655432153354, 45.01633440410822], [-93.07642081146126, 45.016618099102566], [-93.07616192749829, 45.01716819522645]]]}, "properties": {"SECDIVID": "MN460290N0220W0SN080L2", "SECDIVLAB": "L 2", "GISACRE": 43.31370225, "group": "abraham-gervais", "owner": "Abraham Lambert", "label": "Abraham's farm, Lake Gervais", "detail": "Sec. 8 lots 1\u20132, T29N R22W \u00b7 91.25 acres \u00b7 federal patent 25 Mar 1849 (cert. 59)"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[-93.07549674678114, 45.02077337578681], [-93.07645044405136, 45.020799714749444], [-93.08152279755176, 45.020742647381915], [-93.08149492598804, 45.01712326788926], [-93.07642472957014, 45.01717083718337], [-93.07616192749829, 45.01716819522645], [-93.0753273605161, 45.01894146055614], [-93.07549674678114, 45.02077337578681]]]}, "properties": {"SECDIVID": "MN460290N0220W0SN080L1", "SECDIVLAB": "L 1", "GISACRE": 46.53652961, "group": "abraham-gervais", "owner": "Abraham Lambert", "label": "Abraham's farm, Lake Gervais", "detail": "Sec. 8 lots 1\u20132, T29N R22W \u00b7 91.25 acres \u00b7 federal patent 25 Mar 1849 (cert. 59)"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[-93.07634810104943, 45.00635442464548], [-93.07637355652093, 45.00994819315796], [-93.08145167396155, 45.009903609792495], [-93.08143629549653, 45.00630332930406], [-93.07634810104943, 45.00635442464548]]]}, "properties": {"SECDIVID": "MN460290N0220W0SN080ASESW", "SECDIVLAB": "SESW", "GISACRE": 39.58620343, "group": "louis-gervais", "owner": "Louis A. Lambert", "label": "Louis A. Lambert", "detail": "Sec. 8 E\u00bdSW\u00bc, T29N R22W \u00b7 80 acres \u00b7 federal patent 20 Jun 1853 (cert. 227)"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[-93.07637355652093, 45.00994819315796], [-93.07639904006095, 45.013546701687], [-93.08146705552309, 45.01350377732392], [-93.08145167396155, 45.009903609792495], [-93.07637355652093, 45.00994819315796]]]}, "properties": {"SECDIVID": "MN460290N0220W0SN080ANESW", "SECDIVLAB": "NESW", "GISACRE": 39.53041297, "group": "louis-gervais", "owner": "Louis A. Lambert", "label": "Louis A. Lambert", "detail": "Sec. 8 E\u00bdSW\u00bc, T29N R22W \u00b7 80 acres \u00b7 federal patent 20 Jun 1853 (cert. 227)"}}]}, "points": [{"lat": 45.0595622, "lon": -93.0891043, "label": "3921 Woodview Ct", "sub": "you, today", "color": "#ff5a3c", "detail": "<b>3921 Woodview Ct</b><br>Eric's house. Section 30, lot 5 on the 1850s survey, about 300 m west of Lambert Lake's west shore."}, {"lat": 45.0210715, "lon": -93.08479, "label": "St. John the Evangelist", "sub": "the church Abraham helped build", "color": "#9ad0ff", "detail": "<b>St. John the Evangelist, Little Canada</b><br>Abraham gave the land for the cemetery (1851) and logs for the first church. He is buried in the family lot here (d. 1875)."}], "lineage": "Abraham Lambert (1792\u20131875) bought the island in Lambert Lake and a farm on Lake Gervais from the federal government on 25 March 1849. His son Louis Abraham Thomas Lambert (1825\u20131900) bought 80 acres beside him in 1853. From Louis: David J. Lambert, Joseph E. Lambert (1894\u20131968), Marjorie Jane Delyea (1919\u20131998), Mary Elizabeth Richey, and Eric Richey, who lives about three-quarters of a mile from the island today.<p style='margin:14px 0 0'><a href='./' style='color:#b8a27a'>\u2190 The story</a> \u00b7 <a href='fade.html' style='color:#b8a27a'>The maps, 1856\u20132026</a></p>"};
+const $ = id => document.getElementById(id);
+const map = L.map("map", { zoomSnap: 0.25, maxZoom: 20 }).setView([45.04, -93.08], 13);
+// CARTO streets (OpenStreetMap data): OSM's own tile server refuses pages opened from a file (403)
+const osm = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", { maxZoom: 20, maxNativeZoom: 20, subdomains: "abcd" });
+const sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 20, maxNativeZoom: 19 });
+osm.addTo(map);
+
+// historical layers: ArcGIS export, one 256 px tile per request, web mercator
+const R = 20037508.342789244;
+const Export = L.TileLayer.extend({
+  getTileUrl(c) {
+    const res = 2 * R / 256 / 2 ** c.z, x0 = -R + c.x * 256 * res, y1 = R - c.y * 256 * res;
+    return `${this._url}?bbox=${x0},${y1 - 256 * res},${x0 + 256 * res},${y1}&bboxSR=3857&imageSR=3857&size=256,256&format=jpg&f=image`;
+  }
+});
+const RAM = y => `https://maps.co.ramsey.mn.us/arcgis/rest/services/OrthoPhotos/Aerial${y}/${y >= 2018 ? "ImageServer/exportImage" : "MapServer/export"}`;
+const YEARS = [["1850s survey", "https://feat.gisdata.mn.gov/arcgis/rest/services/MnGeo/MN_GLO_Plats_cached/MapServer/export"],
+  ...[1940, 1953, 1974, 1985, 1991, 2003, 2006, 2011, 2017, 2024].map(y => [String(y), RAM(y)]),
+  ["Streets", null], ["Satellite", null]];
+let hist = null;
+const op = $("op");
+function show(i) {
+  if (hist) map.removeLayer(hist);
+  [osm, sat].forEach(l => map.removeLayer(l));
+  const [name, url] = YEARS[i];
+  (name === "Satellite" ? sat : osm).addTo(map);
+  hist = url ? new Export(url, { maxZoom: 20, opacity: op.value / 100 }).addTo(map) : null;
+  document.querySelectorAll("#years button").forEach((b, k) => b.classList.toggle("on", k === i));
+}
+YEARS.forEach(([n], i) => { const b = document.createElement("button"); b.textContent = n; b.onclick = () => show(i); $("years").appendChild(b); });
+op.oninput = () => hist && hist.setOpacity(op.value / 100);
+
+// family parcels
+const COL = { "abraham-island": "#ffcc4d", "abraham-gervais": "#ffcc4d", "louis-gervais": "#ff8a3d" };
+const groups = {};
+DATA.parcels.features.forEach(f => (groups[f.properties.group] ||= []).push(f));
+const shapes = {};
+for (const [g, fs] of Object.entries(groups)) {
+  const p = fs[0].properties;
+  shapes[g] = L.geoJSON({ type: "FeatureCollection", features: fs }, {
+    style: { color: COL[g], weight: 3, fillColor: COL[g], fillOpacity: 0.12, dashArray: g === "louis-gervais" ? "6 5" : null }
+  }).bindTooltip(p.label, { permanent: true, direction: "center", className: "lbl" })
+    .bindPopup(`<b>${p.owner}</b><br>${p.detail}`).addTo(map);
+}
+const pts = [];
+for (const m of DATA.points) {
+  const mk = L.circleMarker([m.lat, m.lon], { radius: 8, color: m.color, weight: 3, fillColor: m.color, fillOpacity: .35 })
+    .bindTooltip(m.label, { permanent: true, direction: "right", offset: [10, 0], className: "lbl" })
+    .bindPopup(m.detail).addTo(map);
+  pts.push([m, mk]);
+}
+// places list
+const add = (title, sub, color, go) => { const b = document.createElement("button"); b.innerHTML = `<b><span class="sw" style="background:${color}"></span>${title}</b><span>${sub}</span>`; b.onclick = go; $("places").appendChild(b); };
+const fit = l => map.flyToBounds(l.getBounds(), { padding: [60, 60], duration: 1 });
+add("Lambert Island", "Abraham's, 1849 · 94.39 acres", COL["abraham-island"], () => fit(shapes["abraham-island"]));
+add("Abraham's farm on Lake Gervais", "1849 · 91.25 acres", COL["abraham-gervais"], () => fit(shapes["abraham-gervais"]));
+add("Louis A. Lambert's 80 acres", "1853 · beside his father", COL["louis-gervais"], () => fit(shapes["louis-gervais"]));
+for (const [m, mk] of pts) add(m.label, m.sub, m.color, () => map.flyTo(mk.getLatLng(), 17, { duration: 1 }));
+add("Everything", "the whole family map", "#888", () => map.flyToBounds(L.featureGroup([...Object.values(shapes), ...pts.map(p => p[1])]).getBounds(), { padding: [40, 40] }));
+$("lineage").innerHTML = DATA.lineage;
+map.fitBounds(L.featureGroup([...Object.values(shapes), ...pts.map(p => p[1])]).getBounds(), { padding: [40, 40] });
+show(0);
+</script>
+</body>
+</html>

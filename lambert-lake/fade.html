@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lambert Lake, 1856–2026</title>
+<style>.back{position:absolute;left:62px;top:14px;z-index:700;font:12px ui-sans-serif,-apple-system,sans-serif;color:#e9e1cf;background:rgba(22,19,15,.8);padding:5px 11px;border-radius:14px;text-decoration:none}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<style>
+  :root { --ink: #16130f; --paper: #e9e1cf; --dim: #8f8573; --accent: #b8a27a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--ink); color: var(--paper);
+    font-family: "Iowan Old Style", "Palatino", Georgia, serif; }
+  main { height: 100vh; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+  .stage { position: relative; min-height: 0; }
+  #map { position: absolute; inset: 0; background: var(--ink); }
+  .leaflet-container { font: 12px ui-sans-serif, -apple-system, sans-serif; }
+  .leaflet-bar a { background: rgba(22,19,15,.8); color: var(--paper); border-color: #3a342b; }
+  .leaflet-bar a:hover { background: #2a251e; color: #fff; }
+  .leaflet-control-attribution { background: rgba(22,19,15,.6) !important; color: var(--dim); }
+  .leaflet-control-attribution a { color: var(--dim); }
+  .leaflet-tile { image-rendering: auto; }
+  .chips { display: flex; flex-direction: column; gap: 6px; }
+  .chips button { border: 1px solid #3a342b; background: rgba(22,19,15,.8); color: var(--paper); border-radius: 15px;
+    padding: 5px 11px; font: 12px ui-sans-serif, -apple-system, sans-serif; cursor: pointer; }
+  .chips button:hover { border-color: var(--paper); }
+  .house-tip { background: rgba(22,19,15,.85); color: #fff; border: 0; box-shadow: none; font-weight: 600; }
+  .house-tip::before { display: none; }
+  footer { display: grid; grid-template-columns: auto 1fr; gap: 6px 28px; align-items: end; padding: 14px 36px 22px; }
+  .year { font-size: clamp(44px, 6vw, 80px); line-height: .9; font-variant-numeric: oldstyle-nums; letter-spacing: -.01em; min-width: 3.2ch; }
+  .text { padding-bottom: 8px; }
+  .caption { font-size: 18px; font-style: italic; min-height: 1.3em; }
+  .history { font-size: 15px; color: #cfc5b0; margin-top: 4px; max-width: 70ch; min-height: 1.2em; }
+  .credit { font: 12px/1.4 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
+  .timeline { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; margin-top: 14px; }
+  #play { background: none; border: 1px solid var(--paper); color: var(--paper); width: 44px; height: 44px;
+    border-radius: 50%; cursor: pointer; font-size: 13px; flex: none; }
+  .track { position: relative; flex: 1; height: 44px; cursor: pointer; touch-action: none; }
+  .track::before { content: ""; position: absolute; left: 0; right: 0; top: 18px; height: 3px; border-radius: 2px; background: #4a4337; }
+  .tick { position: absolute; top: 0; transform: translateX(-50%); text-align: center;
+    font: 12px ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
+  .tick::before { content: ""; display: block; width: 7px; height: 7px; margin: 16px auto 5px; border-radius: 50%; background: var(--dim); }
+  .tick.on { color: var(--paper); }
+  .tick.on::before { background: var(--paper); }
+  .knob { position: absolute; top: 10px; width: 19px; height: 19px; margin-left: -9.5px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 4px rgba(184,162,122,.25); pointer-events: none; }
+  .modes { grid-column: 1 / -1; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .modes button, .pick select, .pick button { background: none; border: 1px solid #4a4337; color: var(--paper); border-radius: 15px;
+    padding: 5px 12px; font: 12px ui-sans-serif, -apple-system, sans-serif; cursor: pointer; }
+  .modes button.on { border-color: var(--accent); color: #fff; background: rgba(184,162,122,.18); }
+  .pick { display: none; align-items: center; gap: 8px; margin-left: 14px; font: 12px ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
+  .pick select { background: var(--ink); }
+  body.compare .pick { display: flex; }
+  body.compare .timeline { display: none; }
+  .divider { position: absolute; z-index: 600; display: none; pointer-events: none; }
+  .divider .bar { position: absolute; background: #f3ead6; box-shadow: 0 0 6px rgba(0,0,0,.7); }
+  .divider .grip { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: #f3ead6;
+    box-shadow: 0 1px 6px rgba(0,0,0,.6); pointer-events: auto; cursor: grab; display: grid; place-items: center; color: #16130f; font: 14px sans-serif; }
+  .lens { position: absolute; z-index: 600; display: none; pointer-events: none; border-radius: 50%;
+    box-shadow: 0 0 0 3px #f3ead6, 0 0 18px 4px rgba(0,0,0,.55); }
+  .tag { position: absolute; z-index: 601; display: none; pointer-events: none; padding: 3px 8px; border-radius: 10px;
+    background: rgba(22,19,15,.8); color: #fff; font: 600 12px ui-sans-serif, -apple-system, sans-serif; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="./">&larr; The story</a><div class="stage" id="stage"><div id="map"></div>
+    <div class="divider" id="divider"><div class="bar" id="bar"></div><div class="grip" id="grip">&#8596;</div></div>
+    <div class="lens" id="lens"></div><div class="tag" id="tagA"></div><div class="tag" id="tagB"></div></div>
+  <footer>
+    <div class="year" id="year"></div>
+    <div class="text"><div class="caption" id="caption"></div><div class="history" id="history"></div><div class="credit" id="credit"></div></div>
+    <div class="modes" id="modes">
+      <button data-m="fade" class="on" title="f">Fade</button><button data-m="x" title="s">Swipe &#8596;</button>
+      <button data-m="y" title="d">Swipe &#8597;</button><button data-m="lens" title="l">Looking glass</button>
+      <span class="pick"><span id="labOver">left</span> <select id="selOver"></select>
+        <button id="swap" title="Swap (x)">&#8644;</button>
+        <span id="labUnder">right</span> <select id="selUnder"></select></span>
+    </div>
+    <div class="timeline">
+      <button id="play" title="Play (space)">&#9654;</button>
+      <div class="track" id="track"><div class="knob" id="knob"></div></div>
+    </div>
+  </footer>
+</main>
+<script src="vendor/leaflet.js"></script>
+<script>
+const FRAMES = [{"year": "1856", "caption": "Government survey plat. A ring of water around an island, no name yet.", "credit": "MnGeo / Minnesota Historical Society", "history": "In 1846-47 French-Canadian families led by Jean Vadnais and Jean Garceau came up from St. Paul by ox-cart. The township was surveyed in 1848.", "native": 4}, {"year": "1859", "caption": "The first map here to name it: Lamberts Lake.", "credit": "Minnesota Historical Society", "history": "White Bear Township was organized at John Lamb's hotel on Goose Lake on May 11, 1858, the day Minnesota became a state. 27 votes were cast.", "native": 2}, {"year": "1867", "caption": "Lambert's Lake. P. Jervais on the island.", "credit": "L. G. Bennett, Map of Ramsey County, 1867 \u00b7 UMN Libraries", "history": "The Lake Superior & Mississippi Railroad is building its line from St. Paul to White Bear; trains run from 1868.", "native": 4}, {"year": "1886", "caption": "Lambert Lake and Lambert Island. A. K. Barnum owns the island and most of the shore.", "credit": "G. M. Hopkins, Atlas of the Environs of St. Paul, 1886, plate 19 \u00b7 UMN Libraries", "history": "White Bear is a resort town, 20 minutes from St. Paul by train. White Bear Village left the township in 1881.", "native": 5}, {"year": "1898", "caption": "Lambert Lake. N.W. Realty Co. owns the island.", "credit": "P. M. Dahl, Plat Book of Ramsey County, 1898 \u00b7 UMN Libraries", "history": "Truck farms line County Road E. In the 1890s the Andersons start a 20-acre farm where Walmart stands today.", "native": 3}, {"year": "1902", "caption": "USGS topographic map. Where the ring was, it draws marsh.", "credit": "USGS", "history": "St. Paul bought Vadnais Lake and its shore in 1899 for $22,000, per local history; it's the city's reservoir.", "native": 3}, {"year": "1940", "caption": "Lambert Creek is a ditch now: County Ditches 13 and 14.", "credit": "Ramsey County GIS", "history": "In 1936 the CCC and St. Paul Water dug channels feeding East Vadnais. County Ditch 14 drains Lambert Lake in the 1940s.", "native": 5}, {"year": "1947", "caption": "Air photo. The dark corner is a frame that wouldn't line up.", "credit": "MHAPO, UMN Borchert Map Library (USGS, 1947)", "history": "Still farms and wetlands. After the war the Vadnais area grows from about 750 people toward 2,000.", "native": 5}, {"year": "1953", "caption": "", "credit": "Ramsey County GIS", "history": "White Bear Lake keeps annexing township land; in 1956 township voters reject a 1,850-acre annexation.", "native": 5}, {"year": "1957", "caption": "Air photo.", "credit": "MHAPO, UMN Borchert Map Library (Ramsey County, 1957)", "history": "July 1957: the Lake Vadnais area votes 277 to 83 to become a village, over a fight about sewers. North Oaks left the township in 1956; Gem Lake follows in 1959.", "native": 5}, {"year": "1974", "caption": "Drained for development that never came. I-35E cuts through.", "credit": "Ramsey County GIS", "history": "I-35E construction began in 1964 and the I-35E/I-694 'weave' opened by the early 1970s. Vadnais Heights: 3,411 people (1970).", "native": 5}, {"year": "1985", "caption": "", "credit": "Ramsey County GIS", "history": "A city since 1974, when state law made every village a city. 5,111 people (1980). In 1986 VLAWMO takes over the Lambert Creek ditches.", "native": 5}, {"year": "1991", "caption": "", "credit": "Ramsey County GIS", "history": "11,041 people (1990). Walmart anchors the city's first shopping center. Minnesota passes its Wetland Conservation Act.", "native": 5}, {"year": "2003", "caption": "", "credit": "Ramsey County GIS", "history": "City Hall opened in 2000; the farms along County Road E are gone. 13,069 people (2000), the city's peak.", "native": 5}, {"year": "2006", "caption": "", "credit": "Ramsey County GIS", "history": "'Unweave the Weave' (2004-08) splits I-35E from I-694. Lambert Lake Pond is dug in 2005 inside the old lakebed.", "native": 5}, {"year": "2011", "caption": "", "credit": "Ramsey County GIS", "history": "The Vadnais Sports Center opened in 2010. 12,302 people (2010).", "native": 5}, {"year": "2017", "caption": "", "credit": "Ramsey County GIS", "history": "Lambert Creek has been on the state's impaired-waters list for bacteria since 2008.", "native": 5}, {"year": "2024", "caption": "Lambert: a wetland on Lambert Creek, flowing to East Vadnais.", "credit": "Ramsey County GIS", "history": "In winter 2020-21 crews put the bends back into about 2,000 feet of straightened Lambert Creek beside the old lakebed.", "native": 5}, {"year": "2026", "caption": "Today.", "credit": "Google Maps imagery, stitched from 18 screenshots", "history": "Vadnais Heights 12,912 and Gem Lake 528 people (2020). Lambert Creek still runs into St. Paul's drinking-water reservoir.", "native": 5}];
+const META = {"width": 8033, "height": 3456, "mpp": 0.9, "frame_utm15n": [492100, 4987920, 499330, 4991030], "house": {"x": 982.7777777777777, "y": 1621.2222222218084, "label": "3921 Woodview Ct"}, "zmax": 5, "native": {"1974": 5, "1898": 3, "1867": 4, "2017": 5, "2003": 5, "1859": 2, "2011": 5, "1902": 3, "2006": 5, "1886": 5, "1931": 5, "2024": 5, "2026": 5, "1856": 4, "1991": 5, "1985": 5, "1947": 5, "1953": 5, "1957": 5, "1940": 5}, "parcels": [{"group": "abraham-island", "label": "Lambert Island", "owner": "Abraham Lambert", "detail": "Sec. 29 lots 6\u20137, T30N R22W \u00b7 94.39 acres \u00b7 federal patent 25 Mar 1849 (cert. 137, \"Abraham Lombert\")", "px": [[2521.5, 2067.6], [2553.0, 2083.0], [2761.6, 1952.7], [2751.6, 1785.3], [2835.5, 1483.6], [2816.3, 1362.1], [2671.2, 1368.2], [2524.1, 1225.8], [2521.5, 2067.6]]}, {"group": "abraham-island", "label": "Lambert Island", "owner": "Abraham Lambert", "detail": "Sec. 29 lots 6\u20137, T30N R22W \u00b7 94.39 acres \u00b7 federal patent 25 Mar 1849 (cert. 137, \"Abraham Lombert\")", "px": [[2524.1, 1225.8], [2462.3, 1166.0], [2293.2, 1223.9], [2216.9, 1270.5], [2157.5, 1365.1], [2056.5, 1419.8], [2178.9, 1695.3], [2211.7, 1916.3], [2521.5, 2067.6], [2524.1, 1225.8]]}, {"group": "abraham-gervais", "label": "Abraham's farm, Lake Gervais", "owner": "Abraham Lambert", "detail": "Sec. 8 lots 1\u20132, T29N R22W \u00b7 91.25 acres \u00b7 federal patent 25 Mar 1849 (cert. 59)", "px": [[2110.1, 6855.1], [2087.1, 6854.8], [1643.2, 6860.2], [1645.2, 7307.0], [2088.9, 7302.1], [2191.2, 7301.2], [2134.9, 7105.1], [2087.6, 6987.8], [2075.6, 6958.0], [2087.3, 6923.0], [2110.1, 6855.1]]}, {"group": "abraham-gervais", "label": "Abraham's farm, Lake Gervais", "owner": "Abraham Lambert", "detail": "Sec. 8 lots 1\u20132, T29N R22W \u00b7 91.25 acres \u00b7 federal patent 25 Mar 1849 (cert. 59)", "px": [[2168.7, 6410.2], [2085.2, 6406.9], [1641.2, 6413.5], [1643.2, 6860.2], [2087.1, 6854.8], [2110.1, 6855.1], [2183.3, 6636.3], [2168.7, 6410.2]]}, {"group": "louis-gervais", "label": "Louis A. Lambert", "owner": "Louis A. Lambert", "detail": "Sec. 8 E\u00bdSW\u00bc, T29N R22W \u00b7 80 acres \u00b7 federal patent 20 Jun 1853 (cert. 227)", "px": [[2092.5, 8189.9], [2090.7, 7746.3], [1646.1, 7751.3], [1647.0, 8195.7], [2092.5, 8189.9]]}, {"group": "louis-gervais", "label": "Louis A. Lambert", "owner": "Louis A. Lambert", "detail": "Sec. 8 E\u00bdSW\u00bc, T29N R22W \u00b7 80 acres \u00b7 federal patent 20 Jun 1853 (cert. 227)", "px": [[2090.7, 7746.3], [2088.9, 7302.1], [1645.2, 7307.0], [1646.1, 7751.3], [2090.7, 7746.3]]}]};
+const N = FRAMES.length, $ = id => document.getElementById(id);
+const Z = META.zmax, K = 2 ** Z;                       // map units: frame px / K
+const toLL = (x, y) => L.latLng(-y / K, x / K);
+const bounds = L.latLngBounds(toLL(0, META.height), toLL(META.width, 0));
+
+const map = L.map("map", { crs: L.CRS.Simple, fadeAnimation: false, minZoom: 0, maxZoom: Z + 2, zoomSnap: 0.25, zoomDelta: 0.5,
+  wheelPxPerZoomLevel: 90, maxBounds: bounds.pad(0.15), maxBoundsViscosity: 0.8, attributionControl: false });
+map.fitBounds(bounds);
+map.setMinZoom(map.getZoom() - 0.5);
+
+const layers = FRAMES.map(f => L.tileLayer(`tiles/${f.year}/{z}/{x}_{y}.webp`, {
+  bounds, noWrap: true, tileSize: 256, minZoom: 0, maxZoom: Z + 2, maxNativeZoom: f.native,
+  keepBuffer: 4, updateWhenZooming: false, attribution: f.credit, opacity: 0 }));
+
+// the family's federal parcels (BLM lots as patented), drawn in the frame; outside the frame they simply don't show
+const parcelLayer = L.layerGroup((META.parcels || []).map(p => L.polygon(p.px.map(([x, y]) => toLL(x, y)),
+  { color: p.owner.startsWith("Louis") ? "#ff8a3d" : "#ffcc4d", weight: 2.5, fill: false, dashArray: p.owner.startsWith("Louis") ? "6 5" : null })
+  .bindTooltip(p.owner + " · " + p.label, { sticky: true, className: "house-tip" })
+  .bindPopup(`<b>${p.owner}</b><br>${p.detail}`))).addTo(map);
+const HOME = META.house || { x: 0.263 * META.width, y: 0.283 * META.height };   // no pin: "Lambert" aims at the ring (UTM 494000 E, 4990150 N)
+const house = META.house ? L.circleMarker(toLL(META.house.x, META.house.y), { radius: 8, color: "#ff5a3c", weight: 3, fill: false })
+  .bindTooltip(META.house.label, { permanent: true, direction: "right", offset: [10, 0], className: "house-tip" }).addTo(map) : null;
+
+const Chips = L.Control.extend({ options: { position: "topright" }, onAdd() {
+  const d = L.DomUtil.create("div", "chips"); L.DomEvent.disableClickPropagation(d);
+  d.innerHTML = META.house
+    ? '<button id="zhome" title="Zoom to the house (h)">house</button><button id="zall" title="Whole map (0)">all</button><button id="zpin" title="Hide or show the pin and the family parcels (m)">pin</button>'
+    : '<button id="zhome" title="Zoom to Lambert Lake (h)">Lambert</button><button id="zall" title="Whole map (0)">all</button>';
+  return d; } });
+new Chips().addTo(map);
+const goHouse = () => map.flyTo(toLL(HOME.x, HOME.y), META.house ? Z : Z - 2, { duration: 1.2 });
+const goAll = () => map.flyToBounds(bounds, { duration: 1.0 });
+const togglePin = () => {
+  const on = !map.hasLayer(parcelLayer);
+  for (const l of [house, parcelLayer]) if (l) on ? l.addTo(map) : map.removeLayer(l);
+};
+$("zhome").onclick = goHouse; $("zall").onclick = goAll; if ($("zpin")) $("zpin").onclick = togglePin;
+
+// two layers live at a time: the frame below and the next one fading in over it
+const ticks = FRAMES.map((f, i) => {
+  const el = document.createElement("div");
+  el.className = "tick"; el.textContent = f.year; el.style.left = (100 * i / (N - 1)) + "%";
+  $("track").appendChild(el); return el;
+});
+let t = 0, playing = false, live = new Set();
+function render() {
+  if (mode !== "fade") return renderCompare();
+  const i = Math.min(Math.floor(t), N - 2), f = t - i, want = new Set([i, i + 1]);
+  // keep the years on either side loaded (invisible) so scrubbing either way doesn't wait on tiles
+  if (i + 2 < N) want.add(i + 2);
+  if (i > 0) want.add(i - 1);
+  for (const k of live) if (!want.has(k)) { map.removeLayer(layers[k]); live.delete(k); }
+  for (const k of want) if (!live.has(k)) { layers[k].addTo(map); live.add(k); }
+  layers[i].setZIndex(1).setOpacity(1);
+  layers[i + 1].setZIndex(2).setOpacity(f);
+  if (i + 2 < N) layers[i + 2].setZIndex(0).setOpacity(0);
+  if (i > 0) layers[i - 1].setZIndex(0).setOpacity(0);
+  const near = Math.round(t), fr = FRAMES[near];
+  $("year").textContent = fr.year; $("caption").textContent = fr.caption; $("history").textContent = fr.history; $("credit").textContent = fr.credit;
+  ticks.forEach((el, k) => el.classList.toggle("on", k === near));
+  $("knob").style.left = (100 * t / (N - 1)) + "%";
+}
+
+const FADE = 2200, HOLD = 1400;
+let phase = 0, last = 0;
+function step(now) {
+  if (!playing) return;
+  phase += now - last; last = now;
+  const k = Math.floor(t);
+  if (phase > HOLD) t = Math.min(k + (phase - HOLD) / FADE, N - 1);
+  if (phase > HOLD + FADE) { t = Math.min(k + 1, N - 1); phase = 0; }
+  if (t >= N - 1) setPlaying(false);
+  render(); requestAnimationFrame(step);
+}
+function setPlaying(on) {
+  playing = on; $("play").innerHTML = on ? "&#10074;&#10074;" : "&#9654;";
+  if (on) { if (t >= N - 1) t = 0; t = Math.floor(t); phase = 0; last = performance.now(); requestAnimationFrame(step); }
+}
+$("play").onclick = () => setPlaying(!playing);
+
+const track = $("track");
+function seek(e) {
+  const r = track.getBoundingClientRect();
+  t = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * (N - 1);
+  setPlaying(false); render();
+}
+track.addEventListener("pointerdown", e => { track.setPointerCapture(e.pointerId); seek(e); track.onpointermove = seek; });
+track.addEventListener("pointerup", () => { track.onpointermove = null; });
+
+// ---- compare: two years, a divider (left/right or top/bottom) or a looking glass ----
+let mode = "fade", over = FRAMES.findIndex(f => f.year === "1886"), under = FRAMES.findIndex(f => f.year === "2024");
+let pos = 0.5, lensPt = null, lensR = 150;
+const selOver = $("selOver"), selUnder = $("selUnder");
+for (const sel of [selOver, selUnder]) FRAMES.forEach((f, i) => sel.add(new Option(f.year, i)));
+selOver.onchange = () => { over = +selOver.value; showPair(); };
+selUnder.onchange = () => { under = +selUnder.value; showPair(); };
+$("swap").onclick = () => { [over, under] = [under, over]; showPair(); };
+function clearClips() { layers.forEach(l => { const c = l.getContainer && l.getContainer(); if (c) c.style.clipPath = ""; }); }
+function showPair() {
+  for (const k of live) { map.removeLayer(layers[k]); }
+  live = new Set([under, over]);
+  layers[under].addTo(map).setZIndex(1).setOpacity(1);
+  layers[over].addTo(map).setZIndex(2).setOpacity(1);
+  selOver.value = over; selUnder.value = under;
+  renderCompare();
+}
+function renderCompare() {
+  const c = layers[over].getContainer(); if (!c) return;
+  const size = map.getSize(), nw = map.containerPointToLayerPoint([0, 0]), se = map.containerPointToLayerPoint(size);
+  const st = $("stage").getBoundingClientRect(), mp = $("map").getBoundingClientRect(), ox = mp.left - st.left, oy = mp.top - st.top;
+  const dv = $("divider"), bar = $("bar"), grip = $("grip"), lens = $("lens"), A = $("tagA"), B = $("tagB");
+  A.textContent = FRAMES[over].year; B.textContent = FRAMES[under].year;
+  dv.style.display = lens.style.display = "none"; A.style.display = B.style.display = "block";
+  if (mode === "x") {
+    const x = nw.x + pos * size.x;
+    c.style.clipPath = `polygon(${nw.x}px ${nw.y}px, ${x}px ${nw.y}px, ${x}px ${se.y}px, ${nw.x}px ${se.y}px)`;
+    Object.assign(dv.style, { display: "block", left: ox + pos * size.x + "px", top: oy + "px", width: 0, height: size.y + "px" });
+    Object.assign(bar.style, { left: "-1.5px", top: 0, width: "3px", height: size.y + "px" });
+    Object.assign(grip.style, { left: 0, top: size.y / 2 + "px" }); grip.innerHTML = "&#8596;";
+    Object.assign(A.style, { left: ox + pos * size.x - 60 + "px", top: oy + 12 + "px" });
+    Object.assign(B.style, { left: ox + pos * size.x + 14 + "px", top: oy + 12 + "px" });
+  } else if (mode === "y") {
+    const y = nw.y + pos * size.y;
+    c.style.clipPath = `polygon(${nw.x}px ${nw.y}px, ${se.x}px ${nw.y}px, ${se.x}px ${y}px, ${nw.x}px ${y}px)`;
+    Object.assign(dv.style, { display: "block", left: ox + "px", top: oy + pos * size.y + "px", width: size.x + "px", height: 0 });
+    Object.assign(bar.style, { left: 0, top: "-1.5px", width: size.x + "px", height: "3px" });
+    Object.assign(grip.style, { left: size.x / 2 + "px", top: 0 }); grip.innerHTML = "&#8597;";
+    Object.assign(A.style, { left: ox + 12 + "px", top: oy + pos * size.y - 30 + "px" });
+    Object.assign(B.style, { left: ox + 12 + "px", top: oy + pos * size.y + 10 + "px" });
+  } else {
+    const p = lensPt || L.point(size.x / 2, size.y / 2), lp = map.containerPointToLayerPoint(p);
+    c.style.clipPath = `circle(${lensR}px at ${lp.x}px ${lp.y}px)`;
+    Object.assign(lens.style, { display: "block", left: ox + p.x - lensR + "px", top: oy + p.y - lensR + "px", width: 2 * lensR + "px", height: 2 * lensR + "px" });
+    Object.assign(A.style, { left: ox + p.x - 20 + "px", top: oy + p.y - lensR - 28 + "px" });
+    Object.assign(B.style, { left: ox + 56 + "px", top: oy + 14 + "px" });
+  }
+  $("year").textContent = `${FRAMES[over].year} · ${FRAMES[under].year}`;
+  $("caption").textContent = mode === "lens" ? `${FRAMES[over].year} inside the glass, ${FRAMES[under].year} around it.`
+    : mode === "x" ? `${FRAMES[over].year} on the left, ${FRAMES[under].year} on the right. Drag the handle.`
+    : `${FRAMES[over].year} above, ${FRAMES[under].year} below. Drag the handle.`;
+  $("history").textContent = FRAMES[over].history;
+  $("credit").textContent = FRAMES[over].credit === FRAMES[under].credit ? FRAMES[over].credit : `${FRAMES[over].credit} · ${FRAMES[under].credit}`;
+}
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll("#modes [data-m]").forEach(b => b.classList.toggle("on", b.dataset.m === m));
+  document.body.classList.toggle("compare", m !== "fade");
+  $("labOver").textContent = m === "x" ? "left" : m === "y" ? "top" : "glass";
+  $("labUnder").textContent = m === "x" ? "right" : m === "y" ? "bottom" : "around";
+  clearClips();
+  if (m === "fade") {
+    $("divider").style.display = $("lens").style.display = $("tagA").style.display = $("tagB").style.display = "none";
+    for (const k of live) map.removeLayer(layers[k]);
+    live = new Set(); render();
+  } else { setPlaying(false); showPair(); }
+}
+document.querySelectorAll("#modes [data-m]").forEach(b => b.onclick = () => setMode(b.dataset.m));
+map.on("move zoom zoomend resize viewreset", () => { if (mode !== "fade") renderCompare(); });
+const grip = $("grip");
+grip.addEventListener("pointerdown", e => {
+  e.stopPropagation(); grip.setPointerCapture(e.pointerId); map.dragging.disable();
+  grip.onpointermove = ev => {
+    const r = $("map").getBoundingClientRect();
+    pos = mode === "x" ? (ev.clientX - r.left) / r.width : (ev.clientY - r.top) / r.height;
+    pos = Math.max(0.02, Math.min(0.98, pos)); renderCompare();
+  };
+});
+grip.addEventListener("pointerup", () => { grip.onpointermove = null; map.dragging.enable(); });
+$("map").addEventListener("pointermove", e => {
+  if (mode !== "lens") return;
+  const r = $("map").getBoundingClientRect(); lensPt = L.point(e.clientX - r.left, e.clientY - r.top); renderCompare();
+});
+
+addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT") return;
+  if (e.key === "f") setMode("fade");
+  if (e.key === "s") setMode("x");
+  if (e.key === "d") setMode("y");
+  if (e.key === "l") setMode("lens");
+  if (mode !== "fade") {
+    if (e.key === "x") $("swap").onclick();
+    if (e.key === "]" || e.key === "[") { lensR = Math.max(50, Math.min(450, lensR * (e.key === "]" ? 1.2 : 1 / 1.2))); renderCompare(); }
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); over = (over + (e.key === "ArrowRight" ? 1 : N - 1)) % N; showPair(); return; }
+    if (e.key === " ") { e.preventDefault(); return; }
+  }
+  if (e.key === " ") { e.preventDefault(); setPlaying(!playing); }
+  if (e.key === "ArrowRight") { e.preventDefault(); setPlaying(false); t = Math.min(N - 1, Math.floor(t + 1e-6) + 1); render(); }
+  if (e.key === "ArrowLeft") { e.preventDefault(); setPlaying(false); t = Math.max(0, Math.ceil(t - 1e-6) - 1); render(); }
+  if (e.key === "h") goHouse();
+  if (e.key === "0") goAll();
+  if (e.key === "m") togglePin();
+});
+render();
+const hash = location.hash.slice(1).split(",");
+const hm = { swipe: "x", updown: "y", lens: "lens" };
+const hmode = hash.find(h => hm[h]);
+if (hash.includes("house")) setTimeout(goHouse, 300);
+if (hmode) setTimeout(() => setMode(hm[hmode]), 400);
+else if (!hash.includes("house")) setTimeout(() => setPlaying(true), 900);
+</script>
+</body>
+</html>
