@@ -2,116 +2,83 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Lambert Lake and the family it's named for</title>
+<title>Lambert Lake</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="img/lambert-lake-logo.svg">
 <style>
-  :root { --ink: #16130f; --paper: #efe7d6; --soft: #d9cfba; --dim: #8f8573; --accent: #b8a27a; }
+  @font-face { font-family: "Caslon"; src: url("fonts/LibreCaslonText-400-normal.woff2") format("woff2"); font-weight: 400; }
+  @font-face { font-family: "Caslon"; src: url("fonts/LibreCaslonText-400-italic.woff2") format("woff2"); font-style: italic; }
+  @font-face { font-family: "Caslon"; src: url("fonts/LibreCaslonText-700-normal.woff2") format("woff2"); font-weight: 700; }
+  :root { --paper: #f3ecda; --paper2: #e7ddc4; --ink: #251e15; --soft: #5b4f3e; --seal: #8a2a22; --water: #5f8793; }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--ink); color: var(--paper); font: 19px/1.6 "Iowan Old Style", Palatino, Georgia, serif; }
-  main { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
-  .kicker { font: 600 12px ui-sans-serif, -apple-system, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
-  h1 { font-size: clamp(36px, 6vw, 54px); line-height: 1.05; font-weight: normal; margin: 10px 0 18px; }
-  h2 { font-size: 27px; font-weight: normal; margin: 52px 0 10px; }
-  p { margin: 0 0 16px; color: var(--soft); }
-  a { color: var(--accent); }
-  .cta { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 30px 0 8px; }
-  .cta a { display: block; text-decoration: none; border: 1px solid #4a4337; border-radius: 10px; padding: 16px 18px; color: var(--paper); }
-  .cta a:hover { border-color: var(--accent); }
-  .cta b { display: block; font-size: 20px; font-weight: normal; }
-  .cta span { font: 13px/1.4 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
-  blockquote { margin: 20px 0; padding: 4px 0 4px 20px; border-left: 2px solid var(--accent); font-style: italic; color: var(--paper); }
-  figure { margin: 26px 0; }
-  figure img { width: 100%; max-width: 460px; margin: 0 auto; border-radius: 4px; display: block; }
-  figcaption { font: 13px/1.5 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); margin-top: 8px; }
-  .line { list-style: none; padding: 0; margin: 18px 0; }
-  .line li { padding: 8px 0 8px 22px; border-left: 2px solid #4a4337; position: relative; color: var(--soft); }
-  .line li::before { content: ""; position: absolute; left: -6px; top: 17px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
-  .line b { color: var(--paper); font-weight: normal; }
-  table { width: 100%; border-collapse: collapse; font: 15px/1.45 ui-sans-serif, -apple-system, sans-serif; margin: 10px 0 18px; }
-  td { padding: 7px 8px 7px 0; border-bottom: 1px solid #2c271f; vertical-align: top; color: var(--soft); }
-  td:first-child { color: var(--accent); white-space: nowrap; width: 1%; padding-right: 16px; }
-  .note { font: 14px/1.55 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
-  .src { font: 13px/1.6 ui-sans-serif, -apple-system, sans-serif; color: var(--dim); }
-  .src li { margin-bottom: 4px; }
-  @media (max-width: 560px) { .cta { grid-template-columns: 1fr; } }
+  body { margin: 0; background: var(--paper2); color: var(--ink); font: 19px/1.6 "Caslon", Georgia, serif; }
+  header { position: relative; min-height: 64vh; display: grid; place-items: center; text-align: center; overflow: hidden;
+    background: url("img/journey/generations-1759-asis.jpg") center/cover; }
+  header::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(243,236,218,.94) 0 38%, rgba(243,236,218,.55) 75%, rgba(243,236,218,.25)); }
+  .hero { position: relative; padding: 60px 24px; max-width: 760px; }
+  .hero img { width: 120px; }
+  h1 { font-size: clamp(48px, 8vw, 84px); line-height: 1; margin: 10px 0 8px; font-weight: 700; }
+  .sub { font-style: italic; color: var(--seal); font-size: 22px; margin: 0 0 18px; }
+  .lede { color: var(--soft); margin: 0 auto; max-width: 600px; }
+  main { max-width: 1120px; margin: -40px auto 0; padding: 0 22px 70px; position: relative; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .card { display: flex; flex-direction: column; background: var(--paper); border-radius: 6px; overflow: hidden; text-decoration: none; color: inherit;
+    box-shadow: 0 10px 30px rgba(37,30,21,.18); transition: transform .2s, box-shadow .2s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(37,30,21,.25); }
+  .card .pic { aspect-ratio: 4 / 3; background-size: cover; background-position: center; border-bottom: 4px solid var(--seal); }
+  .card .body { padding: 18px 20px 22px; }
+  .kicker { font-style: italic; color: var(--seal); font-size: 15px; }
+  .card h2 { margin: 2px 0 8px; font-size: 27px; }
+  .card p { margin: 0; color: var(--soft); font-size: 16px; }
+  .go { margin-top: 14px; color: var(--water); font-weight: 700; font-size: 16px; }
+  .note { max-width: 760px; margin: 50px auto 0; text-align: center; color: var(--soft); font-size: 16px; }
+  .note a { color: var(--seal); }
+  footer { text-align: center; color: var(--soft); font-size: 14px; padding: 0 0 40px; }
+  footer a { color: inherit; }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } main { margin-top: -20px; } }
 </style>
 </head>
 <body>
+<header>
+  <div class="hero">
+    <img src="img/lambert-lake-logo.svg" alt="">
+    <h1>Lambert Lake</h1>
+    <p class="sub">and the family it's named for</p>
+    <p class="lede">A ring-shaped lake with an island in the middle, in what is now Vadnais Heights, Minnesota. In 1849 Abraham Lambert bought the island from the United States. This is his family's story, from a farm across the river from Quebec in the 1640s to the creek that still runs where the lake used to be.</p>
+  </div>
+</header>
 <main>
-  <div class="kicker">Vadnais Heights · Little Canada · 1792 to now</div>
-  <h1>Lambert Lake, and the family it's named for</h1>
-  <p>Three-quarters of a mile east of our house on Woodview Court there used to be a lake shaped like a ring, with an island in the middle. The maps called it Lambert Lake and Lambert Island. It was drained in the 1940s, and today it's a wetland that most people drive past on I-35E without knowing it was ever there.</p>
-  <p>The Lambert it's named for is family. Abraham Lambert, Eric's fourth-great-grandfather, bought that island from the United States government in 1849.</p>
-
-  <div class="cta">
-    <a href="fade.html"><b>The maps, 1856–2026</b><span>170 years of maps and air photos laid on top of each other. Fade through them, swipe between two years, or look through a looking glass.</span></a>
-    <a href="family.html"><b>The family land</b><span>Abraham's island, his farm on Lake Gervais, his son Louis's land, St. John's church, and our house, on one map.</span></a>
+  <div class="cards">
+    <a class="card" href="story.html">
+      <div class="pic" style="background-image:url('img/journey/stlouis-asis.jpg')"></div>
+      <div class="body">
+        <div class="kicker">Scroll at your own pace</div>
+        <h2>The Story</h2>
+        <p>Maps from 1856 to today, period paintings and the family's own records: Eustache crossing the ocean, Abraham's four-year journey west, the island, and the lake slowly drained. Ends with every map of the lake to explore yourself.</p>
+        <div class="go">Read the story →</div>
+      </div>
+    </a>
+    <a class="card" href="listen/">
+      <div class="pic" style="background-image:url('listen/covers/s1e01.jpg')"></div>
+      <div class="body">
+        <div class="kicker">A bedtime series in six episodes</div>
+        <h2>Listen</h2>
+        <p>Six radio episodes, about thirteen minutes each, with voices, sound and music. The map, paintings and seasons move with the narrator, so you can watch along or just listen.</p>
+        <div class="go">Press play →</div>
+      </div>
+    </a>
+    <a class="card" href="kids/">
+      <div class="pic" style="background-image:url('img/journey/camp-asis.jpg')"></div>
+      <div class="body">
+        <div class="kicker">For young explorers</div>
+        <h2>For Kids</h2>
+        <p>Big pictures, short words, a ship, a canoe, steamboats and squeaky ox carts, a folding chair, and the island in the ring-shaped lake. Can you find it when you walk by the creek?</p>
+        <div class="go">Start the adventure →</div>
+      </div>
+    </a>
   </div>
-
-  <h2>From Quebec to Little Canada</h2>
-  <p>Abraham Lambert was born on 5 June 1792 at Lauzon, across the St. Lawrence from Quebec City, the son of Louis Joseph Lambert and Judith Magnon. On 29 December 1821, at Lévis, he married Rose Angèle Demers. They had at least nine children.</p>
-  <p>In 1841, when Abraham was nearly fifty, the family left Lower Canada. The county history of 1881 tells it this way:</p>
-  <blockquote>Abram Lambert with his family of wife and three sons and three daughters left Lower Canada, in 1841…</blockquote>
-  <p>They traveled by way of St. Louis, headed for Oregon. They stopped instead at St. Boniface on the Red River, where their daughter Rose Angélique married Alexander Ducharme in November 1844. The next year both families came south together and settled at Little Canada, among the French-Canadian families around Lake Gervais.</p>
-
-  <h2>25 March 1849</h2>
-  <p>On a single day the federal land office at the Falls of St. Croix issued Abraham two land patents. One was 91 acres on the west shore of Lake Gervais, the family farm. The other was the whole island in the middle of the lake that already carried his name: lots 6 and 7 of section 29, 94.39 acres.</p>
-  <figure>
-    <img src="records/1849-patent-island.jpg" alt="The 1849 land patent to Abraham Lombert for lots 6 and 7 of section 29">
-    <figcaption>The island patent, certificate No. 137, issued in the name of President Zachary Taylor. The clerk spelled him "Abraham Lombert, of St. Croix County, Wisconsin": Minnesota Territory was only three weeks old, and the land office still wrote the old county. <a href="records/1849-patent-island.pdf">PDF</a> · Bureau of Land Management, General Land Office Records.</figcaption>
-  </figure>
-  <p>Those two lots are exactly the island. On the government's original survey plat, lot 6 is 58.69 acres and lot 7 is 35.70; together that's 94.39, the patent's figure to the hundredth of an acre.</p>
-
-  <h2>A founder of Little Canada</h2>
-  <p>In 1850 Abraham was an election judge for the Little Canada precinct. Around then he was named its postmaster, at what an 1857 newspaper called the first post office in Minnesota outside St. Paul. He gave the land for St. John's cemetery in 1851, and the timbers for the first log church there came mostly from Lambert land.</p>
-  <p>He was also, in the words of a 1964 county history article, "the stubborn Abraham Lambert": when the parish started charging rent for pews, he carried his own folding chair to Mass instead. He died at Little Canada on 30 August 1875, at 83, and is buried in the family lot at St. John's. Rose Angèle died the next year.</p>
-
-  <h2>How long the family held the land</h2>
-  <table>
-    <tr><td>1849</td><td>Abraham buys the island and the Lake Gervais farm from the government.</td></tr>
-    <tr><td>1853</td><td>His son Louis A. Lambert buys the 80 acres next to the farm.</td></tr>
-    <tr><td>1867</td><td>The county map shows Lamberts across the west side of Lake Gervais: "P. &amp; J. M. Lambert" (likely sons Pierre and Joseph Modeste), "Louis Lambert", about 100–150 acres. The island is already someone else's (P. Jervais).</td></tr>
-    <tr><td>1874–86</td><td>Pierre Lambert holds 63 acres with a house; Louis still has the shore lots.</td></tr>
-    <tr><td>1898</td><td>The west shore of Lake Gervais is platted as "Gervais Lake Park". No Lamberts left on the maps there.</td></tr>
-    <tr><td>1931</td><td>The Ducharmes, Rose Angélique's family, are still there, along what is still called Ducharme Road.</td></tr>
-  </table>
-  <p>The island left the family within twenty years, but the name stayed on the lake. The 1881 county history says the lake was "named in honor of Louis Lambert, who purchased a portion of the island located near its center in an early day." Louis was Abraham's son, and our direct ancestor.</p>
-
-  <h2>Our line</h2>
-  <ul class="line">
-    <li><b>Abraham Lambert</b> (1792–1875) and Rose Angèle Demers (1797–1876)</li>
-    <li><b>Louis Abraham Thomas Lambert</b> (1825–1900)</li>
-    <li><b>David J. Lambert</b></li>
-    <li><b>Joseph E. Lambert</b> (1894–1968)</li>
-    <li><b>Marjorie Jane Delyea</b> (1919–1998)</li>
-    <li><b>Mary Elizabeth Richey</b> (1950)</li>
-    <li><b>Eric Joseph Richey</b> (1981), who lives on Woodview Court, a short walk from where the island was</li>
-  </ul>
-  <p>Abraham and Rose Angèle's children: Rose Angélique (1824, married Alexander Ducharme), Louis Abraham Thomas (1825), Félicité (1833, married F.-X. Constant LeMay), Pierre (1833), Le Sanges (1834), Esther (1836, married Nazaire Augé), Elizabeth (1837), Joseph Modeste (1838), and Marie (born at Little Canada, 1849).</p>
-
-  <h2>What happened to the lake</h2>
-  <p>The 1902 government topographic map already draws marsh where the ring of water was. In the 1940s County Ditch 14, the channel now called Lambert Creek, drained what was left, for a development that was later abandoned. Lambert Creek still runs from the old lakebed into East Vadnais Lake, St. Paul's drinking-water reservoir. A pond was dug inside the old lake in 2005, and in the winter of 2020–21 the straightened ditch was given its bends back.</p>
-
-  <div class="cta">
-    <a href="fade.html"><b>The maps, 1856–2026</b><span>See the ring, the island and the drained marsh year by year.</span></a>
-    <a href="family.html"><b>The family land</b><span>Where they lived and owned land, next to where we live.</span></a>
-  </div>
-
-  <h2>Still to find</h2>
-  <p class="note">When and to whom the island was sold (Ramsey County deed books). The land office's own file for the 1849 purchase, which may carry Abraham's signature or mark (National Archives). Census entries for 1850–1880. And George Belland's family history, "The Abraham Lambert Family", which was at St. John's parish in 1964.</p>
-
-  <h2>Sources</h2>
-  <ul class="src">
-    <li>Bureau of Land Management, General Land Office Records: patents MN2090__.032 and MN2090__.005 (1849), MN2090__.155 (1853).</li>
-    <li>Edward D. Neill, <i>History of Ramsey County and the City of St. Paul</i> (1881), pp. 281, 289.</li>
-    <li>Margaret Whitney Wall, "Little Canada—Heritage from the French," <i>Ramsey County History</i> 1:2 (Fall 1964).</li>
-    <li>Warren Upham, <i>Minnesota Geographic Names</i> (1920).</li>
-    <li>Plat maps: L. G. Bennett (1867), G. M. Hopkins (1886), P. M. Dahl (1898), Ramsey County atlas (1931), University of Minnesota Libraries; Andreas atlas (1874), David Rumsey Map Collection.</li>
-    <li>Find a Grave, St. John the Evangelist Cemetery, Little Canada. Family tree on Ancestry.</li>
-    <li>Vadnais Lake Area Water Management Organization (VLAWMO): Lambert Creek and Lambert Lake Pond.</li>
-    <li>Air photos: Ramsey County GIS; University of Minnesota Borchert Map Library (MHAPO). Survey plat: MnGeo / Minnesota Historical Society.</li>
-  </ul>
-  <p class="note" style="margin-top:30px">Made by Eric Richey, October 2026. <a href="/">Millwright Software</a></p>
+  <p class="note">Facts come from land patents, parish registers, county histories and old maps, listed in the story's sources. Where the record is silent, the story says so, and imagined scenes are told as imagined.</p>
 </main>
+<footer>Made by Eric Richey · <a href="/">Millwright Software</a></footer>
 </body>
 </html>

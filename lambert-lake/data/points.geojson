@@ -1,0 +1,47 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "house",
+    "label": "3921 Woodview Ct"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.0891043,
+     45.0595622
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "church",
+    "label": "St. John the Evangelist, Little Canada"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.08479,
+     45.0210715
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "ring",
+    "label": "Lambert Lake ring center"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.0762133,
+     45.0647845
+    ]
+   }
+  }
+ ]
+}

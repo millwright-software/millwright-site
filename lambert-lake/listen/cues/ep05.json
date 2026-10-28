@@ -1,0 +1,748 @@
+[
+{
+"kind": "scene",
+"t_start": 0.5,
+"t_end": null,
+"speaker": null,
+"text": "Scene 1 — Open and last time (0:00–1:30)",
+"cue_id": "ep05-000"
+},
+{
+"kind": "music",
+"t_start": 0.5,
+"t_end": 15.26,
+"speaker": null,
+"text": "theme",
+"key": "theme",
+"cue_id": "ep05-001"
+},
+{
+"kind": "line",
+"t_start": 6.26,
+"t_end": 12.5,
+"speaker": "NARRATOR",
+"text": "This is \"Lambert Lake.\" Episode five: \"Squeaky Wheels and the Oregon Dream.\"",
+"cue_id": "ep05-002"
+},
+{
+"kind": "ambience",
+"t_start": 14.76,
+"t_end": null,
+"speaker": null,
+"text": "the upper Mississippi in spring, a steamboat engine, birds on the bluffs",
+"key": "river",
+"cue_id": "ep05-003"
+},
+{
+"kind": "sfx",
+"t_start": 14.96,
+"t_end": 26.26,
+"speaker": null,
+"text": "steamwhistle: a deep Mississippi steamboat whistle, twice",
+"key": "steamwhistle",
+"cue_id": "ep05-004"
+},
+{
+"kind": "line",
+"t_start": 24.8,
+"t_end": 39.58,
+"speaker": "NARRATOR",
+"text": "Last time, the Lamberts traveled from Quebec by steamboat and stagecoach, by train and lake steamer, across the prairie, all the way to St. Louis. They spent the whole winter there, waiting for the ice to melt.",
+"cue_id": "ep05-005"
+},
+{
+"kind": "line",
+"t_start": 41.02,
+"t_end": 50.14,
+"speaker": "NARRATOR",
+"text": "And now it's spring, eighteen forty-two. The ice is gone. The whistle blows. And the boat turns north, up the Mississippi.",
+"cue_id": "ep05-006"
+},
+{
+"kind": "scene",
+"t_start": 52.36,
+"t_end": null,
+"speaker": null,
+"text": "Scene 2 — Up the river to almost nowhere (1:30–3:00)",
+"cue_id": "ep05-007"
+},
+{
+"kind": "sfx",
+"t_start": 52.56,
+"t_end": 68.56,
+"speaker": null,
+"text": "paddle: a big sternwheel churning, under",
+"key": "paddle",
+"cue_id": "ep05-008"
+},
+{
+"kind": "line",
+"t_start": 55.26,
+"t_end": 70.88,
+"speaker": "NARRATOR",
+"text": "Up, and up, and up the river they went. Past high bluffs, and islands, and a wide part of the river called Lake Pepin. Boats didn't go that far north very often in those days. Sometimes you had to wait days for the next one.",
+"cue_id": "ep05-009"
+},
+{
+"kind": "line",
+"t_start": 71.96,
+"t_end": 89.76,
+"speaker": "NARRATOR",
+"text": "And at the top, the old history says, they \"came by boat to St. Paul.\" But St. Paul wasn't a city yet. It was a stone fort on a cliff, called Fort Snelling, and a fur trader's post, and a few little cabins by the river. That's all.",
+"cue_id": "ep05-010"
+},
+{
+"kind": "line",
+"t_start": 90.94,
+"t_end": 92.82,
+"speaker": "ROSE ANGÈLE",
+"text": "This is St. Paul?",
+"cue_id": "ep05-011"
+},
+{
+"kind": "line",
+"t_start": 93.92,
+"t_end": 95.54,
+"speaker": "ABRAHAM",
+"text": "This is St. Paul.",
+"cue_id": "ep05-012"
+},
+{
+"kind": "line",
+"t_start": 96.84,
+"t_end": 98.7,
+"speaker": "ROSE ANGÈLE",
+"text": "It's smaller than Saint-Nicolas.",
+"cue_id": "ep05-013"
+},
+{
+"kind": "line",
+"t_start": 99.86,
+"t_end": 102.4,
+"speaker": "ABRAHAM",
+"text": "It's smaller than our barn. We won't be staying.",
+"cue_id": "ep05-014"
+},
+{
+"kind": "line",
+"t_start": 103.72,
+"t_end": 111.1,
+"speaker": "NARRATOR",
+"text": "Abraham was wrong about that. But he didn't know it yet. North, they went. To Red River.",
+"cue_id": "ep05-015"
+},
+{
+"kind": "scene",
+"t_start": 113.42,
+"t_end": null,
+"speaker": null,
+"text": "Scene 3 — Squeaky wheels (3:00–5:30)",
+"cue_id": "ep05-016"
+},
+{
+"kind": "ambience",
+"t_start": 113.42,
+"t_end": null,
+"speaker": null,
+"text": "Red River carts on a trail, the wooden wheels shrieking, oxen, wind in the grass",
+"key": "cart",
+"cue_id": "ep05-017"
+},
+{
+"kind": "line",
+"t_start": 116.46,
+"t_end": 120.7,
+"speaker": "NARRATOR",
+"text": "Do you hear that sound? That's a Red River cart. Lots of them.",
+"cue_id": "ep05-018"
+},
+{
+"kind": "line",
+"t_start": 122.0,
+"t_end": 153.34,
+"speaker": "NARRATOR",
+"text": "Here's tonight's lesson. A Red River cart was a cart with two big wheels, made all of wood. Not one single piece of metal. If a piece broke, you could fix it with an axe and a tree and some rawhide. A cart was pulled by one ox. And the wheels were never greased. Why not? Because on the dusty prairie, grease and dust would turn into a sticky paste that would grind the wheels to pieces.",
+"cue_id": "ep05-019"
+},
+{
+"kind": "line",
+"t_start": 154.94,
+"t_end": 167.4,
+"speaker": "NARRATOR",
+"text": "So the wood rubbed on the wood. And it squealed. And screeched. And shrieked. A long line of carts, all squealing at once, could be heard for miles across the prairie.",
+"cue_id": "ep05-020"
+},
+{
+"kind": "line",
+"t_start": 168.4,
+"t_end": 170.98,
+"speaker": "CHILD",
+"text": "Papa, why does the cart cry like that?",
+"cue_id": "ep05-021"
+},
+{
+"kind": "line",
+"t_start": 172.2,
+"t_end": 178.54,
+"speaker": "ABRAHAM",
+"text": "Because it doesn't want to go to Red River either, mon petit. But it goes anyway. Like the rest of us.",
+"cue_id": "ep05-022"
+},
+{
+"kind": "line",
+"t_start": 180.06,
+"t_end": 185.84,
+"speaker": "NARRATOR",
+"text": "In French, a cart is la charrette. And an ox is le bœuf.",
+"cue_id": "ep05-023"
+},
+{
+"kind": "line",
+"t_start": 187.1,
+"t_end": 188.52,
+"speaker": "FRENCH",
+"text": "La charrette. Le bœuf.",
+"cue_id": "ep05-024"
+},
+{
+"kind": "sfx",
+"t_start": 189.125,
+"t_end": 192.125,
+"speaker": null,
+"text": "oxen: an ox bellows",
+"key": "oxen",
+"cue_id": "ep05-025"
+},
+{
+"kind": "line",
+"t_start": 192.005,
+"t_end": 207.125,
+"speaker": "NARRATOR",
+"text": "The oxen walked slowly. Maybe fifteen miles a day. When they came to a river with no bridge, people sometimes took the wheels off and floated the cart across like a raft. It took five or six weeks to get to Red River.",
+"cue_id": "ep05-026"
+},
+{
+"kind": "line",
+"t_start": 208.345,
+"t_end": 231.785,
+"speaker": "NARRATOR",
+"text": "And one cart could carry a big load. As much as four or five grown-ups put together. So here's tonight's question. If you had a whole cart, for a whole new home, what would you pack? Not just a backpack this time. A cart. A bed? Pots and pans? Seeds for a garden? Your toys? Your little brother?",
+"cue_id": "ep05-027"
+},
+{
+"kind": "scene",
+"t_start": 234.145,
+"t_end": null,
+"speaker": null,
+"text": "Scene 4 — Red River and the Métis (5:30–8:00)",
+"cue_id": "ep05-028"
+},
+{
+"kind": "ambience",
+"t_start": 234.145,
+"t_end": null,
+"speaker": null,
+"text": "wind across the plain, a mission bell, distant voices",
+"key": "bells+wind",
+"cue_id": "ep05-029"
+},
+{
+"kind": "line",
+"t_start": 236.105,
+"t_end": 253.365,
+"speaker": "NARRATOR",
+"text": "At the place where two rivers meet, the Red River and the Assiniboine, there was a settlement. It had a church with bells, and farms in long strips along the river, just like back home in Quebec. The French part was called St. Boniface.",
+"cue_id": "ep05-030"
+},
+{
+"kind": "line",
+"t_start": 254.645,
+"t_end": 291.345,
+"speaker": "NARRATOR",
+"text": "And many of the people who lived there were Métis. The Métis are a people whose great-grandparents were First Nations, like the Cree and the Ojibwe, and French or Scottish fur traders. They had their own way of life. They hunted buffalo on the open plains, with long lines of those squeaky carts. They wore bright woven sashes around their waists. They had their own language, called Michif, that mixed Cree and French. And they loved music, and dancing. Especially the fiddle.",
+"cue_id": "ep05-031"
+},
+{
+"kind": "music",
+"t_start": 291.645,
+"t_end": 311.188,
+"speaker": null,
+"text": "fontaine",
+"key": "fontaine",
+"cue_id": "ep05-032"
+},
+{
+"kind": "line",
+"t_start": 296.385,
+"t_end": 305.205,
+"speaker": "NEIGHBOR",
+"text": "You're the new family from Quebec? Bonjour, bonjour! Come in out of the wind. Tonight there's fiddling at my cousin's house. You'll come. Everybody comes.",
+"cue_id": "ep05-033"
+},
+{
+"kind": "line",
+"t_start": 306.405,
+"t_end": 308.185,
+"speaker": "ROSE ANGÈLE",
+"text": "We don't know any of the dances.",
+"cue_id": "ep05-034"
+},
+{
+"kind": "line",
+"t_start": 309.425,
+"t_end": 312.105,
+"speaker": "NEIGHBOR",
+"text": "You'll learn. Your feet will learn before you do.",
+"cue_id": "ep05-035"
+},
+{
+"kind": "line",
+"t_start": 313.365,
+"t_end": 316.445,
+"speaker": "NARRATOR",
+"text": "A fiddle, in French, is le violon.",
+"cue_id": "ep05-036"
+},
+{
+"kind": "line",
+"t_start": 317.785,
+"t_end": 318.625,
+"speaker": "FRENCH",
+"text": "Le violon.",
+"cue_id": "ep05-037"
+},
+{
+"kind": "line",
+"t_start": 321.85,
+"t_end": 343.51,
+"speaker": "NARRATOR",
+"text": "That neighbor is imagined. But the fiddling was real, and the buffalo hunts were real, and the Lamberts lived in that world for about three years. In winter, the snow came across the plains like it wanted to bury everything. In summer, the carts of the buffalo hunters creaked out onto the prairie and came home loaded.",
+"cue_id": "ep05-038"
+},
+{
+"kind": "line",
+"t_start": 344.85,
+"t_end": 366.79,
+"speaker": "NARRATOR",
+"text": "Twice a year, the Métis went out on the great buffalo hunt. Hundreds of people, with hundreds of carts, rolling out onto the plains together, like a whole moving town. They had rules for the hunt, and captains, and scouts. And when they came home, the carts were loaded with buffalo meat and buffalo hides.",
+"cue_id": "ep05-039"
+},
+{
+"kind": "line",
+"t_start": 367.97,
+"t_end": 389.47,
+"speaker": "NARRATOR",
+"text": "Some of the meat was dried, and pounded, and mixed with melted fat and berries, and packed into leather bags. That was called pemmican. Pemmican kept for months, even years, and it was so full of energy that a little bit could keep a traveler going all day. It was the food that fed the whole fur trade.",
+"cue_id": "ep05-040"
+},
+{
+"kind": "line",
+"t_start": 390.53,
+"t_end": 392.21,
+"speaker": "CHILD",
+"text": "What does pemmican taste like?",
+"cue_id": "ep05-041"
+},
+{
+"kind": "line",
+"t_start": 393.23,
+"t_end": 397.15,
+"speaker": "NEIGHBOR",
+"text": "Like a long trip with no supper, little one. Here. Try some.",
+"cue_id": "ep05-042"
+},
+{
+"kind": "line",
+"t_start": 398.11,
+"t_end": 402.39,
+"speaker": "CHILD",
+"text": "It's chewy. And kind of salty. And there's a berry in it!",
+"cue_id": "ep05-043"
+},
+{
+"kind": "line",
+"t_start": 403.53,
+"t_end": 405.49,
+"speaker": "NEIGHBOR",
+"text": "That's the best part. You always hope for a berry.",
+"cue_id": "ep05-044"
+},
+{
+"kind": "scene",
+"t_start": 407.59,
+"t_end": null,
+"speaker": null,
+"text": "Scene 5 — The Oregon dream (8:00–10:30)",
+"cue_id": "ep05-045"
+},
+{
+"kind": "ambience",
+"t_start": 407.59,
+"t_end": null,
+"speaker": null,
+"text": "a stove fire in a log house, quiet",
+"key": "fire",
+"cue_id": "ep05-046"
+},
+{
+"kind": "line",
+"t_start": 409.73,
+"t_end": 420.27,
+"speaker": "NARRATOR",
+"text": "Now, remember the plan? Red River was only supposed to be a stop. The Lamberts were going on to Oregon, to Uncle Modeste, across the Rocky Mountains.",
+"cue_id": "ep05-047"
+},
+{
+"kind": "line",
+"t_start": 421.69,
+"t_end": 446.65,
+"speaker": "NARRATOR",
+"text": "But the trip from Red River to Oregon was another two thousand miles, on foot and by cart and on horseback, over plains and rivers and mountains. One big group of families had left Red River for Oregon the summer before the Lamberts got there. It took them a hundred and thirty days. And after they left, there wasn't another group going for years and years.",
+"cue_id": "ep05-048"
+},
+{
+"kind": "line",
+"t_start": 448.25,
+"t_end": 473.29,
+"speaker": "NARRATOR",
+"text": "The old history tells this part in just one sentence. The family was \"persuaded to give up the trip on account of the dangers.\" Who persuaded them? Nobody wrote it down. Maybe it was the bishop, Bishop Provencher, the same bishop who had asked Uncle Modeste to come west in the first place. Let's imagine it was.",
+"cue_id": "ep05-049"
+},
+{
+"kind": "sfx",
+"t_start": 473.93,
+"t_end": 477.83,
+"speaker": null,
+"text": "door: a heavy wooden door, footsteps on a plank floor",
+"key": "door",
+"cue_id": "ep05-050"
+},
+{
+"kind": "line",
+"t_start": 477.69,
+"t_end": 484.55,
+"speaker": "PROVENCHER",
+"text": "Monsieur Lambert. Madame. Sit, please. You're Modeste's sister. I'd know those eyes anywhere.",
+"cue_id": "ep05-051"
+},
+{
+"kind": "line",
+"t_start": 485.97,
+"t_end": 487.89,
+"speaker": "ROSE ANGÈLE",
+"text": "Is there news of him, Monseigneur?",
+"cue_id": "ep05-052"
+},
+{
+"kind": "line",
+"t_start": 489.21,
+"t_end": 495.31,
+"speaker": "PROVENCHER",
+"text": "He is well. And working too hard, as always. Now. You want to go on to Oregon.",
+"cue_id": "ep05-053"
+},
+{
+"kind": "line",
+"t_start": 496.41,
+"t_end": 501.51,
+"speaker": "ABRAHAM",
+"text": "That's why we came, Monseigneur. We've come two thousand miles already.",
+"cue_id": "ep05-054"
+},
+{
+"kind": "line",
+"t_start": 503.05,
+"t_end": 513.93,
+"speaker": "PROVENCHER",
+"text": "And there are two thousand more. Over the plains, through the mountains, with oxen, and six children. The last party left a year ago. Nobody knows when there will be another.",
+"cue_id": "ep05-055"
+},
+{
+"kind": "line",
+"t_start": 515.37,
+"t_end": 518.51,
+"speaker": "ABRAHAM",
+"text": "The soil there is fertile. Modeste said so.",
+"cue_id": "ep05-056"
+},
+{
+"kind": "line",
+"t_start": 519.69,
+"t_end": 529.39,
+"speaker": "PROVENCHER",
+"text": "The soil here is fertile too, my son. And it isn't on the other side of the Rocky Mountains. Stay. Rest. Plant. God will show you the next road when it's time.",
+"cue_id": "ep05-057"
+},
+{
+"kind": "line",
+"t_start": 530.57,
+"t_end": 531.27,
+"speaker": "ROSE ANGÈLE",
+"text": "Abraham?",
+"cue_id": "ep05-058"
+},
+{
+"kind": "line",
+"t_start": 532.35,
+"t_end": 534.65,
+"speaker": "ABRAHAM",
+"text": "We stay. For now, we stay.",
+"cue_id": "ep05-059"
+},
+{
+"kind": "line",
+"t_start": 535.75,
+"t_end": 545.73,
+"speaker": "NARRATOR",
+"text": "And so the Oregon dream was set down. Not thrown away. Set down. The way you set down something heavy you've carried for a very long way.",
+"cue_id": "ep05-060"
+},
+{
+"kind": "scene",
+"t_start": 547.93,
+"t_end": null,
+"speaker": null,
+"text": "Scene 6 — A wedding in the snow (10:30–12:30)",
+"cue_id": "ep05-061"
+},
+{
+"kind": "ambience",
+"t_start": 547.93,
+"t_end": null,
+"speaker": null,
+"text": "a cold church, a small crowd, a fiddle tuning",
+"key": "wedding",
+"cue_id": "ep05-062"
+},
+{
+"kind": "sfx",
+"t_start": 549.33,
+"t_end": 562.73,
+"speaker": null,
+"text": "bell: wedding bells, bright",
+"key": "bell",
+"cue_id": "ep05-063"
+},
+{
+"kind": "line",
+"t_start": 555.45,
+"t_end": 578.13,
+"speaker": "NARRATOR",
+"text": "Now, remember Rose Angélique, the oldest daughter? While they were at Red River, she fell in love. His name was Alexander Ducharme. He had grown up in the care of the bishop himself. And on the twenty-sixth of November, eighteen forty-four, with snow on the ground, they were married in the church at St. Boniface.",
+"cue_id": "ep05-064"
+},
+{
+"kind": "line",
+"t_start": 579.31,
+"t_end": 583.77,
+"speaker": "ROSE ANGÉLIQUE",
+"text": "Papa, Alexander has something to tell you. Before the fiddler starts.",
+"cue_id": "ep05-065"
+},
+{
+"kind": "line",
+"t_start": 584.71,
+"t_end": 600.51,
+"speaker": "DUCHARME",
+"text": "Monsieur Lambert, there's a place south of here, near St. Paul. A man named Gervais has a farm by a little lake. Good land. Good water. Woods for building. French families are starting to go there. Rose and I want to go, in the spring. And we want you and Madame to come with us.",
+"cue_id": "ep05-066"
+},
+{
+"kind": "line",
+"t_start": 601.65,
+"t_end": 603.99,
+"speaker": "ROSE ANGÈLE",
+"text": "South? After we came all this way north?",
+"cue_id": "ep05-067"
+},
+{
+"kind": "line",
+"t_start": 605.27,
+"t_end": 608.37,
+"speaker": "ROSE ANGÉLIQUE",
+"text": "Please, Maman. Home is wherever the family is.",
+"cue_id": "ep05-068"
+},
+{
+"kind": "line",
+"t_start": 609.67,
+"t_end": 611.09,
+"speaker": "ABRAHAM",
+"text": "She sounds like her father.",
+"cue_id": "ep05-069"
+},
+{
+"kind": "sfx",
+"t_start": 611.45,
+"t_end": 616.65,
+"speaker": null,
+"text": "laugh-crowd: the wedding guests laughing",
+"key": "laugh-crowd",
+"cue_id": "ep05-070"
+},
+{
+"kind": "music",
+"t_start": 613.05,
+"t_end": 632.593,
+"speaker": null,
+"text": "fontaine",
+"key": "fontaine",
+"cue_id": "ep05-071"
+},
+{
+"kind": "scene",
+"t_start": 619.05,
+"t_end": null,
+"speaker": null,
+"text": "Scene 7 — The carts go south (12:30–14:00)",
+"cue_id": "ep05-072"
+},
+{
+"kind": "ambience",
+"t_start": 619.05,
+"t_end": null,
+"speaker": null,
+"text": "a long cart train shrieking, oxen, wind in the grass",
+"key": "cart",
+"cue_id": "ep05-073"
+},
+{
+"kind": "line",
+"t_start": 620.77,
+"t_end": 643.83,
+"speaker": "NARRATOR",
+"text": "So in June of eighteen forty-five, when the prairie grass was tall enough to feed the oxen, the carts squealed south. Nobody wrote down which trail they took. Most likely it was the Woods Trail, along lakes and through forests, through the country of the Ojibwe people. Thirty or forty days of dust, and mosquitoes, and river crossings.",
+"cue_id": "ep05-074"
+},
+{
+"kind": "ambience",
+"t_start": 644.13,
+"t_end": null,
+"speaker": null,
+"text": "a fire at night, crickets, oxen shifting",
+"key": "campfire",
+"cue_id": "ep05-075"
+},
+{
+"kind": "line",
+"t_start": 644.73,
+"t_end": 645.35,
+"speaker": "ROSE ANGÈLE",
+"text": "Are you awake?",
+"cue_id": "ep05-076"
+},
+{
+"kind": "line",
+"t_start": 646.69,
+"t_end": 651.23,
+"speaker": "ABRAHAM",
+"text": "I'm counting stars instead of children. It's easier. They hold still.",
+"cue_id": "ep05-077"
+},
+{
+"kind": "line",
+"t_start": 652.29,
+"t_end": 654.17,
+"speaker": "ROSE ANGÈLE",
+"text": "Are you sorry? About Oregon?",
+"cue_id": "ep05-078"
+},
+{
+"kind": "line",
+"t_start": 655.39,
+"t_end": 662.15,
+"speaker": "ABRAHAM",
+"text": "I was. Tonight, I'm not. Tonight, I think maybe God just wanted us to take the long way.",
+"cue_id": "ep05-079"
+},
+{
+"kind": "scene",
+"t_start": 664.33,
+"t_end": null,
+"speaker": null,
+"text": "Scene 8 — Goodnight (14:00–15:30)",
+"cue_id": "ep05-080"
+},
+{
+"kind": "ambience",
+"t_start": 664.33,
+"t_end": null,
+"speaker": null,
+"text": "a prairie night, crickets, a soft wind, a fire burning low",
+"key": "night",
+"cue_id": "ep05-081"
+},
+{
+"kind": "music",
+"t_start": 665.53,
+"t_end": 768.515,
+"speaker": null,
+"text": "lullaby",
+"key": "lullaby",
+"cue_id": "ep05-082"
+},
+{
+"kind": "line",
+"t_start": 669.43,
+"t_end": 672.91,
+"speaker": "NARRATOR",
+"text": "Stars, in French, are les étoiles.",
+"cue_id": "ep05-083"
+},
+{
+"kind": "line",
+"t_start": 674.25,
+"t_end": 675.25,
+"speaker": "FRENCH",
+"text": "Les étoiles.",
+"cue_id": "ep05-084"
+},
+{
+"kind": "line",
+"t_start": 677.0,
+"t_end": 691.64,
+"speaker": "NARRATOR",
+"text": "Out on the prairie there are no city lights at all. So the stars come out by the thousands. By the millions. The whole sky is full of them, and the long cloudy stripe of the Milky Way runs right across the middle.",
+"cue_id": "ep05-085"
+},
+{
+"kind": "line",
+"t_start": 693.3,
+"t_end": 709.54,
+"speaker": "NARRATOR",
+"text": "The oxen are lying down in the grass. The carts are quiet, for once. The fire is just glowing coals. And the whole family is asleep under the wagons, wrapped up in blankets, all except Abraham, who is counting les étoiles.",
+"cue_id": "ep05-086"
+},
+{
+"kind": "line",
+"t_start": 710.94,
+"t_end": 722.9,
+"speaker": "NARRATOR",
+"text": "Next time, the carts reach a little lake, and Abraham finds something amazing in the woods. A lake shaped like a ring. With an island in the middle. But that's for tomorrow.",
+"cue_id": "ep05-087"
+},
+{
+"kind": "line",
+"t_start": 724.38,
+"t_end": 735.7,
+"speaker": "NARRATOR",
+"text": "Tonight, look up at your ceiling, and pretend it's the prairie sky. Count the stars. One. Two. Three. And close your eyes before you get to ten.",
+"cue_id": "ep05-088"
+},
+{
+"kind": "line",
+"t_start": 737.12,
+"t_end": 737.96,
+"speaker": "FRENCH",
+"text": "Bonne nuit.",
+"cue_id": "ep05-089"
+},
+{
+"kind": "line",
+"t_start": 739.435,
+"t_end": 744.295,
+"speaker": "NARRATOR",
+"text": "Goodnight, William. Goodnight, Alex. Goodnight, from the shore of Lambert Lake.",
+"cue_id": "ep05-090"
+}
+]

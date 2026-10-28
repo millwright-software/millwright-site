@@ -1,0 +1,266 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -71.18,
+      46.8
+     ],
+     [
+      -71.21,
+      46.81
+     ],
+     [
+      -73.57,
+      45.5
+     ],
+     [
+      -76.5,
+      44.25
+     ],
+     [
+      -79.38,
+      43.65
+     ],
+     [
+      -78.88,
+      42.9
+     ],
+     [
+      -83.47,
+      41.69
+     ],
+     [
+      -87.63,
+      41.88
+     ],
+     [
+      -89.08,
+      41.35
+     ],
+     [
+      -89.6,
+      40.8
+     ],
+     [
+      -90.75,
+      39.4
+     ],
+     [
+      -90.2,
+      38.63
+     ]
+    ]
+   },
+   "properties": {
+    "leg": 1,
+    "from": "Lévis",
+    "to": "St. Louis",
+    "year": 1841,
+    "mode": "boat",
+    "est_days": 40,
+    "confidence": "reconstructed",
+    "note": "MOCK. Neill: they 'went to St. Louis by boat and spent the winter.' The water route drawn (St. Lawrence, the lakes, the Illinois) is a placeholder; the real file decides.",
+    "sources": [
+     "Neill, History of Ramsey County (1881), p. 289"
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -90.2,
+      38.63
+     ],
+     [
+      -91.36,
+      39.71
+     ],
+     [
+      -91.38,
+      40.4
+     ],
+     [
+      -91.1,
+      40.81
+     ],
+     [
+      -90.52,
+      41.51
+     ],
+     [
+      -90.67,
+      42.5
+     ],
+     [
+      -91.14,
+      43.05
+     ],
+     [
+      -91.25,
+      43.81
+     ],
+     [
+      -91.64,
+      44.05
+     ],
+     [
+      -92.53,
+      44.56
+     ],
+     [
+      -93.09,
+      44.95
+     ]
+    ]
+   },
+   "properties": {
+    "leg": 2,
+    "from": "St. Louis",
+    "to": "St. Paul",
+    "year": 1842,
+    "mode": "boat",
+    "est_days": 20,
+    "confidence": "reconstructed",
+    "note": "MOCK. Neill: 'They came via boat to St. Paul.' Drawn along the Mississippi; days are a placeholder.",
+    "sources": [
+     "Neill, History of Ramsey County (1881), p. 289"
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -93.09,
+      44.95
+     ],
+     [
+      -93.26,
+      44.98
+     ],
+     [
+      -94.16,
+      45.59
+     ],
+     [
+      -95.38,
+      45.89
+     ],
+     [
+      -95.72,
+      46.42
+     ],
+     [
+      -96.58,
+      46.26
+     ],
+     [
+      -96.78,
+      47.08
+     ],
+     [
+      -97.03,
+      47.92
+     ],
+     [
+      -97.24,
+      48.97
+     ],
+     [
+      -97.1,
+      49.89
+     ]
+    ]
+   },
+   "properties": {
+    "leg": 3,
+    "from": "St. Paul",
+    "to": "St. Boniface (Red River)",
+    "year": 1842,
+    "mode": "overland",
+    "est_days": 35,
+    "confidence": "assumed",
+    "note": "MOCK. Neill: 'then to Red River with the idea of seeking a home in Oregon.' Which trail they took is not recorded; this is a placeholder line.",
+    "sources": [
+     "Neill, History of Ramsey County (1881), p. 289"
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -97.1,
+      49.89
+     ],
+     [
+      -97.24,
+      48.97
+     ],
+     [
+      -97.03,
+      47.92
+     ],
+     [
+      -96.78,
+      47.08
+     ],
+     [
+      -96.58,
+      46.26
+     ],
+     [
+      -95.72,
+      46.42
+     ],
+     [
+      -95.38,
+      45.89
+     ],
+     [
+      -94.16,
+      45.59
+     ],
+     [
+      -93.26,
+      44.98
+     ],
+     [
+      -93.09,
+      44.95
+     ],
+     [
+      -93.08,
+      45.02
+     ]
+    ]
+   },
+   "properties": {
+    "leg": 4,
+    "from": "St. Boniface (Red River)",
+    "to": "Little Canada",
+    "year": 1845,
+    "mode": "ox-cart",
+    "est_days": 35,
+    "confidence": "reconstructed",
+    "note": "MOCK. Wall: Alexander and Rose Ducharme 'brought along Rose's mother and father, Abraham and Angelique DeMers Lambert and their children.' The cart-trail line and the 35 days are placeholders until the journey file is written.",
+    "sources": [
+     "Wall, 'Little Canada—Heritage from the French', Ramsey County History (Fall 1964), p. 10",
+     "Neill, History of Ramsey County (1881), p. 289"
+    ]
+   }
+  }
+ ]
+}

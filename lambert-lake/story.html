@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lambert Lake, and the family it's named for</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A ring-shaped lake with an island, drained for the city's water and a farmer's fields, and the French-Canadian family that bought the island in 1849.">
+<link rel="icon" type="image/svg+xml" href="img/lambert-lake-logo.svg">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="scrolly" id="scrolly">
+  <div class="graphic" id="graphic">
+    <div id="story-map" aria-label="The story map"></div>
+    <div class="map-veil"></div>
+    <!-- the date, in one place, through the whole story -->
+    <div class="datemark" id="datemark" aria-live="polite"><svg class="logo small" viewBox="-24 -24 1048 950" aria-hidden="true"><path d="M623.8,5.1 L527.9,0.4 L391.1,63.5 L388.2,106.1 L382.2,112.5 L325.5,102.3 L207.9,68.6 L164.0,71.6 L135.5,80.1 L125.3,90.8 L98.4,165.3 L81.8,192.6 L83.5,210.9 L72.0,212.2 L0.0,331.9 L17.9,404.3 L40.1,448.2 L80.5,584.1 L96.3,598.6 L153.8,614.0 L210.1,613.5 L250.1,621.6 L288.0,670.2 L286.7,764.8 L293.1,832.6 L332.3,872.2 L383.0,900.7 L510.9,885.8 L566.3,832.6 L655.3,733.3 L657.4,723.9 L669.4,725.6 L699.6,706.9 L834.3,714.5 L942.9,649.8 L969.7,625.9 L993.6,590.5 L994.9,579.0 L989.3,573.9 L996.2,557.3 L991.1,542.0 L1000.0,525.8 L992.3,488.7 L979.5,464.4 L891.4,400.1 L875.2,332.8 L856.0,203.2 L771.6,176.4 L757.6,177.2 L754.6,169.6 L710.7,145.3 L697.9,124.4 L675.3,37.5 L656.2,32.0 L651.0,19.6 Z M436.7,279.5 L508.3,357.1 L591.4,367.7 L595.2,425.2 L563.7,544.1 L565.4,620.4 L484.4,681.3 L462.7,678.3 L326.4,606.3 L324.7,575.6 L318.7,567.5 L322.5,554.3 L314.9,539.8 L320.0,527.9 L310.6,487.0 L257.8,389.4 L293.6,373.2 L338.3,327.2 L372.0,303.8 Z" fill="#5f8793" fill-opacity="0.25" fill-rule="evenodd" stroke="#251e15" stroke-width="22" stroke-linejoin="round"/></svg><div class="y" id="dm-year"></div><div class="sub" id="dm-sub"></div></div>
+    <!-- the illustration for a journey beat, drawn onto the paper -->
+    <figure class="illus" id="illus"><img id="illus-img" alt="" data-enlarge tabindex="0" title="Click to enlarge"><figcaption id="illus-cap" data-enlarge></figcaption></figure>
+    <!-- the generation ribbon (the l-gens step): a strip that slides as the years advance -->
+    <div class="gen-strip" id="gen-strip" aria-hidden="true"><ol class="gs-track" id="gs-track"></ol><div class="gs-now"></div></div>
+    <!-- what the map is showing, and the line legend -->
+    <div class="hud" aria-live="polite">
+      <div class="tag legend modes" id="hud-modes"></div>
+      <div class="tag legend" id="hud-legend"><span class="k solid"></span>documented <span class="k dashed"></span>reconstructed <span class="k dotted"></span>the other possible route</div>
+      <div class="tag" id="hud-layer"></div>
+    </div>
+  </div>
+
+  <div class="steps" id="steps">
+
+    <!-- Opening: the ring -->
+    <section class="step" data-act="ring" data-date="" data-sub="Lambert Lake, as the surveyors drew it" data-pos="left">
+      <div class="prose">
+        <p>In December 1847 a government surveyor walked the shore of a lake north of St. Paul. It was shaped like a ring, with an island in the middle, and he wrote its size inside: 357 acres of water and land. It had no name yet.<sup class="fn"><a href="#s2">2</a></sup></p>
+        <p>Two years later a man named Abraham Lambert bought the island in the middle.</p>
+      </div>
+    </section>
+
+    <section class="step title" data-act="title" data-date="" data-sub="">
+      <div class="prose center bare">
+        <svg class="logo draw" viewBox="-24 -24 1048 950" aria-label="Lambert Lake and Lambert Island, as surveyed in 1847–48"><path d="M623.8,5.1 L527.9,0.4 L391.1,63.5 L388.2,106.1 L382.2,112.5 L325.5,102.3 L207.9,68.6 L164.0,71.6 L135.5,80.1 L125.3,90.8 L98.4,165.3 L81.8,192.6 L83.5,210.9 L72.0,212.2 L0.0,331.9 L17.9,404.3 L40.1,448.2 L80.5,584.1 L96.3,598.6 L153.8,614.0 L210.1,613.5 L250.1,621.6 L288.0,670.2 L286.7,764.8 L293.1,832.6 L332.3,872.2 L383.0,900.7 L510.9,885.8 L566.3,832.6 L655.3,733.3 L657.4,723.9 L669.4,725.6 L699.6,706.9 L834.3,714.5 L942.9,649.8 L969.7,625.9 L993.6,590.5 L994.9,579.0 L989.3,573.9 L996.2,557.3 L991.1,542.0 L1000.0,525.8 L992.3,488.7 L979.5,464.4 L891.4,400.1 L875.2,332.8 L856.0,203.2 L771.6,176.4 L757.6,177.2 L754.6,169.6 L710.7,145.3 L697.9,124.4 L675.3,37.5 L656.2,32.0 L651.0,19.6 Z M436.7,279.5 L508.3,357.1 L591.4,367.7 L595.2,425.2 L563.7,544.1 L565.4,620.4 L484.4,681.3 L462.7,678.3 L326.4,606.3 L324.7,575.6 L318.7,567.5 L322.5,554.3 L314.9,539.8 L320.0,527.9 L310.6,487.0 L257.8,389.4 L293.6,373.2 L338.3,327.2 L372.0,303.8 Z" fill="#5f8793" fill-opacity="0.18" fill-rule="evenodd" stroke="#251e15" stroke-width="12" stroke-linejoin="round"/></svg>
+        <h1>Lambert Lake</h1>
+        <p class="sub">and the family it's named for</p>
+        <div class="rule"></div>
+        <p class="where">Vadnais Heights and Little Canada, Minnesota</p>
+        <p class="scroll-hint">Scroll<span></span></p>
+      </div>
+    </section>
+
+    <!-- Prologue: Eustache -->
+    <section class="step chapter" data-act="ch-0" data-date="about 1617" data-sub="near Boulogne, in the north of France">
+      <div class="prose center bare"><h2 class="chapter-title"><span class="num">Prologue</span> <span class="t">Sainte-Marie</span></h2></div>
+    </section>
+
+    <!-- France: the opening scene. The research beats (3–4 short paragraphs on France about 1617–1644 and
+         Eustache in his twenties) go in .beats, one <p> each; the picture is the manifest's beat "france". -->
+    <section class="step tall long" data-act="eu-france" data-beat="france" data-date="1617–1636" data-sub="France" data-pos="left">
+      <div class="prose">
+        <p>The family tree begins with Eustache Lambert, born about 1617 or 1618, probably near Boulogne, in the north of France.<sup class="fn"><a href="#s9">9</a></sup></p>
+        <div class="beats" data-beats="0"></div>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="eu-france" data-beat="france" data-date="1639" data-sub="France" data-pos="left">
+      <div class="prose">
+        <div class="beats" data-beats="1"></div>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="eu-france" data-beat="france" data-date="1639–1644" data-sub="France" data-pos="left">
+      <div class="prose">
+        <div class="beats" data-beats="2"></div>
+      </div>
+    </section>
+
+    <section class="step tall longer" data-act="eu-sea" data-beat="crossing|quebec1640s" data-date="about 1644" data-sub="to New France" data-pos="left">
+      <div class="prose wide">
+        <p>He crossed in the early 1640s, probably in 1644. He never learned to write; he signed with a mark instead of his name.<sup class="fn"><a href="#s5">5</a>, <a href="#s9">9</a></sup></p>
+        <div class="beats" data-beats="3"></div>
+        <p class="note">No ship or route is recorded. The map follows the usual way of French ships then, by the Strait of Belle Isle and up the river past Gaspé and Tadoussac.</p>
+      </div>
+    </section>
+
+    <section class="step tall longer" data-act="eu-levy" data-beat="huronia" data-date="1646–1653" data-sub="Sainte-Marie, twice" data-pos="left">
+      <div class="prose">
+        <p>By 1646 he was paddling up the rivers to Sainte-Marie among the Hurons, the Jesuit mission near today's Midland, Ontario, where he served as an interpreter. In 1649, in the war that destroyed the Huron country, the mission was burned and abandoned.<sup class="fn"><a href="#s9">9</a></sup></p>
+        <p>In 1653 he started over. He took a strip of riverfront at Pointe-Lévy, across the St. Lawrence from Quebec, and named the farm Sainte-Marie, after the mission of his youth.<sup class="fn"><a href="#s5">5</a>, <a href="#s9">9</a></sup> He married Marie Laurence in 1656, and his farm became a meeting place for Huron and Algonquin traders passing Quebec. He died at Quebec in July 1673.</p>
+        <details class="more"><summary>more</summary><p>The grant was eight arpents of river frontage by forty deep, roughly a third of a mile by a mile and a half, and the only rent was a tenth of his eels. He was fishing there by 1651. The family tree gives his death as 6 June 1673; the Dictionary of Canadian Biography gives 6 July.</p></details>
+      </div>
+    </section>
+
+    <!-- I. Lauzon -->
+    <section class="step chapter" data-act="ch-1" data-date="1673" data-sub="the Lauzon shore">
+      <div class="prose center bare"><h2 class="chapter-title"><span class="num">I.</span> <span class="t">Lauzon</span></h2></div>
+    </section>
+
+    <!-- six generations on one shore: one tall step; the counter races from 1673 to 1792 and each generation
+         comes up as it passes (data/generations.json) -->
+    <section class="step gens" data-act="l-gens" data-beat="life-lauzon-levis|generations-1759|generations-1759" data-date="1673–1792" data-sub="six generations on one shore" data-pos="right">
+      <div class="prose">
+        <p class="gens-lead">Six generations lived on the Lauzon shore, father to son, from Eustache to Abraham.</p>
+        <details class="more"><summary>more</summary><p>Eustache's eldest son, Gabriel, ran Sainte-Marie from the age of twenty and lived his whole life there, a man "of gentle and quiet ways." Next door farmed Jean Dumets, the ancestor of the Demers family.<sup class="fn"><a href="#s5">5</a></sup> Gabriel's son Louis-Joseph, known as Monsieur de Sainte-Marie, was commanding the south-shore militia when Wolfe's army came up the river in 1759.<sup class="fn"><a href="#s5">5</a></sup></p><p>From there the family tree traces the line down, father to son, to Joseph Lambert and Judith Magnan.<sup class="fn"><a href="#s17">17</a></sup> Their son Abraham was born at Lauzon on 5 June 1792,<sup class="fn"><a href="#s6">6</a>, <a href="#s18">18</a></sup> the sixth generation on that shore, and grew up to farm it.</p><p>Roy warns that more than one unrelated Lambert family lived in the seigneury, so the links from Eustache down to Abraham's father still want checking against the original parish registers. In 1759 the families of the shore spent five months hiding in the woods while British guns on the Lévis heights fired across at Quebec; Louis-Joseph died the next January, still in command. In 1776 the King's commissioners struck off a Pointe-Lévy militia captain named Joseph Lambert for serving the American "Rebels"; which Lambert he was is not known, and he is probably where the family tree's "Patriot" comes from.<sup class="fn"><a href="#s5">5</a>, <a href="#s17">17</a></sup></p></details>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="l-marriage" data-beat="life-lauzon-church" data-date="1822" data-sub="22 January, Saint-Nicolas" data-pos="left">
+      <div class="prose">
+        <p>On 22 January 1822, at Saint-Nicolas, Abraham married Rose Angèle Demers, the daughter of Michel Demers and Rosalie Foucher. He was twenty-nine. He married into a big family: in the years after, he stood as a witness at her brothers' and sisters' weddings.<sup class="fn"><a href="#s6">6</a></sup></p>
+        <p>Their first child, a girl, was born the next May and baptized Rosalie, after her grandmother. Her godparents were her two grandparents, Judith Magnan and Michel Demers. She is very probably the Rose Angélique of the rest of this story.</p>
+        <details class="more"><summary>more</summary><p>The children, as the family tree and the gravestones list them: Rose Angélique (1823), Louis Abraham Thomas (1825), Félicité (1833), Pierre (1833), Le Sanges (1834), Esther (1835), Elizabeth (1837), Joseph Modeste (1838), and Marie (1849, at Little Canada). The county history counts six children on the journey west.<sup class="fn"><a href="#s10">10</a>, <a href="#s17">17</a>, <a href="#s18">18</a></sup></p><p>In November 1828 the bishop planted the cross for the church of a new parish, Saint-Jean-Chrysostome, in the village of Beaulieu, on <i>la terre d'Abraham Lambert</i>, the land of Abraham Lambert. It was very probably this Abraham; Esther was born in that parish. The neighbours argued the spot was too far from the middle, and the next summer the site moved.<sup class="fn"><a href="#s5">5</a></sup></p></details>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="l-cholera" data-beat="life-lauzon-farm" data-date="1832–34" data-sub="cholera and three hungry years" data-pos="right">
+      <div class="prose">
+        <p>Then came hard years. Cholera reached Canada in June 1832 and killed twenty-five people at Pointe-Lévy and thirteen at Saint-Nicolas by July, the Lamberts' two parishes. The harvests failed three years running. In 1834 a member told the Assembly he had seen fields at Saint-Jean-Chrysostome "entirely destroyed by hail," and that even the potatoes had failed.<sup class="fn"><a href="#s5">5</a></sup> Abraham and Rose Angèle had small children then: Félicité was born in 1833, Esther in 1835.</p>
+      </div>
+    </section>
+
+    <section class="step tall long" data-act="l-modeste" data-date="1838" data-sub="Uncle Modeste goes west" data-pos="right">
+      <div class="prose">
+        <p>Rose Angèle's younger brother, Modeste Demers, had become a priest. In 1838 he set out across the continent with Father François-Norbert Blanchet, to serve the French-Canadian farmers settled in the Oregon Country.<sup class="fn"><a href="#s7">7</a>, <a href="#s6">6</a></sup> That January, Abraham and Rose Angèle had named their newborn son Joseph Modeste, very likely for his uncle.</p>
+        <p>The missionaries' letters came home in print, in the yearly report of Quebec's mission society. The report of January 1840 described the country in words a farmer would remember:<sup class="fn"><a href="#s8">8</a></sup></p>
+        <blockquote class="pull"><p>très-propre à recevoir des colons ; le climat est doux, le sol fertile</p><cite>"well suited to settlers; the climate is mild, the soil fertile." <i>Rapport sur les missions du diocèse de Québec</i>, January 1840</cite></blockquote>
+        <p>In 1841 Abraham was forty-nine, on the shore where his people had lived for almost two hundred years. The record doesn't say why he left. The hungry years were fresh, the old seigneury was full, and his wife's brother was a priest among Canadien farmers in a mild, fertile country. Likely all of it weighed on him. He started anyway.</p>
+      </div>
+    </section>
+
+    <!-- II. The Journey West -->
+    <section class="step chapter" data-act="ch-2" data-date="1841" data-sub="from Lower Canada to the West">
+      <div class="prose center bare"><h2 class="chapter-title"><span class="num">II.</span> <span class="t">The Journey West</span></h2></div>
+    </section>
+
+    <section class="step tall longer" data-act="j-lawrence" data-beat="rapids" data-it="1841-01-levis-montreal,1841-02-montreal,1841-03-montreal-kingston,1841-04-kingston-buffalo,1841-05-buffalo,1841-06-buffalo-chicago,1841-07-chicago" data-pos="right">
+      <div class="prose">
+        <blockquote class="pull small"><p>Abram Lambert with his family of wife and three sons and three daughters left Lower Canada, in 1841…</p><cite>Neill, <i>History of Ramsey County</i>, 1881</cite></blockquote>
+        <p>They went up the St. Lawrence by steamer, changing to a stage around each rapid above Montreal, then crossed Lake Ontario and took a little railroad past Niagara to Buffalo.<sup class="fn"><a href="#s24">24</a></sup> There they boarded one of the big lake steamers that lived on emigrants and their farm tools: about a week on the water, past Detroit and around by Mackinac to Chicago.<sup class="fn"><a href="#s25">25</a></sup></p>
+        <p class="note">The stops and years are recorded; the roads and days are reconstructed. Solid lines are documented, dashed lines the likeliest way.<sup class="fn"><a href="#s10">10</a>, <a href="#s23">23</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall long" data-act="j-stlouis" data-beat="stlouis" data-it="1841-08-chicago-peru,1841-09-peru,1841-10-peru-st-louis,1841-11-st-louis-winter" data-pos="left">
+      <div class="prose">
+        <p>Chicago was a young town, and its canal to the Illinois River was not yet finished. A stage carried them across the prairie to Peru, and a steamboat down the Illinois to the Mississippi.<sup class="fn"><a href="#s24">24</a></sup> At St. Louis, an old French river town, they stopped and, in the county history's words, "spent the winter."<sup class="fn"><a href="#s10">10</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall long" data-act="j-stpaul" data-beat="mississippi" data-it="1842-01-st-louis-galena,1842-02-galena,1842-03-galena-fort-snelling,1842-04-mendota" data-pos="right">
+      <div class="prose">
+        <p>In the spring of 1842 they went on up the Mississippi, about 660 river miles, to the landing under Fort Snelling. Boats that far north were still rare, so they probably changed boats at Galena and waited.<sup class="fn"><a href="#s26">26</a></sup></p>
+        <blockquote class="pull"><p>They came via boat to St. Paul, then to Red River with the idea of seeking a home in Oregon.</p><cite>Neill, 1881</cite></blockquote>
+      </div>
+    </section>
+
+    <section class="step tall long" data-act="j-redriver" data-beat="camp" data-it="1842-05-mendota-red-river" data-pos="left">
+      <div class="prose">
+        <p>The way north was by ox cart, up the Minnesota valley and across the plains to the Red River, at about fifteen miles a day.<sup class="fn"><a href="#s28">28</a>, <a href="#s29">29</a></sup> Red River was the jumping-off place for Oregon. But its own emigrant party, 121 people under James Sinclair, had left the summer before, and the Hudson's Bay Company sent no second party for years.<sup class="fn"><a href="#s27">27</a></sup></p>
+        <p>So the Oregon plan ended there. The family "were persuaded to give up the trip on account of the dangers that beset their way."<sup class="fn"><a href="#s10">10</a></sup> Who persuaded them is not known. Bishop Provencher, who had sent Modeste west, may have been one of them.<sup class="fn"><a href="#s7">7</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="j-boniface" data-beat="redriver" data-it="1842-06-st-boniface" data-pos="right">
+      <div class="prose">
+        <p>They stayed about three years at St. Boniface, the bishop's parish across the river from Fort Garry. On 26 November 1844 Rose Angélique, the eldest, married Louis Alexander Ducharme there, a ward of the bishop.<sup class="fn"><a href="#s11">11</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall longer" data-act="j-trail" data-beat="trail" data-it="1845-01-st-boniface-pembina,1845-02-pembina-st-paul,1845-03-st-paul-little-canada" data-pos="left">
+      <div class="prose">
+        <p>In 1845 the Ducharmes started south for Minnesota and, as a county history tells it, brought Rose's mother and father and their children with them.<sup class="fn"><a href="#s11">11</a></sup> The cart brigades left in early June, when there was grass for the oxen: about 450 miles, about five weeks.<sup class="fn"><a href="#s29">29</a></sup> No one wrote down their trail. The map follows the Woods Trail, the traders' road after a fight on the open plains the year before; the dotted line is the plains road they might have taken instead.<sup class="fn"><a href="#s28">28</a></sup></p>
+        <p>They stopped among the French-Canadian families around Lake Gervais, north of St. Paul. Abraham settled on the west shore, with the Ducharmes nearby, four years after leaving Lauzon.<sup class="fn"><a href="#s10">10</a>, <a href="#s11">11</a></sup></p>
+      </div>
+    </section>
+
+    <!-- III. The Island -->
+    <section class="step chapter" data-act="ch-3" data-date="1849" data-sub="25 March">
+      <div class="prose center bare"><h2 class="chapter-title"><span class="num">III.</span> <span class="t">The Island</span></h2></div>
+    </section>
+
+    <section class="step tall" data-act="island" data-date="1849" data-sub="25 March, the Falls of St. Croix land office" data-pos="left">
+      <div class="prose">
+        <p>On a single day, 25 March 1849, the government land office issued Abraham two patents. One was for his farm on Lake Gervais. The other was for the whole island in the middle of the ring lake, three miles north.<sup class="fn"><a href="#s1">1</a></sup> No one else bought land at that lake for four more years.</p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="island-patent" data-date="1849" data-sub="certificate No. 137" data-pos="right">
+      <div class="prose wide">
+        <a class="patent" href="img/1849-patent-island-page.jpg" data-enlarge data-caption="<b>The 1849 land patent</b>, certificate No. 137, to &quot;Abraham Lombert&quot; for lots 6 and 7 of section 29, township 30 north, range 22 west, 94.39 acres. <span class=&quot;cr&quot;>Bureau of Land Management, General Land Office Records, MN2090__.032.</span>"><img src="img/1849-patent-island-page.jpg" alt="The 1849 land patent, certificate No. 137, to Abraham Lombert for lots 6 and 7 of section 29, township 30 north, range 22 west" loading="lazy"></a>
+        <p>The clerk spelled him "Abraham Lombert, of St. Croix County, Wisconsin": Minnesota Territory was only three weeks old. The patent, in the name of President Zachary Taylor, grants the island to him "and to his heirs and assigns forever."<sup class="fn"><a href="#s1">1</a></sup> Click the page to see it large.</p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="island-lots" data-date="1849" data-sub="lots 6 and 7" data-pos="left">
+      <div class="prose">
+        <p>The patent's two lots are exactly the island. The surveyor wrote their acres on the plat, and they add up to the patent's figure to the hundredth of an acre.<sup class="fn"><a href="#s2">2</a></sup></p>
+        <div class="sum">
+          <span class="lot">Lot 6</span><span class="ac">58.69</span>
+          <span class="lot">Lot 7</span><span class="ac">35.70</span>
+          <span class="lot total">The patent</span><span class="ac total">94.39 acres</span>
+        </div>
+        <p>Abraham bought the whole island.</p>
+      </div>
+    </section>
+
+    <!-- IV. Little Canada -->
+    <section class="step chapter" data-act="ch-4" data-date="1849" data-sub="Lake Gervais">
+      <div class="prose center bare"><h2 class="chapter-title"><span class="num">IV.</span> <span class="t">Little Canada</span></h2></div>
+    </section>
+
+    <section class="step tall" data-act="lc-farm" data-date="1850" data-sub="the farm, and the post office" data-pos="left">
+      <div class="prose">
+        <p>Home was the farm: about ninety acres on the west shore of Lake Gervais.<sup class="fn"><a href="#s1">1</a></sup> Abraham became one of the little settlement's steady hands. In 1850 the county named him an election judge for Little Canada. He was appointed to run its new post office, remembered later as the first in Minnesota outside St. Paul,<sup class="fn"><a href="#s4">4</a></sup> and in 1851 he helped oversee the building of the road to White Bear.<sup class="fn"><a href="#s12">12</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="lc-church" data-beat="life-canada-chapel" data-date="1851" data-sub="St. John the Evangelist" data-pos="left">
+      <div class="prose">
+        <p>Until then the French Canadians' church was Father Galtier's log chapel in St. Paul. When Little Canada founded its own parish, St. John the Evangelist, in October 1851, Abraham gave twenty acres for its cemetery, and the logs for the first church came from his land, "the large logs hauled by sleighs over the snow."<sup class="fn"><a href="#s11">11</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="lc-chair" data-date="1852" data-sub="the folding chair" data-pos="right">
+      <div class="prose">
+        <p>A county history calls him "the stubborn Abraham Lambert." When the new church began charging pew rent in 1852,</p>
+        <blockquote class="pull"><p>Abraham Lambert objected to paying it but, not wanting to miss Mass, he built himself a folding chair and every Sunday carried it to church, set it up, then carried it home again.</p><cite>Wall, <i>Ramsey County History</i>, 1964, from a Lambert family manuscript</cite></blockquote>
+      </div>
+    </section>
+
+    <section class="step" data-act="lc-louis" data-date="1853" data-sub="Louis buys the next eighty acres" data-pos="left">
+      <div class="prose">
+        <p>In 1853 his son Louis bought the eighty acres just south of the farm.<sup class="fn"><a href="#s1">1</a></sup> The family's names spread along the west side of the lake, and the county history of 1881 found three sons still farming Abraham's claim.<sup class="fn"><a href="#s10">10</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="lc-island" data-date="1867" data-sub="the island changes hands" data-pos="right">
+      <div class="prose">
+        <p>The island did not stay in the family long. By 1867 the county map lettered the water Lambert's Lake, and put another man's name, P. Jervais, on the island.<sup class="fn"><a href="#s19">19</a></sup> When it was sold, and why, is in the county deed books, which have not yet been read.</p>
+      </div>
+    </section>
+
+
+    <!-- V. The Lake Goes Dry -->
+    <section class="step chapter" data-act="ch-5" data-date="1870" data-sub="the lake goes dry">
+      <div class="prose center bare"><h2 class="chapter-title"><span class="num">V.</span> <span class="t">The Lake Goes Dry</span></h2></div>
+    </section>
+
+    <section class="step tall" data-act="v-depth" data-date="1870" data-sub="the lake Abraham knew" data-pos="right">
+      <div class="prose wide">
+        <p>When Abraham bought the island, the water around it was mostly three to six feet deep, eight to eleven in the east pocket: a lake you could pole a boat across and touch bottom almost anywhere. It was the last few feet of water on a basin that had been filling with peat for 9,000 years, and the island was a hill the glaciers left behind, with oaks on top.<sup class="fn"><a href="#s15">15</a></sup></p>
+        <a class="patent lidar" href="img/lambert-basin-lidar.png" data-enlarge data-caption="<b>The Lambert Lake basin</b>, a hillshade of Minnesota LiDAR elevation data: the hollow of the ring and the hill of the island."><img src="img/lambert-basin-lidar.png" alt="LiDAR hillshade of the Lambert Lake basin: the ring-shaped hollow and the island hill at its center" loading="lazy"></a>
+        <p class="figcap">The basin today, from the state's elevation survey: the hollow of the ring and the hill of the island.</p>
+        <details class="more"><summary>more</summary><p>Nobody ever measured the depth. The surveyor's line along the shore in 1847 still sits at about 906 feet above sea level on both sides, and the floor of the basin today lies a few feet below it. The peat under the water runs ten to twenty-five feet deep in the wetlands along Lambert Creek.</p></details>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="drain-1870" data-date="1870" data-sub="the St. Paul Water Company's canal" data-pos="left">
+      <div class="prose">
+        <p>The city drank it first. In 1870 the St. Paul Water Company ran a canal to Lambert Lake and counted it among the lakes "tributary to St. Paul." The lake sat about thirty feet above Vadnais, so a canal between them was a drain.<sup class="fn"><a href="#s14">14</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="lc-death" data-date="1875" data-sub="St. John's cemetery" data-pos="right">
+      <div class="prose">
+        <p>Abraham died at Little Canada at the end of August 1875, at eighty-three, and was buried at St. John's, in the cemetery on the land he had given. Rose Angèle died the next August.<sup class="fn"><a href="#s18">18</a></sup> He may have lived long enough to see the lake that carried his name begin to fall.</p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="drain-1881" data-date="1881" data-sub="meadow lands" data-pos="left">
+      <div class="prose">
+        <p>Eleven years after the canal, the county history wrote the lake's first obituary:</p>
+        <blockquote class="pull"><p>has since been drained into Vadnais lake, so much so that a large portion is now occupied as meadow lands.</p><cite>Neill, <i>History of Ramsey County</i>, 1881</cite></blockquote>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="drain-1894" data-date="1893–94" data-sub="Barnum's ditch" data-pos="right">
+      <div class="prose">
+        <p>Then a farmer finished the job. In the winter of 1893–94 A. K. Barnum, who by then owned the island and nearly the whole shore, hired a man to dig more than a mile of ditch to Lake Vadnais, through springs and quicksand, "for the purpose of draining the former." The two ended up before the Minnesota Supreme Court over the bill.<sup class="fn"><a href="#s14">14</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="drain-1902" data-date="1899" data-sub="the government's topographic survey" data-pos="right">
+      <div class="prose"><p>By 1899 the government's mapmakers found only marsh. They drew reeds where the ring had been, and one contour line around the island.<sup class="fn"><a href="#s20">20</a></sup></p></div>
+    </section>
+
+    <section class="step tall" data-act="drain-1916" data-date="1916" data-sub="the county's ditches" data-pos="left">
+      <div class="prose"><p>In 1916 Ramsey County dug its own ditches through the old bed, and more in 1927. From the 1930s a developer sold house lots on the dry ground.<sup class="fn"><a href="#s14">14</a></sup></p></div>
+    </section>
+
+    <section class="step tall" data-act="drain-1957" data-date="1957" data-sub="air photo" data-pos="right">
+      <div class="prose"><p>In 1957 the Lake Vadnais area voted to become a village: Vadnais Heights.<sup class="fn"><a href="#s16">16</a></sup></p></div>
+    </section>
+
+    <section class="step tall" data-act="drain-1974" data-date="1974" data-sub="air photo" data-pos="left">
+      <div class="prose"><p>Then came the freeway. Interstate 35E was built past the old lake beginning in 1964.<sup class="fn"><a href="#s16">16</a></sup></p></div>
+    </section>
+
+    <section class="step tall" data-act="drain-2024" data-date="2024" data-sub="Lambert Creek" data-pos="right">
+      <div class="prose"><p>The ditch that drained the lake is Lambert Creek now, and in 2021 crews dug its bends back in. A pond sits in the old footprint, and a scrap of open water, less than an acre, is still listed by the county as Lambert Lake.<sup class="fn"><a href="#s14">14</a></sup></p></div>
+    </section>
+
+    <!-- Epilogue -->
+    <section class="step chapter" data-act="ch-6" data-date="2026" data-sub="the name stays">
+      <div class="prose center bare"><h2 class="chapter-title"><span class="num">Epilogue</span> <span class="t">The Name Stays</span></h2></div>
+    </section>
+
+    <section class="step tall" data-act="name" data-date="2026" data-sub="the name stays" data-pos="right">
+      <div class="prose">
+        <p>The island left the family within twenty years, and the lake is nearly gone. The name stayed: on the maps, on the creek, on the pond. The county history of 1881 gave the credit to the son:</p>
+        <blockquote class="pull"><p>This lake was named in honor of Louis Lambert, who purchased a portion of the island located near its center in an early day.</p><cite>Neill, 1881</cite></blockquote>
+        <p>The only purchase on record is his father's. Either way, it is the family's name.<sup class="fn"><a href="#s1">1</a>, <a href="#s10">10</a></sup></p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="line" data-date="2026" data-sub="Eustache to Mary" data-pos="right">
+      <div class="prose">
+        <p>And the family went on.</p>
+        <ol class="register">
+          <li><b>Eustache Lambert</b> <span>about 1618–1673, from near Boulogne to Pointe-Lévy; m. Marie Laurence, 1656</span></li>
+          <li><b>Gabriel Lambert, Sieur de Sainte-Marie</b> <span>1657–1719; m. Françoise-Renée Roussel, 1683</span></li>
+          <li><b>Louis-Joseph Lambert, Monsieur de Sainte-Marie</b> <span>1695–1760; m. Geneviève Rouer de Villeray, 1722</span></li>
+          <li><b>Louis-Joseph Lambert</b> <span>1725–1817; m. Marie-Thérèse Frontigny</span></li>
+          <li><b>Joseph (Louis-Joseph) Lambert</b> <span>born 1749; m. Judith Magnan, 1777</span></li>
+          <li><b>Abraham Lambert</b> <span>1792–1875, Lauzon to Little Canada; m. Rose Angèle Demers, 1822</span></li>
+          <li><b>Louis Abraham Thomas Lambert</b> <span>1825–1900</span></li>
+          <li><b>David J. Lambert</b> <span>1871–1928</span></li>
+          <li><b>Joseph Eugene Lambert</b> <span>1894–1968, Cloquet</span></li>
+          <li><b>Marjorie Jane (Lambert) Delyea</b> <span>1919–1998</span></li>
+          <li><b>Mary Elizabeth Richey</b> <span>born 1950</span></li>
+        </ol>
+        <details class="more"><summary>more</summary><p>The line follows the family tree, with the 1822 marriage and Abraham's parents from the Saint-Nicolas register and the early generations from Roy's history of the seigneury. More than one unrelated Lambert family lived in Lauzon, so the links from Eustache to Abraham still want checking against the original parish registers.<sup class="fn"><a href="#s5">5</a>, <a href="#s6">6</a>, <a href="#s17">17</a></sup></p></details>
+      </div>
+    </section>
+
+    <!-- After the line: the Lamberts of northern Minnesota, then Mary, then Eric (data/descendants.json) -->
+    <section class="step tall" data-act="d-north" data-beat="intlfalls" data-date="" data-sub="the Lamberts of northern Minnesota" data-pos="right">
+      <div class="prose">
+        <p>From Lake Gervais the family went north, to the forests and mill towns of northern Minnesota.</p>
+        <ol class="desc" data-gens="7,8"></ol>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="d-cloquet" data-beat="cloquet-1910|cloquet-fire" data-date="" data-sub="Cloquet" data-pos="right">
+      <div class="prose">
+        <ol class="desc" data-gens="9,10"></ol>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="d-mary" data-date="" data-sub="Mary" data-pos="right">
+      <div class="prose">
+        <ol class="desc" data-gens="11"></ol>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="d-park" data-date="2026" data-sub="Abraham's Park, Little Canada" data-pos="left">
+      <div class="prose">
+        <p>Part of Abraham's 1849 farm is a county park now, on Edgerton Street by Lake Gervais. The family calls it Abraham's Park. William and Alex pass it every day on the way to school.</p>
+      </div>
+    </section>
+
+    <section class="step tall" data-act="d-eric" data-date="2026" data-sub="3921 Woodview Ct, Vadnais Heights" data-pos="left">
+      <div class="prose">
+        <p>And Eric Richey, the twelfth generation from Eustache, lives at 3921 Woodview Ct in Vadnais Heights, <span id="home-dist">about 0.84 miles</span> from the island Abraham bought in 1849.</p>
+      </div>
+    </section>
+
+    <section class="step short" data-act="line-out" data-date="2026" data-sub="every map, on one frame" data-pos="left">
+      <div class="prose">
+        <p>Explore every map yourself. Below, every map of the lake from 1856 to 2026 sits on one frame: play it through, drag the year, or split the screen between two years.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- The full time map -->
+<section class="atlas" id="atlas" aria-label="Lambert Lake through time">
+  <nav>
+    <h2>Lambert Lake, 1856–2026</h2>
+    <p class="lead">Plats, atlases, a topographic map and air photos, laid on the same ground. Under them, today's streets or satellite. South of the old lake, where the family farmed, the county's own air photo for that year fills in.</p>
+    <h3>Places</h3>
+    <div class="places" id="places"></div>
+    <h3>Show</h3>
+    <div class="toggles" id="toggles">
+      <button data-t="parcels" class="on">the family's land</button>
+      <button data-t="labels" class="on">labels</button>
+      <button data-t="county" class="on">county air photo</button>
+      <button data-t="house" title="Eric's house, today">3921 Woodview Ct</button>
+    </div>
+    <h3>Underneath</h3>
+    <div class="under" id="under">
+      <button data-u="streets" class="on">streets</button>
+      <button data-u="imagery">satellite</button>
+    </div>
+    <p class="nav-note" id="nav-note">Space plays. Arrow keys step a year. Scroll on the map to zoom.</p>
+  </nav>
+  <div class="stage" id="stage">
+    <div id="time-map"></div>
+    <div class="divider" id="divider"><div class="bar" id="bar"></div><div class="grip" id="grip">&#8596;</div></div>
+    <div class="lens" id="lens"></div><div class="ytag" id="tagA"></div><div class="ytag" id="tagB"></div>
+  </div>
+  <footer>
+    <div class="year" id="year"></div>
+    <div class="text"><div class="caption" id="caption"></div><div class="history" id="history"></div><div class="credit" id="credit"></div></div>
+    <div class="modes" id="modes">
+      <button data-m="fade" class="on" title="f">Fade</button><button data-m="x" title="s">Swipe &#8596;</button>
+      <button data-m="y" title="d">Swipe &#8597;</button><button data-m="lens" title="l">Looking glass</button>
+      <span class="pick"><span id="labOver">left</span> <select id="selOver"></select>
+        <button id="swap" title="Swap (x)">&#8644;</button>
+        <span id="labUnder">right</span> <select id="selUnder"></select></span>
+    </div>
+    <div class="timeline">
+      <button id="play" title="Play (space)" aria-label="Play">&#9654;</button>
+      <div class="track" id="track"><div class="knob" id="knob"></div></div>
+    </div>
+  </footer>
+</section>
+
+<!-- Sources -->
+<section class="sources" id="sources">
+  <h2>Sources</h2>
+  <p class="lead">Every date, acreage and quotation above comes from one of these; the small numbers in the story point here. Where the record is thin or disagrees with itself, the note says so.</p>
+
+  <h3>Records</h3>
+  <ol>
+    <li id="s1">Bureau of Land Management, General Land Office Records. Patent to "Abraham Lombert," lots 6 and 7, sec. 29, T30N R22W, 94.39 acres, Falls St. Croix certificate 137, 25 March 1849, accession MN2090__.032 (the image above). Patent to Abraham Lambert, lots 1 and 2, sec. 8, T29N R22W, 91.25 acres, certificate 59, same day, MN2090__.005. Patent to Louis A. Lambert, E½SW¼ sec. 8, T29N R22W, 80 acres, Stillwater, 20 June 1853, MN2090__.155. An exhaustive pull of all 1,569 patents in T28–30N, R21–23W found no other federal purchase by Abraham, and no other purchase at the lake before 1853.</li>
+    <li id="s2">Government survey plat of T30N R22W (surveyed 1847–48; MnGeo georeferenced GLO plats, Minnesota Historical Society). Lot 6, "A. 58.69"; lot 7, "A. 35.70"; the island's total, 94.39; the ring and island together, "A. 357.15". Parcel outlines on the maps: BLM PLSS CadNSDI government lots.</li>
+    <li id="s3">Lake Gervais and Little Canada parcels: the same BLM survey layer, lots as patented.</li>
+    <li id="s4">Minnesota Pioneer, 10 April 1850, p. 3 (election judge); Minnesotian, 17 January 1852, p. 3 (paid as judge); Weekly Minnesotian, 1 August 1857, p. 4 (the Little Canada post office, "Abraham Lambert appointed"). Library of Congress, Chronicling America.</li>
+  </ol>
+
+  <h3>Quebec</h3>
+  <ol start="5">
+    <li id="s5">J.-Edmond Roy, <i>Histoire de la seigneurie de Lauzon</i>, 5 vols. (Lévis, 1897–1904), archive.org. Vol. 1, ch. 19, pp. 255–261 (Eustache: the donné, his mark, the 1653 grant and the eels, the farm called Sainte-Marie), p. 165 (Jean Dumets, ancestor of the Demers, beside Eustache), p. 202 (the 1667 census: Gabriel, aged 20, running the farm), pp. 258, 262–263 (Gabriel's marriage and his plea of deafness); vol. 2, pp. 41–42 (Gabriel "de mœurs douces et tranquilles"; Louis-Joseph, Monsieur de Ste-Marie, the militia command and the first pew; his death on 21 January 1760), pp. 266–268 (the summer of 1759, "cinq longs mois" in the woods); vol. 3, p. 229 n. 2 (a Magnan–Lambert marriage, 1777); vol. 4, appendix (the 1776 commissioners at Pointe-Lévy and Captain Joseph Lambert); vol. 5, pp. 34–37 (November 1828: the cross planted "sur la terre d'Abraham Lambert" at Beaulieu, and the site moved in July 1829), pp. 349–359 (cholera, 1832; the hail at Saint-Jean-Chrysostome and the third year of famine, 1834). Page numbers come from the OCR's page markers and may be off by one. Roy notes that more than one unrelated Lambert family lived in the seigneury.</li>
+    <li id="s6">Saint-Nicolas parish register transcriptions, François Marchi, genealogie.quebec (stemma4web): the marriage of Abraham Lambert, "fils de Judith Magnan et Joseph Lambert," and Rose Angèle Demers, "fille de Rosalie Foucher et Michel Demers," 22 January 1822 (Saint-Nicolas, 1822, p. 2, act M2; records 381992, 381995); the baptism of Rosalie Lambert, born 10 May and baptized 11 May 1823, godparents Judith Magnan and Michel Demers (382453); the household of Michel Demers and Rosalie Foucher, including Rose Angèle and Modeste, and Michel Demers's death on 29 July 1838 (75672, 75673); Abraham as witness at the Demers weddings of 1829 and 1832 (139056). A secondary transcription; the original register images have not been seen. The family tree's earlier date and place for the marriage are corrected here from this register, which MesAieux also gives.</li>
+    <li id="s7">Usher, "Demers, Modeste," <i>Dictionary of Canadian Biography</i>, vol. 10 (biographi.ca): son of Michel Demers and Rosalie Foucher; missionary to the Oregon Country with F.-N. Blanchet from 1838. Also Lemieux, "Provencher, Joseph-Norbert," DCB vol. 8, for the bishop who recruited him.</li>
+    <li id="s8">Association de la Propagation de la Foi, <i>Notice sur les missions du diocèse de Québec</i>, No. 1 (Quebec: Fréchette, January 1839), pp. 22–23 (the Columbia mission; "un trajet d'environ deux mille lieues à travers le continent"); <i>Rapport sur les missions du diocèse de Québec</i>, No. 2 (January 1840), pp. 22–27 (Cowlitz: "très-propre à recevoir des colons ; le climat est doux, le sol fertile"; the Willamette chapel of 70 feet by 30 and its first Mass, 6 January 1839); No. 3 (January 1841), with the year's contributions listed parish by parish. archive.org. The English renderings in the story are this page's own.</li>
+    <li id="s9">J. Monet, "Lambert, Eustache," <i>Dictionary of Canadian Biography</i>, vol. 1: born about 1618 "probably near Boulogne"; a donné; at Sainte-Marie among the Hurons in 1646; land at Pointe-Lévy in 1653 and the house Sainte-Marie, "in memory of his youth in the Huron country"; married Marie Laurence 1656; died at Quebec, July 1673. Henry Gosselin, <i>Eustache Lambert: Donné Extraordinaire</i> (2001), for the 1644 arrival.</li>
+  </ol>
+
+  <h3>Minnesota histories</h3>
+  <ol start="10">
+    <li id="s10">Edward D. Neill, <i>History of Ramsey County and the City of St. Paul</i> (1881), p. 281 (the lake "named in honor of Louis Lambert"; "has since been drained into Vadnais lake") and p. 289 (the family's route, 1841–45; the Oregon plan; "where he died in 1875"; three sons still on the claim).</li>
+    <li id="s11">Margaret Whitney Wall, "Little Canada—Heritage from the French," <i>Ramsey County History</i> 1:2 (Fall 1964), pp. 10–12: the Ducharme marriage at St. Boniface, the return south, the cemetery gift, the church logs, the pew rent and the folding chair, and "the stubborn Abraham Lambert," drawing on George Belland's manuscript "The Abraham Lambert Family" and Msgr. Arthur Durand's 1957 monograph. The gravestone puts the cemetery gift in 1853 and the family's arrival at St. Boniface in 1841; the story follows Wall and Neill.</li>
+    <li id="s12">Alan R. Woolworth, "White Bear Lake," <i>Ramsey County History</i> (Fall 1965), p. 5 (the 1851 Little Canada–White Bear road).</li>
+    <li id="s13">Warren Upham, <i>Minnesota Geographic Names</i> (1920), p. 442, repeating Neill on the name.</li>
+    <li id="s14">The draining: Neill (1881), p. 434 (the St. Paul Water Company's 1870 canal; the lakes "tributary to St. Paul") and p. 281; <i>Swank v. Barnum</i>, 63 Minn. 447 (1896), Minnesota Supreme Court (David Swank's 5,963-foot ditch of 1893–94, "for the purpose of draining the former, and thereby improving the defendant's farm"); Vadnais Lake Area Water Management Organization watershed plan, Appendix B (County Ditches 13 and 14, 1916; laterals 1927), and its Lambert Creek and Lambert Lake Pond pages (the 2005 pond, the 2021 meander); Minnesota Historical Society, Davidson Company papers (Stockdale Farms plats, about 1933–1948); Ramsey County GIS and the Minnesota DNR Public Waters Inventory, 62-30 (the 0.68-acre Lambert Lake today).</li>
+    <li id="s15">The lake's depth and ground: the 1847–48 meander line read over Minnesota LiDAR elevation data; USGS Water-Resources Investigations Report 94-4062 (peat); SSURGO soils; Minnesota Geological Survey, Ramsey County geologic atlas C-07, plate 3 (the island's till). Worked in <code>research_notes/lake/lake.md</code>.</li>
+    <li id="s16">Area history on the maps: White Bear Township history pages (from Catherine Carey, <i>White Bear: A History</i>, 2008); Press Publications Vadnais Heights history columns (the 1957 vote, 277 to 83; I‑35E); Gem Lake history (gemlakemn.org); U.S. census populations.</li>
+  </ol>
+
+  <h3>Family</h3>
+  <ol start="17">
+    <li id="s17">The family tree on Ancestry: the line from Eustache Lambert to Abraham, and Abraham → Louis Abraham Thomas Lambert (1825–1900) → David J. Lambert → Joseph E. Lambert (1894–1968) → Marjorie Jane Delyea (1919–1998) → Mary Elizabeth Richey (1950); the children and their years. The tree's generations two to five are not yet checked against the parish registers; where Roy or the Saint-Nicolas register gives a different date or name (Gabriel's marriage in 1683; Abraham's father as Joseph Lambert), the story follows them.</li>
+    <li id="s18">Find a Grave, St. John the Evangelist Cemetery, Little Canada: Abraham Lambert (memorial 50657843; born 5 June 1792, Lauzon; died 30 or 31 August 1875, age 83); Marie Esther Augé (72497788; Rose Angèle's dates, 1797–1876; Esther born 1835 at Saint-Jean-Chrysostome); Rose Angélique Ducharme (201643373); Joseph Modeste Lambert (71154227, born January 1838).</li>
+  </ol>
+
+  <h3>Maps</h3>
+  <ol start="19">
+    <li id="s19">L. G. Bennett, <i>Map of Ramsey County</i> (1867); G. M. Hopkins, <i>Atlas of the Environs of St. Paul</i> (1886), plate 19; P. M. Dahl, <i>Plat Book of Ramsey County</i> (1898); <i>Atlas of Ramsey County</i>, St. Paul Real Estate Board (1931): University of Minnesota Libraries, UMedia. 1859 township plat: Minnesota Historical Society. Andreas atlas (1874): David Rumsey Map Collection.</li>
+    <li id="s20">USGS, White Bear 1:62,500 topographic quadrangle (surveyed 1899, published 1902).</li>
+    <li id="s21">Air photos: Ramsey County GIS (1940–2024); University of Minnesota Borchert Map Library, MHAPO (1947 USGS, 1957 Ramsey County). 2026: Google Maps imagery, stitched from 18 screenshots.</li>
+    <li id="s22">Live map layers: Ramsey County orthophoto services; MnGeo GLO plats; Esri World Imagery, World Street Map, World Physical Map and Light Gray Canvas (with HERE, Garmin and OpenStreetMap data).</li>
+  </ol>
+
+  <h3>The journey</h3>
+  <ol start="23">
+    <li id="s23">The stops and years are Neill (1881), p. 289, Wall (1964), p. 10, and the gravestone. The lines between them are reconstructions; <code>data/journey.geojson</code> marks each leg documented, reconstructed or assumed, and the map draws documented legs solid, reconstructed legs dashed, and the alternative 1845 route dotted. The dates and day counts are a working scenario in <code>data/itinerary.json</code> (its basis in <code>data/journey.md</code>): leaving Lévis about 10 May 1841, St. Louis about 5 June, the winter there, Fort Snelling about early May 1842, a long wait at Mendota for a northbound cart party, St. Boniface about 5 September 1842, leaving about 29 May 1845 and reaching Lake Gervais about 6 July 1845. Every date is estimated and shown as "about." If the family left after the harvest instead of in spring, the St. Louis stay was about five months, not ten. The gravestone says they reached St. Boniface in 1841; Neill's winter at St. Louis puts them there in 1842, and the map follows Neill.</li>
+    <li id="s24">G. M. Davison, <i>The Traveller's Guide through the Middle and Northern States and the Provinces of Canada</i> (Saratoga Springs, 1840 ed.); Theodore Dwight, <i>The Northern Traveller</i> (New York, 1841): the St. Lawrence chain of steamers and stages, the Lewiston–Buffalo railroad, and the Chicago–Peru stages.</li>
+    <li id="s25">J. B. Mansfield, <i>History of the Great Lakes</i>, vol. 1 (Chicago, 1899), quoting the 1841 lake-trade report; Wilford Woodruff, journal, 19–28 September 1841 (Buffalo to Chicago on the <i>Chesapeake</i>, seven days).</li>
+    <li id="s26">William J. Petersen, <i>Steamboating on the Upper Mississippi</i> (Iowa City, 1937), pp. 143–44, 235–36.</li>
+    <li id="s27">"Sinclair, James," <i>Dictionary of Canadian Biography</i>, vol. 8; Lawrence J. Barkwell, "Sinclair Expedition to the Oregon Territory," Louis Riel Institute (2007).</li>
+    <li id="s28">Demian and Jeffrey A. Hess, "Minnesota Red River Trails, 1835–1871," National Register of Historic Places Multiple Property Documentation Form (Minnesota SHPO, 1989), section E; NRHP nominations 90002201 and 90002202, Red River Trail (Woods Trail), 1990; Rhoda R. Gilman, Carolyn Gilman and Deborah M. Stultz, <i>The Red River Trails</i> (1979); John C. Schultz, "The Old Crow Wing Trail" (1894).</li>
+    <li id="s29">J. Fletcher Williams, <i>A History of the City of Saint Paul, and of the County of Ramsey</i> (St. Paul, 1876), pp. 304–05 (448 miles by Otter Tail and Sauk Rapids; caravans out early in June, in early July; about 15 miles a day).</li>
+    <li id="s30">Route geometry: the lines follow OpenStreetMap waterways and rail corridors and Natural Earth river centerlines, with the cart roads traced from the 1850s–70s GLO survey plats; gaps between them are hand-routed by terrain. The Woods Trail as drawn measures about 468 miles, against Williams's 448. Route lines: © OpenStreetMap contributors (ODbL). Historical base maps: David H. Burr, <i>Map of the United States of North America</i> (London: J. Arrowsmith, 1839), and J. N. Nicollet, <i>Hydrographical Basin of the Upper Mississippi River</i> (1843), both Library of Congress, warped to the web map, so they fit approximately; underneath, Esri's World Physical Map. Travel icons drawn for this page.</li>
+  </ol>
+
+  <h3>Generations and descendants</h3>
+  <p class="fine-lead">The timelines of the generations from Eustache to Abraham, and from Louis to Eric, with their sources as the research gives them. Dates marked "general reference; not re-checked" are background history, not family records.</p>
+  <ul class="gen-sources" id="gen-sources"></ul>
+
+  <h3>Pictures</h3>
+  <p class="fine-lead">Period pictures of the kinds of boats, carts and places the family would have seen. None shows the Lamberts themselves; each caption says how close it is.</p>
+  <ol start="31" id="illus-credits"><li>No illustrations loaded yet.</li></ol>
+
+  <h3>Still to find</h3>
+  <ul>
+    <li>When and to whom the island was sold (Ramsey County deed books, 1849–1867).</li>
+    <li>The original Saint-Nicolas register pages for the 1822 marriage and the 1823 baptism, and the baptisms that tie each generation back to Eustache.</li>
+    <li>Any letter from Modeste Demers to his sister's family; Quebec newspapers of 1840–41 on Oregon.</li>
+    <li>Census households, 1850–1880, and the St. John's parish registers.</li>
+    <li>George Belland's "The Abraham Lambert Family," which was at St. John's parish in 1964.</li>
+  </ul>
+
+  <p class="fine">Made by Eric Richey. Millwright Software, October 2026. <a href="#top" onclick="window.scrollTo({top:0});return false;">Back to the top</a>.</p>
+</section>
+
+<script src="vendor/leaflet.js"></script>
+<script src="js/config.js"></script>
+<script src="js/scroll.js"></script>
+<script src="js/lightbox.js"></script>
+<script src="js/seasons.js"></script>
+<script src="js/story.js"></script>
+<script src="js/timemap.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

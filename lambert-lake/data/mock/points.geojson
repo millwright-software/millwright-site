@@ -1,0 +1,50 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.0891043,
+     45.0595622
+    ]
+   },
+   "properties": {
+    "label": "3921 Woodview Ct",
+    "kind": "house",
+    "detail": "Eric's house. Section 30, lot 5 on the 1850s survey, about 300 m west of Lambert Lake's west shore (Ramsey County parcel centroid)."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.08479,
+     45.0210715
+    ]
+   },
+   "properties": {
+    "label": "St. John the Evangelist",
+    "kind": "church",
+    "detail": "Abraham gave the land for the cemetery (1851) and logs for the first church. He is buried in the family lot here (d. 1875)."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.0720002,
+     45.0599287
+    ]
+   },
+   "properties": {
+    "label": "Lambert Lake",
+    "kind": "lake",
+    "detail": "The center of the island, which is the center of the ring. The lake was drained in the 1940s; it is a wetland on Lambert Creek today."
+   }
+  }
+ ]
+}

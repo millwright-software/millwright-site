@@ -1,0 +1,234 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "canal-1870",
+    "year": 1870,
+    "label": "St. Paul Water Co. canal",
+    "kind": "canal",
+    "confidence": "approximate",
+    "traced_from": "mock",
+    "note": "mock geometry, replaced by web/data/drainage.geojson"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -93.0835,
+      45.06
+     ],
+     [
+      -93.09,
+      45.0575
+     ],
+     [
+      -93.098,
+      45.0555
+     ],
+     [
+      -93.106,
+      45.054
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "barnum-1894",
+    "year": 1894,
+    "label": "Barnum's ditch",
+    "kind": "ditch",
+    "confidence": "approximate",
+    "traced_from": "mock",
+    "note": "mock geometry, replaced by web/data/drainage.geojson"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -93.075,
+      45.0545
+     ],
+     [
+      -93.082,
+      45.052
+     ],
+     [
+      -93.092,
+      45.05
+     ],
+     [
+      -93.104,
+      45.0505
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "cd13-1916",
+    "year": 1916,
+    "label": "County Ditch 13",
+    "kind": "ditch",
+    "confidence": "traced",
+    "traced_from": "mock",
+    "note": "mock geometry, replaced by web/data/drainage.geojson"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -93.07,
+      45.066
+     ],
+     [
+      -93.074,
+      45.061
+     ],
+     [
+      -93.077,
+      45.056
+     ],
+     [
+      -93.079,
+      45.0525
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "cd14-1916",
+    "year": 1916,
+    "label": "County Ditch 14",
+    "kind": "ditch",
+    "confidence": "traced",
+    "traced_from": "mock",
+    "note": "mock geometry, replaced by web/data/drainage.geojson"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -93.062,
+      45.062
+     ],
+     [
+      -93.068,
+      45.058
+     ],
+     [
+      -93.074,
+      45.0555
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "lat-1927",
+    "year": 1927,
+    "label": "laterals",
+    "kind": "ditch",
+    "confidence": "approximate",
+    "traced_from": "mock",
+    "note": "mock geometry, replaced by web/data/drainage.geojson"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -93.066,
+      45.067
+     ],
+     [
+      -93.066,
+      45.0625
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "pond-2005",
+    "year": 2005,
+    "label": "Lambert Lake pond",
+    "kind": "pond",
+    "confidence": "traced",
+    "traced_from": "mock",
+    "note": "mock geometry, replaced by web/data/drainage.geojson"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -93.0795,
+       45.0565
+      ],
+      [
+       -93.0775,
+       45.0565
+      ],
+      [
+       -93.0775,
+       45.0552
+      ],
+      [
+       -93.0795,
+       45.0552
+      ],
+      [
+       -93.0795,
+       45.0565
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "meander-2021",
+    "year": 2021,
+    "label": "Lambert Creek meander",
+    "kind": "creek",
+    "confidence": "traced",
+    "traced_from": "mock",
+    "note": "mock geometry, replaced by web/data/drainage.geojson"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -93.086,
+      45.0515
+     ],
+     [
+      -93.088,
+      45.0512
+     ],
+     [
+      -93.0895,
+      45.052
+     ],
+     [
+      -93.091,
+      45.0512
+     ],
+     [
+      -93.093,
+      45.0515
+     ]
+    ]
+   }
+  }
+ ]
+}

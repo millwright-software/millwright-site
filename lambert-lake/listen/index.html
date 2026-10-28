@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- every path below resolves from web/, so the page works whether web/ or the repo root is served -->
+<base href="../">
+<title>Listen | Lambert Lake</title>
+<link rel="icon" type="image/svg+xml" href="img/lambert-lake-logo.svg">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="listen/listen.css">
+</head>
+<body class="idle">
+<div id="map" aria-label="The map of the episode"></div>
+<div id="haze" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<header id="top"><a class="home" href="./" title="Lambert Lake home">Lambert Lake</a><div id="ep-title"></div></header>
+
+<div id="caption" class="ov" aria-live="polite"></div>
+<div id="ribbon" class="ov"></div>
+<figure id="art" class="ov"><div class="frame"><img id="art-img" alt=""></div><figcaption id="art-cap"></figcaption></figure>
+<div id="subs" class="ov" aria-live="off"></div>
+
+<div id="start" class="on">
+  <div class="card">
+    <img id="start-cover" alt="">
+    <div id="start-title"></div>
+    <button id="bigplay" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg><span>Play</span></button>
+    <p class="hint">Space plays and pauses. Arrow keys skip ten seconds. C turns the words on and off.</p>
+  </div>
+</div>
+
+<div id="next">
+  <div class="card"><img id="next-cover" alt=""><div><p>Up next in <span id="next-count">10</span></p><p id="next-title"></p>
+  <button id="next-go">Play now</button> <button id="next-stay">Stay here</button></div></div>
+</div>
+
+<nav id="eps" aria-label="Episodes"></nav>
+
+<div id="bar">
+  <button id="pp" aria-label="Play or pause"><svg class="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg></button>
+  <span id="now">0:00</span>
+  <input id="scrub" type="range" min="0" max="1" step="0.01" value="0" aria-label="Seek">
+  <span id="dur">0:00</span>
+  <button id="cc" title="Words on screen (C)">CC</button>
+  <button id="eps-btn" title="Episodes">Episodes</button>
+</div>
+
+<audio id="audio" preload="auto"></audio>
+
+<script src="vendor/leaflet.js"></script>
+<script src="js/config.js"></script>
+<script src="js/seasons.js"></script>
+<script src="listen/listen.js"></script>
+</body>
+</html>

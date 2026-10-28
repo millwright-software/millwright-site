@@ -1,0 +1,448 @@
+{
+ "origin": "Lévis",
+ "departure_est": "1841-09-01",
+ "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this.",
+ "entries": [
+  {
+   "id": "lawrence",
+   "kind": "travel",
+   "label": "Lévis to Kingston, by the St. Lawrence",
+   "legs": [
+    1,
+    2
+   ],
+   "start_est": "1841-09-01",
+   "end_est": "1841-09-05",
+   "days_est": 3.5,
+   "days_range": "3-6",
+   "mode": "steamboat and stage",
+   "basis": "Davison 1840, Dwight 1841: steamer and stage past the rapids",
+   "confidence": "reconstructed",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      46.5,
+      -72.2
+     ],
+     "zoom": 7.2,
+     "at": 0
+    },
+    {
+     "center": [
+      45.4,
+      -74.3
+     ],
+     "zoom": 7.6,
+     "at": 0.5
+    },
+    {
+     "center": [
+      44.5,
+      -76.0
+     ],
+     "zoom": 7.4,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  },
+  {
+   "id": "ontario",
+   "kind": "travel",
+   "label": "Kingston to Buffalo, by Lake Ontario and the Niagara portage",
+   "legs": [
+    3
+   ],
+   "start_est": "1841-09-05",
+   "end_est": "1841-09-07",
+   "days_est": 2,
+   "days_range": "2-3",
+   "mode": "steamboat, then stage past Niagara",
+   "basis": "Davison 1840",
+   "confidence": "reconstructed",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      43.7,
+      -77.5
+     ],
+     "zoom": 7.2,
+     "at": 0
+    },
+    {
+     "center": [
+      43.0,
+      -79.0
+     ],
+     "zoom": 8.6,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  },
+  {
+   "id": "lakes",
+   "kind": "travel",
+   "label": "Buffalo to Chicago, over the lakes",
+   "legs": [
+    4
+   ],
+   "start_est": "1841-09-07",
+   "end_est": "1841-09-14",
+   "days_est": 7,
+   "days_range": "7-10",
+   "mode": "steamboat (Great Lakes)",
+   "basis": "Woodruff's journal, 21-28 Sept 1841; Mansfield 1899",
+   "confidence": "reconstructed",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      42.6,
+      -80.5
+     ],
+     "zoom": 6.8,
+     "at": 0
+    },
+    {
+     "center": [
+      44.5,
+      -83.5
+     ],
+     "zoom": 6.0,
+     "at": 0.5
+    },
+    {
+     "center": [
+      42.5,
+      -87.0
+     ],
+     "zoom": 6.6,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  },
+  {
+   "id": "stage",
+   "kind": "travel",
+   "label": "Chicago to Peru, by stage",
+   "legs": [
+    5
+   ],
+   "start_est": "1841-09-15",
+   "end_est": "1841-09-17",
+   "days_est": 2,
+   "days_range": "1-3",
+   "mode": "stage",
+   "basis": "Davison 1840: daily stages, 100 miles",
+   "confidence": "reconstructed",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      41.7,
+      -88.2
+     ],
+     "zoom": 8.6,
+     "at": 0
+    },
+    {
+     "center": [
+      41.4,
+      -88.9
+     ],
+     "zoom": 8.8,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  },
+  {
+   "id": "illinois",
+   "kind": "travel",
+   "label": "Peru to St. Louis, down the Illinois",
+   "legs": [
+    6
+   ],
+   "start_est": "1841-09-17",
+   "end_est": "1841-09-20",
+   "days_est": 3,
+   "days_range": "2-4",
+   "mode": "steamboat",
+   "basis": "Davison 1840",
+   "confidence": "reconstructed",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      40.6,
+      -89.8
+     ],
+     "zoom": 7.4,
+     "at": 0
+    },
+    {
+     "center": [
+      39.0,
+      -90.3
+     ],
+     "zoom": 7.8,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  },
+  {
+   "id": "winter",
+   "kind": "stay",
+   "label": "Winter at St. Louis",
+   "legs": [],
+   "start_est": "1841-09-20",
+   "end_est": "1842-04-20",
+   "days_est": 212,
+   "days_range": "about seven months",
+   "mode": null,
+   "basis": "Neill: 'went to St. Louis by boat and spent the winter'",
+   "confidence": "documented",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      38.63,
+      -90.2
+     ],
+     "zoom": 9.5,
+     "at": 0
+    },
+    {
+     "center": [
+      38.63,
+      -90.2
+     ],
+     "zoom": 9.5,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  },
+  {
+   "id": "mississippi",
+   "kind": "travel",
+   "label": "St. Louis to Fort Snelling, up the Mississippi",
+   "legs": [
+    7
+   ],
+   "start_est": "1842-04-20",
+   "end_est": "1842-05-04",
+   "days_est": 14,
+   "days_range": "8-21",
+   "mode": "steamboat",
+   "basis": "Petersen 1937: boats irregular above Galena",
+   "confidence": "documented (route); days reconstructed",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      39.8,
+      -90.9
+     ],
+     "zoom": 7.0,
+     "at": 0
+    },
+    {
+     "center": [
+      42.4,
+      -90.6
+     ],
+     "zoom": 7.2,
+     "at": 0.5
+    },
+    {
+     "center": [
+      44.9,
+      -93.2
+     ],
+     "zoom": 9.0,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  },
+  {
+   "id": "north",
+   "kind": "travel",
+   "label": "Mendota to St. Boniface, by the Minnesota Valley trail",
+   "legs": [
+    8
+   ],
+   "start_est": "1842-05-10",
+   "end_est": "1842-06-19",
+   "days_est": 40,
+   "days_range": "30-45",
+   "mode": "ox cart",
+   "basis": "Williams 1876: 30 to 40 days at 15 miles a day",
+   "confidence": "reconstructed",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      44.9,
+      -93.3
+     ],
+     "zoom": 8.5,
+     "at": 0
+    },
+    {
+     "center": [
+      45.6,
+      -95.5
+     ],
+     "zoom": 6.8,
+     "at": 0.4
+    },
+    {
+     "center": [
+      48.0,
+      -97.0
+     ],
+     "zoom": 6.4,
+     "at": 0.8
+    },
+    {
+     "center": [
+      49.6,
+      -97.1
+     ],
+     "zoom": 7.6,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  },
+  {
+   "id": "boniface",
+   "kind": "stay",
+   "label": "St. Boniface, 1842 to 1845",
+   "legs": [],
+   "start_est": "1842-06-19",
+   "end_est": "1845-06-05",
+   "days_est": 1082,
+   "days_range": "about three years",
+   "mode": null,
+   "basis": "Neill: 'remained in Red River until 1845'; Wall: the 26 Nov 1844 wedding",
+   "confidence": "documented",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      49.85,
+      -97.1
+     ],
+     "zoom": 9.2,
+     "at": 0
+    },
+    {
+     "center": [
+      49.85,
+      -97.1
+     ],
+     "zoom": 9.2,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  },
+  {
+   "id": "trail",
+   "kind": "travel",
+   "label": "St. Boniface to Little Canada, by the Woods Trail",
+   "legs": [
+    9
+   ],
+   "start_est": "1845-06-05",
+   "end_est": "1845-07-10",
+   "days_est": 35,
+   "days_range": "30-40",
+   "mode": "ox cart (Woods Trail)",
+   "basis": "Williams 1876: 448 miles via Otter Tail and Sauk Rapids, early June to early July",
+   "confidence": "reconstructed",
+   "sources": [
+    "Neill 1881, p. 289",
+    "journey.geojson leg notes"
+   ],
+   "camera": [
+    {
+     "center": [
+      49.5,
+      -97.0
+     ],
+     "zoom": 7.6,
+     "at": 0
+    },
+    {
+     "center": [
+      47.9,
+      -96.5
+     ],
+     "zoom": 7.0,
+     "at": 0.3
+    },
+    {
+     "center": [
+      46.5,
+      -95.0
+     ],
+     "zoom": 7.0,
+     "at": 0.6
+    },
+    {
+     "center": [
+      45.6,
+      -94.2
+     ],
+     "zoom": 7.6,
+     "at": 0.85
+    },
+    {
+     "center": [
+      45.05,
+      -93.15
+     ],
+     "zoom": 9.0,
+     "at": 1
+    }
+   ],
+   "note": "MOCK: placeholder dates. Neill gives the years, not the days; the real data/itinerary.json replaces this."
+  }
+ ]
+}

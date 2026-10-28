@@ -1,0 +1,926 @@
+{
+ "title": "Lambert family itinerary, 1841-1845 (working reconstruction)",
+ "anchors_documented": [
+  "left Lower Canada 1841 (Neill; stone)",
+  "wintered at St. Louis 1841-42 (Neill)",
+  "by boat to St. Paul, then to Red River, 1842 by Neill's order (stone says St. Boniface 1841)",
+  "Rose Angelique Lambert m. Alexander Ducharme, St. Boniface, 26 Nov 1844 (Wall)",
+  "to Little Canada 1845 (Neill; Wall; stone)"
+ ],
+ "method": "Every date below is a working reconstruction: documented year anchors, navigation seasons (St. Lawrence open about late April to November; Lake Erie at Buffalo and Lake Michigan about 24-26 April; first boats to Fort Snelling early April to 1 May; Red River caravans leaving Pembina early June and reaching St. Paul early July), 1840-41 guidebook schedules, one dated 1841 lake passage (Woodruff) and 1840s cart speeds. A post-harvest 1841 departure (Sept-Oct) is equally consistent with the record and would shift the 1841 rows by about four months without changing 1842.",
+ "scenario": "spring-1841 departure",
+ "entries": [
+  {
+   "id": "1841-00-levis",
+   "kind": "stay",
+   "from": "Lévis (Lauzon)",
+   "to": "Lévis (Lauzon)",
+   "mode": "home",
+   "start_est": "1841-04-01/1841-05-10",
+   "end_est": "1841-05-10",
+   "days_est": "—",
+   "days_range": "departure window 1841-05-01/1841-06-15",
+   "basis": "Neill: 'left Lower Canada, in 1841', no month. River steamers ran once the St. Lawrence opened (shipping at Montreal 'interrupted between November and May'); a spring departure after the thaw is the conventional emigrant pattern, but a post-harvest departure (Sept-Oct, lakes still open; Woodruff crossed in late Sept 1841) fits Neill's winter at St. Louis just as well.",
+   "sources": [
+    "Neill, History of Ramsey County (1881), p. 289, https://archive.org/details/historyoframseyc00warn",
+    "Find a Grave 50657843, gravestone inscription, https://www.findagrave.com/memorial/50657843/abraham-lambert",
+    "Pointe-a-Callière, 'The Port of Montreal': shipping 'interrupted between November and May' until the mid-20th century, https://montrealcapitale-simple.pacmusee.qc.ca/en/carousel/3-1/architecture-3/the-port-of-montreal-0",
+    "Wilford Woodruff journal, 19-28 Sept 1841, https://wilfordwoodruffpapers.org/documents/a9d1a2cb-18fe-445d-a5e4-350caaf63442/transcript"
+   ],
+   "confidence": "assumed",
+   "note": "Family of eight: Abraham (48), Angélique (44), three sons, three daughters; Rose Angélique 18, Joseph Modeste 3. Pick 10 May 1841 as the working departure.",
+   "map_view": {
+    "center": [
+     46.8,
+     -71.18
+    ],
+    "zoom": 11
+   }
+  },
+  {
+   "id": "1841-01-levis-montreal",
+   "kind": "travel",
+   "leg": 1,
+   "from": "Lévis (Lauzon)",
+   "to": "Montreal",
+   "mode": "steamboat",
+   "start_est": "1841-05-10",
+   "end_est": "1841-05-11",
+   "days_est": 1,
+   "days_range": "1-2",
+   "basis": "Quebec-Montreal steamers ran daily, 180 miles, timing departure to the tide at the Richelieu rapids (Dwight); an overnight run.",
+   "sources": [
+    "Davison, Traveller's Guide (1840 ed.), https://archive.org/details/cihm_33368",
+    "Dwight, The Northern Traveller (1841), p. 63 and Buffalo 'Western Routes', https://archive.org/details/northerntravelle00dwig"
+   ],
+   "confidence": "reconstructed",
+   "note": "Up past Portneuf, Trois-Rivières and Lac Saint-Pierre.",
+   "map_view": {
+    "center": [
+     46.25,
+     -72.4
+    ],
+    "zoom": 7,
+    "path": [
+     {
+      "center": [
+       46.34,
+       -72.55
+      ],
+      "zoom": 9,
+      "label": "Trois-Rivières"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1841-02-montreal",
+   "kind": "stay",
+   "from": "Montreal",
+   "to": "Montreal",
+   "mode": "layover",
+   "start_est": "1841-05-11",
+   "end_est": "1841-05-13",
+   "days_est": 2,
+   "days_range": "1-3",
+   "basis": "Connection: the through line to Upper Canada left by stage from Montreal to Lachine (9 miles) to meet the steamer; a day or two to book passage and transfer baggage.",
+   "sources": [
+    "Davison, Traveller's Guide (1840 ed.), https://archive.org/details/cihm_33368",
+    "Dwight, The Northern Traveller (1841), p. 63 and Buffalo 'Western Routes', https://archive.org/details/northerntravelle00dwig"
+   ],
+   "confidence": "assumed",
+   "note": "",
+   "map_view": {
+    "center": [
+     45.5,
+     -73.55
+    ],
+    "zoom": 12
+   }
+  },
+  {
+   "id": "1841-03-montreal-kingston",
+   "kind": "travel",
+   "leg": 2,
+   "from": "Montreal",
+   "to": "Kingston",
+   "mode": "steamboat and stage",
+   "start_est": "1841-05-13",
+   "end_est": "1841-05-15",
+   "days_est": 2,
+   "days_range": "2-3",
+   "basis": "Dwight: the Niagara-Montreal passage by steamboats through Lake Ontario 'is performed in about two days' (downstream); upstream with the stage portages at Lachine, Cascades-Coteau and Cornwall-Dickinson's Landing allow 2-3 days to Kingston.",
+   "sources": [
+    "Davison, Traveller's Guide (1840 ed.), https://archive.org/details/cihm_33368",
+    "Dwight, The Northern Traveller (1841), p. 63 and Buffalo 'Western Routes', https://archive.org/details/northerntravelle00dwig"
+   ],
+   "confidence": "reconstructed",
+   "note": "Stage 9, steamer 24, stage 16, steamer 41, stage 12, steamer 30 to Prescott, then Brockville and Kingston (Davison's distances).",
+   "map_view": {
+    "center": [
+     44.95,
+     -75.0
+    ],
+    "zoom": 7,
+    "path": [
+     {
+      "center": [
+       45.43,
+       -73.67
+      ],
+      "zoom": 10,
+      "label": "Lachine"
+     },
+     {
+      "center": [
+       45.02,
+       -74.73
+      ],
+      "zoom": 9,
+      "label": "Long Sault / Cornwall"
+     },
+     {
+      "center": [
+       44.71,
+       -75.52
+      ],
+      "zoom": 9,
+      "label": "Prescott"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1841-04-kingston-buffalo",
+   "kind": "travel",
+   "leg": 3,
+   "from": "Kingston",
+   "to": "Buffalo",
+   "mode": "steamboat, then stage and railroad past Niagara",
+   "start_est": "1841-05-15",
+   "end_est": "1841-05-17",
+   "days_est": 2,
+   "days_range": "1-3",
+   "basis": "British steamers Kingston-Toronto-Fort George (142 miles, about a day); stage Lewiston 7 miles and the railroad 22 miles to Buffalo (Davison).",
+   "sources": [
+    "Davison, Traveller's Guide (1840 ed.), https://archive.org/details/cihm_33368",
+    "Dwight, The Northern Traveller (1841), p. 63 and Buffalo 'Western Routes', https://archive.org/details/northerntravelle00dwig"
+   ],
+   "confidence": "reconstructed",
+   "note": "The one walk-around in the whole water route: past the Falls.",
+   "map_view": {
+    "center": [
+     43.6,
+     -78.2
+    ],
+    "zoom": 7,
+    "path": [
+     {
+      "center": [
+       43.64,
+       -79.38
+      ],
+      "zoom": 9,
+      "label": "Toronto"
+     },
+     {
+      "center": [
+       43.12,
+       -79.06
+      ],
+      "zoom": 10,
+      "label": "Niagara portage"
+     },
+     {
+      "center": [
+       42.89,
+       -78.88
+      ],
+      "zoom": 10,
+      "label": "Buffalo"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1841-05-buffalo",
+   "kind": "stay",
+   "from": "Buffalo",
+   "to": "Buffalo",
+   "mode": "layover",
+   "start_est": "1841-05-17",
+   "end_est": "1841-05-19",
+   "days_est": 2,
+   "days_range": "1-4",
+   "basis": "Six boats of the largest class on fifteen-day round trips to Chicago in 1841 means a departure every two or three days; Woodruff waited two days (19-21 Sept 1841) for the Chesapeake.",
+   "sources": [
+    "Mansfield, History of the Great Lakes (1899), vol. 1, 1841 trade report and c. 1850 line, https://archive.org/details/historyofgreatla01mans",
+    "Wilford Woodruff journal, 19-28 Sept 1841, https://wilfordwoodruffpapers.org/documents/a9d1a2cb-18fe-445d-a5e4-350caaf63442/transcript"
+   ],
+   "confidence": "assumed",
+   "note": "Navigation at Buffalo opened 24 April in 1840; Lake Michigan (Milwaukee) 25 April in 1841, so mid-May is well inside the season.",
+   "map_view": {
+    "center": [
+     42.89,
+     -78.88
+    ],
+    "zoom": 11
+   }
+  },
+  {
+   "id": "1841-06-buffalo-chicago",
+   "kind": "travel",
+   "leg": 4,
+   "from": "Buffalo",
+   "to": "Chicago",
+   "mode": "steamboat (Great Lakes)",
+   "start_est": "1841-05-19",
+   "end_est": "1841-05-27",
+   "days_est": 8,
+   "days_range": "7-10",
+   "basis": "Woodruff: left Buffalo 21 Sept 1841, Cleveland 22nd, Detroit 23rd, Manitou Island 25th, Chicago 28th ('1047 miles'); Buffalo-Detroit 'about 36 hours' (Davison, Dwight); steerage $10 a head.",
+   "sources": [
+    "Wilford Woodruff journal, 19-28 Sept 1841, https://wilfordwoodruffpapers.org/documents/a9d1a2cb-18fe-445d-a5e4-350caaf63442/transcript",
+    "Davison, Traveller's Guide (1840 ed.), https://archive.org/details/cihm_33368",
+    "Dwight, The Northern Traveller (1841), p. 63 and Buffalo 'Western Routes', https://archive.org/details/northerntravelle00dwig",
+    "Mansfield, History of the Great Lakes (1899), vol. 1, 1841 trade report and c. 1850 line, https://archive.org/details/historyofgreatla01mans",
+    "Lapham, Geographical and Topographical Description of Wisconsin (1844), first steamboat at Milwaukee by year, https://fromthepage.com/wiscribes/increase-lapham/box-27-folder-1-geographical-and-topographical-description-of-wisconsin-1844",
+    "History of the Great Lakes (Mansfield 1899) chronology at maritimehistoryofthegreatlakes.ca: navigation opened at Buffalo 24 April 1840 (steamer Chesapeake)"
+   ],
+   "confidence": "reconstructed",
+   "note": "Erie, Cleveland, Detroit, the St. Clair River, Lake Huron, Mackinac, Lake Michigan.",
+   "map_view": {
+    "center": [
+     44.0,
+     -84.0
+    ],
+    "zoom": 6,
+    "path": [
+     {
+      "center": [
+       42.33,
+       -83.05
+      ],
+      "zoom": 9,
+      "label": "Detroit"
+     },
+     {
+      "center": [
+       45.85,
+       -84.62
+      ],
+      "zoom": 8,
+      "label": "Mackinac"
+     },
+     {
+      "center": [
+       43.04,
+       -87.91
+      ],
+      "zoom": 9,
+      "label": "Milwaukee"
+     },
+     {
+      "center": [
+       41.88,
+       -87.63
+      ],
+      "zoom": 10,
+      "label": "Chicago"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1841-07-chicago",
+   "kind": "stay",
+   "from": "Chicago",
+   "to": "Chicago",
+   "mode": "layover",
+   "start_est": "1841-05-27",
+   "end_est": "1841-05-29",
+   "days_est": 2,
+   "days_range": "1-3",
+   "basis": "Stages 'leave daily' for Peru (Davison); a family with baggage more likely hired a wagon, as Woodruff did at Chicago ($2 per cwt), which takes a day to arrange.",
+   "sources": [
+    "Davison, Traveller's Guide (1840 ed.), https://archive.org/details/cihm_33368",
+    "Wilford Woodruff journal, 19-28 Sept 1841, https://wilfordwoodruffpapers.org/documents/a9d1a2cb-18fe-445d-a5e4-350caaf63442/transcript"
+   ],
+   "confidence": "assumed",
+   "note": "",
+   "map_view": {
+    "center": [
+     41.88,
+     -87.63
+    ],
+    "zoom": 11
+   }
+  },
+  {
+   "id": "1841-08-chicago-peru",
+   "kind": "travel",
+   "leg": 5,
+   "from": "Chicago",
+   "to": "Peru / La Salle, Illinois",
+   "mode": "stage or hired wagon",
+   "start_est": "1841-05-29",
+   "end_est": "1841-05-31",
+   "days_est": 2,
+   "days_range": "1-4",
+   "basis": "100 miles by Davison's stage road (Joliet 30, Ottawa 53, Peru 17); a stage did it in a long day or with a night at Ottawa, a loaded wagon in 3-4 days 'on a very bad road' (Woodruff).",
+   "sources": [
+    "Davison, Traveller's Guide (1840 ed.), https://archive.org/details/cihm_33368",
+    "Wilford Woodruff journal, 19-28 Sept 1841, https://wilfordwoodruffpapers.org/documents/a9d1a2cb-18fe-445d-a5e4-350caaf63442/transcript"
+   ],
+   "confidence": "reconstructed",
+   "note": "The Illinois & Michigan Canal would not open until 1848.",
+   "map_view": {
+    "center": [
+     41.6,
+     -88.4
+    ],
+    "zoom": 8,
+    "path": [
+     {
+      "center": [
+       41.53,
+       -88.08
+      ],
+      "zoom": 10,
+      "label": "Joliet"
+     },
+     {
+      "center": [
+       41.35,
+       -88.84
+      ],
+      "zoom": 10,
+      "label": "Ottawa"
+     },
+     {
+      "center": [
+       41.33,
+       -89.13
+      ],
+      "zoom": 11,
+      "label": "Peru"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1841-09-peru",
+   "kind": "stay",
+   "from": "Peru / La Salle, Illinois",
+   "to": "Peru / La Salle, Illinois",
+   "mode": "layover",
+   "start_est": "1841-05-31",
+   "end_est": "1841-06-02",
+   "days_est": 2,
+   "days_range": "1-4",
+   "basis": "Peru was 'the virtual head of navigation'; in 1839 one captain alone made 58 St. Louis-Peru trips, so boats called several times a week in season (Illinois State Museum).",
+   "sources": [
+    "Illinois State Museum, 'The Steamboat Era in Illinois' (1839: one captain made 58 St. Louis-Peru trips; Peru 'the virtual head of navigation'), https://www.museum.state.il.us/RiverWeb/landings/Ambot/Archives/vignettes/economy/Steamboat_20Era.html",
+    "Davison, Traveller's Guide (1840 ed.), https://archive.org/details/cihm_33368"
+   ],
+   "confidence": "assumed",
+   "note": "",
+   "map_view": {
+    "center": [
+     41.33,
+     -89.13
+    ],
+    "zoom": 11
+   }
+  },
+  {
+   "id": "1841-10-peru-st-louis",
+   "kind": "travel",
+   "leg": 6,
+   "from": "Peru / La Salle, Illinois",
+   "to": "St. Louis",
+   "mode": "steamboat (Illinois River)",
+   "start_est": "1841-06-02",
+   "end_est": "1841-06-05",
+   "days_est": 3,
+   "days_range": "2-4",
+   "basis": "Davison: Peru-Peoria 60 miles, Peoria-Alton 149, Alton-St. Louis 21 (230 miles downstream); low water, not ice, was the usual obstacle in late summer.",
+   "sources": [
+    "Davison, Traveller's Guide (1840 ed.), https://archive.org/details/cihm_33368",
+    "Illinois State Museum, 'The Steamboat Era in Illinois' (1839: one captain made 58 St. Louis-Peru trips; Peru 'the virtual head of navigation'), https://www.museum.state.il.us/RiverWeb/landings/Ambot/Archives/vignettes/economy/Steamboat_20Era.html"
+   ],
+   "confidence": "reconstructed",
+   "note": "Past Peoria, Beardstown, Grafton and Alton to the St. Louis levee.",
+   "map_view": {
+    "center": [
+     40.2,
+     -89.9
+    ],
+    "zoom": 7,
+    "path": [
+     {
+      "center": [
+       40.69,
+       -89.59
+      ],
+      "zoom": 10,
+      "label": "Peoria"
+     },
+     {
+      "center": [
+       38.97,
+       -90.43
+      ],
+      "zoom": 10,
+      "label": "Grafton / mouth of the Illinois"
+     },
+     {
+      "center": [
+       38.63,
+       -90.2
+      ],
+      "zoom": 11,
+      "label": "St. Louis"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1841-11-st-louis-winter",
+   "kind": "stay",
+   "from": "St. Louis",
+   "to": "St. Louis",
+   "mode": "winter (documented)",
+   "start_est": "1841-06-05",
+   "end_est": "1842-04-20",
+   "days_est": 319,
+   "days_range": "about 5 (autumn arrival) to 10 (spring arrival) months",
+   "basis": "Neill: 'went to St. Louis by boat and spent the winter.' The arrival date is the assumed spring itinerary; the departure is set by the upper-Mississippi season (first boat to Fort Snelling 'about May 1' in 1840; 6 April in 1844 and 1845; average first arrival at St. Paul 13 April, Lake Pepin latest 1 May).",
+   "sources": [
+    "Neill, History of Ramsey County (1881), p. 289, https://archive.org/details/historyoframseyc00warn",
+    "Williams, History of the City of Saint Paul (1876), pp. 100, 128, 304-05, https://archive.org/details/historyofcityofs00will",
+    "Petersen, Steamboating on the Upper Mississippi (1937), pp. 143-44, 235-36, 454, 461, https://archive.org/details/steamboatingonup00pete"
+   ],
+   "confidence": "documented (winter); dates reconstructed",
+   "note": "Had they left Canada after harvest they would have reached St. Louis in October-November, before the Illinois closed. St. Louis had a French-speaking community (Carondelet, Florissant) and Bishop Rosati's cathedral; boats for the upper river were rare before 1844 ('not likely ... more than twenty-five a year').",
+   "map_view": {
+    "center": [
+     38.63,
+     -90.2
+    ],
+    "zoom": 11
+   }
+  },
+  {
+   "id": "1842-01-st-louis-galena",
+   "kind": "travel",
+   "leg": 7,
+   "leg_segment": "St. Louis - Galena",
+   "from": "St. Louis",
+   "to": "Galena",
+   "mode": "steamboat (Mississippi)",
+   "start_est": "1842-04-20",
+   "end_est": "1842-04-25",
+   "days_est": 5,
+   "days_range": "4-6",
+   "basis": "St. Louis-Galena packets were regular (the Otter made 11 round trips in 1842, Petersen); about 420 river miles upstream at 1840s speeds.",
+   "sources": [
+    "Petersen, Steamboating on the Upper Mississippi (1937), pp. 143-44, 235-36, 454, 461, https://archive.org/details/steamboatingonup00pete"
+   ],
+   "confidence": "reconstructed",
+   "note": "Past Alton, Hannibal, Quincy, the Des Moines rapids at Keokuk, Rock Island and Dubuque to the Fever River landing at Galena.",
+   "map_view": {
+    "center": [
+     40.6,
+     -90.9
+    ],
+    "zoom": 7,
+    "path": [
+     {
+      "center": [
+       40.4,
+       -91.38
+      ],
+      "zoom": 9,
+      "label": "Keokuk rapids"
+     },
+     {
+      "center": [
+       41.5,
+       -90.57
+      ],
+      "zoom": 9,
+      "label": "Rock Island"
+     },
+     {
+      "center": [
+       42.42,
+       -90.43
+      ],
+      "zoom": 10,
+      "label": "Galena"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1842-02-galena",
+   "kind": "stay",
+   "from": "Galena",
+   "to": "Galena",
+   "mode": "layover for a Fort Snelling boat",
+   "start_est": "1842-04-25",
+   "end_est": "1842-05-03",
+   "days_est": 8,
+   "days_range": "3-14",
+   "basis": "Before 1844 'trips were made only when a sufficient cargo was offered'; Riggs in 1837 had to wait at Galena 'the arrival of a boat destined for Fort Snelling' (Petersen).",
+   "sources": [
+    "Petersen, Steamboating on the Upper Mississippi (1937), pp. 143-44, 235-36, 454, 461, https://archive.org/details/steamboatingonup00pete",
+    "Williams, History of the City of Saint Paul (1876), pp. 100, 128, 304-05, https://archive.org/details/historyofcityofs00will"
+   ],
+   "confidence": "assumed",
+   "note": "Galena, the lead-mine port, was the busiest town on the upper river and the usual place to change boats.",
+   "map_view": {
+    "center": [
+     42.42,
+     -90.43
+    ],
+    "zoom": 11
+   }
+  },
+  {
+   "id": "1842-03-galena-fort-snelling",
+   "kind": "travel",
+   "leg": 7,
+   "leg_segment": "Galena - Fort Snelling",
+   "from": "Galena",
+   "to": "Fort Snelling / Mendota",
+   "mode": "steamboat (upper Mississippi)",
+   "start_est": "1842-05-03",
+   "end_est": "1842-05-08",
+   "days_est": 5,
+   "days_range": "3-7",
+   "basis": "About 300 river miles with wood stops and calls at Prairie du Chien and the Lake Pepin landings; the 1840 first boat reached Fort Snelling 'about May 1' (Williams p. 100).",
+   "sources": [
+    "Petersen, Steamboating on the Upper Mississippi (1937), pp. 143-44, 235-36, 454, 461, https://archive.org/details/steamboatingonup00pete",
+    "Williams, History of the City of Saint Paul (1876), pp. 100, 128, 304-05, https://archive.org/details/historyofcityofs00will"
+   ],
+   "confidence": "reconstructed",
+   "note": "Neill: 'They came via boat to St. Paul.' In 1842 the landing was below Fort Snelling; Mendota was the fur post and St. Paul a few cabins and Father Galtier's chapel.",
+   "map_view": {
+    "center": [
+     43.7,
+     -91.9
+    ],
+    "zoom": 7,
+    "path": [
+     {
+      "center": [
+       43.05,
+       -91.14
+      ],
+      "zoom": 10,
+      "label": "Prairie du Chien"
+     },
+     {
+      "center": [
+       44.45,
+       -92.3
+      ],
+      "zoom": 9,
+      "label": "Lake Pepin"
+     },
+     {
+      "center": [
+       44.893,
+       -93.18
+      ],
+      "zoom": 12,
+      "label": "Fort Snelling"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1842-04-mendota",
+   "kind": "stay",
+   "from": "Fort Snelling / Mendota (St. Paul)",
+   "to": "Fort Snelling / Mendota (St. Paul)",
+   "mode": "waiting for a northbound cart party",
+   "start_est": "1842-05-08",
+   "end_est": "1842-07-25",
+   "days_est": 78,
+   "days_range": "30-100",
+   "basis": "No family went 600 miles across Dakota country alone. Red River free traders had come down to Mendota every summer since 1835 (Hess); by Williams's pattern they arrived early July, traded about three weeks (Gilman) and went home late July. The American Fur Company's own outfit for Lac qui Parle and Lake Traverse is the other possible escort.",
+   "sources": [
+    "Hess, Minnesota Red River Trails 1835-1871, NRHP MPDF (1989), sect. E, https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500284_text",
+    "Williams, History of the City of Saint Paul (1876), pp. 100, 128, 304-05, https://archive.org/details/historyofcityofs00will",
+    "Gilman, Gilman & Stultz, The Red River Trails (1979), pp. 79-87 (via https://en.wikipedia.org/wiki/Red_River_Trails)",
+    "Neill, History of Ramsey County (1881), p. 289, https://archive.org/details/historyoframseyc00warn"
+   ],
+   "confidence": "assumed",
+   "note": "Neill: 'then to Red River with the idea of seeking a home in Oregon.' Sinclair's Oregon party had left Fort Garry 3 June 1841; nothing was going west in 1842.",
+   "map_view": {
+    "center": [
+     44.9,
+     -93.15
+    ],
+    "zoom": 11
+   }
+  },
+  {
+   "id": "1842-05-mendota-red-river",
+   "kind": "travel",
+   "leg": 8,
+   "from": "Mendota / St. Paul",
+   "to": "St. Boniface (Red River Settlement)",
+   "mode": "ox cart (Minnesota Valley / West Plains trail)",
+   "start_est": "1842-07-25",
+   "end_est": "1842-09-05",
+   "days_est": 42,
+   "days_range": "30-50",
+   "basis": "596 drawn miles at 15-20 miles a day (Williams 15; Hargrave 20, 'of ten travelling hours'); the Grey Nuns who came the same way in 1850 left Montreal in spring, crossed the plains from St. Paul and reached St. Boniface 'late in September' (Healy p. 109).",
+   "sources": [
+    "Hess, Minnesota Red River Trails 1835-1871, NRHP MPDF (1989), sect. E, https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500284_text",
+    "Williams, History of the City of Saint Paul (1876), pp. 100, 128, 304-05, https://archive.org/details/historyofcityofs00will",
+    "Hargrave, Red River (1871), pp. 60, 452, https://archive.org/details/redriver00harggoog",
+    "Healy, Women of Red River (1923), pp. 26-27 (Cowan 1848), 108-09 (Grey Nuns 1850), https://archive.org/details/womenofredriverb00unse",
+    "Gilman, Gilman & Stultz, The Red River Trails (1979), pp. 79-87 (via https://en.wikipedia.org/wiki/Red_River_Trails)"
+   ],
+   "confidence": "reconstructed",
+   "note": "Traverse des Sioux, Lac qui Parle, Big Stone Lake, Lake Traverse, the beach-ridge trail west of the Red, Pembina, St. Boniface. The gravestone's 'St. Boniface ... in 1841' would put this leg a year earlier; Neill's winter at St. Louis rules that out unless the stone is loose with the year.",
+   "map_view": {
+    "center": [
+     47.2,
+     -95.8
+    ],
+    "zoom": 6,
+    "path": [
+     {
+      "center": [
+       44.36,
+       -93.96
+      ],
+      "zoom": 10,
+      "label": "Traverse des Sioux"
+     },
+     {
+      "center": [
+       45.03,
+       -95.88
+      ],
+      "zoom": 9,
+      "label": "Lac qui Parle"
+     },
+     {
+      "center": [
+       45.88,
+       -96.69
+      ],
+      "zoom": 9,
+      "label": "Lake Traverse"
+     },
+     {
+      "center": [
+       48.97,
+       -97.24
+      ],
+      "zoom": 9,
+      "label": "Pembina"
+     },
+     {
+      "center": [
+       49.89,
+       -97.12
+      ],
+      "zoom": 11,
+      "label": "St. Boniface"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1842-06-st-boniface",
+   "kind": "stay",
+   "from": "St. Boniface (Red River Settlement)",
+   "to": "St. Boniface (Red River Settlement)",
+   "mode": "residence (documented)",
+   "start_est": "1842-09-05",
+   "end_est": "1845-05-29",
+   "days_est": 996,
+   "days_range": "about 2.7 years (Neill) or 3.7 (stone)",
+   "basis": "Neill: 'They remained in Red River until 1845'; stone: 'came to St. Boniface on the Red River in 1841 and to Little Canada in 1845'. Rose Angélique married Louis Alexander Ducharme at St. Boniface on 26 November 1844 (Wall).",
+   "sources": [
+    "Neill, History of Ramsey County (1881), p. 289, https://archive.org/details/historyoframseyc00warn",
+    "Find a Grave 50657843, gravestone inscription, https://www.findagrave.com/memorial/50657843/abraham-lambert",
+    "Wall, Ramsey County History, Fall 1964, pp. 10-12, https://rchs.com/wp-content/uploads/2015/11/RCHS_Fall1964_Wall.pdf",
+    "Barkwell, Sinclair Expedition to the Oregon Territory, https://www.metismuseum.ca/resource.php/07187"
+   ],
+   "confidence": "documented (residence and wedding); arrival/departure dates reconstructed",
+   "note": "Bishop Provencher's parish opposite Fort Garry. Oregon abandoned: 'persuaded to give up the trip on account of the dangers that beset their way' (Neill). 1844: Kittson's first six carts south; the Dakota-Metis clash; the Woods Trail cut.",
+   "map_view": {
+    "center": [
+     49.89,
+     -97.12
+    ],
+    "zoom": 12
+   }
+  },
+  {
+   "id": "1845-01-st-boniface-pembina",
+   "kind": "travel",
+   "leg": 9,
+   "leg_segment": "St. Boniface - border",
+   "from": "St. Boniface (Red River Settlement)",
+   "to": "Pembina junction (49th parallel)",
+   "mode": "ox cart",
+   "start_est": "1845-05-29",
+   "end_est": "1845-06-02",
+   "days_est": 4,
+   "days_range": "3-5",
+   "basis": "About 70 miles down the Red valley to the border at 15-20 miles a day; Williams says the Pembina caravans started 'early in June, as soon [as] there was sufficient pasturage for the cattle'.",
+   "sources": [
+    "Williams, History of the City of Saint Paul (1876), pp. 100, 128, 304-05, https://archive.org/details/historyofcityofs00will",
+    "Hargrave, Red River (1871), pp. 60, 452, https://archive.org/details/redriver00harggoog"
+   ],
+   "confidence": "reconstructed",
+   "note": "On the Woods Trail the families kept east of the Red (Rat River, St. Malo ridge, Roseau crossing); on the plains trail they would have followed the west bank to Pembina.",
+   "map_view": {
+    "center": [
+     49.45,
+     -97.05
+    ],
+    "zoom": 8,
+    "path": [
+     {
+      "center": [
+       49.76,
+       -97.14
+      ],
+      "zoom": 11,
+      "label": "St. Norbert"
+     },
+     {
+      "center": [
+       49.15,
+       -97.08
+      ],
+      "zoom": 10,
+      "label": "Roseau River crossing"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1845-02-pembina-st-paul",
+   "kind": "travel",
+   "leg": 9,
+   "leg_segment": "border - St. Paul",
+   "from": "Pembina junction (49th parallel)",
+   "to": "St. Paul",
+   "mode": "ox cart (Woods Trail; alternative: Minnesota Valley trail)",
+   "start_est": "1845-06-02",
+   "end_est": "1845-07-05",
+   "days_est": 33,
+   "days_range": "30-40",
+   "basis": "Williams 1876: 448 miles 'via Otter Tail and Sauk Rapids', 'the down trip would generally consume from 30 to 40 days, arriving here early in July. An average day's travel was 15 miles.'",
+   "sources": [
+    "Williams, History of the City of Saint Paul (1876), pp. 100, 128, 304-05, https://archive.org/details/historyofcityofs00will",
+    "Hess, Minnesota Red River Trails 1835-1871, NRHP MPDF (1989), sect. E, https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500284_text",
+    "Gilman, Gilman & Stultz, The Red River Trails (1979), pp. 79-87 (via https://en.wikipedia.org/wiki/Red_River_Trails)",
+    "Hargrave, Red River (1871), pp. 60, 452, https://archive.org/details/redriver00harggoog",
+    "Healy, Women of Red River (1923), pp. 26-27 (Cowan 1848), 108-09 (Grey Nuns 1850), https://archive.org/details/womenofredriverb00unse"
+   ],
+   "confidence": "reconstructed",
+   "note": "Wall: Alexander and Rose Ducharme 'brought along Rose's mother and father ... and their children.' Trail choice undocumented; see journey.md. Carts corralled each night 'where wood and water was convenient' (Williams).",
+   "map_view": {
+    "center": [
+     47.1,
+     -95.4
+    ],
+    "zoom": 6,
+    "path": [
+     {
+      "center": [
+       47.89,
+       -96.36
+      ],
+      "zoom": 10,
+      "label": "Old Crossing, Red Lake River"
+     },
+     {
+      "center": [
+       46.8,
+       -95.85
+      ],
+      "zoom": 10,
+      "label": "Detroit Lake"
+     },
+     {
+      "center": [
+       46.42,
+       -95.69
+      ],
+      "zoom": 10,
+      "label": "Otter Tail Lake"
+     },
+     {
+      "center": [
+       46.28,
+       -94.34
+      ],
+      "zoom": 11,
+      "label": "Crow Wing ford"
+     },
+     {
+      "center": [
+       45.59,
+       -94.17
+      ],
+      "zoom": 10,
+      "label": "Sauk Rapids"
+     },
+     {
+      "center": [
+       44.98,
+       -93.26
+      ],
+      "zoom": 12,
+      "label": "St. Anthony Falls"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1845-03-st-paul-little-canada",
+   "kind": "travel",
+   "leg": 9,
+   "leg_segment": "St. Paul - Lake Gervais",
+   "from": "St. Paul",
+   "to": "Little Canada (Lake Gervais)",
+   "mode": "ox cart / on foot",
+   "start_est": "1845-07-06",
+   "end_est": "1845-07-06",
+   "days_est": 1,
+   "days_range": "1",
+   "basis": "Seven miles north of the St. Paul landing by the trail Benjamin Gervais had opened in 1844 ('no roads into the area at that time'; settlers 'had to travel on horseback or on foot the seven miles to St. Paul', Wall).",
+   "sources": [
+    "Wall, Ramsey County History, Fall 1964, pp. 10-12, https://rchs.com/wp-content/uploads/2015/11/RCHS_Fall1964_Wall.pdf",
+    "Neill, History of Ramsey County (1881), p. 289, https://archive.org/details/historyoframseyc00warn"
+   ],
+   "confidence": "reconstructed",
+   "note": "Arrival in early July 1845 is the Williams-pattern date; a second caravan could put it in August or September.",
+   "map_view": {
+    "center": [
+     44.99,
+     -93.09
+    ],
+    "zoom": 11,
+    "path": [
+     {
+      "center": [
+       44.944,
+       -93.093
+      ],
+      "zoom": 13,
+      "label": "St. Paul landing"
+     },
+     {
+      "center": [
+       45.04,
+       -93.08
+      ],
+      "zoom": 13,
+      "label": "Lake Gervais, section 8"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1845-04-little-canada",
+   "kind": "stay",
+   "from": "Little Canada (Lake Gervais)",
+   "to": "Little Canada (Lake Gervais)",
+   "mode": "settled (documented)",
+   "start_est": "1845-07-06",
+   "end_est": "1875-08-30",
+   "days_est": "—",
+   "days_range": "—",
+   "basis": "Neill: 'in 1845 ... they returned and settled on section 8, of this town, where he died in 1875'; Wall: the Ducharmes and Lamberts 'acquired most of the land along the south shore of Lake Gervais'; patents 25 March 1849.",
+   "sources": [
+    "Neill, History of Ramsey County (1881), p. 289, https://archive.org/details/historyoframseyc00warn",
+    "Wall, Ramsey County History, Fall 1964, pp. 10-12, https://rchs.com/wp-content/uploads/2015/11/RCHS_Fall1964_Wall.pdf",
+    "Find a Grave 50657843, gravestone inscription, https://www.findagrave.com/memorial/50657843/abraham-lambert"
+   ],
+   "confidence": "documented (year); day assumed",
+   "note": "Abraham d. 30/31 Aug 1875, buried St. John's, on land he gave.",
+   "map_view": {
+    "center": [
+     45.04,
+     -93.08
+    ],
+    "zoom": 13
+   }
+  }
+ ]
+}

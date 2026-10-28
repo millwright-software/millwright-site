@@ -1,0 +1,796 @@
+[
+{
+"kind": "scene",
+"t_start": 0.5,
+"t_end": null,
+"speaker": null,
+"text": "Scene 1 — Open and last time (0:00–1:30)",
+"cue_id": "ep04-000"
+},
+{
+"kind": "music",
+"t_start": 0.5,
+"t_end": 15.14,
+"speaker": null,
+"text": "theme",
+"key": "theme",
+"cue_id": "ep04-001"
+},
+{
+"kind": "line",
+"t_start": 6.3,
+"t_end": 12.36,
+"speaker": "NARRATOR",
+"text": "This is \"Lambert Lake.\" Episode four: \"Steamboats and a Moving House.\"",
+"cue_id": "ep04-002"
+},
+{
+"kind": "ambience",
+"t_start": 14.64,
+"t_end": null,
+"speaker": null,
+"text": "a river port, water, gulls, a steamboat engine idling",
+"key": "river",
+"cue_id": "ep04-003"
+},
+{
+"kind": "line",
+"t_start": 15.34,
+"t_end": 37.12,
+"speaker": "NARRATOR",
+"text": "Last time, Abraham and Rose Angèle had some hard years. A sickness, and hail that flattened the crops. Then news came from Rose Angèle's brother, Uncle Modeste, all the way from Oregon, on the far side of the mountains. \"The climate is mild. The soil is fertile.\" And Abraham decided: we're going.",
+"cue_id": "ep04-004"
+},
+{
+"kind": "line",
+"t_start": 38.6,
+"t_end": 70.6,
+"speaker": "NARRATOR",
+"text": "So here they are, in the year eighteen forty-one. Abraham. Rose Angèle. And six children, three boys and three girls. The oldest was Rose Angélique, eighteen, almost a grown-up. The youngest was little Joseph Modeste, just three. And one of the boys in the middle was Louis, about sixteen. Remember Louis. He's going to be very important to you. Louis is your great, great, great, great grandpa.",
+"cue_id": "ep04-005"
+},
+{
+"kind": "scene",
+"t_start": 72.88,
+"t_end": null,
+"speaker": null,
+"text": "Scene 2 — How a steamboat works (1:30–4:30)",
+"cue_id": "ep04-006"
+},
+{
+"kind": "sfx",
+"t_start": 73.08,
+"t_end": 80.98,
+"speaker": null,
+"text": "steamwhistle: a steamboat whistle, long and bright",
+"key": "steamwhistle",
+"cue_id": "ep04-007"
+},
+{
+"kind": "sfx",
+"t_start": 79.6,
+"t_end": 95.6,
+"speaker": null,
+"text": "paddle: paddlewheels churning, under",
+"key": "paddle",
+"cue_id": "ep04-008"
+},
+{
+"kind": "line",
+"t_start": 82.3,
+"t_end": 104.68,
+"speaker": "NARRATOR",
+"text": "Now, nobody wrote down which boats the Lamberts took, or what day they left. The old history book says only that they went to St. Louis by boat. But we know how families went west in those days, because there were travel guides, a little like the maps on a phone today, but printed on paper. So come along.",
+"cue_id": "ep04-009"
+},
+{
+"kind": "line",
+"t_start": 105.94,
+"t_end": 112.32,
+"speaker": "NARRATOR",
+"text": "First, a steamboat, up the river from Quebec to Montreal. A night and a day.",
+"cue_id": "ep04-010"
+},
+{
+"kind": "line",
+"t_start": 113.34,
+"t_end": 115.4,
+"speaker": "CHILD",
+"text": "Papa! The boat is smoking!",
+"cue_id": "ep04-011"
+},
+{
+"kind": "line",
+"t_start": 116.34,
+"t_end": 119.94,
+"speaker": "ABRAHAM",
+"text": "That's how it goes, mon petit. Ask the captain.",
+"cue_id": "ep04-012"
+},
+{
+"kind": "line",
+"t_start": 121.2,
+"t_end": 134.8,
+"speaker": "CAPTAIN",
+"text": "Ho ho! Come here, young man, and I'll show you. See that big fire down there? We feed it wood, all day long. The fire heats up a giant pot of water, called a boiler. And what happens when you heat up water?",
+"cue_id": "ep04-013"
+},
+{
+"kind": "line",
+"t_start": 136.2,
+"t_end": 138.28,
+"speaker": "LOUIS",
+"text": "It boils. It turns to steam.",
+"cue_id": "ep04-014"
+},
+{
+"kind": "line",
+"t_start": 139.46,
+"t_end": 154.98,
+"speaker": "CAPTAIN",
+"text": "Right you are! And steam is strong. Stronger than ten horses. Stronger than fifty. The steam pushes a big metal rod back and forth, back and forth, chug, chug, chug. And the rod turns that big wheel on the side of the boat. The paddlewheel.",
+"cue_id": "ep04-015"
+},
+{
+"kind": "sfx",
+"t_start": 155.46,
+"t_end": 160.46,
+"speaker": null,
+"text": "steam: a steam engine chuffing, a hiss of steam",
+"key": "steam",
+"cue_id": "ep04-016"
+},
+{
+"kind": "line",
+"t_start": 159.3,
+"t_end": 169.94,
+"speaker": "CAPTAIN",
+"text": "The wheel paddles the water backward, splash, splash, splash, and the whole boat goes forward. No sails. No oars. No wind. Just fire, and water, and steam.",
+"cue_id": "ep04-017"
+},
+{
+"kind": "line",
+"t_start": 171.52,
+"t_end": 189.38,
+"speaker": "NARRATOR",
+"text": "That's tonight's lesson. Fire makes steam. Steam pushes the rod. The rod turns the wheel. The wheel pushes the water, and the boat goes. In French, a steamboat is le bateau à vapeur. A boat of steam.",
+"cue_id": "ep04-018"
+},
+{
+"kind": "line",
+"t_start": 190.72,
+"t_end": 192.12,
+"speaker": "FRENCH",
+"text": "Le bateau à vapeur.",
+"cue_id": "ep04-019"
+},
+{
+"kind": "line",
+"t_start": 193.525,
+"t_end": 197.045,
+"speaker": "CHILD",
+"text": "Le bateau à vapeur!",
+"cue_id": "ep04-020"
+},
+{
+"kind": "line",
+"t_start": 198.105,
+"t_end": 216.165,
+"speaker": "CAPTAIN",
+"text": "And do you know the hardest part of running a steamboat, young man? Feeding it! This boat eats wood like you eat pancakes. A whole pile of logs every few hours. So every so often we pull up to the shore, where there's a big stack of firewood waiting, and everybody helps carry it on.",
+"cue_id": "ep04-021"
+},
+{
+"kind": "line",
+"t_start": 217.265,
+"t_end": 217.965,
+"speaker": "LOUIS",
+"text": "Everybody?",
+"cue_id": "ep04-022"
+},
+{
+"kind": "line",
+"t_start": 218.965,
+"t_end": 221.985,
+"speaker": "CAPTAIN",
+"text": "Strong young fellows especially. Grab an armful!",
+"cue_id": "ep04-023"
+},
+{
+"kind": "line",
+"t_start": 223.165,
+"t_end": 236.725,
+"speaker": "NARRATOR",
+"text": "That part of the scene is imagined. But steamboats really did burn mountains of wood, and they really did stop at woodpiles along the river to load more. A boat full of fire, eating its way up the river.",
+"cue_id": "ep04-024"
+},
+{
+"kind": "scene",
+"t_start": 239.105,
+"t_end": null,
+"speaker": null,
+"text": "Scene 3 — Stagecoaches around the rapids (4:30–6:30)",
+"cue_id": "ep04-025"
+},
+{
+"kind": "ambience",
+"t_start": 239.105,
+"t_end": null,
+"speaker": null,
+"text": "hoofbeats and iron-rimmed wheels on a rough road, harness jingling",
+"key": "stage",
+"cue_id": "ep04-026"
+},
+{
+"kind": "line",
+"t_start": 241.065,
+"t_end": 274.845,
+"speaker": "NARRATOR",
+"text": "Past Montreal, the river got wild. Rapids, one after another. Remember the carrying places, from Eustache's canoe? Well, a steamboat is much too heavy to carry. So everybody climbed off, and loaded their trunks onto a stagecoach, a big wooden carriage pulled by horses, and bumped and rattled along the road beside the white water. Then onto another steamboat. Then another stagecoach. Steamboat, stagecoach, steamboat, stagecoach.",
+"cue_id": "ep04-027"
+},
+{
+"kind": "line",
+"t_start": 275.905,
+"t_end": 280.625,
+"speaker": "ROSE ANGÈLE",
+"text": "Esther, hold the basket. Félicité, hold Esther. Joseph, hold still!",
+"cue_id": "ep04-028"
+},
+{
+"kind": "line",
+"t_start": 281.705,
+"t_end": 284.325,
+"speaker": "ESTHER",
+"text": "Maman, the horses are going too fast!",
+"cue_id": "ep04-029"
+},
+{
+"kind": "line",
+"t_start": 285.525,
+"t_end": 292.105,
+"speaker": "ABRAHAM",
+"text": "The horses are going exactly fast enough. Look out the window. You'll never see this road again.",
+"cue_id": "ep04-030"
+},
+{
+"kind": "scene",
+"t_start": 294.265,
+"t_end": null,
+"speaker": null,
+"text": "Scene 4 — A house that moves by itself (6:30–8:30)",
+"cue_id": "ep04-031"
+},
+{
+"kind": "ambience",
+"t_start": 294.265,
+"t_end": null,
+"speaker": null,
+"text": "big open water, wind, a ship's engine, waves on the hull",
+"key": "lake",
+"cue_id": "ep04-032"
+},
+{
+"kind": "line",
+"t_start": 296.445,
+"t_end": 303.085,
+"speaker": "NARRATOR",
+"text": "Past a town called Kingston, they crossed a big lake. In French, a lake is le lac.",
+"cue_id": "ep04-033"
+},
+{
+"kind": "line",
+"t_start": 304.305,
+"t_end": 305.145,
+"speaker": "FRENCH",
+"text": "Le lac.",
+"cue_id": "ep04-034"
+},
+{
+"kind": "line",
+"t_start": 306.615,
+"t_end": 317.775,
+"speaker": "NARRATOR",
+"text": "And at a town called Lewiston, near the giant waterfall called Niagara Falls, they saw something none of them had ever seen before. Ever. A railroad.",
+"cue_id": "ep04-035"
+},
+{
+"kind": "ambience",
+"t_start": 318.235,
+"t_end": null,
+"speaker": null,
+"text": "an early steam train, chuffing, wheels clicking on the rails",
+"key": "train",
+"cue_id": "ep04-036"
+},
+{
+"kind": "sfx",
+"t_start": 318.435,
+"t_end": 325.135,
+"speaker": null,
+"text": "trainwhistle: a thin, high locomotive whistle",
+"key": "trainwhistle",
+"cue_id": "ep04-037"
+},
+{
+"kind": "line",
+"t_start": 320.955,
+"t_end": 328.695,
+"speaker": "NARRATOR",
+"text": "Twenty-two miles of track, all the way to a town called Buffalo. And on the track, a train.",
+"cue_id": "ep04-038"
+},
+{
+"kind": "line",
+"t_start": 329.835,
+"t_end": 332.735,
+"speaker": "ESTHER",
+"text": "Papa! Papa! The house is moving by itself!",
+"cue_id": "ep04-039"
+},
+{
+"kind": "line",
+"t_start": 333.935,
+"t_end": 340.335,
+"speaker": "ABRAHAM",
+"text": "It's not a house, it's a train. And yes, it's moving by itself. Hold on to your hat.",
+"cue_id": "ep04-040"
+},
+{
+"kind": "line",
+"t_start": 341.755,
+"t_end": 349.595,
+"speaker": "LOUIS",
+"text": "It's a steam engine on wheels, Esther. Like the boat. Fire, water, steam. But instead of a paddlewheel, it turns the wheels on the track.",
+"cue_id": "ep04-041"
+},
+{
+"kind": "line",
+"t_start": 350.735,
+"t_end": 353.795,
+"speaker": "ESTHER",
+"text": "I don't care how it works. I want to ride it again!",
+"cue_id": "ep04-042"
+},
+{
+"kind": "line",
+"t_start": 355.155,
+"t_end": 359.715,
+"speaker": "NARRATOR",
+"text": "A train, in French, is le train. That one's easy.",
+"cue_id": "ep04-043"
+},
+{
+"kind": "line",
+"t_start": 361.095,
+"t_end": 361.955,
+"speaker": "FRENCH",
+"text": "Le train.",
+"cue_id": "ep04-044"
+},
+{
+"kind": "line",
+"t_start": 363.545,
+"t_end": 385.745,
+"speaker": "NARRATOR",
+"text": "And near Lewiston, just a few miles up the river, was Niagara Falls. A whole river falling over a cliff, with a roar like thunder that never stops, and clouds of mist rising up so high you can see them from far away. Did the Lamberts go to look? We don't know. But let's imagine they heard it.",
+"cue_id": "ep04-045"
+},
+{
+"kind": "ambience",
+"t_start": 385.925,
+"t_end": null,
+"speaker": null,
+"text": "a huge waterfall roaring in the distance, mist, wind",
+"key": "falls",
+"cue_id": "ep04-046"
+},
+{
+"kind": "line",
+"t_start": 386.645,
+"t_end": 390.285,
+"speaker": "LOUIS",
+"text": "Papa, what's that noise? It's like thunder, but it doesn't stop.",
+"cue_id": "ep04-047"
+},
+{
+"kind": "line",
+"t_start": 391.485,
+"t_end": 394.765,
+"speaker": "ABRAHAM",
+"text": "That's the falls, Louis. The whole river jumping off a cliff.",
+"cue_id": "ep04-048"
+},
+{
+"kind": "line",
+"t_start": 396.005,
+"t_end": 396.885,
+"speaker": "LOUIS",
+"text": "Can we go see it?",
+"cue_id": "ep04-049"
+},
+{
+"kind": "line",
+"t_start": 397.945,
+"t_end": 404.465,
+"speaker": "ROSE ANGÈLE",
+"text": "Not with six children and nine trunks, we can't. Somebody would fall in. Probably your father.",
+"cue_id": "ep04-050"
+},
+{
+"kind": "line",
+"t_start": 405.485,
+"t_end": 406.205,
+"speaker": "ABRAHAM",
+"text": "Probably me.",
+"cue_id": "ep04-051"
+},
+{
+"kind": "line",
+"t_start": 407.445,
+"t_end": 416.785,
+"speaker": "NARRATOR",
+"text": "So maybe they just stood there for a minute, and listened, and felt the ground shake a tiny bit under their feet. And then they climbed back on the train.",
+"cue_id": "ep04-052"
+},
+{
+"kind": "scene",
+"t_start": 419.165,
+"t_end": null,
+"speaker": null,
+"text": "Scene 5 — The big lakes (8:30–10:00)",
+"cue_id": "ep04-053"
+},
+{
+"kind": "ambience",
+"t_start": 419.165,
+"t_end": null,
+"speaker": null,
+"text": "big open water, wind, a steamer's engine, waves",
+"key": "lake",
+"cue_id": "ep04-054"
+},
+{
+"kind": "line",
+"t_start": 420.905,
+"t_end": 440.725,
+"speaker": "NARRATOR",
+"text": "From Buffalo, big steamers carried families west across the great lakes, with their furniture and their plows and their chickens. Past Cleveland. Past Detroit. Up and around, and down the long, long length of Lake Michigan. About a week on the water. Day and night.",
+"cue_id": "ep04-055"
+},
+{
+"kind": "line",
+"t_start": 441.845,
+"t_end": 447.525,
+"speaker": "CHILD",
+"text": "Maman, the floor won't hold still. My tummy is going up and down with the waves.",
+"cue_id": "ep04-056"
+},
+{
+"kind": "line",
+"t_start": 448.745,
+"t_end": 454.585,
+"speaker": "ROSE ANGÈLE",
+"text": "Look at the far shore, mon petit, and breathe. The lake is only big. It isn't angry.",
+"cue_id": "ep04-057"
+},
+{
+"kind": "line",
+"t_start": 455.845,
+"t_end": 461.725,
+"speaker": "ABRAHAM",
+"text": "All this water is fresh, Joseph. Not salty, like the sea. You could drink the whole lake.",
+"cue_id": "ep04-058"
+},
+{
+"kind": "line",
+"t_start": 462.945,
+"t_end": 465.645,
+"speaker": "CHILD",
+"text": "I don't want to drink it. I want to get off it.",
+"cue_id": "ep04-059"
+},
+{
+"kind": "sfx",
+"t_start": 466.005,
+"t_end": 470.205,
+"speaker": null,
+"text": "laugh: the family laughing together",
+"key": "laugh",
+"cue_id": "ep04-060"
+},
+{
+"kind": "line",
+"t_start": 468.405,
+"t_end": 491.645,
+"speaker": "NARRATOR",
+"text": "So here's tonight's question. It's a long, long trip. Weeks and weeks. No tablets, no TV, no screens of any kind. What would you pack to keep busy? A deck of cards? A ball and a stick? A whittling knife and a piece of wood? Or would you just look out the window, and count the birds, and make up stories? Think about it.",
+"cue_id": "ep04-061"
+},
+{
+"kind": "scene",
+"t_start": 493.965,
+"t_end": null,
+"speaker": null,
+"text": "Scene 6 — The sea of grass (10:00–11:30)",
+"cue_id": "ep04-062"
+},
+{
+"kind": "ambience",
+"t_start": 493.965,
+"t_end": null,
+"speaker": null,
+"text": "tall grass in the wind, meadowlarks, a stage rolling",
+"key": "prairie+stage",
+"cue_id": "ep04-063"
+},
+{
+"kind": "line",
+"t_start": 495.965,
+"t_end": 514.365,
+"speaker": "NARRATOR",
+"text": "At the end of the lake was a muddy little town called Chicago. Today Chicago is one of the biggest cities in America. Back then, it was mostly mud. And from Chicago, the Lamberts took another stagecoach, a hundred miles across the prairie.",
+"cue_id": "ep04-064"
+},
+{
+"kind": "line",
+"t_start": 515.645,
+"t_end": 522.065,
+"speaker": "ROSE ANGÈLE",
+"text": "Abraham, look. There are no trees. There's no end to it. It's like an ocean made of grass.",
+"cue_id": "ep04-065"
+},
+{
+"kind": "line",
+"t_start": 523.385,
+"t_end": 528.945,
+"speaker": "ABRAHAM",
+"text": "Feel this soil, Rose. Black. Deep. You could put your arm in it up to the elbow.",
+"cue_id": "ep04-066"
+},
+{
+"kind": "line",
+"t_start": 530.045,
+"t_end": 531.545,
+"speaker": "ROSE ANGÈLE",
+"text": "Then why aren't we stopping here?",
+"cue_id": "ep04-067"
+},
+{
+"kind": "line",
+"t_start": 532.965,
+"t_end": 536.865,
+"speaker": "ABRAHAM",
+"text": "Because your brother is at the end of the road. And because I said Oregon.",
+"cue_id": "ep04-068"
+},
+{
+"kind": "line",
+"t_start": 537.765,
+"t_end": 549.085,
+"speaker": "NARRATOR",
+"text": "Then down another river on another steamboat, to the biggest river of all, the mighty Mississippi. And down the Mississippi, to a city called St. Louis.",
+"cue_id": "ep04-069"
+},
+{
+"kind": "scene",
+"t_start": 551.225,
+"t_end": null,
+"speaker": null,
+"text": "Scene 7 — A winter in St. Louis (11:30–13:00)",
+"cue_id": "ep04-070"
+},
+{
+"kind": "ambience",
+"t_start": 551.225,
+"t_end": null,
+"speaker": null,
+"text": "a hard winter wind around a building, a stove ticking",
+"key": "winterwind",
+"cue_id": "ep04-071"
+},
+{
+"kind": "line",
+"t_start": 553.185,
+"t_end": 567.865,
+"speaker": "NARRATOR",
+"text": "Here, the old history speaks again. At St. Louis, the family \"spent the winter.\" The rivers froze. The boats stopped. And a family of eight from Quebec waited in a strange city where most people spoke English.",
+"cue_id": "ep04-072"
+},
+{
+"kind": "line",
+"t_start": 569.385,
+"t_end": 571.745,
+"speaker": "NARRATOR",
+"text": "Winter, in French, is l'hiver.",
+"cue_id": "ep04-073"
+},
+{
+"kind": "line",
+"t_start": 573.005,
+"t_end": 573.765,
+"speaker": "FRENCH",
+"text": "L'hiver.",
+"cue_id": "ep04-074"
+},
+{
+"kind": "line",
+"t_start": 575.315,
+"t_end": 581.035,
+"speaker": "ESTHER",
+"text": "Papa, the girl next door says \"good morning\" instead of bonjour. And \"thank you\" instead of merci.",
+"cue_id": "ep04-075"
+},
+{
+"kind": "line",
+"t_start": 582.075,
+"t_end": 587.215,
+"speaker": "ABRAHAM",
+"text": "Then you'll learn to say both. And you'll be twice as polite as anybody on this street.",
+"cue_id": "ep04-076"
+},
+{
+"kind": "line",
+"t_start": 588.355,
+"t_end": 589.995,
+"speaker": "ROSE ANGÈLE",
+"text": "Do you ever wish we'd stayed home?",
+"cue_id": "ep04-077"
+},
+{
+"kind": "line",
+"t_start": 591.295,
+"t_end": 594.915,
+"speaker": "ABRAHAM",
+"text": "Every night, for about one minute. Then I remember the hail.",
+"cue_id": "ep04-078"
+},
+{
+"kind": "sfx",
+"t_start": 595.435,
+"t_end": 599.435,
+"speaker": null,
+"text": "fire: the stove door opened, wood added",
+"key": "fire",
+"cue_id": "ep04-079"
+},
+{
+"kind": "line",
+"t_start": 597.515,
+"t_end": 598.255,
+"speaker": "ROSE ANGÈLE",
+"text": "In the spring, then.",
+"cue_id": "ep04-080"
+},
+{
+"kind": "line",
+"t_start": 599.475,
+"t_end": 605.795,
+"speaker": "ABRAHAM",
+"text": "In the spring. North, up the river. To Red River, where your brother started. And from there, Oregon.",
+"cue_id": "ep04-081"
+},
+{
+"kind": "line",
+"t_start": 606.915,
+"t_end": 624.255,
+"speaker": "NARRATOR",
+"text": "And Louis? We don't know what he did that winter. But a boy of sixteen in a big river city, with steamboats tied up all along the shore, probably didn't sit inside all day. Let's imagine him down at the levee, where the boats were tied up for the winter.",
+"cue_id": "ep04-082"
+},
+{
+"kind": "ambience",
+"t_start": 624.615,
+"t_end": null,
+"speaker": null,
+"text": "wind along a frozen riverbank, a few voices, a hammer far off",
+"key": "winterwind",
+"cue_id": "ep04-083"
+},
+{
+"kind": "line",
+"t_start": 625.355,
+"t_end": 631.875,
+"speaker": "LOUIS",
+"text": "Good. Morning. Good morning. Thank you. Thank you very much. How. Much. Is. That.",
+"cue_id": "ep04-084"
+},
+{
+"kind": "line",
+"t_start": 633.195,
+"t_end": 635.535,
+"speaker": "ROSE ANGÈLE",
+"text": "Louis! Who are you talking to out there?",
+"cue_id": "ep04-085"
+},
+{
+"kind": "line",
+"t_start": 636.755,
+"t_end": 640.935,
+"speaker": "LOUIS",
+"text": "Nobody, Maman! I'm practicing English with the steamboats. They don't laugh at me.",
+"cue_id": "ep04-086"
+},
+{
+"kind": "line",
+"t_start": 642.295,
+"t_end": 652.315,
+"speaker": "NARRATOR",
+"text": "Louis was learning the language of his new country. And someday, he would raise his own family in it. But first, one more river. One more spring.",
+"cue_id": "ep04-087"
+},
+{
+"kind": "scene",
+"t_start": 654.695,
+"t_end": null,
+"speaker": null,
+"text": "Scene 8 — Goodnight (13:00–15:00)",
+"cue_id": "ep04-088"
+},
+{
+"kind": "ambience",
+"t_start": 654.695,
+"t_end": null,
+"speaker": null,
+"text": "a still winter night, a stove ticking, soft wind",
+"key": "night",
+"cue_id": "ep04-089"
+},
+{
+"kind": "music",
+"t_start": 655.895,
+"t_end": 755.85,
+"speaker": null,
+"text": "lullaby",
+"key": "lullaby",
+"cue_id": "ep04-090"
+},
+{
+"kind": "line",
+"t_start": 659.735,
+"t_end": 683.375,
+"speaker": "NARRATOR",
+"text": "So all that winter, the Lamberts waited. Outside, the snow came down on St. Louis, and the big river froze along the edges. Inside, the little stove ticked and glowed. The children learned new English words. Louis, maybe, stood at the window and watched the steamboats sleeping at the levee, waiting for spring, just like him.",
+"cue_id": "ep04-091"
+},
+{
+"kind": "line",
+"t_start": 684.835,
+"t_end": 693.395,
+"speaker": "NARRATOR",
+"text": "They had come so far. Steamboat, stagecoach, train, lake, prairie, river. And they still weren't halfway to Oregon.",
+"cue_id": "ep04-092"
+},
+{
+"kind": "line",
+"t_start": 694.855,
+"t_end": 707.035,
+"speaker": "NARRATOR",
+"text": "Next time, the ice breaks, and the steamboat whistle blows, and the Lamberts go north, to a place called Red River, where the carts squeal and the buffalo hunters ride. But that's for tomorrow.",
+"cue_id": "ep04-093"
+},
+{
+"kind": "line",
+"t_start": 708.435,
+"t_end": 722.915,
+"speaker": "NARRATOR",
+"text": "Tonight, imagine you're in that little room in St. Louis, warm by the stove, with snow outside. Your brother is asleep next to you. Your mom and dad are talking quietly in the kitchen. Tomorrow can wait.",
+"cue_id": "ep04-094"
+},
+{
+"kind": "line",
+"t_start": 724.455,
+"t_end": 725.295,
+"speaker": "FRENCH",
+"text": "Bonne nuit.",
+"cue_id": "ep04-095"
+},
+{
+"kind": "line",
+"t_start": 726.77,
+"t_end": 731.63,
+"speaker": "NARRATOR",
+"text": "Goodnight, William. Goodnight, Alex. Goodnight, from the shore of Lambert Lake.",
+"cue_id": "ep04-096"
+}
+]

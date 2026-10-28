@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420">
+<defs><radialGradient id="g" cx="50%" cy="50%" r="60%"><stop offset="60%" stop-color="#f3ecda" stop-opacity="1"/><stop offset="100%" stop-color="#f3ecda" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="420" fill="url(#g)"/>
+<g fill="none" stroke="#5c5141" stroke-width="1.6" stroke-linecap="round" opacity=".75">
+<path d="M60 300 Q200 260 340 300 T620 300"/><path d="M80 320 Q220 290 360 320 T600 318"/>
+<path d="M190 300 L210 180 L330 180 L350 300 Z"/><path d="M230 180 L240 110 L310 110 L320 180"/>
+<path d="M240 110 L250 60 L300 60 L310 110"/><path d="M150 300 L190 300"/><path d="M350 300 L430 300 L440 280"/>
+<path d="M270 300 L270 250 M280 250 L280 300"/><circle cx="470" cy="120" r="26"/><path d="M430 140 Q470 90 510 140"/>
+</g>
+<text x="320" y="390" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="18" fill="#65584a">placeholder sketch: the period illustration goes here</text>
+</svg>

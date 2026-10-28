@@ -1,0 +1,149 @@
+/* Lambert Lake for kids: a picture book that scrolls. Paintings first, the map soft underneath. */
+@font-face { font-family: "Andika"; font-weight: 400; font-display: swap; src: url(fonts/andika-400-latin.woff2) format("woff2"); }
+@font-face { font-family: "Andika"; font-weight: 700; font-display: swap; src: url(fonts/andika-700-latin.woff2) format("woff2"); }
+@font-face { font-family: "Fraunces Soft"; font-weight: 600; font-display: swap; src: url(fonts/fraunces-600-latin.woff2) format("woff2"); }
+
+:root {
+  --lake: #2e6f9e;
+  --meadow: #6e9b46;
+  --barn: #b8472e;
+  --gold: #e2a32b;
+  --ink: #2d2b55;
+  --wash: #e6eee8;
+  --page: #fffdf7;
+  --story: "Andika", "Trebuchet MS", system-ui, sans-serif;
+  --display: "Fraunces Soft", "Georgia", serif;
+  --text-col: min(460px, 34vw);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--wash); color: var(--ink); font-family: var(--story); }
+
+/* ---------- the stage: map, washes, the picture plate, the year medallion ---------- */
+.stage { position: fixed; inset: 0; overflow: hidden; z-index: 0; }
+#kmap { position: absolute; inset: 0; z-index: 0; background: var(--wash); }
+/* the map is a quiet, painted background: softer colour and contrast, warmed a little */
+#kmap .leaflet-tile-pane { filter: saturate(.58) contrast(.74) brightness(1.1) sepia(.12); }
+#kmap .leaflet-container, #kmap.leaflet-container { background: var(--wash); font-family: var(--story); }
+.tint { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0; mix-blend-mode: soft-light; transition: background-color .25s linear; }
+.wash { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    radial-gradient(ellipse 85% 80% at 50% 50%, rgba(230,238,232,0) 55%, rgba(230,238,232,.75) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .25 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* the picture: a painting with a white mat, placed by kids.js; it moves between big, split and postcard */
+.plate { position: absolute; margin: 0; left: 0; top: 0; width: 10px; height: 10px; z-index: 5; opacity: 0;
+  transition: left .7s cubic-bezier(.3,.7,.2,1), top .7s cubic-bezier(.3,.7,.2,1), width .7s cubic-bezier(.3,.7,.2,1), height .7s cubic-bezier(.3,.7,.2,1), opacity .45s ease, transform .7s ease; }
+.plate.on { opacity: 1; }
+.plate-btn { display: block; width: 100%; height: 100%; padding: clamp(8px, 1.1vw, 16px); border: 0; margin: 0; cursor: zoom-in;
+  background: var(--page); border-radius: 6px 9px 7px 10px;
+  box-shadow: 0 0 0 3px rgba(45,43,85,.85), 7px 9px 0 rgba(45,43,85,.18); }
+.plate-btn img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 2px; transition: opacity .35s ease; }
+.plate-btn img.swap { opacity: 0; }
+.plate-btn:focus-visible { outline: 4px solid var(--gold); outline-offset: 6px; }
+.plate[data-mode="map"] { transform: rotate(-2.2deg); }
+.plate[data-mode="split"] { transform: rotate(-.8deg); }
+
+/* a question on the picture, like a speech bubble */
+.bubble { position: absolute; right: -14px; bottom: -22px; max-width: min(340px, 80%); padding: 12px 18px; z-index: 2;
+  background: var(--gold); color: var(--ink); font: 700 clamp(17px, 1.5vw, 21px)/1.3 var(--story);
+  border-radius: 20px 22px 6px 20px; box-shadow: 0 0 0 3px var(--ink); transform: rotate(1.5deg);
+  animation: bob 3.2s ease-in-out infinite; }
+.bubble[hidden] { display: none; }
+@keyframes bob { 50% { transform: rotate(1.5deg) translateY(-4px); } }
+
+/* the year medallion */
+.medal { position: absolute; z-index: 8; top: clamp(12px, 2.4vh, 26px); left: clamp(12px, 2vw, 30px);
+  min-width: 158px; padding: 12px 22px 10px; text-align: center;
+  background: var(--gold); color: var(--ink); border-radius: 46% 54% 50% 50% / 58% 52% 48% 42%;
+  box-shadow: 0 0 0 3px var(--ink), 5px 6px 0 rgba(45,43,85,.2); transition: opacity .4s ease, transform .4s ease; }
+.medal.off { opacity: 0; transform: scale(.85); pointer-events: none; }
+.m-year { font: 600 clamp(38px, 4vw, 56px)/1 var(--display); letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+.m-year small { display: block; font: 700 15px/1.2 var(--story); letter-spacing: .02em; margin-bottom: 2px; }
+.m-sub { font: 700 clamp(15px, 1.35vw, 19px)/1.25 var(--story); min-height: 0; }
+.m-sub:empty { display: none; }
+.m-sub.pop { animation: pop .6s cubic-bezier(.3,1.6,.5,1); }
+@keyframes pop { 0% { transform: scale(.6); } 100% { transform: scale(1); } }
+.trees { display: block; width: 130px; height: 34px; margin: 4px auto 0; transition: opacity .4s; }
+.trees.off { opacity: 0; height: 0; margin: 0; }
+
+/* ---------- the story cards, scrolling up the right side ---------- */
+.steps { position: relative; z-index: 10; width: var(--text-col); margin-left: auto; margin-right: clamp(14px, 2.2vw, 36px); pointer-events: none; }
+.step { min-height: 100vh; display: flex; align-items: center; padding: 18vh 0; }
+.step.tall { min-height: 150vh; }
+.step.long { min-height: 230vh; }
+.step.title { min-height: 120vh; }
+.step.end { min-height: 120vh; padding-bottom: 30vh; }
+.card { pointer-events: auto; width: 100%; padding: clamp(20px, 2vw, 30px) clamp(22px, 2.2vw, 32px);
+  background: var(--page); border-radius: 22px 28px 20px 30px / 28px 20px 30px 22px;
+  box-shadow: 0 0 0 3px var(--ink), 6px 8px 0 rgba(45,43,85,.16);
+  font-size: clamp(21px, 1.9vw, 27px); line-height: 1.42; }
+.card p { margin: 0 0 .6em; max-width: 30ch; }
+.card p:last-child { margin-bottom: 0; }
+.card b { color: var(--barn); }
+.card .ask { font-weight: 700; color: var(--lake); }
+.card .later { color: var(--lake); }
+.title .card { text-align: left; }
+.title h1 { font: 600 clamp(46px, 5vw, 72px)/1 var(--display); margin: 6px 0 14px; color: var(--ink); }
+.logo { width: 92px; height: auto; display: block; }
+.scroll-cue { font-size: .8em; color: var(--meadow); font-weight: 700; }
+.scroll-cue::after { content: ""; display: inline-block; width: .5em; height: .5em; margin-left: .45em; border: solid currentColor; border-width: 0 3px 3px 0; transform: translateY(-.15em) rotate(45deg); }
+.letter { margin: .2em 0 .7em; padding: 14px 18px; background: #f5ecd2; border-radius: 4px; transform: rotate(-1.2deg);
+  box-shadow: 0 0 0 2px rgba(45,43,85,.5); font-style: italic; }
+.letter p { margin: 0; }
+.chair { width: 104px; height: 104px; display: block; margin: -6px 0 6px; }
+.chair .leg-a, .chair .leg-b { transform-origin: 60px 56px; transform-box: view-box; }
+.step.chair-open .chair .leg-b { animation: unfold 1.4s cubic-bezier(.4,1.4,.5,1) both; }
+@keyframes unfold { from { transform: rotate(-38deg); } to { transform: rotate(0); } }
+.grown { font-size: .72em; margin-top: 1.2em !important; }
+.grown a { color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.park-name { font-weight: 700; color: var(--meadow); }
+
+/* ---------- the map's few marks ---------- */
+.kl { background: none; border: 0; box-shadow: none; padding: 0; color: var(--ink); font: 700 19px/1.1 var(--story); white-space: nowrap;
+  text-shadow: 0 0 4px var(--page), 0 0 4px var(--page), 0 0 8px var(--page), 0 0 2px var(--page); }
+.kl.big { font: 600 26px/1 var(--display); }
+.kl::before { display: none; }
+.kdot { width: 16px !important; height: 16px !important; margin: -8px 0 0 -8px !important; border-radius: 50%; background: var(--barn); box-shadow: 0 0 0 3px var(--page), 0 0 0 5px var(--ink); }
+.kdot.home { background: var(--gold); }
+.kdot.play { background: var(--meadow); }
+.kveh { display: grid; place-items: center; }
+.kveh .disc { width: 60px; height: 60px; border-radius: 50%; background: var(--page); display: grid; place-items: center;
+  box-shadow: 0 0 0 3px var(--ink), 3px 4px 0 rgba(45,43,85,.25); color: var(--barn); }
+.kveh svg { width: 40px; height: 40px; }
+.kveh.bob .disc { animation: vbob 1.6s ease-in-out infinite; }
+@keyframes vbob { 50% { transform: translateY(-3px) rotate(-3deg); } }
+.leaflet-control-attribution { display: none; }
+
+/* ---------- the lightbox ---------- */
+.lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 3vh 3vw 9vh;
+  background: rgba(45,43,85,.88); opacity: 0; transition: opacity .25s ease; }
+.lightbox.in { opacity: 1; }
+.lightbox[hidden] { display: none; }
+.lightbox figure { margin: 0; display: flex; flex-direction: column; align-items: center; max-height: 100%; }
+.lightbox img { max-width: 94vw; max-height: 74vh; object-fit: contain; background: var(--page); padding: 10px; border-radius: 4px; }
+.lightbox figcaption { margin-top: 14px; max-width: 760px; color: var(--page); font: 400 clamp(16px, 1.4vw, 19px)/1.45 var(--story); text-align: center; }
+.lightbox figcaption b { font-weight: 700; }
+.lightbox figcaption small { display: block; opacity: .75; font-size: .82em; margin-top: 4px; }
+.lb-close { position: absolute; top: 14px; right: 18px; width: 56px; height: 56px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--gold); color: var(--ink); font: 700 34px/1 var(--story); box-shadow: 0 0 0 3px var(--ink); }
+.lb-close:focus-visible { outline: 4px solid var(--page); outline-offset: 4px; }
+.lb-hint { position: absolute; bottom: 2.5vh; left: 0; right: 0; margin: 0; text-align: center; color: var(--page); opacity: .8; font: 700 17px var(--story); }
+
+/* ---------- tall screens and phones: the picture on top, the story cards along the bottom ---------- */
+@media (max-aspect-ratio: 1/1), (max-width: 700px) {
+  :root { --text-col: auto; }
+  .steps { width: auto; margin: 0 4vw; }
+  .step { align-items: flex-end; padding: 58vh 0 6vh; }
+  .card { font-size: clamp(19px, 3.6vw, 26px); }
+  .card p { max-width: none; }
+  .medal { min-width: 120px; padding: 8px 16px 6px; }
+  .m-year { font-size: 34px; }
+  .trees { width: 100px; height: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate, .medal, .plate-btn img, .lightbox { transition: none; }
+  .bubble, .kveh.bob .disc, .m-sub.pop, .step.chair-open .chair .leg-b { animation: none; }
+}

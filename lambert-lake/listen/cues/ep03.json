@@ -1,0 +1,783 @@
+[
+{
+"kind": "scene",
+"t_start": 0.5,
+"t_end": null,
+"speaker": null,
+"text": "Scene 1 — Open and last time (0:00–1:30)",
+"cue_id": "ep03-000"
+},
+{
+"kind": "music",
+"t_start": 0.5,
+"t_end": 14.46,
+"speaker": null,
+"text": "theme",
+"key": "theme",
+"cue_id": "ep03-001"
+},
+{
+"kind": "line",
+"t_start": 6.2,
+"t_end": 11.74,
+"speaker": "NARRATOR",
+"text": "This is \"Lambert Lake.\" Episode three: \"The Hail and the Letter.\"",
+"cue_id": "ep03-002"
+},
+{
+"kind": "ambience",
+"t_start": 13.96,
+"t_end": null,
+"speaker": null,
+"text": "a cold wind off the St. Lawrence, water against the shore",
+"key": "wind+river",
+"cue_id": "ep03-003"
+},
+{
+"kind": "line",
+"t_start": 14.96,
+"t_end": 42.0,
+"speaker": "NARRATOR",
+"text": "Last time, Eustache Lambert paddled a birchbark canoe all the way to the Wendat country, carried it around the rapids on the carrying places, and then came home and started a farm across the river from Quebec. He paid his rent in eels. And then we flew through six generations, spring, summer, fall and winter, all the way to a baby named Abraham, born in seventeen ninety-two.",
+"cue_id": "ep03-004"
+},
+{
+"kind": "line",
+"t_start": 43.46,
+"t_end": 46.34,
+"speaker": "NARRATOR",
+"text": "Tonight, Abraham is all grown up.",
+"cue_id": "ep03-005"
+},
+{
+"kind": "scene",
+"t_start": 48.5,
+"t_end": null,
+"speaker": null,
+"text": "Scene 2 — A winter wedding (1:30–4:00)",
+"cue_id": "ep03-006"
+},
+{
+"kind": "ambience",
+"t_start": 48.5,
+"t_end": null,
+"speaker": null,
+"text": "a farmyard, birdsong, a breeze",
+"key": "farm",
+"cue_id": "ep03-007"
+},
+{
+"kind": "sfx",
+"t_start": 49.9,
+"t_end": 57.1,
+"speaker": null,
+"text": "chop: an axe splitting firewood, steady strokes",
+"key": "chop",
+"cue_id": "ep03-008"
+},
+{
+"kind": "line",
+"t_start": 54.92,
+"t_end": 73.38,
+"speaker": "NARRATOR",
+"text": "Abraham grew up to be a farmer, just like his papa, and his papa's papa. Broad shoulders. Strong hands. And every fall, he chopped a mountain of firewood, because the winters on that river were long, and cold, and full of snow.",
+"cue_id": "ep03-009"
+},
+{
+"kind": "line",
+"t_start": 75.02,
+"t_end": 78.08,
+"speaker": "NARRATOR",
+"text": "In French, wood is le bois.",
+"cue_id": "ep03-010"
+},
+{
+"kind": "line",
+"t_start": 79.38,
+"t_end": 80.08,
+"speaker": "FRENCH",
+"text": "Le bois.",
+"cue_id": "ep03-011"
+},
+{
+"kind": "line",
+"t_start": 81.57,
+"t_end": 109.93,
+"speaker": "NARRATOR",
+"text": "On the twenty-second of January, eighteen twenty-two, in the middle of winter, in the church of a parish called Saint-Nicolas, Abraham married a young woman named Rose Angèle Demers. And here's a neat thing. The Demers family and the Lambert family had been neighbors on that shore for more than a hundred and fifty years. The very first Demers had picked land right next to Eustache's, way back at the beginning.",
+"cue_id": "ep03-012"
+},
+{
+"kind": "sfx",
+"t_start": 110.47,
+"t_end": 114.97,
+"speaker": null,
+"text": "chop: two more strokes, then the axe is set down",
+"key": "chop",
+"cue_id": "ep03-013"
+},
+{
+"kind": "line",
+"t_start": 113.29,
+"t_end": 117.85,
+"speaker": "ROSE ANGÈLE",
+"text": "Abraham! You'll chop the whole forest before supper. Come in. The soup is hot.",
+"cue_id": "ep03-014"
+},
+{
+"kind": "line",
+"t_start": 119.03,
+"t_end": 123.69,
+"speaker": "ABRAHAM",
+"text": "One more armful, ma chère. The winter doesn't care how tired I am.",
+"cue_id": "ep03-015"
+},
+{
+"kind": "line",
+"t_start": 124.85,
+"t_end": 129.53,
+"speaker": "ROSE ANGÈLE",
+"text": "The winter doesn't care about anything. That's why I married a man who chops wood.",
+"cue_id": "ep03-016"
+},
+{
+"kind": "sfx",
+"t_start": 130.13,
+"t_end": 134.33,
+"speaker": null,
+"text": "laugh: the two of them laughing together",
+"key": "laugh",
+"cue_id": "ep03-017"
+},
+{
+"kind": "line",
+"t_start": 132.49,
+"t_end": 137.71,
+"speaker": "NARRATOR",
+"text": "Soup, in French, is la soupe. It sounds almost the same.",
+"cue_id": "ep03-018"
+},
+{
+"kind": "line",
+"t_start": 139.09,
+"t_end": 139.99,
+"speaker": "FRENCH",
+"text": "La soupe.",
+"cue_id": "ep03-019"
+},
+{
+"kind": "line",
+"t_start": 141.495,
+"t_end": 162.535,
+"speaker": "NARRATOR",
+"text": "The next spring, in May of eighteen twenty-three, their first baby was born, a little girl. At the church, her two grandparents, one from each side of the family, stood beside her as her godparents. More babies came after that, boys and girls. The house got louder and louder.",
+"cue_id": "ep03-020"
+},
+{
+"kind": "line",
+"t_start": 163.875,
+"t_end": 183.675,
+"speaker": "NARRATOR",
+"text": "Some winters, the river froze so hard between Pointe-Lévy and Quebec that people could walk right across it. They called it the ice bridge. Families went across on sleighs to shop in the city, with the horses' bells jingling and everybody wrapped in buffalo robes and wool.",
+"cue_id": "ep03-021"
+},
+{
+"kind": "sfx",
+"t_start": 184.235,
+"t_end": 193.235,
+"speaker": null,
+"text": "horses: a team pulling a sleigh over snow, bells jingling",
+"key": "horses",
+"cue_id": "ep03-022"
+},
+{
+"kind": "line",
+"t_start": 187.895,
+"t_end": 191.455,
+"speaker": "ROSE ANGÈLE",
+"text": "Children, hold on to the sleigh! And no running on the ice!",
+"cue_id": "ep03-023"
+},
+{
+"kind": "line",
+"t_start": 192.355,
+"t_end": 194.815,
+"speaker": "CHILD",
+"text": "Papa, can we slide? Just once?",
+"cue_id": "ep03-024"
+},
+{
+"kind": "line",
+"t_start": 195.775,
+"t_end": 200.335,
+"speaker": "ABRAHAM",
+"text": "Just once. Then straight back to the sleigh, or the river will keep you until spring.",
+"cue_id": "ep03-025"
+},
+{
+"kind": "line",
+"t_start": 201.355,
+"t_end": 218.835,
+"speaker": "NARRATOR",
+"text": "We don't know if the Lamberts ever crossed on the ice bridge. But families on that shore did, when the river froze. And all over the parish, in the long winter evenings, people visited each other, and played the fiddle, and told stories by the stove. Stories like this one.",
+"cue_id": "ep03-026"
+},
+{
+"kind": "line",
+"t_start": 220.115,
+"t_end": 249.175,
+"speaker": "NARRATOR",
+"text": "And one fall, a bishop came to their village, and he put up a big wooden cross on a farm, to show where a new church would be built. The farm belonged to an Abraham Lambert, very likely our Abraham. Then the neighbors argued that it wasn't in the middle of the village, and the next summer the church was moved somewhere else. But remember that cross. Our story will bring a church back to Abraham's land again someday.",
+"cue_id": "ep03-027"
+},
+{
+"kind": "scene",
+"t_start": 251.495,
+"t_end": null,
+"speaker": null,
+"text": "Scene 3 — The hard years (4:00–6:30)",
+"cue_id": "ep03-028"
+},
+{
+"kind": "ambience",
+"t_start": 251.495,
+"t_end": null,
+"speaker": null,
+"text": "steady rain on a roof, wind behind it",
+"key": "rain",
+"cue_id": "ep03-029"
+},
+{
+"kind": "line",
+"t_start": 253.455,
+"t_end": 260.215,
+"speaker": "NARRATOR",
+"text": "Now we come to some hard years. I'll tell you about them gently, because they're part of the story.",
+"cue_id": "ep03-030"
+},
+{
+"kind": "line",
+"t_start": 261.875,
+"t_end": 281.595,
+"speaker": "NARRATOR",
+"text": "In the summer of eighteen thirty-two, a sickness called cholera came to Quebec on the ships. It made people very sick, very fast. In those days, nobody knew that it came from dirty water. So lots of people got sick, and some of them died, in Quebec and across the river, too.",
+"cue_id": "ep03-031"
+},
+{
+"kind": "line",
+"t_start": 282.855,
+"t_end": 287.635,
+"speaker": "ROSE ANGÈLE",
+"text": "Abraham, I keep the children inside. I count them. I count them every hour.",
+"cue_id": "ep03-032"
+},
+{
+"kind": "line",
+"t_start": 288.675,
+"t_end": 293.695,
+"speaker": "ABRAHAM",
+"text": "Then count them. I'll count them too. We'll count them together, until it's over.",
+"cue_id": "ep03-033"
+},
+{
+"kind": "line",
+"t_start": 295.055,
+"t_end": 298.475,
+"speaker": "NARRATOR",
+"text": "And it did end. And the family was still together.",
+"cue_id": "ep03-034"
+},
+{
+"kind": "line",
+"t_start": 299.935,
+"t_end": 323.855,
+"speaker": "NARRATOR",
+"text": "But then the weather turned against them. Three summers in a row, the crops didn't grow right. And in eighteen thirty-four, a man stood up in the government at Quebec, and said that in Abraham's own parish, the fields had been completely smashed by hail. Do you know what hail is? Little balls of ice falling out of the sky.",
+"cue_id": "ep03-035"
+},
+{
+"kind": "sfx",
+"t_start": 324.355,
+"t_end": 330.355,
+"speaker": null,
+"text": "hail: a burst of hail rattling on the roof, then easing back to rain",
+"key": "hail",
+"cue_id": "ep03-036"
+},
+{
+"kind": "line",
+"t_start": 328.595,
+"t_end": 336.515,
+"speaker": "ABRAHAM",
+"text": "Look at it, Rose. Three months of work. And the hail takes it in ten minutes. The oats are flat. The potatoes are rotten.",
+"cue_id": "ep03-037"
+},
+{
+"kind": "line",
+"t_start": 337.575,
+"t_end": 339.175,
+"speaker": "ROSE ANGÈLE",
+"text": "We've had bad years before.",
+"cue_id": "ep03-038"
+},
+{
+"kind": "line",
+"t_start": 340.515,
+"t_end": 349.815,
+"speaker": "ABRAHAM",
+"text": "Not three. Not three in a row. And Rose, every piece of land on this shore is taken. When our boys grow up, where will they farm?",
+"cue_id": "ep03-039"
+},
+{
+"kind": "line",
+"t_start": 350.915,
+"t_end": 370.275,
+"speaker": "NARRATOR",
+"text": "More babies came in those lean years. Félicité, in eighteen thirty-three. Esther, in eighteen thirty-five. And in January of eighteen thirty-eight, a baby boy. They named him Joseph Modeste. And that middle name, Modeste, is where our story turns.",
+"cue_id": "ep03-040"
+},
+{
+"kind": "scene",
+"t_start": 372.755,
+"t_end": null,
+"speaker": null,
+"text": "Scene 4 — Uncle Modeste goes west (6:30–8:30)",
+"cue_id": "ep03-041"
+},
+{
+"kind": "ambience",
+"t_start": 372.755,
+"t_end": null,
+"speaker": null,
+"text": "a winter hearth, a kettle, quiet",
+"key": "fire",
+"cue_id": "ep03-042"
+},
+{
+"kind": "music",
+"t_start": 373.955,
+"t_end": 393.498,
+"speaker": null,
+"text": "fontaine",
+"key": "fontaine",
+"cue_id": "ep03-043"
+},
+{
+"kind": "line",
+"t_start": 378.895,
+"t_end": 399.135,
+"speaker": "NARRATOR",
+"text": "Rose Angèle had a little brother named Modeste. He grew up to be a priest. And one winter, a bishop came all the way from the middle of the continent, from a place called Red River, looking for brave young priests to come and help him. He asked Modeste. And Modeste said yes.",
+"cue_id": "ep03-044"
+},
+{
+"kind": "line",
+"t_start": 400.255,
+"t_end": 406.695,
+"speaker": "ROSE ANGÈLE",
+"text": "My little brother. He used to hide in the hayloft so he wouldn't have to say his prayers. And now he's going to the end of the world.",
+"cue_id": "ep03-045"
+},
+{
+"kind": "line",
+"t_start": 408.195,
+"t_end": 428.275,
+"speaker": "NARRATOR",
+"text": "Modeste went to Red River first. And then, in eighteen thirty-eight, the very same year his baby nephew was born, Modeste set out with another priest, by canoe and on foot, over the Rocky Mountains, all the way to the Pacific Ocean, to a country called Oregon.",
+"cue_id": "ep03-046"
+},
+{
+"kind": "line",
+"t_start": 429.675,
+"t_end": 439.215,
+"speaker": "NARRATOR",
+"text": "Over the mountains! To the ocean! All the way across America! From Quebec, that was about as far as a person could go.",
+"cue_id": "ep03-047"
+},
+{
+"kind": "scene",
+"t_start": 443.555,
+"t_end": null,
+"speaker": null,
+"text": "Scene 5 — How news traveled (8:30–10:30)",
+"cue_id": "ep03-048"
+},
+{
+"kind": "ambience",
+"t_start": 443.555,
+"t_end": null,
+"speaker": null,
+"text": "the hearth, a little wind outside",
+"key": "fire",
+"cue_id": "ep03-049"
+},
+{
+"kind": "line",
+"t_start": 445.495,
+"t_end": 458.755,
+"speaker": "NARRATOR",
+"text": "Now here's a question for you. If your uncle went all the way across America today, how would you hear from him? You'd call him on the phone. Or video chat. And there he'd be, right away.",
+"cue_id": "ep03-050"
+},
+{
+"kind": "line",
+"t_start": 460.015,
+"t_end": 488.055,
+"speaker": "NARRATOR",
+"text": "In eighteen thirty-eight, there were no phones. No computers. Not even a mail truck. If Uncle Modeste wanted to send news home, he wrote it down with a pen dipped in ink. Then somebody carried it. By canoe. By horse. By ship. Over the mountains and down the rivers and across the lakes. And it took months. Sometimes almost a whole year.",
+"cue_id": "ep03-051"
+},
+{
+"kind": "line",
+"t_start": 489.335,
+"t_end": 501.635,
+"speaker": "NARRATOR",
+"text": "And when the news finally got to Quebec, the priests there printed it in a little report and read it out loud to people. That's how news traveled. Slowly, and by hand, and out loud.",
+"cue_id": "ep03-052"
+},
+{
+"kind": "line",
+"t_start": 502.875,
+"t_end": 506.455,
+"speaker": "NARRATOR",
+"text": "A letter, in French, is la lettre.",
+"cue_id": "ep03-053"
+},
+{
+"kind": "line",
+"t_start": 507.715,
+"t_end": 508.615,
+"speaker": "FRENCH",
+"text": "La lettre.",
+"cue_id": "ep03-054"
+},
+{
+"kind": "line",
+"t_start": 510.055,
+"t_end": 527.715,
+"speaker": "NARRATOR",
+"text": "We don't know if Modeste ever wrote a letter just to his sister. But in January of eighteen forty, the missions of Quebec printed a report, with the words Modeste and his friend had sent back from Oregon. Imagine, if you like, Rose Angèle reading them by the fire.",
+"cue_id": "ep03-055"
+},
+{
+"kind": "sfx",
+"t_start": 528.275,
+"t_end": 529.675,
+"speaker": null,
+"text": "paper: a folded letter opened, pages turned",
+"key": "paper",
+"cue_id": "ep03-056"
+},
+{
+"kind": "line",
+"t_start": 530.335,
+"t_end": 538.855,
+"speaker": "MODESTE",
+"text": "The whole country is very fit to receive settlers. The climate is mild. The soil is fertile. Hay, and game, and fish are everywhere.",
+"cue_id": "ep03-057"
+},
+{
+"kind": "line",
+"t_start": 539.805,
+"t_end": 552.285,
+"speaker": "MODESTE",
+"text": "And at a river called the Willamette, the good Canadien farmers came out on the road to meet us. They had already built a chapel, seventy feet long. We said the first Mass there on the sixth of January, eighteen thirty-nine.",
+"cue_id": "ep03-058"
+},
+{
+"kind": "sfx",
+"t_start": 552.605,
+"t_end": 554.005,
+"speaker": null,
+"text": "paper: the page lowered",
+"key": "paper",
+"cue_id": "ep03-059"
+},
+{
+"kind": "line",
+"t_start": 554.845,
+"t_end": 557.205,
+"speaker": "ABRAHAM",
+"text": "Read it again. The part about the soil.",
+"cue_id": "ep03-060"
+},
+{
+"kind": "line",
+"t_start": 558.445,
+"t_end": 561.105,
+"speaker": "ROSE ANGÈLE",
+"text": "\"The climate is mild. The soil is fertile.\"",
+"cue_id": "ep03-061"
+},
+{
+"kind": "line",
+"t_start": 562.385,
+"t_end": 567.145,
+"speaker": "ABRAHAM",
+"text": "Mild. When did anybody on this shore ever say the word mild?",
+"cue_id": "ep03-062"
+},
+{
+"kind": "scene",
+"t_start": 569.365,
+"t_end": null,
+"speaker": null,
+"text": "Scene 6 — The decision (10:30–12:30)",
+"cue_id": "ep03-063"
+},
+{
+"kind": "sfx",
+"t_start": 569.565,
+"t_end": 573.565,
+"speaker": null,
+"text": "fire: a log settles in the hearth",
+"key": "fire",
+"cue_id": "ep03-064"
+},
+{
+"kind": "line",
+"t_start": 571.785,
+"t_end": 573.325,
+"speaker": "ROSE ANGÈLE",
+"text": "Abraham. I know that look.",
+"cue_id": "ep03-065"
+},
+{
+"kind": "line",
+"t_start": 574.585,
+"t_end": 585.665,
+"speaker": "ABRAHAM",
+"text": "There are farmers like us out there already, Rose. They built a chapel. Your brother is their priest. There's land enough for every one of our children, and it doesn't freeze from November to May.",
+"cue_id": "ep03-066"
+},
+{
+"kind": "line",
+"t_start": 586.965,
+"t_end": 590.825,
+"speaker": "ROSE ANGÈLE",
+"text": "It's two thousand leagues. Across the whole of America. With six children.",
+"cue_id": "ep03-067"
+},
+{
+"kind": "line",
+"t_start": 592.085,
+"t_end": 593.445,
+"speaker": "ABRAHAM",
+"text": "I know how far it is.",
+"cue_id": "ep03-068"
+},
+{
+"kind": "line",
+"t_start": 594.725,
+"t_end": 601.025,
+"speaker": "ROSE ANGÈLE",
+"text": "Then you also know I'm coming with you. Somebody has to keep you from feeding the children to the bears.",
+"cue_id": "ep03-069"
+},
+{
+"kind": "line",
+"t_start": 602.185,
+"t_end": 604.865,
+"speaker": "CHILD",
+"text": "Papa, are there bears in Oregon?",
+"cue_id": "ep03-070"
+},
+{
+"kind": "line",
+"t_start": 605.925,
+"t_end": 609.545,
+"speaker": "ABRAHAM",
+"text": "Only polite ones, mon petit. Go to sleep.",
+"cue_id": "ep03-071"
+},
+{
+"kind": "line",
+"t_start": 610.565,
+"t_end": 616.565,
+"speaker": "NARRATOR",
+"text": "Mon petit means \"my little one.\" It's what French moms and dads call their children.",
+"cue_id": "ep03-072"
+},
+{
+"kind": "line",
+"t_start": 618.085,
+"t_end": 619.025,
+"speaker": "FRENCH",
+"text": "Mon petit.",
+"cue_id": "ep03-073"
+},
+{
+"kind": "line",
+"t_start": 620.595,
+"t_end": 634.195,
+"speaker": "NARRATOR",
+"text": "And so, in eighteen forty-one, when he was forty-nine years old, Abraham Lambert decided to do something no Lambert had done in almost two hundred years. He decided to leave the shore. And go west.",
+"cue_id": "ep03-074"
+},
+{
+"kind": "line",
+"t_start": 635.515,
+"t_end": 654.175,
+"speaker": "NARRATOR",
+"text": "Which brings us to tonight's question. If your whole family was moving, very, very far away, and you could each bring just one special thing, what would you pack? Your blanket? A toy? A picture? Think about it. You can tell your dad in the morning.",
+"cue_id": "ep03-075"
+},
+{
+"kind": "scene",
+"t_start": 656.475,
+"t_end": null,
+"speaker": null,
+"text": "Scene 7 — The last night on the shore (12:30–15:00)",
+"cue_id": "ep03-076"
+},
+{
+"kind": "ambience",
+"t_start": 656.475,
+"t_end": null,
+"speaker": null,
+"text": "the wind and water again, softer, night",
+"key": "wind+river",
+"cue_id": "ep03-077"
+},
+{
+"kind": "sfx",
+"t_start": 657.875,
+"t_end": 674.075,
+"speaker": null,
+"text": "bell: the parish bell across the water, slow",
+"key": "bell",
+"cue_id": "ep03-078"
+},
+{
+"kind": "sfx",
+"t_start": 666.275,
+"t_end": 671.915,
+"speaker": null,
+"text": "steps: footsteps on the shingle, someone coming down to the water",
+"key": "steps",
+"cue_id": "ep03-079"
+},
+{
+"kind": "line",
+"t_start": 671.809,
+"t_end": 676.449,
+"speaker": "ROSE ANGÈLE",
+"text": "The trunks are packed. The children are asleep. All six of them, for once.",
+"cue_id": "ep03-080"
+},
+{
+"kind": "line",
+"t_start": 677.669,
+"t_end": 677.989,
+"speaker": "ABRAHAM",
+"text": "Good.",
+"cue_id": "ep03-081"
+},
+{
+"kind": "line",
+"t_start": 679.009,
+"t_end": 679.869,
+"speaker": "ROSE ANGÈLE",
+"text": "What are you looking at?",
+"cue_id": "ep03-082"
+},
+{
+"kind": "line",
+"t_start": 681.129,
+"t_end": 693.189,
+"speaker": "ABRAHAM",
+"text": "Everything. Eustache stood on this shore. And his son. And his son's son. Every one of them looked across at that rock and said, this is enough. This is home.",
+"cue_id": "ep03-083"
+},
+{
+"kind": "line",
+"t_start": 694.249,
+"t_end": 695.369,
+"speaker": "ROSE ANGÈLE",
+"text": "And you?",
+"cue_id": "ep03-084"
+},
+{
+"kind": "line",
+"t_start": 696.449,
+"t_end": 702.489,
+"speaker": "ABRAHAM",
+"text": "I say home isn't the rock, Rose. Home is the people in that house. We take it with us.",
+"cue_id": "ep03-085"
+},
+{
+"kind": "line",
+"t_start": 703.569,
+"t_end": 707.249,
+"speaker": "ROSE ANGÈLE",
+"text": "Then come inside, and sleep. Home leaves early in the morning.",
+"cue_id": "ep03-086"
+},
+{
+"kind": "sfx",
+"t_start": 707.769,
+"t_end": 719.169,
+"speaker": null,
+"text": "bell: one last stroke, fading",
+"key": "bell",
+"cue_id": "ep03-087"
+},
+{
+"kind": "ambience",
+"t_start": 711.169,
+"t_end": null,
+"speaker": null,
+"text": "a quiet night, crickets, the river, an owl",
+"key": "night",
+"cue_id": "ep03-088"
+},
+{
+"kind": "music",
+"t_start": 711.169,
+"t_end": 784.204,
+"speaker": null,
+"text": "lullaby",
+"key": "lullaby",
+"cue_id": "ep03-089"
+},
+{
+"kind": "line",
+"t_start": 715.089,
+"t_end": 728.369,
+"speaker": "NARRATOR",
+"text": "So that night, in the old house on the shore, everybody slept. The big kids and the little kids. The trunks were tied up by the door. Outside, the river went by in the dark, the way it always had.",
+"cue_id": "ep03-090"
+},
+{
+"kind": "line",
+"t_start": 729.849,
+"t_end": 741.609,
+"speaker": "NARRATOR",
+"text": "Next time, the Lamberts go west. By steamboat, and stagecoach, and a train, the first train any of them had ever seen. But that's for tomorrow.",
+"cue_id": "ep03-091"
+},
+{
+"kind": "line",
+"t_start": 743.089,
+"t_end": 751.449,
+"speaker": "NARRATOR",
+"text": "Tonight, close your eyes, and listen to the river. Home isn't a place. It's the people you love. And they're right here.",
+"cue_id": "ep03-092"
+},
+{
+"kind": "line",
+"t_start": 752.809,
+"t_end": 753.649,
+"speaker": "FRENCH",
+"text": "Bonne nuit.",
+"cue_id": "ep03-093"
+},
+{
+"kind": "line",
+"t_start": 755.124,
+"t_end": 759.984,
+"speaker": "NARRATOR",
+"text": "Goodnight, William. Goodnight, Alex. Goodnight, from the shore of Lambert Lake.",
+"cue_id": "ep03-094"
+}
+]

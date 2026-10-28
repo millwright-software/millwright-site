@@ -1,0 +1,409 @@
+[
+ {
+  "gen": 1,
+  "name": "Eustache Lambert",
+  "born": "c. 1617-1618, \"probably near Boulogne in France\" (DCB); tree: 21 Sep 1617, \"Boulogne, Oise, Picardie\"",
+  "died": "6 Jul 1673, Quebec, buried 7 Jul (DCB; Roy vol. 1 p. 258); tree says 6 Jun 1673",
+  "spouse": "Marie Laurence, m. 1656 at Quebec (DCB gives 1656; the tree's \"Boulogne\" as the marriage place is wrong, he was in Canada)",
+  "place": "Boulogne (Picardy) → Quebec → Sainte-Marie among the Hurons → Pointe-Lévy (Lauzon), farm \"Sainte-Marie\"",
+  "lat": 46.755,
+  "lon": -71.235,
+  "place_note": "Pin is approximate: the Sainte-Marie farm lay between the Chaudière and the Etchemin, today's Saint-Romuald (Roy vol. 2 p. 41).",
+  "birthplace_question": "Which Boulogne is unsettled. The tree says \"Boulogne, Oise, Picardie\". The Oise has Boulogne-la-Grasse, a village 11 km SE of Montdidier and 23 km N of Compiègne (Wikipédia), which was Picardy; Boulogne-sur-Mer is in the Boulonnais (today Pas-de-Calais), also counted as Picardy then. A Quebec genealogical chronicle says \"originaire de Boulogne en Picardie\" (gensdupays.ca/cercle/chroniques/20141105.pdf), which fits either. The DCB says only \"near Boulogne\". No baptism has been seen; Fichier Origine was not reached.",
+  "life": "A layman who could not write his name (he signed with a mark), he gave himself to the Jesuits as a donné, worked and interpreted at Sainte-Marie among the Hurons, then took eight arpents of St. Lawrence shore at Pointe-Lévy in 1653, kept an eel fishery there from 1651, named the farm Sainte-Marie, and became a Quebec merchant and militia commander.",
+  "life_basis": "sourced",
+  "beats": [
+   {
+    "title": "A frontier boyhood",
+    "basis": "imagined, framed by sourced context",
+    "text": "Eustache was about eighteen in 1636, \"the year of Corbie\", when a Spanish army crossed the Somme on 5 August, took Corbie on the 15th, raided as far as Compiègne, and sent the court fleeing Paris. If his Boulogne was the village in the Oise, the invasion passed within a day's walk of it; if it was Boulogne-sur-Mer, he grew up in a walled port some twenty kilometres from the Spanish border in Artois. Either way he may have known soldiers' billets, requisitions and hungry winters before he knew anything of Canada.",
+    "sources": [
+     "\"First siege of Corbie\", Wikipedia, https://en.wikipedia.org/wiki/First_siege_of_Corbie",
+     "\"Boulogne-la-Grasse\", Wikipédia (fr), https://fr.wikipedia.org/wiki/Boulogne-la-Grasse",
+     "\"Histoire de Boulogne-sur-Mer\", Wikipédia (fr), https://fr.wikipedia.org/wiki/Histoire_de_Boulogne-sur-Mer (\"la frontière se trouve à une vingtaine de kilomètres de l'entrée de Boulogne\", said of 1662)"
+    ]
+   },
+   {
+    "title": "The little books from Paris",
+    "basis": "imagined, framed by sourced context",
+    "text": "Every year from 1632 the Jesuits printed a Relation of their Canadian missions, almost all at Cramoisy in Paris, and they were \"disseminated among the general public\"; the 1639 one sent Jeanne Mance to Canada, and the Ursulines and hospital nuns who landed at Quebec that year came in answer to them. Eustache could not read, so if the Relations reached him it was aloud, from a pulpit or a priest. He may have heard of the Huron mission the way most people did: as a story read to a room.",
+    "sources": [
+     "L. Pouliot, \"LE JEUNE, PAUL\", DCB vol. 1, https://www.biographi.ca/en/bio/le_jeune_paul_1E.html",
+     "\"GUYART, MARIE (Marie de l'Incarnation)\", DCB vol. 1, https://www.biographi.ca/en/bio/guyart_marie_1E.html"
+    ]
+   },
+   {
+    "title": "Giving himself away",
+    "basis": "sourced, with one hedge",
+    "text": "The Jesuits needed men who could farm, build, hunt, nurse and, unlike their lay brothers, carry a gun. Jérôme Lalemant began taking such men as donnés in the Huron country from 1639: laymen who gave their whole lives to the mission without religious vows, for their keep and the Society's promise to look after them to the end. In 1642 Lalemant wrote that it was unjust for \"young men in the flower of their youth\" to give themselves to so dangerous a country on \"such weak assurances of a livelihood\". Eustache, in his mid-twenties, was one of them; a family biographer, writing as a novelist, says he was recruited in France and reached Quebec in 1644.",
+    "sources": [
+     "\"LALEMANT, JÉRÔME\", DCB vol. 1, https://www.biographi.ca/en/bio/lalemant_jerome_1E.html",
+     "Jérôme Lalemant, \"Mémoire touchant les Domestiques\" (1642), in Thwaites ed., The Jesuit Relations and Allied Documents, vol. 21, pp. 293-297, https://moses.creighton.edu/kripke/jesuitrelations/relations_21.html",
+     "J. Monet, \"LAMBERT, EUSTACHE\", Dictionary of Canadian Biography vol. 1 (1966, rev. 1979), https://www.biographi.ca/en/bio/lambert_eustache_1E.html",
+     "Review of H. Gosselin, Eustache Lambert: Donné Extraordinaire (2001), a historical novel, https://mainewriter.com/articles/Eustache-Lambert-br.htm",
+     "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. 255 (OCR page markers, may be off by one)"
+    ]
+   },
+   {
+    "title": "Ten weeks of sea, then a rock with a fort on it",
+    "basis": "imagined, framed by sourced context",
+    "text": "The crossing took months, not weeks: Marie de l'Incarnation's ship left on 4 May 1639 and reached Quebec on 1 August, and a bad-wind passage could run sixty or seventy days. Quebec, when he came up the river, was a fort on the cliff, Champlain's old Habitation by the water below with a path between them, a Jesuit college, the new Ursuline convent and Hôtel-Dieu, and a few hundred people: 250 in 1641, about 2,000 by 1653. That spring of 1644 the Iroquois burned and killed at Cap-Rouge, just upriver. He may have stepped ashore already knowing he was bound further west.",
+    "sources": [
+     "\"GUYART, MARIE (Marie de l'Incarnation)\", DCB vol. 1, https://www.biographi.ca/en/bio/guyart_marie_1E.html",
+     "Pierre-Georges Roy, Toutes petites choses du régime français (1944), quoted at https://grandquebec.com/histoire/traversee-ocean-atlantique/",
+     "Ville de Québec, \"Histoire 1608-1755\", https://www.ville.quebec.qc.ca/en/apropos/portrait/histoire/1608-1755.aspx",
+     "LEARN Quebec, \"Québec, 1645: fewer than 1000 people\", https://societies.learnquebec.ca/societies/new-france-around-1645/fewer-than-1000-people/",
+     "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. ~10 (OCR page markers, may be off by one)"
+    ]
+   }
+  ],
+  "events": [
+   {
+    "year": "1636",
+    "text": "Spanish invasion of Picardy, \"l'année de Corbie\": the Somme crossed 5 Aug, Corbie taken 15 Aug, retaken by Louis XIII 14 Nov",
+    "age": "c. 18-19",
+    "source": "\"First siege of Corbie\", Wikipedia, https://en.wikipedia.org/wiki/First_siege_of_Corbie"
+   },
+   {
+    "year": "c. 1644",
+    "text": "Reaches Quebec as a Jesuit donné (DCB: \"probably in the early 1640s\"; 1644 is from Gosselin's novel). Iroquois raids at Cap-Rouge that spring",
+    "age": "c. 26-27",
+    "source": "J. Monet, \"LAMBERT, EUSTACHE\", Dictionary of Canadian Biography vol. 1 (1966, rev. 1979), https://www.biographi.ca/en/bio/lambert_eustache_1E.html; Review of H. Gosselin, Eustache Lambert: Donné Extraordinaire (2001), a historical novel, https://mainewriter.com/articles/Eustache-Lambert-br.htm; J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. ~10 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1646",
+    "text": "First on record, August, going up to Sainte-Marie among the Hurons, his second or third trip; 23 donnés were there in 1648",
+    "age": "c. 28-29",
+    "source": "J. Monet, \"LAMBERT, EUSTACHE\", Dictionary of Canadian Biography vol. 1 (1966, rev. 1979), https://www.biographi.ca/en/bio/lambert_eustache_1E.html; The Canadian Encyclopedia, \"Ste Marie Among the Hurons\", https://www.thecanadianencyclopedia.ca/en/article/ste-marie-among-the-hurons"
+   },
+   {
+    "year": "1649",
+    "text": "Iroquois destroy Huronia; Brébeuf and Lalemant killed 16-17 March; the Jesuits burn Sainte-Marie and withdraw",
+    "age": "c. 31-32",
+    "source": "notes/abraham-lambert.md (DCB); The Canadian Encyclopedia, \"Ste Marie Among the Hurons\", https://www.thecanadianencyclopedia.ca/en/article/ste-marie-among-the-hurons"
+   },
+   {
+    "year": "1653",
+    "text": "Commands Quebec's camp volant; on 11 Oct is conceded 8 arpents × 40 at Pointe-Lévy, where he had fished eels since 1651",
+    "age": "c. 35-36",
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. 255-256 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1657",
+    "text": "6 May: Iroquois kill a neighbour's cow on the Lauzon shore; forty of them camped opposite",
+    "age": "c. 39-40",
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. ~113 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1663",
+    "text": "New France becomes a royal colony, with a Conseil souverain at Quebec",
+    "age": "c. 45-46",
+    "source": "general reference date; not re-checked against a primary source in this pass"
+   },
+   {
+    "year": "1673",
+    "text": "Dies at Quebec; estate valued at 31,000 livres",
+    "age": "c. 55-56",
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. 258 (OCR page markers, may be off by one); J. Monet, \"LAMBERT, EUSTACHE\", Dictionary of Canadian Biography vol. 1 (1966, rev. 1979), https://www.biographi.ca/en/bio/lambert_eustache_1E.html"
+   }
+  ],
+  "sources": [
+   "J. Monet, \"LAMBERT, EUSTACHE\", Dictionary of Canadian Biography vol. 1 (1966, rev. 1979), https://www.biographi.ca/en/bio/lambert_eustache_1E.html",
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. 255-261 (OCR page markers, may be off by one), https://archive.org/details/cihm_12750",
+   "Jérôme Lalemant, \"Mémoire touchant les Domestiques\" (1642), in Thwaites ed., The Jesuit Relations and Allied Documents, vol. 21, pp. 293-297, https://moses.creighton.edu/kripke/jesuitrelations/relations_21.html",
+   "L. Pouliot, \"LE JEUNE, PAUL\", DCB vol. 1, https://www.biographi.ca/en/bio/le_jeune_paul_1E.html",
+   "\"GUYART, MARIE (Marie de l'Incarnation)\", DCB vol. 1, https://www.biographi.ca/en/bio/guyart_marie_1E.html",
+   "\"LALEMANT, JÉRÔME\", DCB vol. 1, https://www.biographi.ca/en/bio/lalemant_jerome_1E.html",
+   "\"First siege of Corbie\", Wikipedia, https://en.wikipedia.org/wiki/First_siege_of_Corbie",
+   "LEARN Quebec, \"Québec, 1645: fewer than 1000 people\", https://societies.learnquebec.ca/societies/new-france-around-1645/fewer-than-1000-people/",
+   "Ville de Québec, \"Histoire 1608-1755\", https://www.ville.quebec.qc.ca/en/apropos/portrait/histoire/1608-1755.aspx",
+   "The Canadian Encyclopedia, \"Ste Marie Among the Hurons\", https://www.thecanadianencyclopedia.ca/en/article/ste-marie-among-the-hurons",
+   "Review of H. Gosselin, Eustache Lambert: Donné Extraordinaire (2001), a historical novel, https://mainewriter.com/articles/Eustache-Lambert-br.htm",
+   "Eric's Ancestry tree, sources/records/ancestry-tree/Richey Family Tree.ged (unverified against parish registers)",
+   "notes/abraham-lambert.md",
+   "research_notes/lauzon-and-oregon.md"
+  ]
+ },
+ {
+  "gen": 2,
+  "name": "Gabriel Lambert, \"Sieur de Sainte-Marie\"",
+  "born": "5 Dec 1657, Quebec (Roy); tree: 4 Dec 1657",
+  "died": "1719, Lauzon, buried 25 Jul in St-Joseph church, aged 63 (Roy); tree: 24 Jul 1719",
+  "spouse": "Françoise-Renée Roussel, daughter of the surgeon, m. 18 Jun 1683, contract 12 May 1683 before Rageot (Roy vol. 1 p. 258); tree: 18 Jun 1686",
+  "place": "Habitation Sainte-Marie, Pointe-Lévy (between the Chaudière and the Etchemin, today Saint-Romuald)",
+  "lat": 46.755,
+  "lon": -71.235,
+  "life": "He lived his whole life on the farm his father began clearing in 1652, \"de mœurs douces et tranquilles\"; when dragged into a family lawsuit he begged off, pleading his deafness, his little learning and the distance to town. The 1706-08 Catalogne map marks the place \"M. Lambert ... la ferme Ste-Marie\".",
+  "life_basis": "sourced",
+  "events": [
+   {
+    "year": "1663",
+    "text": "Royal government replaces company rule",
+    "age": 5,
+    "source": "general reference date; not re-checked against a primary source in this pass"
+   },
+   {
+    "year": "1667",
+    "text": "The census shows Eustache's eldest son Gabriel working the Lauzon farm with four servants (Roy gives his age as 20, which conflicts with a 1657 birth)",
+    "age": 9,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. 202 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1673",
+    "text": "Father dies; Gabriel inherits the habitation of Sainte-Marie, valued at 5,000 livres",
+    "age": 15,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. 258 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1690",
+    "text": "October: Phips's Boston fleet of some 35 ships anchors between Beaumont and Pointe-Lévy; a landing on the Lauzon shore is driven back by habitants in ambush",
+    "age": 32,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. 422-424 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1701",
+    "text": "Great Peace of Montreal with the Iroquois and western nations",
+    "age": 43,
+    "source": "general reference date; not re-checked against a primary source in this pass"
+   }
+  ],
+  "sources": [
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 1, p. 202, 258, 262-263, 422-424 (OCR page markers, may be off by one), https://archive.org/details/cihm_12750",
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 2, p. 41-42 (OCR page markers, may be off by one), https://archive.org/details/cihm_12751",
+   "Eric's Ancestry tree, sources/records/ancestry-tree/Richey Family Tree.ged (unverified against parish registers)",
+   "research_notes/lauzon-and-oregon.md"
+  ]
+ },
+ {
+  "gen": 3,
+  "name": "Louis-Joseph Lambert, \"Monsieur de Sainte-Marie\"",
+  "born": "16 Jun 1695, Quebec (tree; Roy: \"né en 1695\")",
+  "died": "21 Jan 1760, Lauzon, still commanding the south-shore militia (Roy vol. 2 p. 42)",
+  "spouse": "Geneviève Rouer de Villeray, m. 16 Nov 1722 at Quebec; 18 children (Roy vol. 2 p. 42)",
+  "place": "Sainte-Marie farm and parish of St-Joseph de la Pointe-Lévy",
+  "lat": 46.755,
+  "lon": -71.235,
+  "life": "A gentleman habitant and militia officer: premier capitaine of St-Joseph parish and commandant of the côte du sud by 1734, he went to court for the first pew after the seigneur's and the blessed bread before anyone else, and won.",
+  "life_basis": "sourced",
+  "events": [
+   {
+    "year": "1722",
+    "text": "Marries Geneviève Rouer de Villeray, granddaughter of a councillor of the Conseil souverain",
+    "age": 27,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 2, p. 42 (OCR page markers, may be off by one); DCB, Rouer de Villeray, Augustin"
+   },
+   {
+    "year": "1734",
+    "text": "First militia captain of St-Joseph and commandant of the south shore in the government of Quebec",
+    "age": 39,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 2, p. 42 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1759",
+    "text": "Lieutenant-colonel commanding the south-shore militia when Wolfe comes; from May the habitants are sent into the woods for \"cinq longs mois\"; signal fires at Pointe-Lévy on 24 May; British batteries on the Lévis heights bombard Quebec from July",
+    "age": 63,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 2, p. 266-268 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1760",
+    "text": "Dies 21 January, four months after Quebec falls; Geneviève buried 16 April",
+    "age": 64,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 2, p. 42 (OCR page markers, may be off by one); J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 3, p. 98 (OCR page markers, may be off by one)"
+   }
+  ],
+  "sources": [
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 2, p. 42, 266-268 (OCR page markers, may be off by one), https://archive.org/details/cihm_12751",
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 3, p. 98 (OCR page markers, may be off by one), https://archive.org/details/cihm_12752",
+   "DCB, Rouer de Villeray, Augustin, https://www.biographi.ca/en/bio/rouer_de_villeray_et_de_la_cardonniere_augustin_2E.html",
+   "Eric's Ancestry tree, sources/records/ancestry-tree/Richey Family Tree.ged (unverified against parish registers)",
+   "research_notes/lauzon-and-oregon.md"
+  ]
+ },
+ {
+  "gen": 4,
+  "name": "Louis-Joseph Lambert (the tree's \"Patriot\")",
+  "born": "5 Jan 1725, Quebec (tree)",
+  "died": "10 Mar 1817, Lauzon (tree), which would make him 92",
+  "spouse": "Marie-Thérèse de Frontigny, m. 11 Nov 1748, Quebec (tree); Roy names her as his wife and says she died 16 Feb 1794 (vol. 3 p. 229 n. 2)",
+  "place": "Pointe-Lévy, parish of St-Joseph",
+  "lat": 46.8135,
+  "lon": -71.1645,
+  "life": "He may have farmed the Sainte-Marie lands as his father had, through the burning summer of 1759 and the American winter of 1775-76; in 1809 a Louis-Joseph Lambert ceded the shore of Eustache's old farm to Caldwell, ground that became the New Liverpool timber cove.",
+  "life_basis": "imagined (farming) / sourced (1809 cession, which could be him or his son)",
+  "events": [
+   {
+    "year": "1759",
+    "text": "The siege: the family's shore occupied, habitants in the woods; his father commands the south-shore militia",
+    "age": 34,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 2, p. 266-268 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1763",
+    "text": "Treaty of Paris: New France ceded to Britain",
+    "age": 38,
+    "source": "general reference date; not re-checked against a primary source in this pass"
+   },
+   {
+    "year": "1775",
+    "text": "8 Nov: Arnold's army comes down the Chaudière to Pointe-Lévy and crosses to Wolfe's Cove on the 13th; the Americans winter \"en véritable pays ami\"",
+    "age": 50,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 3, p. ~44-51 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1776",
+    "text": "5 July: the King's commissioners at Pointe-Lévy cashier militia captain \"Joseph Lambert\", who served the \"Rebels\" with zeal; whether this is him (aged 51) or his son (26) is not known",
+    "age": 51,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 4, p. appendix iii-iv (OCR page markers, may be off by one), https://archive.org/details/cihm_12753"
+   },
+   {
+    "year": "1791",
+    "text": "Constitutional Act creates Lower Canada",
+    "age": 66,
+    "source": "general reference date; not re-checked against a primary source in this pass"
+   },
+   {
+    "year": "1809",
+    "text": "\"Louis Joseph Lambert\" cedes the shore of Eustache's original land to Caldwell (gen. 4 at 84, or gen. 5)",
+    "age": 84,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 3, p. 427-428 (OCR page markers, may be off by one)"
+   }
+  ],
+  "sources": [
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 2, p. 266-268 (OCR page markers, may be off by one)",
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 3, p. ~44-51, 229, 427-428 (OCR page markers, may be off by one), https://archive.org/details/cihm_12752",
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 4, p. appendix (OCR page markers, may be off by one), https://archive.org/details/cihm_12753",
+   "Eric's Ancestry tree, sources/records/ancestry-tree/Richey Family Tree.ged (unverified against parish registers)",
+   "research_notes/lauzon-and-oregon.md"
+  ],
+  "place_note": "Pin is approximate (Pointe-Lévy / Lauzon shore opposite Quebec)."
+ },
+ {
+  "gen": 5,
+  "name": "Joseph (tree: Louis-Joseph) Lambert",
+  "born": "15 Aug 1749, Quebec (tree)",
+  "died": "unknown; tree says 6 Mar 1853 at Lévis, which would make him 103 and is unsupported; alive Jan 1822",
+  "spouse": "Judith Magnan (tree: m. 25 Aug 1777); the 1822 marriage act of his son names \"Joseph Lambert\" and \"Judith Magnan\", living at Saint-Joseph-de-la-Pointe-de-Lévy",
+  "place": "Saint-Joseph-de-la-Pointe-de-Lévy",
+  "lat": 46.8135,
+  "lon": -71.1645,
+  "life": "Habitants named Louis-Joseph often went by Joseph, so he is probably the tree's Louis-Joseph. He may have raised Joseph, Pierre, Ignace and Abraham on a river farm, with eel weirs at the shore and the parish of St-Joseph up the hill.",
+  "life_basis": "imagined (daily life) / sourced (name, wife, residence, children)",
+  "events": [
+   {
+    "year": "1759",
+    "text": "The siege of Quebec; Pointe-Lévy families sent into the woods for five months",
+    "age": "9-10",
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 2, p. 267 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1775-76",
+    "text": "American occupation of Pointe-Lévy; a \"Joseph Lambert\" serves as captain for Congress, possibly him",
+    "age": "26",
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 4, p. appendix iii-iv (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1777",
+    "text": "A Lambert-Magnan marriage at Pointe-Lévy on 7 Jan (his sister Marie-Thérèse to Pierre Magnan); his own to Judith Magnan the same year per the tree",
+    "age": 27,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 3, p. 229 n. 2 (OCR page markers, may be off by one); Eric's Ancestry tree, sources/records/ancestry-tree/Richey Family Tree.ged (unverified against parish registers)"
+   },
+   {
+    "year": "1791",
+    "text": "Lower Canada created",
+    "age": 42,
+    "source": "general reference date; not re-checked against a primary source in this pass"
+   },
+   {
+    "year": "1792",
+    "text": "Son Abraham born (5 June per Find a Grave / tree)",
+    "age": 42,
+    "source": "Eric's Ancestry tree, sources/records/ancestry-tree/Richey Family Tree.ged (unverified against parish registers)"
+   },
+   {
+    "year": "1812-14",
+    "text": "War of 1812; an Ignace Lambert, possibly his son, is a brigadier of militia carts",
+    "age": "63-65",
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 4, p. ~21 (OCR page markers, may be off by one) (identity unverified)"
+   },
+   {
+    "year": "1822",
+    "text": "Alive and named in son Abraham's marriage act, 22 Jan, Saint-Nicolas",
+    "age": 72,
+    "source": "genealogie.quebec / stemma4web (F. Marchi), Saint-Nicolas register transcriptions, https://genealogie.quebec/stemma4web/info/381992"
+   }
+  ],
+  "sources": [
+   "genealogie.quebec / stemma4web (F. Marchi), Saint-Nicolas register transcriptions, https://genealogie.quebec/stemma4web/info/381992",
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 3, p. 229 (OCR page markers, may be off by one)",
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 4, p. appendix, ~21 (OCR page markers, may be off by one)",
+   "Eric's Ancestry tree, sources/records/ancestry-tree/Richey Family Tree.ged (unverified against parish registers)",
+   "research_notes/lauzon-and-oregon.md"
+  ],
+  "place_note": "Pin is approximate (Pointe-Lévy / Lauzon shore opposite Quebec)."
+ },
+ {
+  "gen": 6,
+  "name": "Abraham Lambert",
+  "born": "5 Jun 1792, Lauzon (tree, Find a Grave; the stone says 1792)",
+  "died": "30 or 31 Aug 1875, Little Canada, Minnesota, aged 83",
+  "spouse": "Rose Angèle (Angélique) Demers, sister of Fr. Modeste Demers, m. 22 Jan 1822 at Saint-Nicolas (register transcription; tree says 29 Dec 1821, Lévis)",
+  "place": "Pointe-Lévy / Saint-Nicolas / village of Beaulieu (St-Jean-Chrysostome), then west in 1841",
+  "lat": 46.72,
+  "lon": -71.19,
+  "life": "A cultivateur on the old Eustache peninsula between the Etchemin and the Chaudière; in 1828 the bishop planted the cross for a new parish church on the land of an Abraham Lambert at Beaulieu, very probably his.",
+  "life_basis": "sourced",
+  "events": [
+   {
+    "year": "1812-15",
+    "text": "War of 1812",
+    "age": "20-22",
+    "source": "general reference date; not re-checked against a primary source in this pass"
+   },
+   {
+    "year": "1822",
+    "text": "Marries Rose Angèle Demers at Saint-Nicolas",
+    "age": 29,
+    "source": "genealogie.quebec / stemma4web (F. Marchi), Saint-Nicolas register transcriptions, https://genealogie.quebec/stemma4web/info/381992"
+   },
+   {
+    "year": "1828",
+    "text": "5 Nov: Bishop Signay fixes the church site of St-Jean-Chrysostome \"sur la terre d'Abraham Lambert\" (moved to Taniata in July 1829)",
+    "age": 36,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 5, p. 34-37 (OCR page markers, may be off by one), https://archive.org/details/histoiredelaseig0005royj"
+   },
+   {
+    "year": "1832",
+    "text": "Cholera: 25 deaths at Pointe-Lévy, 13 at Saint-Nicolas",
+    "age": 40,
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 5, p. 349-355 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1832-34",
+    "text": "Three years of failed harvests; hail destroys fields at St-Jean-Chrysostome",
+    "age": "40-42",
+    "source": "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 5, p. 357-359 (OCR page markers, may be off by one)"
+   },
+   {
+    "year": "1837-38",
+    "text": "Rebellions in Lower Canada, fought around Montreal, not Lauzon",
+    "age": "45-46",
+    "source": "general reference date; not re-checked against a primary source in this pass; research_notes/lauzon-and-oregon.md"
+   },
+   {
+    "year": "1841",
+    "text": "Leaves Lower Canada with Rose Angèle and six children, bound west",
+    "age": 49,
+    "source": "notes/abraham-lambert.md (Neill 1881, p. 289; gravestone)"
+   }
+  ],
+  "sources": [
+   "genealogie.quebec / stemma4web (F. Marchi), Saint-Nicolas register transcriptions, https://genealogie.quebec/stemma4web/info/381992",
+   "J.-E. Roy, Histoire de la seigneurie de Lauzon, vol. 5, p. 34-37, 349-359 (OCR page markers, may be off by one), https://archive.org/details/histoiredelaseig0005royj",
+   "Find a Grave 50657843, https://www.findagrave.com/memorial/50657843/abraham-lambert",
+   "notes/abraham-lambert.md",
+   "research_notes/lauzon-and-oregon.md",
+   "Eric's Ancestry tree, sources/records/ancestry-tree/Richey Family Tree.ged (unverified against parish registers)"
+  ],
+  "place_note": "Pin is approximate: Beaulieu / St-Jean-Chrysostome, between the Etchemin and the Chaudière."
+ }
+]

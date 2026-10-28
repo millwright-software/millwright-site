@@ -1,0 +1,413 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Lévis / Lauzon, Lower Canada",
+    "note": "Abraham's birthplace (Lauzon seigneury, 1792); the family left Lower Canada in 1841 (Neill 1881; Find a Grave 50657843).",
+    "year": 1841,
+    "role": "origin",
+    "confidence": "documented"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.177,
+     46.8
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Montreal",
+    "note": "Head of St. Lawrence steam navigation; every westbound route from Quebec passed through it (reconstructed stop).",
+    "year": 1841,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.553,
+     45.503
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Kingston",
+    "note": "Where St. Lawrence travel met the Lake Ontario steamers (reconstructed stop).",
+    "year": 1841,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -76.48,
+     44.231
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Buffalo",
+    "note": "Eastern terminus of the upper-lakes steamers to Detroit, Mackinac and Chicago (reconstructed stop).",
+    "year": 1841,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -78.878,
+     42.887
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Detroit",
+    "note": "Old French town and the first major call for lake steamers bound west (reconstructed stop).",
+    "year": 1841,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -83.045,
+     42.33
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Mackinac",
+    "note": "Straits station where the steamers turned south into Lake Michigan (reconstructed stop).",
+    "year": 1841,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -84.618,
+     45.849
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Chicago",
+    "note": "End of the lake voyage; the canal to the Illinois River did not open until 1848 (reconstructed stop).",
+    "year": 1841,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -87.634,
+     41.883
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Peru / La Salle, Illinois",
+    "note": "Head of steamboat navigation on the Illinois River in 1841 (reconstructed stop).",
+    "year": 1841,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -89.129,
+     41.327
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "St. Louis",
+    "note": "Neill: the family 'went to St. Louis by boat and spent the winter' of 1841-42 there.",
+    "year": 1841,
+    "role": "winter",
+    "confidence": "documented"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -90.195,
+     38.627
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Galena",
+    "note": "Lead-mining port, the busiest upper-Mississippi call for St. Louis boats in the 1840s (reconstructed stop).",
+    "year": 1842,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -90.429,
+     42.416
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Prairie du Chien",
+    "note": "Fort Crawford and the mouth of the Wisconsin; a regular steamboat landing (reconstructed stop).",
+    "year": 1842,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -91.143,
+     43.051
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Fort Snelling / Mendota",
+    "note": "Head of steamboat navigation and the start of the cart trails north; Neill: 'they came via boat to St. Paul, then to Red River'.",
+    "year": 1842,
+    "role": "waypoint",
+    "confidence": "documented"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.173,
+     44.89
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "St. Paul",
+    "note": "Pig's Eye landing in 1841, St. Paul's chapel from 1841; the Red River carts ended here (Hess 1989).",
+    "year": 1845,
+    "role": "waypoint",
+    "confidence": "documented"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.093,
+     44.944
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Traverse des Sioux",
+    "note": "Minnesota River crossing on the West Plains (Minnesota Valley) trail (reconstructed stop).",
+    "year": 1842,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.961,
+     44.362
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Lac qui Parle",
+    "note": "Fur post and mission on the upper Minnesota, on the West Plains trail (reconstructed stop).",
+    "year": 1842,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -95.88,
+     45.03
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Lake Traverse",
+    "note": "Head of the Red River drainage, where the trail left the Minnesota valley (reconstructed stop).",
+    "year": 1842,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -96.69,
+     45.88
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Pembina",
+    "note": "Métis settlement just south of the 49th parallel; junction of all three Red River trails; Kittson's post from 1844.",
+    "year": 1842,
+    "role": "waypoint",
+    "confidence": "documented (place)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.244,
+     48.966
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "St. Boniface / Red River Settlement",
+    "note": "Bishop Provencher's mission across the Red from Fort Garry; the family lived here 1841/42-1845; Rose Angélique married Alexander Ducharme here 26 Nov 1844 (Wall 1964).",
+    "year": 1841,
+    "role": "home",
+    "confidence": "documented"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.117,
+     49.889
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Old Crossing, Red Lake River",
+    "note": "The Woods Trail's ford of the Red Lake River near Huot (Gilman 1979) (reconstructed stop).",
+    "year": 1845,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -96.414,
+     47.863
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Detroit Lake",
+    "note": "The Woods Trail skirted its shore 'for nearly two miles' (Schultz 1894) (reconstructed stop).",
+    "year": 1845,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -95.85,
+     46.8
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Otter Tail Lake",
+    "note": "Where the Woods Trail turned east into the Leaf Hills toward the Mississippi (reconstructed stop).",
+    "year": 1845,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -95.585,
+     46.432
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Crow Wing",
+    "note": "Mississippi ford and trading village at the mouth of the Crow Wing River; the Woods Trail crossed here from 1844 (NRHP 90002201).",
+    "year": 1845,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -94.34,
+     46.281
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Sauk Rapids",
+    "note": "Where the Woods and Middle trails met and ran down the east bank to St. Paul (reconstructed stop).",
+    "year": 1845,
+    "role": "waypoint",
+    "confidence": "reconstructed"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -94.166,
+     45.592
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "label": "Little Canada (Lake Gervais)",
+    "note": "Section 8 of New Canada: the family settled here in 1845; Abraham patented lots 1-2 on Lake Gervais in 1849 (Neill 1881; BLM GLO).",
+    "year": 1845,
+    "role": "destination",
+    "confidence": "documented"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.08,
+     45.035
+    ]
+   }
+  }
+ ]
+}

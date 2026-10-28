@@ -1,0 +1,382 @@
+{
+ "note": "Historical base maps for the journey animation. Both are Library of Congress scans (no rights advisory; free to use and reuse). Both sheets are conic projections, so a simple corner-bounds image overlay in Web Mercator is approximate; for a faithful fit warp with the control points (gdal_translate -gcp ... then gdalwarp -tps -t_srs EPSG:3857) and tile the result. Control points were read off the images (pixel x,y from the top-left of the JPEG) and spot-checked.",
+ "layers": [
+  {
+   "id": "burr-1839",
+   "file": "maps/burr-1839-united-states-north-america-loc.jpg",
+   "use": "1841 continental overview (Quebec to Red River)",
+   "title": "Map of the United States of North America with parts of the adjacent countries",
+   "author": "David H. Burr",
+   "publisher": "J. Arrowsmith, London",
+   "year": 1839,
+   "source": "https://www.loc.gov/item/98688304/",
+   "iiif": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd370:g3700:g3700:rr000060/{region}/{size}/0/default.jpg",
+   "pixels": [
+    14985,
+    11114
+   ],
+   "file_mb": 34.8,
+   "rights": "Library of Congress Geography and Map Division: 'free to use and reuse unless a Rights Advisory statement is present' (none present)",
+   "credit": "David H. Burr, Map of the United States of North America with parts of the adjacent countries (London: J. Arrowsmith, 1839). Library of Congress, Geography and Map Division, G3700 1839 .B8.",
+   "approx_bounds_latlon": {
+    "north": 51.9,
+    "south": 16.0,
+    "west": -133.0,
+    "east": -60.6
+   },
+   "corridor_bounds_latlon": {
+    "north": 51.0,
+    "south": 38.0,
+    "west": -100.0,
+    "east": -69.0
+   },
+   "affine_fit": {
+    "x": "220.58*lon - 17.73*lat + 29600.6",
+    "y": "-14.79*lon - 322.85*lat + 15520.2",
+    "max_residual_px": 77
+   },
+   "control_points": [
+    {
+     "px": [
+      7300,
+      820
+     ],
+     "lat": 49.889,
+     "lon": -97.129,
+     "feature": "Fort Garry, Red/Assiniboine confluence ('Ft Gerry')"
+    },
+    {
+     "px": [
+      7275,
+      1135
+     ],
+     "lat": 48.966,
+     "lon": -97.244,
+     "feature": "Pembina"
+    },
+    {
+     "px": [
+      7355,
+      695
+     ],
+     "lat": 50.37,
+     "lon": -96.85,
+     "feature": "south end of Lake Winnipeg"
+    },
+    {
+     "px": [
+      8380,
+      1825
+     ],
+     "lat": 46.72,
+     "lon": -92.1,
+     "feature": "Fond du Lac, west end of Lake Superior"
+    },
+    {
+     "px": [
+      9507,
+      2935
+     ],
+     "lat": 43.04,
+     "lon": -87.91,
+     "feature": "Milwaukee"
+    },
+    {
+     "px": [
+      9600,
+      3330
+     ],
+     "lat": 41.88,
+     "lon": -87.63,
+     "feature": "Chicago"
+    },
+    {
+     "px": [
+      9045,
+      4390
+     ],
+     "lat": 38.63,
+     "lon": -90.2,
+     "feature": "St. Louis"
+    },
+    {
+     "px": [
+      8555,
+      4430
+     ],
+     "lat": 38.58,
+     "lon": -92.17,
+     "feature": "Jefferson City"
+    },
+    {
+     "px": [
+      8820,
+      6700
+     ],
+     "lat": 31.56,
+     "lon": -91.4,
+     "feature": "Natchez"
+    },
+    {
+     "px": [
+      9225,
+      7145
+     ],
+     "lat": 29.95,
+     "lon": -90.07,
+     "feature": "New Orleans"
+    },
+    {
+     "px": [
+      12783,
+      1615
+     ],
+     "lat": 46.35,
+     "lon": -72.55,
+     "feature": "Trois-Rivieres"
+    },
+    {
+     "px": [
+      12993,
+      1463
+     ],
+     "lat": 46.81,
+     "lon": -71.21,
+     "feature": "Quebec City"
+    },
+    {
+     "px": [
+      12607,
+      1912
+     ],
+     "lat": 45.5,
+     "lon": -73.57,
+     "feature": "Montreal"
+    }
+   ],
+   "graticule_px": {
+    "top_neatline_y": 190,
+    "meridians_x_at_top": {
+     "-107": 5310,
+     "-105": 5709,
+     "-103": 6108,
+     "-101": 6506,
+     "-99": 6905,
+     "-97": 7298,
+     "-95": 7758,
+     "-93": 8143,
+     "-91": 8583,
+     "-89": 8968,
+     "-87": 9339,
+     "-73": 12216,
+     "-71": 12630,
+     "-69": 13037,
+     "-67": 13472,
+     "-65": 13926,
+     "-63": 14355
+    },
+    "left_neatline_x": 170,
+    "parallels_y_at_left": {
+     "48": 650,
+     "46": 1292,
+     "44": 1958,
+     "42": 2600,
+     "40": 3258,
+     "38": 3917,
+     "36": 4570,
+     "34": 5230,
+     "32": 5913,
+     "30": 6567,
+     "28": 7208,
+     "26": 7858,
+     "24": 8508,
+     "22": 9150
+    }
+   },
+   "caveats": [
+    "Conic projection over 70 degrees of longitude; affine residuals up to ~0.35 deg at Quebec/Chicago.",
+    "A sheet fold/seam runs vertically near x~7520 just east of the Red River.",
+    "34.8 MB: downscale or tile before serving."
+   ]
+  },
+  {
+   "id": "nicollet-1843",
+   "file": "maps/nicollet-1843-upper-mississippi-loc.jpg",
+   "use": "1842 and 1845 legs south of 48.75 N (Mississippi, Minnesota valley, Woods Trail south of the Red Lake River)",
+   "title": "Hydrographical Basin of the Upper Mississippi River",
+   "author": "J. N. Nicollet (assisted by J. C. Fremont; compiled by W. H. Emory)",
+   "publisher": "U.S. Senate, Washington",
+   "year": 1843,
+   "source": "https://www.loc.gov/item/78692260/",
+   "iiif": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd404:g4042:g4042m:ct001419/{region}/{size}/0/default.jpg",
+   "pixels": [
+    9484,
+    11491
+   ],
+   "file_mb": 11.1,
+   "rights": "Library of Congress Geography and Map Division: 'free to use and reuse unless a Rights Advisory statement is present' (none present)",
+   "credit": "J. N. Nicollet, Hydrographical Basin of the Upper Mississippi River (Washington: U.S. Senate, 1843). Library of Congress, Geography and Map Division, G4042.M5 1843 .N5.",
+   "neatline_px": [
+    150,
+    150,
+    9333,
+    11190
+   ],
+   "approx_bounds_latlon": {
+    "north": 48.75,
+    "south": 38.4,
+    "west": -101.3,
+    "east": -88.55,
+    "note": "top edge 48.6-48.75 N, bottom 38.35-38.45 N; left edge 101.3 W (top) to 100.25 W (bottom); right edge 88.55 W (top) to 89.6 W (bottom). Fort Garry and Pembina are OFF this sheet."
+   },
+   "affine_fit": {
+    "x": "776.53*lon - 41.32*lat + 80315.9",
+    "y": "-18.40*lon - 1071.15*lat + 50623.1",
+    "max_residual_px": 114
+   },
+   "control_points": [
+    {
+     "px": [
+      6048,
+      4195
+     ],
+     "lat": 44.981,
+     "lon": -93.258,
+     "feature": "Falls of St. Anthony"
+    },
+    {
+     "px": [
+      6118,
+      4308
+     ],
+     "lat": 44.893,
+     "lon": -93.18,
+     "feature": "Fort Snelling, mouth of the St. Peter's (Minnesota) River"
+    },
+    {
+     "px": [
+      6715,
+      4620
+     ],
+     "lat": 44.55,
+     "lon": -92.47,
+     "feature": "head of Lake Pepin"
+    },
+    {
+     "px": [
+      7757,
+      6240
+     ],
+     "lat": 43.051,
+     "lon": -91.141,
+     "feature": "Prairie du Chien / Fort Crawford"
+    },
+    {
+     "px": [
+      5140,
+      2805
+     ],
+     "lat": 46.272,
+     "lon": -94.339,
+     "feature": "mouth of the Crow Wing River"
+    },
+    {
+     "px": [
+      6830,
+      2160
+     ],
+     "lat": 46.72,
+     "lon": -92.1,
+     "feature": "Fond du Lac, west end of Lake Superior"
+    },
+    {
+     "px": [
+      3690,
+      6885
+     ],
+     "lat": 42.49,
+     "lon": -96.44,
+     "feature": "mouth of the Big Sioux"
+    },
+    {
+     "px": [
+      4110,
+      8285
+     ],
+     "lat": 41.14,
+     "lon": -95.91,
+     "feature": "Bellevue on the Missouri"
+    },
+    {
+     "px": [
+      8720,
+      10700
+     ],
+     "lat": 38.811,
+     "lon": -90.117,
+     "feature": "mouth of the Missouri"
+    },
+    {
+     "px": [
+      8690,
+      10890
+     ],
+     "lat": 38.627,
+     "lon": -90.199,
+     "feature": "St. Louis"
+    }
+   ],
+   "graticule_px": {
+    "top_neatline_y": 150,
+    "meridians_x_at_top": {
+     "-101": 367,
+     "-100": 1100,
+     "-99": 1817,
+     "-98": 2533,
+     "-97": 3245,
+     "-96": 3967,
+     "-95": 4683,
+     "-94": 5392,
+     "-93": 6108,
+     "-92": 6837,
+     "-91": 7555,
+     "-90": 8275,
+     "-89": 9008
+    },
+    "bottom_neatline_y": 11190,
+    "meridians_x_at_bottom": {
+     "-96": 3815,
+     "-95": 4680,
+     "-94": 5540,
+     "-93": 6400,
+     "-91": 8105
+    },
+    "left_neatline_x": 150,
+    "parallels_y_at_left": {
+     "48": 792,
+     "47": 1870,
+     "46": 2950,
+     "45": 4028,
+     "44": 5107,
+     "43": 6207,
+     "42": 7277,
+     "41": 8335,
+     "40": 9383,
+     "39": 10450
+    }
+   },
+   "caveats": [
+    "Conic projection, central meridian 95 W; parallels are arcs that sit 200-500 px lower at the sheet edges than at the centre. Affine is fine along the Mississippi/Minnesota corridor; warp with GCPs for the whole sheet.",
+    "Does not reach Pembina or the Red River Settlement."
+   ]
+  }
+ ],
+ "not_available": {
+  "tiles": "No georeferenced XYZ/WMTS tiles found: Allmaps has no annotations for the LOC/UMN/Leventhal scans (image-id lookups 404; allmaps.xyz returns a 4 KB placeholder); David Rumsey Georeferencer pages and API are behind Cloudflare and need a per-site key.",
+  "alternatives": [
+   "Pope 1849 'Map of the territory of Minnesota exhibiting the route of the expedition to the Red River' https://www.loc.gov/item/74696065/ (stops near 49 N)",
+   "Colton 1849 United States / British Provinces https://www.loc.gov/item/2007626897/",
+   "Rumsey copies of Nicollet: List 13071.000 (House ed.) and 2488.000 (Senate), CC BY-NC-SA 3.0"
+  ]
+ }
+}

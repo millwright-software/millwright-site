@@ -1,0 +1,38 @@
+[
+ {
+  "id": "burr1839",
+  "title": "David H. Burr, Map of the United States of North America with parts of the adjacent countries (1839)",
+  "credit": "David H. Burr, Map of the United States of North America with parts of the adjacent countries (London: J. Arrowsmith, 1839). Library of Congress, Geography and Map Division, G3700 1839 .B8.",
+  "license": "Library of Congress Geography and Map Division: 'free to use and reuse unless a Rights Advisory statement is present' (none present)",
+  "minZoom": 3,
+  "maxNativeZoom": 7,
+  "bounds": [
+   [
+    17.065,
+    -129.2098
+   ],
+   [
+    51.6904,
+    -61.7495
+   ]
+  ]
+ },
+ {
+  "id": "nicollet1843",
+  "title": "J. N. Nicollet (assisted by J. C. Fremont; compiled by W. H. Emory), Hydrographical Basin of the Upper Mississippi River (1843)",
+  "credit": "J. N. Nicollet, Hydrographical Basin of the Upper Mississippi River (Washington: U.S. Senate, 1843). Library of Congress, Geography and Map Division, G4042.M5 1843 .N5.",
+  "license": "Library of Congress Geography and Map Division: 'free to use and reuse unless a Rights Advisory statement is present' (none present)",
+  "minZoom": 5,
+  "maxNativeZoom": 9,
+  "bounds": [
+   [
+    38.2601,
+    -101.2098
+   ],
+   [
+    48.721,
+    -88.663
+   ]
+  ]
+ }
+]

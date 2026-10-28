@@ -1,0 +1,363 @@
+[
+ {
+  "year": 1856,
+  "caption": "Government survey plat. A ring of water around an island, no name yet.",
+  "history": "In 1846-47 French-Canadian families led by Jean Vadnais and Jean Garceau came up from St. Paul by ox-cart. The township was surveyed in 1848.",
+  "credit": "MnGeo / Minnesota Historical Society",
+  "minZoom": 12,
+  "maxNativeZoom": 16,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "plat"
+ },
+ {
+  "year": 1859,
+  "caption": "The first map here to name it: Lamberts Lake.",
+  "history": "White Bear Township was organized at John Lamb's hotel on Goose Lake on May 11, 1858, the day Minnesota became a state. 27 votes were cast.",
+  "credit": "Minnesota Historical Society",
+  "minZoom": 12,
+  "maxNativeZoom": 14,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "plat"
+ },
+ {
+  "year": 1867,
+  "caption": "Lambert's Lake. P. Jervais on the island.",
+  "history": "The Lake Superior & Mississippi Railroad is building its line from St. Paul to White Bear; trains run from 1868.",
+  "credit": "L. G. Bennett, Map of Ramsey County, 1867 · UMN Libraries",
+  "minZoom": 12,
+  "maxNativeZoom": 16,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "plat"
+ },
+ {
+  "year": 1886,
+  "caption": "Lambert Lake and Lambert Island. A. K. Barnum owns the island and most of the shore.",
+  "history": "White Bear is a resort town, 20 minutes from St. Paul by train. White Bear Village left the township in 1881.",
+  "credit": "G. M. Hopkins, Atlas of the Environs of St. Paul, 1886, plate 19 · UMN Libraries",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "plat"
+ },
+ {
+  "year": 1898,
+  "caption": "Lambert Lake. N.W. Realty Co. owns the island.",
+  "history": "Truck farms line County Road E. In the 1890s the Andersons start a 20-acre farm where Walmart stands today.",
+  "credit": "P. M. Dahl, Plat Book of Ramsey County, 1898 · UMN Libraries",
+  "minZoom": 12,
+  "maxNativeZoom": 15,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "plat"
+ },
+ {
+  "year": 1902,
+  "caption": "USGS topographic map. Where the ring was, it draws marsh.",
+  "history": "St. Paul bought Vadnais Lake and its shore in 1899 for $22,000, per local history; it's the city's reservoir.",
+  "credit": "USGS",
+  "minZoom": 12,
+  "maxNativeZoom": 15,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "topo"
+ },
+ {
+  "year": 1940,
+  "caption": "Lambert Creek is a ditch now: County Ditches 13 and 14.",
+  "history": "Ramsey County dug Ditches 13 and 14 through the old lakebed in 1916; by 1940 the ring is meadow, marsh and woods. In 1936 the CCC and St. Paul Water dug channels feeding East Vadnais.",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 1947,
+  "caption": "Air photo. The dark corner is a frame that wouldn't line up.",
+  "history": "Still farms and wetlands. After the war the Vadnais area grows from about 750 people toward 2,000.",
+  "credit": "MHAPO, UMN Borchert Map Library (USGS, 1947)",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 1953,
+  "caption": "",
+  "history": "White Bear Lake keeps annexing township land; in 1956 township voters reject a 1,850-acre annexation.",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 1957,
+  "caption": "Air photo.",
+  "history": "July 1957: the Lake Vadnais area votes 277 to 83 to become a village, over a fight about sewers. North Oaks left the township in 1956; Gem Lake follows in 1959.",
+  "credit": "MHAPO, UMN Borchert Map Library (Ramsey County, 1957)",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 1974,
+  "caption": "Drained for development that was later abandoned. I-35E now runs past it.",
+  "history": "I-35E construction began in 1964 and the I-35E/I-694 'weave' opened by the early 1970s. Vadnais Heights: 3,411 people (1970).",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 1985,
+  "caption": "",
+  "history": "A city since 1974, when state law made every village a city. 5,111 people (1980). In 1986 VLAWMO takes over the Lambert Creek ditches.",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 1991,
+  "caption": "",
+  "history": "11,041 people (1990). Walmart anchors the city's first shopping center. Minnesota passes its Wetland Conservation Act.",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 2003,
+  "caption": "",
+  "history": "City Hall opened in 2000; the farms along County Road E are gone. 13,069 people (2000), the city's peak.",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 2006,
+  "caption": "",
+  "history": "'Unweave the Weave' (2004-08) splits I-35E from I-694. Lambert Lake Pond is dug in 2005 inside the old lakebed.",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 2011,
+  "caption": "",
+  "history": "The Vadnais Sports Center opened in 2010. 12,302 people (2010).",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 2017,
+  "caption": "",
+  "history": "Lambert Creek has been on the state's impaired-waters list for bacteria since 2008.",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 2024,
+  "caption": "Lambert: a wetland on Lambert Creek, flowing to East Vadnais.",
+  "history": "In winter 2020-21 crews put the bends back into about 2,000 feet of straightened Lambert Creek beside the old lakebed.",
+  "credit": "Ramsey County GIS",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "air photo"
+ },
+ {
+  "year": 2026,
+  "caption": "Today.",
+  "history": "Vadnais Heights 12,912 and Gem Lake 528 people (2020). Lambert Creek still runs into St. Paul's drinking-water reservoir.",
+  "credit": "Google Maps imagery, stitched from 18 screenshots",
+  "minZoom": 12,
+  "maxNativeZoom": 17,
+  "bounds": [
+   [
+    45.04469174611435,
+    -93.1003613255503
+   ],
+   [
+    45.07273118704499,
+    -93.00850751071877
+   ]
+  ],
+  "kind": "satellite"
+ }
+]

@@ -1,0 +1,86 @@
+[
+ {
+  "gen": 7,
+  "name": "Louis Abraham Thomas Lambert",
+  "born": "1825",
+  "died": "1900",
+  "spouse": "",
+  "place": "Little Canada, Minnesota",
+  "lat": 45.03,
+  "lon": -93.08,
+  "life": "[mock: research pending]",
+  "life_basis": "mock",
+  "events": [],
+  "sources": []
+ },
+ {
+  "gen": 8,
+  "name": "David J. Lambert",
+  "born": "1871",
+  "died": "1928",
+  "spouse": "",
+  "place": "Koochiching County, Minnesota",
+  "lat": 48.601,
+  "lon": -93.41,
+  "life": "[mock: research pending]",
+  "life_basis": "mock",
+  "events": [
+   {
+    "year": 1910,
+    "text": "[mock] event",
+    "age": 39,
+    "source": ""
+   }
+  ],
+  "sources": []
+ },
+ {
+  "gen": 9,
+  "name": "Joseph E. Lambert",
+  "born": "1894",
+  "died": "1968",
+  "spouse": "",
+  "place": "Cloquet, Minnesota",
+  "lat": 46.722,
+  "lon": -92.459,
+  "life": "[mock: research pending]",
+  "life_basis": "mock",
+  "events": [
+   {
+    "year": 1918,
+    "text": "the Cloquet fire",
+    "age": 24,
+    "source": ""
+   }
+  ],
+  "sources": []
+ },
+ {
+  "gen": 10,
+  "name": "Marjorie Jane (Lambert) Delyea",
+  "born": "1919",
+  "died": "1998",
+  "spouse": "",
+  "place": "Cloquet, Minnesota",
+  "lat": 46.722,
+  "lon": -92.459,
+  "life": "[mock: research pending]",
+  "life_basis": "mock",
+  "events": [],
+  "sources": []
+ },
+ {
+  "gen": 11,
+  "name": "Mary Elizabeth Richey",
+  "born": "1950",
+  "died": "",
+  "spouse": "",
+  "place": "",
+  "lat": null,
+  "lon": null,
+  "life": "[mock: research pending]",
+  "life_basis": "mock",
+  "events": [],
+  "sources": []
+ }
+]

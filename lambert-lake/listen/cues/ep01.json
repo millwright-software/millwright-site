@@ -1,0 +1,763 @@
+[
+{
+"kind": "scene",
+"t_start": 0.5,
+"t_end": null,
+"speaker": null,
+"text": "Scene 1 — Open (0:00–1:00)",
+"cue_id": "ep01-000"
+},
+{
+"kind": "music",
+"t_start": 0.5,
+"t_end": 32.4,
+"speaker": null,
+"text": "theme",
+"key": "theme",
+"cue_id": "ep01-001"
+},
+{
+"kind": "line",
+"t_start": 6.26,
+"t_end": 21.7,
+"speaker": "NARRATOR",
+"text": "Hello, William. Hello, Alex. Are you tucked in? Good. Pull the blanket up to your chin, because tonight we are going on a very long trip, across a whole ocean, and back almost four hundred years.",
+"cue_id": "ep01-002"
+},
+{
+"kind": "line",
+"t_start": 23.02,
+"t_end": 32.7,
+"speaker": "NARRATOR",
+"text": "This is \"Lambert Lake,\" the story of your family, told one night at a time. Episode one: \"The Boy from Boulogne.\"",
+"cue_id": "ep01-003"
+},
+{
+"kind": "scene",
+"t_start": 37.1,
+"t_end": null,
+"speaker": null,
+"text": "Scene 2 — A boy by the sea, imagined (1:00–4:00)",
+"cue_id": "ep01-004"
+},
+{
+"kind": "ambience",
+"t_start": 37.1,
+"t_end": null,
+"speaker": null,
+"text": "waves on a stone harbor wall, gulls, a town bell far off",
+"key": "harbor",
+"cue_id": "ep01-005"
+},
+{
+"kind": "line",
+"t_start": 39.04,
+"t_end": 55.28,
+"speaker": "NARRATOR",
+"text": "A long, long time ago, in a country called France, a baby boy was born. His name was Eustache. Eustache Lambert. That's a funny name, isn't it? Say it with me. Oo-stash. Eustache Lambert.",
+"cue_id": "ep01-006"
+},
+{
+"kind": "line",
+"t_start": 56.86,
+"t_end": 92.8,
+"speaker": "NARRATOR",
+"text": "He was born about the year sixteen seventeen, near a place called Boulogne. Now, here is something true about stories this old: we don't know everything. There is a Boulogne by the sea, with a stone wall all the way around it. And there is a little village called Boulogne out among the fields. Nobody knows for sure which one was his. So tonight, let's imagine it was the one by the sea. We'll pretend together, and I'll tell you when we're pretending.",
+"cue_id": "ep01-007"
+},
+{
+"kind": "sfx",
+"t_start": 93.3,
+"t_end": 98.3,
+"speaker": null,
+"text": "gulls: gulls crying over the water",
+"key": "gulls",
+"cue_id": "ep01-008"
+},
+{
+"kind": "line",
+"t_start": 96.56,
+"t_end": 105.24,
+"speaker": "NARRATOR",
+"text": "Maybe little Eustache liked to run along the harbor wall and watch the fishing boats come in. Maybe his mother called him home for supper.",
+"cue_id": "ep01-009"
+},
+{
+"kind": "line",
+"t_start": 106.46,
+"t_end": 110.66,
+"speaker": "MAMAN",
+"text": "Eustache! Eustache! Come in, the soup is getting cold!",
+"cue_id": "ep01-010"
+},
+{
+"kind": "line",
+"t_start": 111.92,
+"t_end": 114.6,
+"speaker": "YOUNG EUSTACHE",
+"text": "One more boat, Maman! There's a big one coming in!",
+"cue_id": "ep01-011"
+},
+{
+"kind": "line",
+"t_start": 115.64,
+"t_end": 121.28,
+"speaker": "NARRATOR",
+"text": "Did you hear that word? Maman. Let's hear how it really sounds in French.",
+"cue_id": "ep01-012"
+},
+{
+"kind": "line",
+"t_start": 122.86,
+"t_end": 123.54,
+"speaker": "FRENCH",
+"text": "Maman.",
+"cue_id": "ep01-013"
+},
+{
+"kind": "line",
+"t_start": 124.83,
+"t_end": 131.91,
+"speaker": "NARRATOR",
+"text": "Maman means Mom. And Dad, in French, is papa. Almost the same as English.",
+"cue_id": "ep01-014"
+},
+{
+"kind": "line",
+"t_start": 133.13,
+"t_end": 133.81,
+"speaker": "FRENCH",
+"text": "Papa.",
+"cue_id": "ep01-015"
+},
+{
+"kind": "line",
+"t_start": 135.42,
+"t_end": 141.04,
+"speaker": "NARRATOR",
+"text": "And the great big salty sea, where all the boats come from, is la mer.",
+"cue_id": "ep01-016"
+},
+{
+"kind": "line",
+"t_start": 142.5,
+"t_end": 143.22,
+"speaker": "FRENCH",
+"text": "La mer.",
+"cue_id": "ep01-017"
+},
+{
+"kind": "line",
+"t_start": 144.785,
+"t_end": 146.625,
+"speaker": "YOUNG EUSTACHE",
+"text": "Maman, where do the big boats go?",
+"cue_id": "ep01-018"
+},
+{
+"kind": "line",
+"t_start": 147.865,
+"t_end": 152.485,
+"speaker": "MAMAN",
+"text": "Far away, mon petit. Across la mer, to the end of the world.",
+"cue_id": "ep01-019"
+},
+{
+"kind": "line",
+"t_start": 153.685,
+"t_end": 155.525,
+"speaker": "YOUNG EUSTACHE",
+"text": "I'm going to go there. When I'm big.",
+"cue_id": "ep01-020"
+},
+{
+"kind": "line",
+"t_start": 156.765,
+"t_end": 161.025,
+"speaker": "MAMAN",
+"text": "When you're big, you can go wherever you like. Tonight, you're going to bed.",
+"cue_id": "ep01-021"
+},
+{
+"kind": "line",
+"t_start": 162.385,
+"t_end": 185.965,
+"speaker": "NARRATOR",
+"text": "Now here's something we know for sure, and it might surprise you. Eustache never learned to read or write. Most children in those days never went to school at all. When Eustache grew up and had to sign his name on important papers, he couldn't write it. So he drew a little mark instead. His own special mark.",
+"cue_id": "ep01-022"
+},
+{
+"kind": "scene",
+"t_start": 188.265,
+"t_end": null,
+"speaker": null,
+"text": "Scene 3 — The little books from Paris (4:00–6:00)",
+"cue_id": "ep01-023"
+},
+{
+"kind": "ambience",
+"t_start": 188.265,
+"t_end": null,
+"speaker": null,
+"text": "a stone church, people settling, a quiet cough",
+"key": "church",
+"cue_id": "ep01-024"
+},
+{
+"kind": "line",
+"t_start": 190.205,
+"t_end": 203.885,
+"speaker": "NARRATOR",
+"text": "But Eustache could listen. And in those days, there were little books coming out of the city of Paris every year, full of stories from a faraway land called New France. Today we call it Canada.",
+"cue_id": "ep01-025"
+},
+{
+"kind": "line",
+"t_start": 205.285,
+"t_end": 220.905,
+"speaker": "NARRATOR",
+"text": "The books were written by priests called Jesuits, who had gone across the ocean to live and teach there. A priest might read them out loud to a whole room full of people. We don't know if Eustache ever heard one. But let's imagine he did.",
+"cue_id": "ep01-026"
+},
+{
+"kind": "line",
+"t_start": 222.085,
+"t_end": 234.905,
+"speaker": "JESUIT",
+"text": "\"In New France, the rivers are so wide you cannot see the other side. The forests go on forever. And far to the west, beyond the great lakes, live the Wendat people, in long houses made of bark, beside fields of corn.\"",
+"cue_id": "ep01-027"
+},
+{
+"kind": "line",
+"t_start": 236.265,
+"t_end": 248.245,
+"speaker": "NARRATOR",
+"text": "Rivers so wide you can't see across! Forests that go on forever! If you were a young man who had never been farther than the next town, wouldn't you want to see that?",
+"cue_id": "ep01-028"
+},
+{
+"kind": "line",
+"t_start": 249.245,
+"t_end": 252.565,
+"speaker": "EUSTACHE",
+"text": "Father, the men who go to help you over there. What do they do?",
+"cue_id": "ep01-029"
+},
+{
+"kind": "line",
+"t_start": 253.405,
+"t_end": 265.305,
+"speaker": "JESUIT",
+"text": "Everything, my son. They paddle canoes and carry packs. They build houses and plant corn. They cook and fish and hunt. They take care of the sick. It is hard work, and it is far from home.",
+"cue_id": "ep01-030"
+},
+{
+"kind": "line",
+"t_start": 266.445,
+"t_end": 267.805,
+"speaker": "EUSTACHE",
+"text": "And what do you pay them?",
+"cue_id": "ep01-031"
+},
+{
+"kind": "line",
+"t_start": 268.805,
+"t_end": 275.485,
+"speaker": "JESUIT",
+"text": "Nothing at all. Their food. Their clothes. A place to sleep. And a promise that we will look after them as long as they live.",
+"cue_id": "ep01-032"
+},
+{
+"kind": "scene",
+"t_start": 277.525,
+"t_end": null,
+"speaker": null,
+"text": "Scene 4 — What a donné was (6:00–7:45)",
+"cue_id": "ep01-033"
+},
+{
+"kind": "ambience",
+"t_start": 277.525,
+"t_end": null,
+"speaker": null,
+"text": "a hearth fire crackling",
+"key": "fire",
+"cue_id": "ep01-034"
+},
+{
+"kind": "line",
+"t_start": 279.645,
+"t_end": 289.725,
+"speaker": "NARRATOR",
+"text": "Now I'm going to teach you a word that is very important in our story. The word is donné. It sounds like doh-nay.",
+"cue_id": "ep01-035"
+},
+{
+"kind": "line",
+"t_start": 291.165,
+"t_end": 291.785,
+"speaker": "FRENCH",
+"text": "Donné.",
+"cue_id": "ep01-036"
+},
+{
+"kind": "line",
+"t_start": 293.26,
+"t_end": 308.92,
+"speaker": "NARRATOR",
+"text": "Donné means \"given.\" A donné was a man who gave himself to help the missions. Not for a year. Not for money. For his whole life. He wasn't a priest. He was a helper, a worker, a man who could do a little of everything.",
+"cue_id": "ep01-037"
+},
+{
+"kind": "line",
+"t_start": 310.62,
+"t_end": 333.12,
+"speaker": "NARRATOR",
+"text": "The Jesuits started taking donnés in the year sixteen thirty-nine. They needed men who could farm, and build, and hunt, and paddle. And one of the priests wrote something kind about them. He said it didn't seem fair that young men in the flower of their youth would give themselves to such a hard country with so little promised in return.",
+"cue_id": "ep01-038"
+},
+{
+"kind": "line",
+"t_start": 334.28,
+"t_end": 346.7,
+"speaker": "NARRATOR",
+"text": "And Eustache Lambert became one of those men. When he was a grown man, about twenty-five years old, Eustache gave himself to the missions. He became a donné.",
+"cue_id": "ep01-039"
+},
+{
+"kind": "line",
+"t_start": 347.86,
+"t_end": 355.14,
+"speaker": "EUSTACHE",
+"text": "I can't read. I can't write. But I can carry. I can paddle. I can chop wood all day long. And I can learn. Take me with you.",
+"cue_id": "ep01-040"
+},
+{
+"kind": "line",
+"t_start": 356.2,
+"t_end": 369.0,
+"speaker": "NARRATOR",
+"text": "We don't know exactly when he sailed. One writer who wrote a book about him thinks it was in the year sixteen forty-four. So let's say good-bye to France, and go down to the harbor. The ship is waiting.",
+"cue_id": "ep01-041"
+},
+{
+"kind": "scene",
+"t_start": 371.26,
+"t_end": null,
+"speaker": null,
+"text": "Scene 5 — The crossing (7:45–10:45)",
+"cue_id": "ep01-042"
+},
+{
+"kind": "ambience",
+"t_start": 371.26,
+"t_end": null,
+"speaker": null,
+"text": "open ocean, a wooden ship creaking, wind in the rigging, big slow waves",
+"key": "sea",
+"cue_id": "ep01-043"
+},
+{
+"kind": "sfx",
+"t_start": 372.66,
+"t_end": 377.66,
+"speaker": null,
+"text": "creak: the hull and the mast groaning as the ship rolls",
+"key": "creak",
+"cue_id": "ep01-044"
+},
+{
+"kind": "line",
+"t_start": 375.86,
+"t_end": 384.42,
+"speaker": "NARRATOR",
+"text": "Today, if you flew across the ocean in an airplane, it would take about seven hours. A movie, a snack, a nap, and you're there.",
+"cue_id": "ep01-045"
+},
+{
+"kind": "line",
+"t_start": 385.82,
+"t_end": 407.58,
+"speaker": "NARRATOR",
+"text": "In Eustache's time, it took months. A ship with sails had to wait for the wind. One famous ship in those days left France at the beginning of May, and didn't reach Quebec until the first day of August. Count it on your fingers. May, June, July. Three whole months at sea.",
+"cue_id": "ep01-046"
+},
+{
+"kind": "line",
+"t_start": 408.86,
+"t_end": 411.72,
+"speaker": "SAILOR",
+"text": "Hold on to something, landsman! Here comes a big one!",
+"cue_id": "ep01-047"
+},
+{
+"kind": "sfx",
+"t_start": 412.08,
+"t_end": 417.08,
+"speaker": null,
+"text": "waves: a big wave breaks against the hull, spray hissing",
+"key": "waves",
+"cue_id": "ep01-048"
+},
+{
+"kind": "line",
+"t_start": 415.1,
+"t_end": 417.68,
+"speaker": "EUSTACHE",
+"text": "I'm holding! I'm holding! Is it always like this?",
+"cue_id": "ep01-049"
+},
+{
+"kind": "line",
+"t_start": 418.74,
+"t_end": 424.92,
+"speaker": "SAILOR",
+"text": "Only on the days that end in \"day.\" You'll get your sea legs. Or you'll get very good at hanging over the side.",
+"cue_id": "ep01-050"
+},
+{
+"kind": "line",
+"t_start": 426.2,
+"t_end": 449.22,
+"speaker": "NARRATOR",
+"text": "Sailors in those days ate hard dry biscuits, and salty meat from a barrel, and drank water that got a little greener every week. When the wind blew, the ship rocked up, and down, and up, and down. And when there was no wind at all, the ship just sat there, still, on a flat blue sea, and everybody waited.",
+"cue_id": "ep01-051"
+},
+{
+"kind": "line",
+"t_start": 450.72,
+"t_end": 465.32,
+"speaker": "NARRATOR",
+"text": "So here is our first big question. And I want you to really think about it. If you were going on a ship for two or three months, across the whole ocean, and you could only take one small bag, what would you pack?",
+"cue_id": "ep01-052"
+},
+{
+"kind": "line",
+"t_start": 466.48,
+"t_end": 475.6,
+"speaker": "NARRATOR",
+"text": "A warm blanket? Your favorite stuffed animal? A ball, for the long, slow days? Think about it. You can tell your dad in the morning.",
+"cue_id": "ep01-053"
+},
+{
+"kind": "line",
+"t_start": 477.22,
+"t_end": 487.34,
+"speaker": "NARRATOR",
+"text": "We don't know what Eustache packed. Maybe a warm coat. A knife. A wooden spoon. Maybe something small from home, to hold on to.",
+"cue_id": "ep01-054"
+},
+{
+"kind": "ambience",
+"t_start": 487.68,
+"t_end": null,
+"speaker": null,
+"text": "a calm night at sea, the ship creaking gently, small waves",
+"key": "sea",
+"cue_id": "ep01-055"
+},
+{
+"kind": "line",
+"t_start": 488.6,
+"t_end": 501.38,
+"speaker": "NARRATOR",
+"text": "Let's imagine one night out on the ocean, halfway across. The wind is soft. The ship creaks, slow and sleepy. And Eustache can't sleep, so he goes up on deck.",
+"cue_id": "ep01-056"
+},
+{
+"kind": "line",
+"t_start": 502.6,
+"t_end": 505.54,
+"speaker": "SAILOR",
+"text": "Can't sleep, landsman? Come here. I'll show you something. Look up.",
+"cue_id": "ep01-057"
+},
+{
+"kind": "line",
+"t_start": 506.64,
+"t_end": 509.8,
+"speaker": "EUSTACHE",
+"text": "Stars. More stars than I've ever seen.",
+"cue_id": "ep01-058"
+},
+{
+"kind": "line",
+"t_start": 510.86,
+"t_end": 532.58,
+"speaker": "SAILOR",
+"text": "Out here there's nothing to hide them. Now, see those seven bright ones, shaped like a big spoon? Follow the two at the end of the spoon, straight up, and you'll find one star all by itself. That's the North Star. It never moves. Every other star goes round and round it all night, but that one stays put. That's how a sailor knows where north is, even in the middle of the ocean.",
+"cue_id": "ep01-059"
+},
+{
+"kind": "line",
+"t_start": 533.76,
+"t_end": 537.44,
+"speaker": "EUSTACHE",
+"text": "So if I'm ever lost, I look for the spoon, and then the star.",
+"cue_id": "ep01-060"
+},
+{
+"kind": "line",
+"t_start": 538.46,
+"t_end": 549.32,
+"speaker": "SAILOR",
+"text": "That's it. And here's another secret. Every ship has a cat. Ours is asleep on the rope pile over there. She catches the mice that try to eat our biscuits. Best sailor on the ship. Never gets seasick.",
+"cue_id": "ep01-061"
+},
+{
+"kind": "sfx",
+"t_start": 549.94,
+"t_end": 554.14,
+"speaker": null,
+"text": "laugh: Eustache and the sailor laughing quietly",
+"key": "laugh",
+"cue_id": "ep01-062"
+},
+{
+"kind": "line",
+"t_start": 552.3,
+"t_end": 569.52,
+"speaker": "NARRATOR",
+"text": "The cat is imagined. But lots of ships really did carry cats, to catch the mice. And sailors really did find their way by the North Star. You can find it too, on a clear night. Look for the big spoon. Ask your dad to show you.",
+"cue_id": "ep01-063"
+},
+{
+"kind": "ambience",
+"t_start": 569.82,
+"t_end": null,
+"speaker": null,
+"text": "open ocean, morning, gulls far off",
+"key": "sea",
+"cue_id": "ep01-064"
+},
+{
+"kind": "sfx",
+"t_start": 570.02,
+"t_end": 575.02,
+"speaker": null,
+"text": "gulls: gulls, far off, then closer",
+"key": "gulls",
+"cue_id": "ep01-065"
+},
+{
+"kind": "line",
+"t_start": 573.42,
+"t_end": 581.72,
+"speaker": "NARRATOR",
+"text": "And then one day, after weeks and weeks of nothing but water, the sailors saw birds. Birds mean land is near.",
+"cue_id": "ep01-066"
+},
+{
+"kind": "line",
+"t_start": 583.06,
+"t_end": 590.26,
+"speaker": "SAILOR",
+"text": "Land! Land ho! That's the mouth of the great river. Another week, and we'll see Quebec.",
+"cue_id": "ep01-067"
+},
+{
+"kind": "scene",
+"t_start": 592.4,
+"t_end": null,
+"speaker": null,
+"text": "Scene 6 — Quebec (10:45–12:45)",
+"cue_id": "ep01-068"
+},
+{
+"kind": "ambience",
+"t_start": 592.4,
+"t_end": null,
+"speaker": null,
+"text": "a wide river, water against the shore, gulls, wind",
+"key": "river",
+"cue_id": "ep01-069"
+},
+{
+"kind": "line",
+"t_start": 594.22,
+"t_end": 610.54,
+"speaker": "NARRATOR",
+"text": "The river was the St. Lawrence. And it was so wide at first that you really couldn't see across it, just like the little books said. Slowly it got narrower, and the forests came close on both sides, dark green and endless.",
+"cue_id": "ep01-070"
+},
+{
+"kind": "line",
+"t_start": 612.06,
+"t_end": 637.02,
+"speaker": "NARRATOR",
+"text": "And then, there it was. Quebec. A big rock cliff above the river, with a little fort on top, and a few wooden buildings down by the water. There was a school run by the Jesuits, and a convent where nuns taught girls, and a little hospital. That was the whole town. About as many people as go to a big school today. Just a few hundred.",
+"cue_id": "ep01-071"
+},
+{
+"kind": "sfx",
+"t_start": 637.56,
+"t_end": 653.76,
+"speaker": null,
+"text": "bell: a small church bell ringing on the cliff above, across the water",
+"key": "bell",
+"cue_id": "ep01-072"
+},
+{
+"kind": "line",
+"t_start": 646.38,
+"t_end": 647.62,
+"speaker": "EUSTACHE",
+"text": "That's it? That's Quebec?",
+"cue_id": "ep01-073"
+},
+{
+"kind": "line",
+"t_start": 648.72,
+"t_end": 651.26,
+"speaker": "JESUIT",
+"text": "That's it. Welcome to New France, Eustache.",
+"cue_id": "ep01-074"
+},
+{
+"kind": "line",
+"t_start": 652.56,
+"t_end": 659.0,
+"speaker": "NARRATOR",
+"text": "When people met each other in Quebec, they said the same thing people in France said. Bonjour.",
+"cue_id": "ep01-075"
+},
+{
+"kind": "line",
+"t_start": 660.4,
+"t_end": 661.26,
+"speaker": "FRENCH",
+"text": "Bonjour.",
+"cue_id": "ep01-076"
+},
+{
+"kind": "line",
+"t_start": 662.815,
+"t_end": 672.215,
+"speaker": "NARRATOR",
+"text": "Bonjour means good day, or hello. And when somebody helps you carry your heavy bag off the ship, you say merci.",
+"cue_id": "ep01-077"
+},
+{
+"kind": "line",
+"t_start": 673.875,
+"t_end": 674.635,
+"speaker": "FRENCH",
+"text": "Merci.",
+"cue_id": "ep01-078"
+},
+{
+"kind": "line",
+"t_start": 676.115,
+"t_end": 687.175,
+"speaker": "NARRATOR",
+"text": "Merci means thank you. Bonjour, merci. Hello, thank you. With those two words, you can make a friend almost anywhere.",
+"cue_id": "ep01-079"
+},
+{
+"kind": "line",
+"t_start": 688.155,
+"t_end": 694.835,
+"speaker": "EUSTACHE",
+"text": "Bonjour, Quebec! Merci, sailors! Merci, ship! Merci, solid ground that doesn't move!",
+"cue_id": "ep01-080"
+},
+{
+"kind": "sfx",
+"t_start": 695.295,
+"t_end": 699.495,
+"speaker": null,
+"text": "laugh: Eustache and the sailor laughing together",
+"key": "laugh",
+"cue_id": "ep01-081"
+},
+{
+"kind": "line",
+"t_start": 697.595,
+"t_end": 706.595,
+"speaker": "JESUIT",
+"text": "Rest tonight. Next summer, when the canoes come down from the west, you'll go back up the river with them. All the way to the Wendat country. To a mission called Sainte-Marie.",
+"cue_id": "ep01-082"
+},
+{
+"kind": "scene",
+"t_start": 708.955,
+"t_end": null,
+"speaker": null,
+"text": "Scene 7 — Goodnight (12:45–14:30)",
+"cue_id": "ep01-083"
+},
+{
+"kind": "ambience",
+"t_start": 708.955,
+"t_end": null,
+"speaker": null,
+"text": "a quiet summer night by the river, crickets, an owl far off",
+"key": "night",
+"cue_id": "ep01-084"
+},
+{
+"kind": "music",
+"t_start": 710.155,
+"t_end": 818.37,
+"speaker": null,
+"text": "lullaby",
+"key": "lullaby",
+"cue_id": "ep01-085"
+},
+{
+"kind": "line",
+"t_start": 713.975,
+"t_end": 729.435,
+"speaker": "NARRATOR",
+"text": "So that night, Eustache Lambert lay down on solid ground, in a brand new country, for the very first time. Maybe he could still feel the ship rocking, the way you sometimes still feel the waves after a day at the beach.",
+"cue_id": "ep01-086"
+},
+{
+"kind": "line",
+"t_start": 730.935,
+"t_end": 739.555,
+"speaker": "NARRATOR",
+"text": "He was far from Maman. Far from Papa. Far from la mer and the harbor wall. But he was where he wanted to be.",
+"cue_id": "ep01-087"
+},
+{
+"kind": "line",
+"t_start": 740.795,
+"t_end": 757.835,
+"speaker": "NARRATOR",
+"text": "And here's the most amazing part. Eustache Lambert is your grandpa. Your great, great, great, great, great, great, great, great, great, great grandpa. That's a lot of greats. So many greats that we'll have to count them some other night.",
+"cue_id": "ep01-088"
+},
+{
+"kind": "line",
+"t_start": 759.215,
+"t_end": 768.415,
+"speaker": "NARRATOR",
+"text": "Next time, Eustache goes up the river in a birchbark canoe, to a place in the forest called Sainte-Marie. But that's for tomorrow.",
+"cue_id": "ep01-089"
+},
+{
+"kind": "line",
+"t_start": 769.995,
+"t_end": 781.855,
+"speaker": "NARRATOR",
+"text": "Tonight, close your eyes. Feel the ship rocking, slow and gentle. Up, and down. Up, and down. Hear the river outside, going by in the dark.",
+"cue_id": "ep01-090"
+},
+{
+"kind": "line",
+"t_start": 783.175,
+"t_end": 784.015,
+"speaker": "FRENCH",
+"text": "Bonne nuit.",
+"cue_id": "ep01-091"
+},
+{
+"kind": "line",
+"t_start": 785.49,
+"t_end": 794.03,
+"speaker": "NARRATOR",
+"text": "Bonne nuit means good night. Goodnight, William. Goodnight, Alex. Goodnight, from the shore of Lambert Lake.",
+"cue_id": "ep01-092"
+}
+]

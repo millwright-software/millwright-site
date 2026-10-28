@@ -1,0 +1,80 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.18,
+     46.8
+    ]
+   },
+   "properties": {
+    "label": "Lévis / Lauzon",
+    "note": "Abraham born 1792 at Lauzon; married Rose Angèle Demers at Lévis, 29 Dec 1821. The family left Lower Canada in 1841.",
+    "year": 1841
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -90.2,
+     38.63
+    ]
+   },
+   "properties": {
+    "label": "St. Louis",
+    "note": "Winter of 1841–42 (Neill).",
+    "year": 1841
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.09,
+     44.95
+    ]
+   },
+   "properties": {
+    "label": "St. Paul",
+    "note": "'They came via boat to St. Paul' (Neill).",
+    "year": 1842
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.1,
+     49.89
+    ]
+   },
+   "properties": {
+    "label": "St. Boniface",
+    "note": "Red River, 1842–45. Rose Angélique married Alexander Ducharme here, 26 Nov 1844 (Wall).",
+    "year": 1844
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.08,
+     45.02
+    ]
+   },
+   "properties": {
+    "label": "Little Canada",
+    "note": "Settled on section 8, beside Lake Gervais, 1845 (Neill).",
+    "year": 1845
+   }
+  }
+ ]
+}

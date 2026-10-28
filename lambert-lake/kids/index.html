@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- every path on this page is relative to web/, so the shared data, tiles, pictures and Leaflet are used in place -->
+<base href="../">
+<title>Lambert Lake: a story for kids</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="The family who came all the way from France to an island in a ring-shaped lake, told for kids.">
+<link rel="icon" type="image/svg+xml" href="img/lambert-lake-logo.svg">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="kids/kids.css">
+</head>
+<body>
+
+<div class="stage" id="stage" data-mode="map">
+  <div id="kmap" aria-hidden="true"></div>
+  <div class="tint" id="tint"></div>
+  <div class="wash"></div>
+
+  <figure class="plate" id="plate" aria-live="polite">
+    <button class="plate-btn" id="plate-btn" aria-label="See the picture big">
+      <img id="plate-img" alt="">
+    </button>
+    <div class="bubble" id="bubble" hidden></div>
+  </figure>
+
+  <div class="medal" id="medal" aria-live="polite">
+    <div class="m-year" id="m-year"></div>
+    <div class="m-sub" id="m-sub"></div>
+    <svg class="trees" id="trees" viewBox="0 0 150 40" aria-hidden="true"></svg>
+  </div>
+</div>
+
+<main class="steps" id="steps">
+
+  <section class="step title" data-act="title" data-mode="map" data-year="">
+    <div class="card">
+      <svg class="logo" viewBox="-24 -24 1048 950" aria-hidden="true"><path d="M623.8,5.1 L527.9,0.4 L391.1,63.5 L388.2,106.1 L382.2,112.5 L325.5,102.3 L207.9,68.6 L164.0,71.6 L135.5,80.1 L125.3,90.8 L98.4,165.3 L81.8,192.6 L83.5,210.9 L72.0,212.2 L0.0,331.9 L17.9,404.3 L40.1,448.2 L80.5,584.1 L96.3,598.6 L153.8,614.0 L210.1,613.5 L250.1,621.6 L288.0,670.2 L286.7,764.8 L293.1,832.6 L332.3,872.2 L383.0,900.7 L510.9,885.8 L566.3,832.6 L655.3,733.3 L657.4,723.9 L669.4,725.6 L699.6,706.9 L834.3,714.5 L942.9,649.8 L969.7,625.9 L993.6,590.5 L994.9,579.0 L989.3,573.9 L996.2,557.3 L991.1,542.0 L1000.0,525.8 L992.3,488.7 L979.5,464.4 L891.4,400.1 L875.2,332.8 L856.0,203.2 L771.6,176.4 L757.6,177.2 L754.6,169.6 L710.7,145.3 L697.9,124.4 L675.3,37.5 L656.2,32.0 L651.0,19.6 Z M436.7,279.5 L508.3,357.1 L591.4,367.7 L595.2,425.2 L563.7,544.1 L565.4,620.4 L484.4,681.3 L462.7,678.3 L326.4,606.3 L324.7,575.6 L318.7,567.5 L322.5,554.3 L314.9,539.8 L320.0,527.9 L310.6,487.0 L257.8,389.4 L293.6,373.2 L338.3,327.2 L372.0,303.8 Z" fill="#2e6f9e" fill-opacity=".35" fill-rule="evenodd" stroke="#2d2b55" stroke-width="26" stroke-linejoin="round"/></svg>
+      <h1>Lambert Lake</h1>
+      <p>Once there was a lake shaped like a ring, with an island in the middle.</p>
+      <p>This is the story of the family it is named for, and the long, long way they came to find it.</p>
+      <p class="scroll-cue">Scroll down to begin</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="france" data-mode="pic" data-pic="france" data-year="about 1617">
+    <div class="card">
+      <p>Almost 400 years ago, a boy named Eustache Lambert was born in France, probably near the town of Boulogne by the sea.</p>
+      <p>Eustache never learned to write. When he signed his name, he drew a mark instead.</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="sea" data-mode="split" data-pic="crossing|quebec1640s" data-year="about 1644">
+    <div class="card">
+      <p>When he was a young man, Eustache sailed across the wide Atlantic Ocean to New France. The trip took many weeks.</p>
+      <p>Maybe he watched for whales!</p>
+      <p class="later">At last he landed at Quebec, a tiny town at the foot of a big cliff.</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="canoe" data-mode="split" data-pic="huronia" data-year="1646">
+    <div class="card">
+      <p>Next he paddled a canoe up the rivers, far into the forest, to a mission called Sainte-Marie among the Hurons.</p>
+      <p>He helped the Jesuit priests and the Huron people understand each other's words.</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="war" data-mode="split" data-pic="quebec1640s-alt" data-year="1649">
+    <div class="card">
+      <p>Then a war came to the Huron country. In 1649 the mission was burned, and everyone had to leave.</p>
+      <p>It was a very sad time.</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="farm" data-mode="pic" data-pic="life-lauzon-levis" data-year="1653">
+    <div class="card">
+      <p>In 1653 Eustache started over. He made a farm on the shore of the great St. Lawrence River and named it Sainte-Marie, after the mission.</p>
+      <p>For rent, he paid in eels: one out of every ten he caught!</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="years" data-mode="pic" data-pic="life-lauzon-winter|generations-1759-alt" data-roll="1673,1792" data-year="1792">
+    <div class="card">
+      <p>Then many, many years went by.</p>
+      <p>Eustache's son farmed that shore, then his grandson, and on and on: six generations, one after another.</p>
+      <p>That's more than a hundred winters!</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="abraham" data-mode="pic" data-pic="life-lauzon-church" data-year="1822">
+    <div class="card">
+      <p>In 1792 a baby named Abraham was born on that shore.</p>
+      <p>When he grew up, he married Rose Angèle Demers, in the winter of 1822. Soon they had a big, busy family.</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="hard" data-mode="pic" data-pic="life-lauzon-farm" data-year="1832">
+    <div class="card">
+      <p>Then came hard years. A sickness called cholera spread, and some people died.</p>
+      <p>Hail and bad weather ruined the crops three years in a row, and families went hungry.</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="oregon" data-mode="map" data-year="1838">
+    <div class="card">
+      <p>Rose Angèle's brother Modeste was a priest. In 1838 he traveled all the way across the land to a faraway place called Oregon.</p>
+      <div class="letter"><p>News came back about Oregon: the weather is mild, and the soil is good for growing things.</p></div>
+      <p>Can you imagine dreaming of a place you have never seen?</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="j-river" data-mode="split" data-pic="levis|rapids" data-it="1841-00-levis,1841-01-levis-montreal,1841-02-montreal,1841-03-montreal-kingston">
+    <div class="card">
+      <p>In 1841 Abraham, Rose Angèle and their six children packed up and set off west.</p>
+      <p>First came a steamboat up the river. Where the water got rough, they rode a bumpy stagecoach around the rapids.</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="j-lakes" data-mode="split" data-pic="lakes" data-prompt="Spot the steamboats! Look for their tall smokestacks." data-it="1841-04-kingston-buffalo,1841-05-buffalo,1841-06-buffalo-chicago,1841-07-chicago">
+    <div class="card">
+      <p>Next came a little railroad past Niagara Falls. Trains were brand new then!</p>
+      <p>Then a big steamboat carried them across the Great Lakes for about a week, all the way to Chicago.</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="j-river2" data-mode="split" data-pic="stlouis|mississippi" data-it="1841-08-chicago-peru,1841-09-peru,1841-10-peru-st-louis,1841-11-st-louis-winter,1842-01-st-louis-galena,1842-02-galena,1842-03-galena-fort-snelling,1842-04-mendota">
+    <div class="card">
+      <p>A stagecoach and another steamboat took them down to St. Louis, where they stayed all winter.</p>
+      <p>In the spring, they rode a steamboat up the Mississippi River to Fort Snelling.</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="j-cart" data-mode="split" data-pic="camp" data-prompt="Find the cart with the giant wheels!" data-it="1842-05-mendota-red-river">
+    <div class="card">
+      <p>From there the ride was slow, slow, slow: ox carts, about fifteen miles a day, north across the prairie to the Red River.</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="j-boniface" data-mode="split" data-pic="redriver|life-boniface-cariole" data-prompt="life-boniface-cariole:In winter, sleds here were pulled by dogs. Count the dogs!" data-it="1842-06-st-boniface">
+    <div class="card">
+      <p>Red River was where travelers set out for Oregon. But that year's group had already gone, and the way west was dangerous. So the Oregon dream ended there.</p>
+      <p>The family stayed about three years, and their oldest daughter, Rose, got married.</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="j-trail" data-mode="split" data-pic="trail" data-prompt="Can you see the long line of ox carts?" data-it="1845-01-st-boniface-pembina,1845-02-pembina-st-paul,1845-03-st-paul-little-canada">
+    <div class="card">
+      <p>In 1845, on about <b>Day <span data-day="1845-01-st-boniface-pembina">1,480</span></b> of their trip, they climbed into the ox carts again and headed south.</p>
+      <p>Five weeks on the trail!</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="arrive" data-mode="pic" data-pic="arrive" data-year="1845">
+    <div class="card">
+      <p>At last they stopped by Lake Gervais, north of St. Paul, and made a farm.</p>
+      <p>Their trip had taken four years!</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="island" data-mode="map" data-pic="patent" data-year="1849">
+    <div class="card">
+      <p>In 1849 Abraham bought something special: the whole island in the middle of the ring-shaped lake!</p>
+      <p>The clerk even spelled his name wrong on the paper: Abraham <i>Lombert</i>.</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="church" data-mode="pic" data-pic="life-canada-chapel" data-year="1851">
+    <div class="card">
+      <p>At first, families here went to a little log chapel in St. Paul, this one.</p>
+      <p>When Little Canada built its own church, the logs came from Abraham's land, pulled over the snow on sleighs.</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="chair" data-mode="map" data-year="1852">
+    <div class="card">
+      <svg class="chair" viewBox="0 0 120 120" aria-hidden="true">
+        <g class="chair-legs" fill="none" stroke="#7a4a26" stroke-width="7" stroke-linecap="round">
+          <path class="leg-a" d="M38 22 L82 108"/>
+          <path class="leg-b" d="M82 52 L38 108"/>
+        </g>
+        <path d="M30 56 h56" stroke="#b8472e" stroke-width="9" stroke-linecap="round"/>
+        <path d="M36 18 h10" stroke="#7a4a26" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      <p>At the new church, families had to pay rent for a seat. Stubborn Abraham did not want to pay!</p>
+      <p>So he made himself a folding chair, and every Sunday he carried it to church and back home again.</p>
+    </div>
+  </section>
+
+  <section class="step long" data-act="drain" data-mode="map" data-roll="1870,1899" data-year="1899">
+    <div class="card">
+      <p>But the lake did not stay. In 1870 a water company dug a canal to send the lake's water to the city.</p>
+      <p>Then a farmer dug a long ditch, and little by little the blue went away.</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="cloquet" data-mode="pic" data-pic="cloquet-1910" data-year="1918">
+    <div class="card">
+      <p>Years later, Abraham's great-grandson Joseph lived up north, in a sawmill town called Cloquet.</p>
+      <p>In 1918 a giant forest fire came. Trains carried almost everyone in town to safety, and the family remembers that they made it through.</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="hotel" data-mode="map" data-year="1919">
+    <div class="card">
+      <p>The family also remembers that Joseph's baby daughter, Marjorie, was born the next year in a hotel on an island in the river, in the hotel's bar!</p>
+      <p>That hotel had made it through the fire. Another island!</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="eric" data-mode="map" data-year="today">
+    <div class="card">
+      <p>Marjorie grew up and had a daughter, Mary. Mary had a son named Eric. That's your dad!</p>
+      <p class="ask">And that's how the story reaches William and Alex.</p>
+    </div>
+  </section>
+
+  <section class="step tall" data-act="park" data-mode="map" data-year="today">
+    <div class="card">
+      <p>Part of the land where Abraham farmed is a park now, with a playground right at the edge of his old farm. We call it <span class="park-name">PARK_NAME</span>!</p>
+      <p>You go past it on the way to school!</p>
+    </div>
+  </section>
+
+  <section class="step tall end" data-act="home" data-mode="map" data-year="today">
+    <div class="card">
+      <p>The lake is almost gone now. A little stream called Lambert Creek runs where its water drained away, and your dad's house on Woodview Court is right next to it.</p>
+      <p class="ask">Can you find where the island was when you walk by the creek?</p>
+      <p class="grown"><a href="story.html">For grown-ups: the full story →</a></p>
+    </div>
+  </section>
+
+</main>
+
+<div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="The picture, big" hidden>
+  <button class="lb-close" id="lb-close" aria-label="Close">×</button>
+  <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+  <p class="lb-hint">Tap or scroll to go back to the story</p>
+</div>
+
+<script src="vendor/leaflet.js"></script>
+<script src="js/config.js"></script>
+<script src="js/scroll.js"></script>
+<script src="kids/kids.js"></script>
+</body>
+</html>

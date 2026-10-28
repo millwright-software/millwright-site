@@ -1,0 +1,89 @@
+/* Listen: a full-screen map and a player. Paths resolve from web/ (index.html sets <base href="../">). */
+@font-face { font-family: "Libre Caslon Text"; font-weight: 400; font-display: swap; src: url(../fonts/LibreCaslonText-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Libre Caslon Text"; font-style: italic; font-weight: 400; font-display: swap; src: url(../fonts/LibreCaslonText-400-italic.woff2) format("woff2"); }
+@font-face { font-family: "Libre Caslon Text"; font-weight: 700; font-display: swap; src: url(../fonts/LibreCaslonText-700-normal.woff2) format("woff2"); }
+:root { --paper: #f3ecda; --ink: #251e15; --ink-2: #65584a; --rust: #8a2a22; --water: #2f5f7a; --bar: 64px;
+  --halo: 0 0 2px #f6f0e1, 0 0 6px #f6f0e1, 0 0 12px rgba(246,240,225,.9); }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #d9cfb6; color: var(--ink); font-family: "Libre Caslon Text", Georgia, serif; }
+#map { position: fixed; inset: 0; background: #d9cfb6; }
+.leaflet-container { background: #d9cfb6; font-family: inherit; }
+/* the period look, as on the scroll story; opacity is driven by the audio clock, so no CSS fades on the layers */
+.pane-base { filter: sepia(.45) saturate(.55) brightness(1.04) contrast(.9); }
+.pane-period { filter: contrast(1.25) saturate(.95) brightness(.97); }
+.leaflet-layer { transition: none !important; }
+.leaflet-control-attribution { font-size: 10px; background: rgba(243,236,218,.7) !important; margin-bottom: calc(var(--bar) + 2px) !important; }
+#fx, #haze { position: fixed; inset: 0; pointer-events: none; z-index: 450; }
+#haze { background: radial-gradient(ellipse at 60% 40%, rgba(255,150,60,.55), rgba(150,60,25,.8)); mix-blend-mode: multiply; transition: opacity .3s; opacity: 0; }
+
+/* the traveller: a white disc with the vehicle, a slow pulse; always above everything on the map */
+.traveller { color: var(--rust); }
+.traveller svg { position: absolute; inset: 7px; width: 32px; height: 32px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+.traveller .halo { position: absolute; inset: 0; border-radius: 50%; background: #fffaf0; border: 2.5px solid var(--rust); box-shadow: 0 0 0 4px rgba(255,250,240,.6), 0 3px 10px rgba(0,0,0,.35); }
+.traveller .halo::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 2px solid var(--rust); opacity: .6; animation: pulse 2.4s ease-out infinite; }
+.traveller.m-ship, .traveller.m-boat, .traveller.m-canoe { color: var(--water); }
+.traveller.m-ship .halo, .traveller.m-boat .halo, .traveller.m-canoe .halo { border-color: var(--water); }
+.traveller.m-ship .halo::after, .traveller.m-boat .halo::after, .traveller.m-canoe .halo::after { border-color: var(--water); }
+@keyframes pulse { from { transform: scale(.85); opacity: .7; } to { transform: scale(1.5); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .traveller .halo::after { animation: none; } }
+.pin { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 2px solid #fffaf0; box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.pin-lbl { background: none; border: 0; box-shadow: none; padding: 0; font: italic 15px/1.2 "Libre Caslon Text", Georgia, serif; color: var(--ink); text-shadow: var(--halo); white-space: nowrap; }
+.pin-lbl::before { display: none; }
+
+/* overlays: absolutely placed by listen.js in the free space */
+.ov { position: fixed; z-index: 600; opacity: 0; pointer-events: none; transition: opacity .6s ease; left: -9999px; top: 0; }
+.ov.on { opacity: 1; }
+#top { position: fixed; z-index: 700; top: 12px; left: 50%; transform: translateX(-50%); text-align: center; pointer-events: none; text-shadow: var(--halo); }
+#top .home { pointer-events: auto; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; }
+#ep-title { font-size: 15px; font-style: italic; }
+#ep-title .no { display: none; }
+#caption { max-width: min(380px, 40vw); background: rgba(246,240,225,.92); border-left: 4px solid var(--rust); padding: 10px 14px; box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+#caption .date { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--rust); }
+#caption .what { font-size: 17px; line-height: 1.35; margin-top: 2px; }
+#ribbon { display: flex; gap: 14px; align-items: baseline; background: var(--ink); color: var(--paper); padding: 10px 22px; border-radius: 2px; box-shadow: 0 6px 20px rgba(0,0,0,.3); white-space: nowrap; }
+#ribbon .gen { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; opacity: .75; }
+#ribbon .name { font-size: 24px; font-weight: 700; }
+#ribbon .yrs { font-size: 20px; font-style: italic; }
+#art { margin: 0; width: min(400px, 33vw); }
+#art.squeezed { width: min(300px, 25vw); }
+#art .frame { padding: 12px; background: linear-gradient(135deg, #8c6a3a, #c9a868 30%, #7a5a2c 60%, #b8955a); box-shadow: 0 10px 30px rgba(0,0,0,.4), inset 0 0 0 2px rgba(0,0,0,.25); }
+#art img { display: block; width: 100%; max-height: 42vh; object-fit: contain; background: #efe6cf; border: 3px solid #efe6cf; outline: 1px solid rgba(0,0,0,.3); }
+#art figcaption { margin: 8px auto 0; width: fit-content; max-width: 100%; background: rgba(246,240,225,.94); padding: 5px 10px; font-size: 13px; line-height: 1.3; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+#subs { max-width: min(860px, 86vw); background: rgba(20,16,10,.78); color: #fbf6ea; font-size: clamp(15px, 1.4vw, 19px); line-height: 1.4; padding: 8px 16px; border-radius: 3px; text-align: center; }
+#subs .who { font-size: .72em; letter-spacing: .14em; text-transform: uppercase; color: #e8c27a; margin-right: 4px; }
+
+/* the player */
+#bar { position: fixed; z-index: 800; left: 0; right: 0; bottom: 0; height: var(--bar); display: flex; align-items: center; gap: 12px; padding: 0 18px;
+  background: linear-gradient(to top, rgba(37,30,21,.92), rgba(37,30,21,.78)); color: var(--paper); font-size: 14px; }
+#bar button { background: none; border: 1px solid rgba(243,236,218,.35); color: var(--paper); border-radius: 3px; padding: 6px 10px; font: inherit; cursor: pointer; }
+#bar button:hover { border-color: var(--paper); }
+#pp { width: 44px; height: 44px; border-radius: 50% !important; display: grid; place-items: center; padding: 0 !important; }
+#pp svg { width: 20px; height: 20px; fill: currentColor; }
+#pp .i-pause, body.playing #pp .i-play { display: none; } body.playing #pp .i-pause { display: block; }
+#cc.on { background: var(--paper); color: var(--ink); }
+#scrub { flex: 1; accent-color: #e8c27a; }
+#now, #dur { font-variant-numeric: tabular-nums; min-width: 42px; }
+#start { position: fixed; inset: 0; z-index: 900; display: none; place-items: center; background: rgba(37,30,21,.35); }
+#start.on { display: grid; }
+#start .card, #next .card { background: var(--paper); padding: 22px; box-shadow: 0 20px 60px rgba(0,0,0,.45); text-align: center; max-width: min(440px, 90vw); }
+#start-cover { width: 100%; max-width: 360px; aspect-ratio: 1; object-fit: cover; display: block; margin: 0 auto 14px; }
+#start-title { font-size: 22px; font-weight: 700; margin-bottom: 14px; }
+#start-title .no, #next p:first-child { display: block; font-size: 12px; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 4px; }
+#bigplay { display: inline-flex; align-items: center; gap: 10px; font: 700 22px "Libre Caslon Text", Georgia, serif; background: var(--rust); color: #fffaf0; border: 0; border-radius: 40px; padding: 14px 34px 14px 26px; cursor: pointer; box-shadow: 0 6px 18px rgba(138,42,34,.4); }
+#bigplay svg { width: 26px; height: 26px; fill: currentColor; }
+#bigplay:hover { background: #a3352b; }
+.hint { font-size: 12px; color: var(--ink-2); margin: 14px 0 0; }
+#next { position: fixed; z-index: 900; right: 20px; bottom: calc(var(--bar) + 20px); display: none; }
+#next.on { display: block; }
+#next .card { display: flex; gap: 14px; align-items: center; text-align: left; padding: 14px; }
+#next-cover { width: 96px; height: 96px; object-fit: cover; }
+#next-title { font-weight: 700; margin: 0 0 8px; }
+#next button { font: inherit; border: 1px solid var(--ink); background: none; padding: 5px 10px; cursor: pointer; }
+#next-go { background: var(--rust) !important; color: #fffaf0; border-color: var(--rust) !important; }
+#eps { position: fixed; z-index: 850; right: 12px; bottom: calc(var(--bar) + 10px); display: none; grid-template-columns: repeat(3, 150px); gap: 10px; background: rgba(37,30,21,.92); padding: 12px; border-radius: 4px; }
+#eps.on { display: grid; }
+#eps .ep { background: none; border: 2px solid transparent; padding: 0; color: var(--paper); text-align: left; font: 13px/1.25 "Libre Caslon Text", Georgia, serif; cursor: pointer; }
+#eps .ep.cur { border-color: #e8c27a; }
+#eps .ep img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+#eps .ep span { display: block; padding: 5px 4px; } #eps .ep b { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #e8c27a; }
+@media (max-width: 760px) { #eps { grid-template-columns: repeat(2, 130px); } #caption { max-width: 60vw; } #art { width: 46vw; } #ribbon .name { font-size: 18px; } }

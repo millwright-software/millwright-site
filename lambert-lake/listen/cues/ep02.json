@@ -1,0 +1,689 @@
+[
+{
+"kind": "scene",
+"t_start": 0.5,
+"t_end": null,
+"speaker": null,
+"text": "Scene 1 — Open and last time (0:00–1:30)",
+"cue_id": "ep02-000"
+},
+{
+"kind": "music",
+"t_start": 0.5,
+"t_end": 14.06,
+"speaker": null,
+"text": "theme",
+"key": "theme",
+"cue_id": "ep02-001"
+},
+{
+"kind": "line",
+"t_start": 6.2,
+"t_end": 11.32,
+"speaker": "NARRATOR",
+"text": "This is \"Lambert Lake.\" Episode two: \"The Canoe and the Farm.\"",
+"cue_id": "ep02-002"
+},
+{
+"kind": "ambience",
+"t_start": 13.56,
+"t_end": null,
+"speaker": null,
+"text": "a wide river, water against the shore, gulls",
+"key": "river",
+"cue_id": "ep02-003"
+},
+{
+"kind": "line",
+"t_start": 14.32,
+"t_end": 36.52,
+"speaker": "NARRATOR",
+"text": "Last time, we met a young man from France named Eustache Lambert. He couldn't read or write, but he could work hard, and he gave his whole life to help the missions in New France. He was a donné. He sailed for months across la mer, and he landed at Quebec, a little town on a big rock above the St. Lawrence River.",
+"cue_id": "ep02-004"
+},
+{
+"kind": "line",
+"t_start": 38.44,
+"t_end": 44.96,
+"speaker": "NARRATOR",
+"text": "Tonight, Eustache goes west. Way west. In a boat made of tree bark.",
+"cue_id": "ep02-005"
+},
+{
+"kind": "scene",
+"t_start": 47.14,
+"t_end": null,
+"speaker": null,
+"text": "Scene 2 — The birchbark canoe (1:30–4:00)",
+"cue_id": "ep02-006"
+},
+{
+"kind": "ambience",
+"t_start": 47.14,
+"t_end": null,
+"speaker": null,
+"text": "a quiet river, paddles dipping, birds in the trees",
+"key": "canoe",
+"cue_id": "ep02-007"
+},
+{
+"kind": "sfx",
+"t_start": 48.54,
+"t_end": 56.54,
+"speaker": null,
+"text": "paddles: paddles dipping and pulling, water dripping off the blades",
+"key": "paddles",
+"cue_id": "ep02-008"
+},
+{
+"kind": "line",
+"t_start": 52.06,
+"t_end": 86.38,
+"speaker": "NARRATOR",
+"text": "Every summer, the Wendat people came down the rivers to trade, in long canoes made of birch bark. Birch bark is the white, papery skin of the birch tree. The Wendat and their neighbors knew how to peel it off in big sheets and sew it over a frame of thin, bent wood, and seal the seams with sticky tree gum. The canoe that came out of it was so light that two men could carry it on their shoulders, and so strong it could carry a whole pile of packs down a wild river.",
+"cue_id": "ep02-009"
+},
+{
+"kind": "line",
+"t_start": 88.02,
+"t_end": 91.44,
+"speaker": "NARRATOR",
+"text": "In French, a canoe is le canot.",
+"cue_id": "ep02-010"
+},
+{
+"kind": "line",
+"t_start": 92.72,
+"t_end": 93.62,
+"speaker": "FRENCH",
+"text": "Le canot.",
+"cue_id": "ep02-011"
+},
+{
+"kind": "line",
+"t_start": 95.205,
+"t_end": 97.945,
+"speaker": "NARRATOR",
+"text": "And a river is la rivière.",
+"cue_id": "ep02-012"
+},
+{
+"kind": "line",
+"t_start": 99.385,
+"t_end": 100.345,
+"speaker": "FRENCH",
+"text": "La rivière.",
+"cue_id": "ep02-013"
+},
+{
+"kind": "line",
+"t_start": 101.995,
+"t_end": 109.955,
+"speaker": "GUIDE",
+"text": "Kwe, Eustache. You sit there, in the middle. Don't stand up. Don't lean over. And whatever you do, don't drop your paddle.",
+"cue_id": "ep02-014"
+},
+{
+"kind": "line",
+"t_start": 111.295,
+"t_end": 112.595,
+"speaker": "EUSTACHE",
+"text": "Kwe! Did I say it right?",
+"cue_id": "ep02-015"
+},
+{
+"kind": "line",
+"t_start": 113.655,
+"t_end": 114.975,
+"speaker": "GUIDE",
+"text": "Almost. You'll learn.",
+"cue_id": "ep02-016"
+},
+{
+"kind": "line",
+"t_start": 116.215,
+"t_end": 124.775,
+"speaker": "NARRATOR",
+"text": "Kwe is a Wendat word. It's how you say hello. Wendat people today still greet each other that way. Kwe.",
+"cue_id": "ep02-017"
+},
+{
+"kind": "line",
+"t_start": 126.095,
+"t_end": 149.595,
+"speaker": "NARRATOR",
+"text": "And Eustache did learn. He learned the Wendat language so well that he could listen to it in one ear and say it in French out the other side. That's called being an interpreter. The record says Eustache Lambert was one. A man who couldn't read a single word turned out to be very, very good with words.",
+"cue_id": "ep02-018"
+},
+{
+"kind": "scene",
+"t_start": 151.895,
+"t_end": null,
+"speaker": null,
+"text": "Scene 3 — The carrying places (4:00–6:30)",
+"cue_id": "ep02-019"
+},
+{
+"kind": "ambience",
+"t_start": 151.895,
+"t_end": null,
+"speaker": null,
+"text": "white water roaring, wind in the pines",
+"key": "rapids",
+"cue_id": "ep02-020"
+},
+{
+"kind": "line",
+"t_start": 153.855,
+"t_end": 177.375,
+"speaker": "NARRATOR",
+"text": "The trip to the Wendat country was far. Up one river, and across a lake, and down another river, and along the shore of a great big bay. It usually took about a month. And there was a problem. Some parts of the rivers were too wild for any canoe. Rapids. White water crashing over rocks. Waterfalls.",
+"cue_id": "ep02-021"
+},
+{
+"kind": "line",
+"t_start": 178.595,
+"t_end": 180.635,
+"speaker": "GUIDE",
+"text": "Everybody out! Carrying place!",
+"cue_id": "ep02-022"
+},
+{
+"kind": "line",
+"t_start": 182.015,
+"t_end": 184.135,
+"speaker": "EUSTACHE",
+"text": "Carrying place? What are we carrying?",
+"cue_id": "ep02-023"
+},
+{
+"kind": "line",
+"t_start": 185.055,
+"t_end": 188.135,
+"speaker": "GUIDE",
+"text": "Everything. The packs. The food. And the canoe.",
+"cue_id": "ep02-024"
+},
+{
+"kind": "line",
+"t_start": 189.335,
+"t_end": 208.595,
+"speaker": "NARRATOR",
+"text": "Here's our lesson for tonight. When the river got too wild, everybody climbed out, and picked up the canoe and every single pack, and carried them along a path through the woods, around the rapids, to where the water was calm again. That path was called a portage. A carrying place.",
+"cue_id": "ep02-025"
+},
+{
+"kind": "sfx",
+"t_start": 208.975,
+"t_end": 215.555,
+"speaker": null,
+"text": "steps: heavy footsteps on a forest trail, a man breathing hard",
+"key": "steps",
+"cue_id": "ep02-026"
+},
+{
+"kind": "line",
+"t_start": 215.368,
+"t_end": 232.048,
+"speaker": "NARRATOR",
+"text": "Some packs weighed as much as a big dog. Some men carried two at a time. Some portages were short, and some went on and on through the trees, with the mosquitoes buzzing the whole way. And on the long trip west, there were dozens of them.",
+"cue_id": "ep02-027"
+},
+{
+"kind": "line",
+"t_start": 233.168,
+"t_end": 234.888,
+"speaker": "EUSTACHE",
+"text": "How many more carrying places?",
+"cue_id": "ep02-028"
+},
+{
+"kind": "line",
+"t_start": 235.848,
+"t_end": 236.448,
+"speaker": "GUIDE",
+"text": "Many.",
+"cue_id": "ep02-029"
+},
+{
+"kind": "line",
+"t_start": 237.368,
+"t_end": 238.888,
+"speaker": "EUSTACHE",
+"text": "How many is many?",
+"cue_id": "ep02-030"
+},
+{
+"kind": "line",
+"t_start": 240.048,
+"t_end": 241.208,
+"speaker": "GUIDE",
+"text": "Ask me again tomorrow.",
+"cue_id": "ep02-031"
+},
+{
+"kind": "line",
+"t_start": 242.308,
+"t_end": 262.428,
+"speaker": "NARRATOR",
+"text": "So here's tonight's question. If you had to carry everything yourself, on your own back, through the woods, what would you pack? Not the heavy things. Just what you really need. Hmm. Maybe a blanket. A cup. A fishing line. What would you take?",
+"cue_id": "ep02-032"
+},
+{
+"kind": "line",
+"t_start": 263.828,
+"t_end": 277.708,
+"speaker": "NARRATOR",
+"text": "The first time we see Eustache in the old records is in August of sixteen forty-six, going up the rivers to the mission. And the record says that wasn't his first trip. It was his second, or maybe his third.",
+"cue_id": "ep02-033"
+},
+{
+"kind": "scene",
+"t_start": 279.868,
+"t_end": null,
+"speaker": null,
+"text": "Scene 4 — Sainte-Marie (6:30–8:30)",
+"cue_id": "ep02-034"
+},
+{
+"kind": "ambience",
+"t_start": 279.868,
+"t_end": null,
+"speaker": null,
+"text": "a summer woods, wind high in the trees, birds",
+"key": "woods",
+"cue_id": "ep02-035"
+},
+{
+"kind": "sfx",
+"t_start": 281.268,
+"t_end": 288.468,
+"speaker": null,
+"text": "chop: an axe on a log, steady strokes",
+"key": "chop",
+"cue_id": "ep02-036"
+},
+{
+"kind": "line",
+"t_start": 286.328,
+"t_end": 319.128,
+"speaker": "NARRATOR",
+"text": "The mission was called Sainte-Marie, which means Saint Mary. It sat beside a small river, near a big bay, close to where the town of Midland, Ontario is today. It had a wooden wall around it, and houses, and a chapel, and a workshop, and gardens. Priests lived there, and Wendat families came and went, and there were helpers, lots of them. In sixteen forty-eight there were twenty-three donnés at Sainte-Marie. Eustache was one.",
+"cue_id": "ep02-037"
+},
+{
+"kind": "line",
+"t_start": 320.368,
+"t_end": 345.688,
+"speaker": "NARRATOR",
+"text": "And the Wendat were farmers. Their women grew fields and fields of corn, and beans, and squash, all planted together. The corn grows tall, and the beans climb up the corn like a ladder, and the big squash leaves spread out on the ground and keep the weeds away. Three plants that help each other. Some people call them the three sisters.",
+"cue_id": "ep02-038"
+},
+{
+"kind": "line",
+"t_start": 347.188,
+"t_end": 352.088,
+"speaker": "GUIDE",
+"text": "You want to eat, Eustache? Then help in the field. The corn doesn't care that you can't read.",
+"cue_id": "ep02-039"
+},
+{
+"kind": "line",
+"t_start": 353.228,
+"t_end": 355.568,
+"speaker": "EUSTACHE",
+"text": "Nobody here cares that I can't read!",
+"cue_id": "ep02-040"
+},
+{
+"kind": "line",
+"t_start": 356.628,
+"t_end": 358.668,
+"speaker": "GUIDE",
+"text": "Here, you can listen. That's better.",
+"cue_id": "ep02-041"
+},
+{
+"kind": "line",
+"t_start": 359.928,
+"t_end": 388.328,
+"speaker": "NARRATOR",
+"text": "And the Wendat lived in longhouses. A longhouse was a long, long house made of poles and bark, with a roof shaped like an upside-down boat. Several families lived in one, with cooking fires down the middle, and the smoke went out through holes in the roof. Can you imagine sleeping in one big house with all your aunts and uncles and cousins? It would be noisy. And very warm.",
+"cue_id": "ep02-042"
+},
+{
+"kind": "line",
+"t_start": 389.928,
+"t_end": 414.748,
+"speaker": "NARRATOR",
+"text": "Let's be honest about the next part, because it's sad. There was a war. Another nation, the Haudenosaunee, who the French called the Iroquois, fought the Wendat, and in the spring of sixteen forty-nine they destroyed many Wendat towns. Some of the priests Eustache knew were killed. Many, many Wendat people lost their homes.",
+"cue_id": "ep02-043"
+},
+{
+"kind": "line",
+"t_start": 416.248,
+"t_end": 442.408,
+"speaker": "NARRATOR",
+"text": "So the priests at Sainte-Marie made a hard choice. They packed up what they could carry, and they set fire to the mission themselves, so no one could use it against them, and they left, together with Wendat families who had nowhere else to go. Some of those Wendat families went all the way to Quebec. And their great-great-great-grandchildren still live near Quebec today, in a place called Wendake.",
+"cue_id": "ep02-044"
+},
+{
+"kind": "line",
+"t_start": 443.708,
+"t_end": 450.348,
+"speaker": "NARRATOR",
+"text": "Eustache came back east too. He was a grown man now, about thirty-two. And he needed a home.",
+"cue_id": "ep02-045"
+},
+{
+"kind": "scene",
+"t_start": 452.548,
+"t_end": null,
+"speaker": null,
+"text": "Scene 5 — The farm on the shore (8:30–11:00)",
+"cue_id": "ep02-046"
+},
+{
+"kind": "ambience",
+"t_start": 452.548,
+"t_end": null,
+"speaker": null,
+"text": "birdsong, a breeze, water on a shore below",
+"key": "farm",
+"cue_id": "ep02-047"
+},
+{
+"kind": "line",
+"t_start": 454.628,
+"t_end": 476.068,
+"speaker": "NARRATOR",
+"text": "Across the river from Quebec, on the south shore, is a place called Pointe-Lévy. In sixteen fifty-one, Eustache started fishing for eels there. And in sixteen fifty-three, he was given his own piece of land. A long, skinny strip of land, running from the river's edge, way back into the woods.",
+"cue_id": "ep02-048"
+},
+{
+"kind": "line",
+"t_start": 477.468,
+"t_end": 480.408,
+"speaker": "NARRATOR",
+"text": "A farm, in French, is la ferme.",
+"cue_id": "ep02-049"
+},
+{
+"kind": "line",
+"t_start": 481.748,
+"t_end": 482.728,
+"speaker": "FRENCH",
+"text": "La ferme.",
+"cue_id": "ep02-050"
+},
+{
+"kind": "line",
+"t_start": 484.193,
+"t_end": 500.413,
+"speaker": "NARRATOR",
+"text": "And do you know what he had to pay, every year, to the lord who owned all the land around it? One out of every ten eels he caught. Eels! Long, slippery fish, like snakes that swim. In French, an eel is l'anguille.",
+"cue_id": "ep02-051"
+},
+{
+"kind": "line",
+"t_start": 501.713,
+"t_end": 502.633,
+"speaker": "FRENCH",
+"text": "L'anguille.",
+"cue_id": "ep02-052"
+},
+{
+"kind": "line",
+"t_start": 504.088,
+"t_end": 511.528,
+"speaker": "NARRATOR",
+"text": "Can you imagine paying your rent in eels? \"Here you go, sir, one, two, three, four slimy eels.\"",
+"cue_id": "ep02-053"
+},
+{
+"kind": "sfx",
+"t_start": 512.088,
+"t_end": 516.288,
+"speaker": null,
+"text": "laugh: two people laughing together",
+"key": "laugh",
+"cue_id": "ep02-054"
+},
+{
+"kind": "line",
+"t_start": 514.428,
+"t_end": 539.088,
+"speaker": "NARRATOR",
+"text": "Eustache named his farm Sainte-Marie, after the mission in the woods, so he would never forget it. In sixteen fifty-six, he married a woman named Marie Laurence. They had children. He became a merchant, trading with Wendat and Algonquin traders who stopped at his house. And when Quebec needed men to guard it, Eustache was in charge of them.",
+"cue_id": "ep02-055"
+},
+{
+"kind": "line",
+"t_start": 540.368,
+"t_end": 547.408,
+"speaker": "MARIE",
+"text": "Eustache, the children want a story. The one about the carrying places.",
+"cue_id": "ep02-056"
+},
+{
+"kind": "line",
+"t_start": 548.588,
+"t_end": 551.268,
+"speaker": "EUSTACHE",
+"text": "Again? They've heard it a hundred times.",
+"cue_id": "ep02-057"
+},
+{
+"kind": "line",
+"t_start": 552.368,
+"t_end": 554.928,
+"speaker": "MARIE",
+"text": "Then this will be a hundred and one.",
+"cue_id": "ep02-058"
+},
+{
+"kind": "line",
+"t_start": 556.488,
+"t_end": 561.008,
+"speaker": "EUSTACHE",
+"text": "All right. Once upon a time, there was a man who carried a canoe on his head for a whole month.",
+"cue_id": "ep02-059"
+},
+{
+"kind": "line",
+"t_start": 562.008,
+"t_end": 570.148,
+"speaker": "NARRATOR",
+"text": "That part is imagined. But he did have stories to tell. Not many people at Quebec had seen what Eustache had seen.",
+"cue_id": "ep02-060"
+},
+{
+"kind": "scene",
+"t_start": 572.508,
+"t_end": null,
+"speaker": null,
+"text": "Scene 6 — The generations fly by (11:00–13:30)",
+"cue_id": "ep02-061"
+},
+{
+"kind": "ambience",
+"t_start": 572.508,
+"t_end": null,
+"speaker": null,
+"text": "wind, a river, birds, all softly turning",
+"key": "seasons",
+"cue_id": "ep02-062"
+},
+{
+"kind": "music",
+"t_start": 573.708,
+"t_end": 593.251,
+"speaker": null,
+"text": "fontaine",
+"key": "fontaine",
+"cue_id": "ep02-063"
+},
+{
+"kind": "line",
+"t_start": 578.448,
+"t_end": 587.988,
+"speaker": "NARRATOR",
+"text": "Now hold on tight, because we're going to go fast. Faster than a canoe. Faster than a ship. We're going to fly through a hundred and forty years.",
+"cue_id": "ep02-064"
+},
+{
+"kind": "line",
+"t_start": 589.288,
+"t_end": 617.068,
+"speaker": "NARRATOR",
+"text": "Eustache died in sixteen seventy-three. His son Gabriel got the farm. Gabriel was a gentle, quiet man. He was hard of hearing. And once, when his relatives wanted him to help with a big argument in court, Gabriel said, no thank you, I can't hear very well, and I haven't had much schooling, and I live too far out in the country. And he stayed home on his farm, for his whole life.",
+"cue_id": "ep02-065"
+},
+{
+"kind": "line",
+"t_start": 618.088,
+"t_end": 622.108,
+"speaker": "GABRIEL",
+"text": "The cows don't argue. The river doesn't argue. I'll stay right here.",
+"cue_id": "ep02-066"
+},
+{
+"kind": "line",
+"t_start": 623.368,
+"t_end": 639.968,
+"speaker": "NARRATOR",
+"text": "Spring came, and the ice broke up on the river with a crack like thunder. Summer came, and the eels swam in the river. Fall came, and the fields turned gold. Winter came, and the snow piled up to the windows. And then spring again.",
+"cue_id": "ep02-067"
+},
+{
+"kind": "line",
+"t_start": 641.308,
+"t_end": 659.128,
+"speaker": "NARRATOR",
+"text": "Gabriel's son was Louis-Joseph. He was the opposite of quiet. He was a captain of all the men on the south shore. And he went to court so his family could sit in the very first pew in church, right behind the lord of the land. And he won.",
+"cue_id": "ep02-068"
+},
+{
+"kind": "line",
+"t_start": 660.568,
+"t_end": 664.648,
+"speaker": "LOUIS JOSEPH",
+"text": "The first pew, I tell you! The Lamberts have been here since the beginning!",
+"cue_id": "ep02-069"
+},
+{
+"kind": "line",
+"t_start": 665.848,
+"t_end": 674.088,
+"speaker": "NARRATOR",
+"text": "Louis-Joseph and his wife Geneviève had eighteen children. Eighteen! Can you imagine the noise at breakfast?",
+"cue_id": "ep02-070"
+},
+{
+"kind": "line",
+"t_start": 675.368,
+"t_end": 695.588,
+"speaker": "NARRATOR",
+"text": "In seventeen fifty-nine, when Louis-Joseph was an old man, a British army came up the river in a great fleet of ships, to take Quebec from the French. The families of Pointe-Lévy went into the woods and stayed there, the old book says, for five long months, while the cannons boomed across the river.",
+"cue_id": "ep02-071"
+},
+{
+"kind": "sfx",
+"t_start": 696.328,
+"t_end": 712.628,
+"speaker": null,
+"text": "cannon: distant cannon, far across the water, muffled",
+"key": "cannon",
+"cue_id": "ep02-072"
+},
+{
+"kind": "line",
+"t_start": 702.288,
+"t_end": 712.188,
+"speaker": "NARRATOR",
+"text": "When it was over, Quebec belonged to the British. But the families came back out of the woods, and went home, and planted again. Spring, summer, fall, winter.",
+"cue_id": "ep02-073"
+},
+{
+"kind": "line",
+"t_start": 713.648,
+"t_end": 729.088,
+"speaker": "NARRATOR",
+"text": "Then Louis-Joseph's son. Then his son, Joseph. Then, in seventeen ninety-two, Joseph and his wife Judith had a baby boy. They named him Abraham. And Abraham is the man our whole story is named for.",
+"cue_id": "ep02-074"
+},
+{
+"kind": "scene",
+"t_start": 731.288,
+"t_end": null,
+"speaker": null,
+"text": "Scene 7 — Goodnight (13:30–15:00)",
+"cue_id": "ep02-075"
+},
+{
+"kind": "ambience",
+"t_start": 731.288,
+"t_end": null,
+"speaker": null,
+"text": "a quiet summer night, crickets, the river below, an owl",
+"key": "night",
+"cue_id": "ep02-076"
+},
+{
+"kind": "music",
+"t_start": 732.488,
+"t_end": 832.083,
+"speaker": null,
+"text": "lullaby",
+"key": "lullaby",
+"cue_id": "ep02-077"
+},
+{
+"kind": "line",
+"t_start": 736.228,
+"t_end": 751.988,
+"speaker": "NARRATOR",
+"text": "That's six generations, one after another, all on that same south shore, looking across the river at the rock of Quebec. Almost two hundred years. Children were born there, and grew up there, and had children of their own.",
+"cue_id": "ep02-078"
+},
+{
+"kind": "line",
+"t_start": 753.348,
+"t_end": 767.648,
+"speaker": "NARRATOR",
+"text": "And all that time, the long skinny farm ran down to the river. And all that time, somebody was out on the water at dawn, checking the eel traps, with the mist coming up off the river.",
+"cue_id": "ep02-079"
+},
+{
+"kind": "line",
+"t_start": 769.288,
+"t_end": 781.088,
+"speaker": "NARRATOR",
+"text": "Next time, we meet Abraham, all grown up, and a girl named Rose Angèle, and an uncle who goes all the way to the other side of the mountains. But that's for tomorrow.",
+"cue_id": "ep02-080"
+},
+{
+"kind": "line",
+"t_start": 782.628,
+"t_end": 799.428,
+"speaker": "NARRATOR",
+"text": "Tonight, imagine you're lying in the bottom of a birchbark canoe, wrapped in a blanket. Somebody else is paddling. Dip. And pull. Dip. And pull. The stars are coming out, one at a time, over the trees.",
+"cue_id": "ep02-081"
+},
+{
+"kind": "line",
+"t_start": 800.688,
+"t_end": 801.528,
+"speaker": "FRENCH",
+"text": "Bonne nuit.",
+"cue_id": "ep02-082"
+},
+{
+"kind": "line",
+"t_start": 803.003,
+"t_end": 807.863,
+"speaker": "NARRATOR",
+"text": "Goodnight, William. Goodnight, Alex. Goodnight, from the shore of Lambert Lake.",
+"cue_id": "ep02-083"
+}
+]

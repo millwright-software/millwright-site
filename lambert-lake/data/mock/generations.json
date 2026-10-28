@@ -1,0 +1,158 @@
+[
+ {
+  "gen": 1,
+  "name": "Eustache Lambert",
+  "born": "1618",
+  "died": "1673",
+  "spouse": "Marie Laurence",
+  "place": "Pointe-Lévy",
+  "life": "[mock: research pending] a donné of the Jesuits, then a farmer at Pointe-Lévy.",
+  "life_basis": "mock",
+  "events": [
+   {
+    "year": 1608,
+    "text": "Champlain founds Quebec",
+    "age": null,
+    "source": ""
+   },
+   {
+    "year": 1649,
+    "text": "the Huron country falls",
+    "age": 31,
+    "source": ""
+   },
+   {
+    "year": 1663,
+    "text": "New France becomes a royal colony",
+    "age": 45,
+    "source": ""
+   }
+  ],
+  "sources": []
+ },
+ {
+  "gen": 2,
+  "name": "Gabriel Lambert",
+  "born": "1657",
+  "died": "1719",
+  "spouse": "Françoise-Renée Roussel",
+  "place": "Pointe-Lévy",
+  "life": "[mock: research pending] ran Sainte-Marie from the age of twenty.",
+  "life_basis": "mock",
+  "events": [
+   {
+    "year": 1690,
+    "text": "Phips's fleet attacks Quebec",
+    "age": 33,
+    "source": ""
+   },
+   {
+    "year": 1713,
+    "text": "Treaty of Utrecht: Acadia and Newfoundland lost to Britain",
+    "age": 56,
+    "source": ""
+   }
+  ],
+  "sources": []
+ },
+ {
+  "gen": 3,
+  "name": "Louis-Joseph Lambert",
+  "born": "1695",
+  "died": "1760",
+  "spouse": "Geneviève Rouer de Villeray",
+  "place": "Pointe-Lévy",
+  "life": "[mock: research pending] Monsieur de Sainte-Marie, captain of the south-shore militia.",
+  "life_basis": "mock",
+  "events": [
+   {
+    "year": 1745,
+    "text": "Louisbourg falls the first time",
+    "age": 50,
+    "source": ""
+   },
+   {
+    "year": 1759,
+    "text": "Wolfe's guns on the Lévis heights; the siege of Quebec",
+    "age": 64,
+    "source": ""
+   }
+  ],
+  "sources": []
+ },
+ {
+  "gen": 4,
+  "name": "Louis-Joseph Lambert",
+  "born": "1725",
+  "died": "1817",
+  "spouse": "Marie-Thérèse Frontigny",
+  "place": "Pointe-Lévy",
+  "life": "[mock: research pending] lived from the French regime into the British.",
+  "life_basis": "mock",
+  "events": [
+   {
+    "year": 1759,
+    "text": "the siege of Quebec",
+    "age": 34,
+    "source": ""
+   },
+   {
+    "year": 1763,
+    "text": "Treaty of Paris: New France becomes British",
+    "age": 38,
+    "source": ""
+   },
+   {
+    "year": 1775,
+    "text": "the Americans besiege Quebec",
+    "age": 50,
+    "source": ""
+   }
+  ],
+  "sources": []
+ },
+ {
+  "gen": 5,
+  "name": "Joseph Lambert",
+  "born": "1749",
+  "died": "",
+  "spouse": "Judith Magnan",
+  "place": "Pointe-Lévy",
+  "life": "[mock: research pending] married Judith Magnan in 1777.",
+  "life_basis": "mock",
+  "events": [
+   {
+    "year": 1774,
+    "text": "the Quebec Act",
+    "age": 25,
+    "source": ""
+   },
+   {
+    "year": 1791,
+    "text": "Lower Canada is created",
+    "age": 42,
+    "source": ""
+   }
+  ],
+  "sources": []
+ },
+ {
+  "gen": 6,
+  "name": "Abraham Lambert",
+  "born": "1792",
+  "died": "1875",
+  "spouse": "Rose Angèle Demers",
+  "place": "Lauzon",
+  "life": "[mock: research pending] born at Lauzon, the sixth generation on that shore.",
+  "life_basis": "mock",
+  "events": [
+   {
+    "year": 1812,
+    "text": "war with the United States",
+    "age": 20,
+    "source": ""
+   }
+  ],
+  "sources": []
+ }
+]

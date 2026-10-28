@@ -1,0 +1,372 @@
+[
+ {
+  "gen": 7,
+  "name": "Louis Abraham Thomas Lambert",
+  "born": "1825, Lévis-Lauzon, Quebec (tree; no baptism seen)",
+  "died": "1900, Ramsey County, Minnesota (tree)",
+  "spouse": "\"Desange\" (tree; b. about 1832, Canada; maiden name not recorded, probably a misread first name)",
+  "place": "New Canada township, Ramsey County",
+  "places": [
+   {
+    "name": "Little Canada / New Canada township (Lake Gervais)",
+    "lat": 45.0278,
+    "lon": -93.0786
+   }
+  ],
+  "life": "A boy of about sixteen when the family left Lauzon in 1841, he grew up a farmer on the west shore of Lake Gervais. He is probably the \"Louis A. Lambert\" who bought 80 acres beside Abraham's lots in 1853 and the \"L. A. Lambert, farmer\" of New Canada in 1881, and so possibly the Louis for whom Lambert Lake was named.",
+  "life_basis": "sourced (census, land) / hypothesis (identity with Louis A. and the lake's Louis)",
+  "events": [
+   {
+    "year": "1841-45",
+    "text": "Travels with his parents from Lauzon via Red River to Lake Gervais",
+    "age": "c. 16-20",
+    "source": "notes/abraham-lambert.md"
+   },
+   {
+    "year": "1853",
+    "text": "A Louis A. Lambert takes 80 acres, E½SW¼ sec. 8, T29N R22W, beside Abraham's land",
+    "age": "c. 28",
+    "source": "notes/abraham-lambert.md (BLM GLO patent index)"
+   },
+   {
+    "year": "1858",
+    "text": "Minnesota statehood",
+    "age": "c. 33",
+    "source": "general reference date; not re-checked against a primary source in this pass"
+   },
+   {
+    "year": "1880",
+    "text": "Head of household in New Canada, Ramsey County; wife Desange, son David (8)",
+    "age": "c. 55",
+    "source": "1880 US Federal Census, New Canada, Ramsey, MN, roll 631, p. 451D, ED 023 (as cited in the GEDCOM)"
+   }
+  ],
+  "sources": [
+   "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged",
+   "notes/abraham-lambert.md",
+   "1880 US Federal Census, New Canada (as cited in the GEDCOM)"
+  ]
+ },
+ {
+  "gen": 8,
+  "name": "David J. Lambert",
+  "born": "Oct 1871, Ramsey County, Minnesota (tree; 1900 census style date)",
+  "died": "27 Apr 1928, Koochiching County; buried at Big Falls (tree)",
+  "spouse": "Alfonsina (Alphonsine) Paré, m. 1893 at Saint-Éphrem-de-Tring, Quebec (tree). Her birth is given two ways: 17 Feb 1867, Nicolet, Quebec, and Oct 1871, Wisconsin",
+  "place": "New Canada → Quebec (married 1893) → Knife Falls/Cloquet → Deerwood → Koochiching County",
+  "places": [
+   {
+    "name": "Little Canada / New Canada township (Lake Gervais)",
+    "lat": 45.0278,
+    "lon": -93.0786
+   },
+   {
+    "name": "Saint-Éphrem-de-Tring (Beauce), Quebec",
+    "lat": 46.059,
+    "lon": -70.95,
+    "approx": true
+   },
+   {
+    "name": "Cloquet (Knife Falls), Carlton County",
+    "lat": 46.7216,
+    "lon": -92.4591
+   },
+   {
+    "name": "Deerwood, Crow Wing County",
+    "lat": 46.4744,
+    "lon": -93.8986
+   },
+   {
+    "name": "Big Falls, Koochiching County",
+    "lat": 48.1916,
+    "lon": -93.8071
+   }
+  ],
+  "life": "Born in the French-Canadian farm settlement at Lake Gervais, he went back to Quebec's Beauce to marry and then north to the sawmill town of Knife Falls (Cloquet). He may have followed work where it was: in 1910 he boarded at Deerwood, on the new Cuyuna iron range, while Alfonsina kept house in Cloquet, and he ended his life in the logging country of Koochiching County.",
+  "life_basis": "sourced (residences) / imagined (motives)",
+  "events": [
+   {
+    "year": "1875",
+    "text": "Listed at New Canada in the 1 May 1875 Minnesota state census",
+    "age": 3,
+    "source": "Minnesota Territorial and State Censuses, 1849-1905 (GEDCOM)"
+   },
+   {
+    "year": "1880",
+    "text": "Son in his father's household, New Canada",
+    "age": 8,
+    "source": "1880 US Federal Census, New Canada, Ramsey, MN (as cited in the GEDCOM)"
+   },
+   {
+    "year": "1890",
+    "text": "An \"Arrival\" event in the tree, perhaps a return from Quebec; unexplained",
+    "age": 18,
+    "source": "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged"
+   },
+   {
+    "year": "1893",
+    "text": "Marries Alfonsina Paré at Saint-Éphrem-de-Tring, Quebec",
+    "age": 21,
+    "source": "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged"
+   },
+   {
+    "year": "1900",
+    "text": "Head of household at Knife Falls (Cloquet), Carlton County, with Alfonsina and son Joseph (6)",
+    "age": 28,
+    "source": "1900 US Federal Census, Knife Falls, Carlton, MN, p. 24, ED 0042 (as cited in the GEDCOM)"
+   },
+   {
+    "year": "1910",
+    "text": "Boarder at Deerwood, Crow Wing County; Alfonsina listed as head in Cloquet Ward 2",
+    "age": 38,
+    "source": "1910 US Federal Census, Deerwood, Crow Wing, MN, roll T624_694, p. 1B, ED 0040 (as cited in the GEDCOM); 1910 US Federal Census, Cloquet Ward 2, roll T624_692, p. 8B, ED 0038 (as cited in the GEDCOM)"
+   },
+   {
+    "year": "1910",
+    "text": "International Falls' paper mill makes its first newsprint, 10 June; Koochiching timber is driven down the Big Fork and Rainy rivers to the Falls mills",
+    "age": 38,
+    "source": "\"IFalls paper mill turns 100\", BusinessNorth (first newsprint 10 Jun 1910), https://www.businessnorth.com/businessnorth_exclusives/ifalls-paper-mill-turns-100/article_a443be4e-ddf0-5785-a028-8e33acf17fbe.html; NPS, Voyageurs NP, \"Logging\" (International Logging Co. drove Koochiching timber to International Falls mills), https://www.nps.gov/voya/learn/historyculture/logging.htm"
+   },
+   {
+    "year": "1928",
+    "text": "Dies 27 April in Koochiching County; buried at Big Falls on the Big Fork River",
+    "age": 56,
+    "source": "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged (Find a Grave index)"
+   }
+  ],
+  "sources": [
+   "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged",
+   "1880 US Federal Census, New Canada (as cited in the GEDCOM)",
+   "1900 US Federal Census, Knife Falls (as cited in the GEDCOM)",
+   "1910 US Federal Census, Deerwood and Cloquet (as cited in the GEDCOM)",
+   "\"IFalls paper mill turns 100\", BusinessNorth (first newsprint 10 Jun 1910), https://www.businessnorth.com/businessnorth_exclusives/ifalls-paper-mill-turns-100/article_a443be4e-ddf0-5785-a028-8e33acf17fbe.html",
+   "NPS, Voyageurs NP, \"Logging\" (International Logging Co. drove Koochiching timber to International Falls mills), https://www.nps.gov/voya/learn/historyculture/logging.htm"
+  ],
+  "open": "Where David was on 12 Oct 1918 is not known. Why Koochiching (a homestead, a logging camp, a son's or daughter's home) is not in the GEDCOM; Koochiching County homestead patents (BLM GLO) and his death certificate are the next checks."
+ },
+ {
+  "gen": 9,
+  "name": "Joseph Eugene Lambert",
+  "born": "27 May 1894, Cloquet (tree; a second record says Feb 1894)",
+  "died": "28 Jan 1968, Cloquet; buried Cloquet",
+  "spouse": "Matilda Bernadette Bodway (b. 4 Nov 1894 Neenah, Wisconsin; 1900 Appleton, 1910 Phillips, Wisconsin; d. 2 Nov 1977 St. Paul; buried Cloquet). Marriage date not in the tree",
+  "place": "Cloquet, all his life on record (1900-1968)",
+  "places": [
+   {
+    "name": "Cloquet (Knife Falls), Carlton County",
+    "lat": 46.7216,
+    "lon": -92.4591
+   },
+   {
+    "name": "Northeastern Hotel, 115 St. Louis Ave, Dunlap Island, Cloquet",
+    "lat": 46.7222,
+    "lon": -92.4612,
+    "approx": true
+   },
+   {
+    "name": "Neenah, Wisconsin",
+    "lat": 44.1858,
+    "lon": -88.4626
+   }
+  ],
+  "life": "A Cloquet man from boyhood to death, in a town that lived on its sawmills and the Northwest Paper Company. He was 24 and registered in Carlton County for the WWI draft when the fire of 12 October 1918 burned the city almost flat; he was in Cloquet in 1910 and again, married, in January 1920, so the family tradition that they lived through the fire there fits the record.",
+  "life_basis": "sourced (residences) / family tradition (presence on the day of the fire)",
+  "events": [
+   {
+    "year": "1900",
+    "text": "Son, age 6, at Knife Falls (Cloquet)",
+    "age": 6,
+    "source": "1900 US Federal Census, Knife Falls, Carlton, MN (as cited in the GEDCOM)"
+   },
+   {
+    "year": "1905",
+    "text": "Minnesota state census, Cloquet Ward 2, 17 June",
+    "age": 11,
+    "source": "Minnesota Territorial and State Censuses (GEDCOM)"
+   },
+   {
+    "year": "1910",
+    "text": "With his mother in Cloquet Ward 2",
+    "age": 15,
+    "source": "1910 US Federal Census, Cloquet Ward 2, Carlton, MN (as cited in the GEDCOM)"
+   },
+   {
+    "year": "1917-18",
+    "text": "Registers for the WWI draft in Carlton County (roll 1675385); the card's address and employer have not been read",
+    "age": "23-24",
+    "source": "U.S. WWI Draft Registration Cards, 1917-1918, Minnesota, Carlton County, roll 1675385 (cited in the GEDCOM)"
+   },
+   {
+    "year": "1918",
+    "text": "12 October: fires set by locomotive sparks sweep Carlton and St. Louis counties; over 450 die across the region but only five in Cloquet, as the mayor's four evacuation trains carry more than 7,000 people out; the city burns almost flat. Left standing: three of five sawmills, one school, scattered houses, and the buildings along St. Louis Avenue on Dunlap Island",
+    "age": 24,
+    "source": "P. Nelson, \"Cloquet, Duluth, and Moose Lake Fires, 1918\", MNopedia (MNHS), https://www.mnopedia.org/event/cloquet-duluth-and-moose-lake-fires-1918; Northeastern Hotel, National Register of Historic Places nomination (S. Karppinen, Aug 1984; NRHP 84000218), https://npgallery.nps.gov/NRHP/GetAsset/NRHP/84000218_text"
+   },
+   {
+    "year": "1918",
+    "text": "Family tradition: the Lamberts were in Cloquet for the fire. Consistent with the 1910 and 1920 censuses and the Carlton County draft card; no record placing them there on 12 Oct 1918 has been read",
+    "age": 24,
+    "source": "Family account (Eric, Oct 2026)",
+    "basis": "family tradition"
+   },
+   {
+    "year": "1918-19",
+    "text": "The Northeastern Hotel on Dunlap Island, which \"providentially escaped\" the fire, serves as Red Cross headquarters, a hospital for fire and influenza victims and the temporary post office; rebuilding is well under way by August 1919",
+    "age": "24-25",
+    "source": "Northeastern Hotel, National Register of Historic Places nomination (S. Karppinen, Aug 1984; NRHP 84000218), https://npgallery.nps.gov/NRHP/GetAsset/NRHP/84000218_text"
+   },
+   {
+    "year": "1920",
+    "text": "Head of household, married, Cloquet Ward 3, with Matilda and baby Marjorie",
+    "age": 25,
+    "source": "1920 US Federal Census, Cloquet Ward 3, Carlton, MN, roll T625_824, p. 1A, ED 10 (as cited in the GEDCOM)"
+   },
+   {
+    "year": "1930-40",
+    "text": "Still in Cloquet (1930, 1935, 1940 censuses)",
+    "age": "35-45",
+    "source": "1930 US Federal Census, Cloquet (as cited in the GEDCOM); 1940 US Federal Census, Cloquet (as cited in the GEDCOM)"
+   },
+   {
+    "year": "1942",
+    "text": "WWII draft registration, Cloquet",
+    "age": 47,
+    "source": "U.S. WWII Draft Registration Cards, 1942 (GEDCOM)"
+   }
+  ],
+  "sources": [
+   "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged",
+   "1900 US Federal Census, Knife Falls (as cited in the GEDCOM)",
+   "1910 US Federal Census, Cloquet Ward 2 (as cited in the GEDCOM)",
+   "1920 US Federal Census, Cloquet Ward 3 (as cited in the GEDCOM)",
+   "P. Nelson, \"Cloquet, Duluth, and Moose Lake Fires, 1918\", MNopedia (MNHS), https://www.mnopedia.org/event/cloquet-duluth-and-moose-lake-fires-1918",
+   "Northeastern Hotel, National Register of Historic Places nomination (S. Karppinen, Aug 1984; NRHP 84000218), https://npgallery.nps.gov/NRHP/GetAsset/NRHP/84000218_text",
+   "\"Cloquet-Northern Office Building\", Wikipedia, https://en.wikipedia.org/wiki/Cloquet-Northern_Office_Building"
+  ],
+  "open": "Read the WWI draft card (address and employer in 1917-18). The Minnesota Forest Fires Relief Commission records at MNHS (Governor's forest fire relief files, gr01043; Cloquet Fire Witness Statements P2809) and the Carlton County Historical Society's 1918 fire claims ledger (Minnesota Digital Library carl:157) are not name-indexed online; no Lambert claim was found in this pass."
+ },
+ {
+  "gen": 10,
+  "name": "Marjorie Jane (Lambert) Delyea",
+  "born": "17 Oct 1919, Cloquet (tree; one record says 18 Oct)",
+  "died": "24 Aug 1998, Forest Lake, Washington County",
+  "spouse": "Stephen William Delyea (b. 20 Sep 1919 Cloquet; in Cloquet 1920-40; later Kelso/Longview, Washington; d. 13 Apr 2005 Longview). Marriage date not in the tree",
+  "place": "Cloquet (1919-1940) → Saint Paul (1986) → Forest Lake",
+  "places": [
+   {
+    "name": "Northeastern Hotel, 115 St. Louis Ave, Dunlap Island, Cloquet",
+    "lat": 46.7222,
+    "lon": -92.4612,
+    "approx": true
+   },
+   {
+    "name": "Cloquet (Knife Falls), Carlton County",
+    "lat": 46.7216,
+    "lon": -92.4591
+   },
+   {
+    "name": "Saint Paul / Ramsey County",
+    "lat": 44.9537,
+    "lon": -93.09
+   },
+   {
+    "name": "Forest Lake, Washington County",
+    "lat": 45.2788,
+    "lon": -92.9852
+   }
+  ],
+  "life": "Born a year and five days after the fire, into a town still rebuilding. Family tradition says she was born in a hotel bar on an island in Cloquet, \"because it was the only thing that survived the fire.\" One building matches: the Northeastern Hotel, a two-storey brick hotel with a 30-foot mahogany bar on Dunlap Island, which survived and served as a hospital after the fire. It was not literally the only survivor, and no record has been read that places her birth there.",
+  "life_basis": "family tradition (birthplace) / sourced (dates, residences, the hotel's history)",
+  "events": [
+   {
+    "year": "1919",
+    "text": "Born 17 October, Cloquet. Family tradition: in the island hotel bar, very probably the Northeastern Hotel, 115 St. Louis Avenue, Dunlap Island",
+    "age": 0,
+    "source": "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged; family account (Eric, Oct 2026); Northeastern Hotel, National Register of Historic Places nomination (S. Karppinen, Aug 1984; NRHP 84000218), https://npgallery.nps.gov/NRHP/GetAsset/NRHP/84000218_text",
+    "basis": "family tradition"
+   },
+   {
+    "year": "1920",
+    "text": "Infant daughter in her parents' household, Cloquet Ward 3 (January census)",
+    "age": 0,
+    "source": "1920 US Federal Census, Cloquet Ward 3 (as cited in the GEDCOM)"
+   },
+   {
+    "year": "1930-40",
+    "text": "Daughter at home in Cloquet; in 1940 still single",
+    "age": "10-20",
+    "source": "1930 US Federal Census, Cloquet (as cited in the GEDCOM); 1940 US Federal Census, Cloquet (as cited in the GEDCOM)"
+   },
+   {
+    "year": "1950",
+    "text": "Daughter Mary Elizabeth born, Ramsey County",
+    "age": 31,
+    "source": "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged"
+   },
+   {
+    "year": "1998",
+    "text": "Dies 24 August at Forest Lake",
+    "age": 78,
+    "source": "Minnesota Death Index (GEDCOM)"
+   }
+  ],
+  "sources": [
+   "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged",
+   "1920 US Federal Census, Cloquet Ward 3 (as cited in the GEDCOM)",
+   "Northeastern Hotel, National Register of Historic Places nomination (S. Karppinen, Aug 1984; NRHP 84000218), https://npgallery.nps.gov/NRHP/GetAsset/NRHP/84000218_text",
+   "\"We the People: Remembering the Moose Lake-Cloquet Fire of 1918\", Northern News Now, 15 Oct 2025 (Carlton County Historical Society quoted), https://www.northernnewsnow.com/2025/10/15/we-people-remembering-moose-lake-cloquet-fire-1918/",
+   "\"Building that survived fires of 1918 is no more\", Pine Knot News, 20 Aug 2021, https://www.pineknotnews.com/story/2021/08/20/news/building-that-survived-fires-of-1918-is-no-more/5729.html"
+  ],
+  "open": "Her Minnesota birth record (Minnesota Birth Index 1900-1934 is cited in the tree) may give the place of birth or the attending physician; that would test the tradition."
+ },
+ {
+  "gen": 11,
+  "name": "Mary Elizabeth (Delyea) Richey",
+  "born": "29 Nov 1950, Ramsey County (tree)",
+  "died": "",
+  "spouse": "Bruce G. Richey, m. 6 Sep 1975, Dakota County (tree)",
+  "place": "Ramsey County",
+  "places": [
+   {
+    "name": "Saint Paul / Ramsey County",
+    "lat": 44.9537,
+    "lon": -93.09
+   }
+  ],
+  "life": "",
+  "life_basis": "sourced",
+  "events": [
+   {
+    "year": "1975",
+    "text": "Marries Bruce G. Richey",
+    "age": 24,
+    "source": "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged"
+   }
+  ],
+  "sources": [
+   "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged"
+  ]
+ },
+ {
+  "gen": 12,
+  "name": "Eric Joseph Richey",
+  "born": "28 Dec 1981, Ramsey County (tree)",
+  "died": "",
+  "spouse": "",
+  "place": "Vadnais Heights, about 0.84 miles from Lambert Island",
+  "places": [
+   {
+    "name": "3921 Woodview Ct, Vadnais Heights (about 0.84 mi from Lambert Island)",
+    "lat": 45.0595622,
+    "lon": -93.0891043
+   }
+  ],
+  "life": "Lives about 0.84 miles from the island his great-great-great-great-grandfather Abraham bought from the government on 25 March 1849.",
+  "life_basis": "sourced",
+  "events": [],
+  "sources": [
+   "Eric's Ancestry tree GEDCOM, sources/records/ancestry-tree/Richey Family Tree.ged",
+   "notes/abraham-lambert.md"
+  ]
+ }
+]

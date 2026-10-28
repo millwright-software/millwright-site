@@ -1,0 +1,755 @@
+[
+{
+"kind": "scene",
+"t_start": 0.5,
+"t_end": null,
+"speaker": null,
+"text": "Scene 1 — Open and last time (0:00–1:30)",
+"cue_id": "ep06-000"
+},
+{
+"kind": "music",
+"t_start": 0.5,
+"t_end": 13.94,
+"speaker": null,
+"text": "theme",
+"key": "theme",
+"cue_id": "ep06-001"
+},
+{
+"kind": "line",
+"t_start": 6.22,
+"t_end": 11.22,
+"speaker": "NARRATOR",
+"text": "This is \"Lambert Lake.\" Episode six: \"The Lake with an Island.\"",
+"cue_id": "ep06-002"
+},
+{
+"kind": "ambience",
+"t_start": 13.44,
+"t_end": null,
+"speaker": null,
+"text": "a cart train on a woods trail, wheels squealing, birds",
+"key": "cart",
+"cue_id": "ep06-003"
+},
+{
+"kind": "line",
+"t_start": 14.42,
+"t_end": 38.1,
+"speaker": "NARRATOR",
+"text": "Last time, the Lamberts rode the squeaky Red River carts north, to the Métis country at Red River. They gave up their dream of Oregon. Rose Angélique married Alexander Ducharme. And in the summer of eighteen forty-five, the whole family squealed back south again, all the way down the long trail.",
+"cue_id": "ep06-004"
+},
+{
+"kind": "line",
+"t_start": 39.56,
+"t_end": 43.5,
+"speaker": "NARRATOR",
+"text": "Tonight, the carts stop squealing. They've arrived.",
+"cue_id": "ep06-005"
+},
+{
+"kind": "scene",
+"t_start": 45.66,
+"t_end": null,
+"speaker": null,
+"text": "Scene 2 — Little Canada (1:30–3:00)",
+"cue_id": "ep06-006"
+},
+{
+"kind": "ambience",
+"t_start": 45.66,
+"t_end": null,
+"speaker": null,
+"text": "birdsong, a lake breeze, a farmyard",
+"key": "farm",
+"cue_id": "ep06-007"
+},
+{
+"kind": "sfx",
+"t_start": 47.06,
+"t_end": 54.26,
+"speaker": null,
+"text": "chop: an axe on a log, steady",
+"key": "chop",
+"cue_id": "ep06-008"
+},
+{
+"kind": "line",
+"t_start": 52.24,
+"t_end": 73.64,
+"speaker": "NARRATOR",
+"text": "Seven miles north of St. Paul there's a little lake. It's called Lake Gervais, after Benjamin Gervais, the first settler there. Alexander Ducharme was the second. And the Lamberts came with him. More French-speaking families came after them, and pretty soon everybody called the place Little Canada.",
+"cue_id": "ep06-009"
+},
+{
+"kind": "line",
+"t_start": 74.96,
+"t_end": 92.52,
+"speaker": "NARRATOR",
+"text": "Abraham took land on the south shore of the lake. He was fifty-three years old, and he was starting all over again. A new house. New fields. A new church to build. And the same strong arms, chopping le bois, just like back on the St. Lawrence.",
+"cue_id": "ep06-010"
+},
+{
+"kind": "line",
+"t_start": 93.74,
+"t_end": 96.48,
+"speaker": "ROSE ANGÈLE",
+"text": "Abraham! Are you going to chop down the whole of Minnesota?",
+"cue_id": "ep06-011"
+},
+{
+"kind": "line",
+"t_start": 97.92,
+"t_end": 100.54,
+"speaker": "ABRAHAM",
+"text": "Only the parts that are in the way, ma chère.",
+"cue_id": "ep06-012"
+},
+{
+"kind": "scene",
+"t_start": 102.86,
+"t_end": null,
+"speaker": null,
+"text": "Scene 3 — The ring lake, imagined (3:00–5:30)",
+"cue_id": "ep06-013"
+},
+{
+"kind": "ambience",
+"t_start": 102.86,
+"t_end": null,
+"speaker": null,
+"text": "autumn woods, wind high in the trees, a woodpecker",
+"key": "woods",
+"cue_id": "ep06-014"
+},
+{
+"kind": "sfx",
+"t_start": 104.26,
+"t_end": 109.9,
+"speaker": null,
+"text": "leaves: footsteps crunching through dry fallen leaves",
+"key": "leaves",
+"cue_id": "ep06-015"
+},
+{
+"kind": "line",
+"t_start": 109.794,
+"t_end": 127.694,
+"speaker": "NARRATOR",
+"text": "Now we come to a part of the story nobody wrote down. So we'll tell it the way it might have been. Picture an autumn day, a few years later. Abraham, walking north through the woods. The maple leaves are red and gold, and they crunch under his boots.",
+"cue_id": "ep06-016"
+},
+{
+"kind": "sfx",
+"t_start": 128.094,
+"t_end": 130.294,
+"speaker": null,
+"text": "leaves: footsteps stop",
+"key": "leaves",
+"cue_id": "ep06-017"
+},
+{
+"kind": "line",
+"t_start": 130.624,
+"t_end": 132.564,
+"speaker": "ABRAHAM",
+"text": "Mon Dieu. Look at that.",
+"cue_id": "ep06-018"
+},
+{
+"kind": "line",
+"t_start": 133.824,
+"t_end": 148.364,
+"speaker": "NARRATOR",
+"text": "Through the trees, a lake. But not like any lake he'd ever seen. It was shaped like a ring. Water all the way around, in a circle. And right in the middle, like the jewel on a ring, an island, all covered with oak trees.",
+"cue_id": "ep06-019"
+},
+{
+"kind": "line",
+"t_start": 149.844,
+"t_end": 152.544,
+"speaker": "NARRATOR",
+"text": "An island, in French, is l'île.",
+"cue_id": "ep06-020"
+},
+{
+"kind": "line",
+"t_start": 153.964,
+"t_end": 154.644,
+"speaker": "FRENCH",
+"text": "L'île.",
+"cue_id": "ep06-021"
+},
+{
+"kind": "line",
+"t_start": 156.124,
+"t_end": 163.784,
+"speaker": "ABRAHAM",
+"text": "An island. A whole island, just sitting there, waiting. Rose will say I'm a fool. Rose will be right.",
+"cue_id": "ep06-022"
+},
+{
+"kind": "line",
+"t_start": 164.944,
+"t_end": 189.404,
+"speaker": "NARRATOR",
+"text": "Do you know how that island got there? Long, long ago, before there were any people at all, giant sheets of ice covered Minnesota. When the ice melted, it left behind hills of dirt and rocks. And a big chunk of ice, stuck in the ground, melted into a lake. The island was one of those hills the ice left behind, poking up out of the water.",
+"cue_id": "ep06-023"
+},
+{
+"kind": "sfx",
+"t_start": 189.944,
+"t_end": 195.944,
+"speaker": null,
+"text": "oars: oars in a small boat, water lapping",
+"key": "oars",
+"cue_id": "ep06-024"
+},
+{
+"kind": "line",
+"t_start": 193.704,
+"t_end": 199.424,
+"speaker": "NARRATOR",
+"text": "Maybe he brought Rose Angèle back to see it, rowing across the ring of water in a little boat.",
+"cue_id": "ep06-025"
+},
+{
+"kind": "line",
+"t_start": 200.764,
+"t_end": 205.404,
+"speaker": "ROSE ANGÈLE",
+"text": "It's beautiful, Abraham. I'll give you that. But what on earth would we do with an island?",
+"cue_id": "ep06-026"
+},
+{
+"kind": "line",
+"t_start": 206.444,
+"t_end": 215.804,
+"speaker": "ABRAHAM",
+"text": "Cut timber. Make hay. Let the grandchildren run wild on it. And someday, when somebody asks where the Lamberts are from, they can point to a place that's ours.",
+"cue_id": "ep06-027"
+},
+{
+"kind": "line",
+"t_start": 216.904,
+"t_end": 222.224,
+"speaker": "ROSE ANGÈLE",
+"text": "You crossed half the continent looking for Oregon. And you found an island seven miles from St. Paul.",
+"cue_id": "ep06-028"
+},
+{
+"kind": "line",
+"t_start": 223.564,
+"t_end": 226.464,
+"speaker": "ABRAHAM",
+"text": "The long way, Rose. God likes the long way.",
+"cue_id": "ep06-029"
+},
+{
+"kind": "scene",
+"t_start": 228.604,
+"t_end": null,
+"speaker": null,
+"text": "Scene 4 — The land patent (5:30–7:00)",
+"cue_id": "ep06-030"
+},
+{
+"kind": "ambience",
+"t_start": 228.604,
+"t_end": null,
+"speaker": null,
+"text": "a quiet room, a clock ticking",
+"key": "office",
+"cue_id": "ep06-031"
+},
+{
+"kind": "sfx",
+"t_start": 230.004,
+"t_end": 236.004,
+"speaker": null,
+"text": "quill: a quill pen scratching on paper",
+"key": "quill",
+"cue_id": "ep06-032"
+},
+{
+"kind": "line",
+"t_start": 233.384,
+"t_end": 259.444,
+"speaker": "NARRATOR",
+"text": "Now we're back to things that really happened. Here's tonight's first lesson. In those days, most of the land in Minnesota belonged to the United States government. If you wanted to own a piece of it, you paid for it, and the government gave you a special paper called a land patent. A land patent said: this land is yours. And your children's. Forever.",
+"cue_id": "ep06-033"
+},
+{
+"kind": "line",
+"t_start": 261.324,
+"t_end": 288.084,
+"speaker": "NARRATOR",
+"text": "On the twenty-fifth of March, eighteen forty-nine, a clerk dipped his quill pen in ink and wrote out a land patent, in the name of the President, Zachary Taylor. It said Abraham had paid in full, in cash, for the island in the middle of the ring lake. His, the paper said, \"and his heirs and assigns forever.\" Heirs means his children, and their children. That means you.",
+"cue_id": "ep06-034"
+},
+{
+"kind": "line",
+"t_start": 289.684,
+"t_end": 299.584,
+"speaker": "NARRATOR",
+"text": "But the clerk made a mistake. He spelled the name wrong. Not Lambert. Lombert. L, O, M, B, E, R, T. Lombert!",
+"cue_id": "ep06-035"
+},
+{
+"kind": "sfx",
+"t_start": 300.084,
+"t_end": 304.284,
+"speaker": null,
+"text": "laugh: two people laughing together",
+"key": "laugh",
+"cue_id": "ep06-036"
+},
+{
+"kind": "line",
+"t_start": 302.424,
+"t_end": 317.224,
+"speaker": "NARRATOR",
+"text": "It didn't matter. Abraham bought that island four years before anybody else bought a single acre around that lake. And pretty soon, people had a name for the water around it. Lambert's Lake.",
+"cue_id": "ep06-037"
+},
+{
+"kind": "scene",
+"t_start": 319.744,
+"t_end": null,
+"speaker": null,
+"text": "Scene 5 — A pillar of Little Canada (7:00–8:30)",
+"cue_id": "ep06-038"
+},
+{
+"kind": "ambience",
+"t_start": 319.744,
+"t_end": null,
+"speaker": null,
+"text": "snow wind, sleigh bells, horses",
+"key": "winterwind",
+"cue_id": "ep06-039"
+},
+{
+"kind": "sfx",
+"t_start": 321.144,
+"t_end": 330.144,
+"speaker": null,
+"text": "horses: a team pulling a heavy sleigh over snow",
+"key": "horses",
+"cue_id": "ep06-040"
+},
+{
+"kind": "line",
+"t_start": 324.904,
+"t_end": 342.164,
+"speaker": "NARRATOR",
+"text": "Abraham became one of the people Little Canada counted on. He helped run the elections. He helped oversee the building of the road to White Bear Lake. He ran the post office, the first post office in Minnesota outside of St. Paul.",
+"cue_id": "ep06-041"
+},
+{
+"kind": "line",
+"t_start": 343.764,
+"t_end": 369.984,
+"speaker": "NARRATOR",
+"text": "And in eighteen fifty-one, when the families decided to build a church, Abraham gave twenty acres of his land for its cemetery. The logs for the new log church came mostly from his woods, big logs pulled on sleighs over the snow. Remember the cross, back in Quebec, on Abraham's land, that got moved away? This time, the church stayed.",
+"cue_id": "ep06-042"
+},
+{
+"kind": "scene",
+"t_start": 372.344,
+"t_end": null,
+"speaker": null,
+"text": "Scene 6 — The folding chair (8:30–10:30)",
+"cue_id": "ep06-043"
+},
+{
+"kind": "ambience",
+"t_start": 372.344,
+"t_end": null,
+"speaker": null,
+"text": "a small log church, people settling, a cough, a stove",
+"key": "church",
+"cue_id": "ep06-044"
+},
+{
+"kind": "sfx",
+"t_start": 373.744,
+"t_end": 376.844,
+"speaker": null,
+"text": "chair: a wooden folding chair unfolded and set down with a clack",
+"key": "chair",
+"cue_id": "ep06-045"
+},
+{
+"kind": "line",
+"t_start": 376.064,
+"t_end": 408.664,
+"speaker": "NARRATOR",
+"text": "Now, when the new church opened, the parish started charging money for the benches, called pews. If you wanted your family to have a seat, you paid every year. Abraham did not like that one bit. But he didn't want to miss church, either. So, the story goes, he built himself a folding chair. And every Sunday, he carried it to church, and set it up, and sat in it. And after Mass, he folded it up, and carried it home again.",
+"cue_id": "ep06-046"
+},
+{
+"kind": "line",
+"t_start": 409.864,
+"t_end": 413.724,
+"speaker": "NARRATOR",
+"text": "A chair, in French, is la chaise.",
+"cue_id": "ep06-047"
+},
+{
+"kind": "line",
+"t_start": 414.804,
+"t_end": 415.924,
+"speaker": "FRENCH",
+"text": "La chaise.",
+"cue_id": "ep06-048"
+},
+{
+"kind": "line",
+"t_start": 417.274,
+"t_end": 419.634,
+"speaker": "ROSE ANGÈLE",
+"text": "Abraham. Everyone is looking at you.",
+"cue_id": "ep06-049"
+},
+{
+"kind": "line",
+"t_start": 420.694,
+"t_end": 423.774,
+"speaker": "ABRAHAM",
+"text": "Let them look. It's a very good chair.",
+"cue_id": "ep06-050"
+},
+{
+"kind": "sfx",
+"t_start": 424.314,
+"t_end": 439.844,
+"speaker": null,
+"text": "hymn: the congregation finishes a hymn",
+"key": "hymn",
+"cue_id": "ep06-051"
+},
+{
+"kind": "line",
+"t_start": 439.607,
+"t_end": 463.567,
+"speaker": "PRIEST",
+"text": "Today is the feast of our patron, Saint John. And Saint John tells us, \"Little children, let us love not in word, but in deed.\" In deed. That means in what we do. This church is a deed. These logs came from your woods. This ground came from your hands. Some of you came a very long way to build it. By way of St. Louis, and Red River, and, I'm told, very nearly Oregon.",
+"cue_id": "ep06-052"
+},
+{
+"kind": "sfx",
+"t_start": 463.707,
+"t_end": 468.907,
+"speaker": null,
+"text": "laugh-crowd: a ripple of quiet laughter in the pews",
+"key": "laugh-crowd",
+"cue_id": "ep06-053"
+},
+{
+"kind": "line",
+"t_start": 465.927,
+"t_end": 468.387,
+"speaker": "PRIEST",
+"text": "And some of you, I notice, brought your own chair.",
+"cue_id": "ep06-054"
+},
+{
+"kind": "sfx",
+"t_start": 468.487,
+"t_end": 473.687,
+"speaker": null,
+"text": "laugh-crowd: louder laughter",
+"key": "laugh-crowd",
+"cue_id": "ep06-055"
+},
+{
+"kind": "line",
+"t_start": 470.827,
+"t_end": 475.047,
+"speaker": "PRIEST",
+"text": "Love one another, in what you do. That's the whole of it. Go in peace.",
+"cue_id": "ep06-056"
+},
+{
+"kind": "sfx",
+"t_start": 475.307,
+"t_end": 507.864,
+"speaker": null,
+"text": "hymn: the congregation sings, an organ under them",
+"key": "hymn",
+"cue_id": "ep06-057"
+},
+{
+"kind": "scene",
+"t_start": 495.213,
+"t_end": null,
+"speaker": null,
+"text": "Scene 7 — The long years, and the lake (10:30–12:00)",
+"cue_id": "ep06-058"
+},
+{
+"kind": "ambience",
+"t_start": 495.213,
+"t_end": null,
+"speaker": null,
+"text": "a small creek running, wind in the reeds",
+"key": "creek",
+"cue_id": "ep06-059"
+},
+{
+"kind": "line",
+"t_start": 497.113,
+"t_end": 514.653,
+"speaker": "NARRATOR",
+"text": "The children grew up, and married, and had children of their own. Abraham lived a long time. He died in eighteen seventy-five, when he was eighty-three years old. He's buried at St. John's, in the cemetery on the land he gave.",
+"cue_id": "ep06-060"
+},
+{
+"kind": "line",
+"t_start": 516.013,
+"t_end": 551.113,
+"speaker": "NARRATOR",
+"text": "And the lake? Here's tonight's second lesson. Why would anybody drain a lake? Well, the city of St. Paul was growing, and people needed water to drink. So in eighteen seventy, a water company dug a canal from Lambert Lake down to another lake, called Vadnais, to send the water to the city. And later, in the winter of eighteen ninety-three, a farmer who owned the land around it dug a long ditch, to drain the rest of the water out, so the wet lake bottom could become part of his farm.",
+"cue_id": "ep06-061"
+},
+{
+"kind": "line",
+"t_start": 552.933,
+"t_end": 571.353,
+"speaker": "NARRATOR",
+"text": "So, slowly, the ring of water turned into a meadow, and a marsh, full of cattails and redwing blackbirds. Today, the island is just a hill in the middle of the marsh. But a little stream still runs out of it. In French, a little stream is le ruisseau.",
+"cue_id": "ep06-062"
+},
+{
+"kind": "line",
+"t_start": 572.773,
+"t_end": 573.713,
+"speaker": "FRENCH",
+"text": "Le ruisseau.",
+"cue_id": "ep06-063"
+},
+{
+"kind": "line",
+"t_start": 575.353,
+"t_end": 582.273,
+"speaker": "NARRATOR",
+"text": "And that stream has a name. Lambert Creek. And the marsh still has its name. Lambert Lake.",
+"cue_id": "ep06-064"
+},
+{
+"kind": "scene",
+"t_start": 584.613,
+"t_end": null,
+"speaker": null,
+"text": "Scene 8 — Down the generations (12:00–13:45)",
+"cue_id": "ep06-065"
+},
+{
+"kind": "music",
+"t_start": 584.613,
+"t_end": 756.355,
+"speaker": null,
+"text": "fontaine-bed",
+"key": "fontaine-bed",
+"cue_id": "ep06-066"
+},
+{
+"kind": "line",
+"t_start": 587.813,
+"t_end": 595.213,
+"speaker": "NARRATOR",
+"text": "Now we're going to fly again, the way we did with Eustache. Down the generations, all the way to you.",
+"cue_id": "ep06-067"
+},
+{
+"kind": "line",
+"t_start": 596.813,
+"t_end": 610.573,
+"speaker": "NARRATOR",
+"text": "Abraham's son Louis farmed by Lake Gervais. Louis's son David went north, to a sawmill town called Cloquet, where they cut big logs into boards. David's son Joseph grew up in Cloquet.",
+"cue_id": "ep06-068"
+},
+{
+"kind": "line",
+"t_start": 612.293,
+"t_end": 639.313,
+"speaker": "NARRATOR",
+"text": "In October of nineteen eighteen, a great forest fire swept toward Cloquet. It was very scary. But the town's mayor and the railroad men filled up trains, and drove them away from the fire, and carried more than seven thousand people to safety. The fire burned most of the town. But almost everyone got away. And the family remembers that they lived through it.",
+"cue_id": "ep06-069"
+},
+{
+"kind": "line",
+"t_start": 640.773,
+"t_end": 662.933,
+"speaker": "NARRATOR",
+"text": "A year and five days later, Joseph's baby daughter Marjorie was born. And the family tells a story about that, the kind of story families love to tell. They say she was born in a hotel bar, on an island in Cloquet. And there was a hotel on an island in Cloquet, the old Northeastern Hotel, that the fire left standing.",
+"cue_id": "ep06-070"
+},
+{
+"kind": "line",
+"t_start": 664.613,
+"t_end": 675.053,
+"speaker": "NARRATOR",
+"text": "Marjorie had a daughter named Mary, born back near St. Paul. Mary had a son. And her son is Eric. Your dad. And Eric's sons are William, and Alex.",
+"cue_id": "ep06-071"
+},
+{
+"kind": "scene",
+"t_start": 677.313,
+"t_end": null,
+"speaker": null,
+"text": "Scene 9 — Abraham's Park (13:45–15:00)",
+"cue_id": "ep06-072"
+},
+{
+"kind": "ambience",
+"t_start": 677.313,
+"t_end": null,
+"speaker": null,
+"text": "a park by a lake, birds, a breeze, children far off",
+"key": "farm",
+"cue_id": "ep06-073"
+},
+{
+"kind": "sfx",
+"t_start": 678.713,
+"t_end": 682.503,
+"speaker": null,
+"text": "leaves: children's footsteps running through leaves",
+"key": "leaves",
+"cue_id": "ep06-074"
+},
+{
+"kind": "line",
+"t_start": 682.675,
+"t_end": 705.035,
+"speaker": "NARRATOR",
+"text": "And you live right there. Less than a mile from where the island stood. By Lake Gervais, on the land that was Abraham's farm, there's a park with a playground. The family calls it Abraham's Park. And every morning, on the way to school, you go right past the land Abraham cleared with his own two hands.",
+"cue_id": "ep06-075"
+},
+{
+"kind": "line",
+"t_start": 706.115,
+"t_end": 707.895,
+"speaker": "ALEX",
+"text": "Is that really our lake?",
+"cue_id": "ep06-076"
+},
+{
+"kind": "line",
+"t_start": 709.155,
+"t_end": 710.435,
+"speaker": "NARRATOR",
+"text": "It really is, Alex.",
+"cue_id": "ep06-077"
+},
+{
+"kind": "line",
+"t_start": 711.595,
+"t_end": 715.635,
+"speaker": "WILLIAM",
+"text": "Did Abraham really carry his chair to church every single Sunday?",
+"cue_id": "ep06-078"
+},
+{
+"kind": "line",
+"t_start": 716.915,
+"t_end": 721.615,
+"speaker": "NARRATOR",
+"text": "That's what the family story says, William. Every single Sunday.",
+"cue_id": "ep06-079"
+},
+{
+"kind": "line",
+"t_start": 722.495,
+"t_end": 726.335,
+"speaker": "WILLIAM",
+"text": "I'd carry a chair too. If it was a really good chair.",
+"cue_id": "ep06-080"
+},
+{
+"kind": "line",
+"t_start": 727.455,
+"t_end": 751.895,
+"speaker": "NARRATOR",
+"text": "Here's our last question of the season. Abraham left things behind for you. An island. A name on a lake. A creek. A park. A story about a chair. So if you could pack a box for the children who'll live here in two hundred years, what would you put in it? Think about it. You can tell your dad in the morning.",
+"cue_id": "ep06-081"
+},
+{
+"kind": "scene",
+"t_start": 754.155,
+"t_end": null,
+"speaker": null,
+"text": "Scene 10 — Goodnight (15:00–16:30)",
+"cue_id": "ep06-082"
+},
+{
+"kind": "ambience",
+"t_start": 754.155,
+"t_end": null,
+"speaker": null,
+"text": "a quiet night by a marsh, crickets, frogs, an owl",
+"key": "night",
+"cue_id": "ep06-083"
+},
+{
+"kind": "music",
+"t_start": 755.355,
+"t_end": 858.73,
+"speaker": null,
+"text": "lullaby",
+"key": "lullaby",
+"cue_id": "ep06-084"
+},
+{
+"kind": "line",
+"t_start": 759.315,
+"t_end": 778.815,
+"speaker": "NARRATOR",
+"text": "Before we say goodnight, let's be honest about which parts were imagined. The conversations, those we imagined. The walk in the woods. Whether Eustache was the seaside boy. What the bishop said. All imagined, to fit what's written down, but never to change it.",
+"cue_id": "ep06-085"
+},
+{
+"kind": "line",
+"t_start": 779.995,
+"t_end": 803.535,
+"speaker": "NARRATOR",
+"text": "And here's what's real. A boy from France who couldn't write his name. A canoe. Eels for rent. Six generations on one shore. The hail, the letter, the long road west. A winter in St. Louis. Squeaky carts. A wedding in the snow. An island, bought from the government and spelled wrong. A folding chair. A creek. And you.",
+"cue_id": "ep06-086"
+},
+{
+"kind": "line",
+"t_start": 805.235,
+"t_end": 812.455,
+"speaker": "NARRATOR",
+"text": "There are other families in your story, too. Other long roads. But those are for another season.",
+"cue_id": "ep06-087"
+},
+{
+"kind": "line",
+"t_start": 813.875,
+"t_end": 824.275,
+"speaker": "NARRATOR",
+"text": "Tonight, close your eyes. Listen. Hear the creek? Lambert Creek, running through the reeds in the dark, the way it has for a very long time.",
+"cue_id": "ep06-088"
+},
+{
+"kind": "line",
+"t_start": 825.735,
+"t_end": 826.575,
+"speaker": "FRENCH",
+"text": "Bonne nuit.",
+"cue_id": "ep06-089"
+},
+{
+"kind": "line",
+"t_start": 828.07,
+"t_end": 834.43,
+"speaker": "NARRATOR",
+"text": "Bonne nuit. Good night. Goodnight, William. Goodnight, Alex. Goodnight, from the shore of Lambert Lake.",
+"cue_id": "ep06-090"
+}
+]
