@@ -953,8 +953,9 @@ LL.story = function (D) {
   // ---------- the open map: where the traveller and a step's focus can sit with nothing laid over them ----------
   // Per step, a model of what covers the map once the step is on screen: the words (a column the full height of
   // the screen when they scroll through it, the bottom band when they are held), the period picture, the date
-  // mark, the map notes and legends, and the generation ribbon. The camera's aim for the marker is the middle of
-  // the largest rectangle that stays PAD clear of all of them. The model, not the live page, so a step's views
+  // mark, the map notes and legends, and the generation ribbon. The camera's aim for the marker is the middle of the
+  // corridor between the words and the picture when a step has both (corridor()), else the middle of the largest
+  // rectangle that stays PAD clear of all of them. The model, not the live page, so a step's views
   // are the same whenever they are computed (endView of the step before must equal where this step starts).
   // When nothing usable is left (narrow screens), the picture shrinks, never the marker.
   const PAD = 60, EDGE = 24, MIN_FREE = 56;
@@ -1014,9 +1015,38 @@ LL.story = function (D) {
     }
     return best;
   }
+  // When a step has both words and a picture, the aim is the middle of the corridor between them: x halfway from
+  // the words' edge to the picture's facing edge, y the middle of the screen, moved only as far as it must to keep
+  // PAD from the date mark, the legends, the ribbon and the screen's edge. The corridor counts when it is at least
+  // CORRIDOR wide; the picture shrinks to open it before the aim gives up and goes to the largest free rectangle.
+  const CORRIDOR = 160;
+  function corridor(obs) {
+    const w = W(), h = H(), fig = obs.find(r => r.k === "figure"), pr = obs.find(r => r.k === "prose");
+    if (!fig || !pr) return null;
+    const x0 = pr.r <= fig.l ? pr.r : fig.r, x1 = pr.r <= fig.l ? fig.l : pr.l;
+    if (x1 - x0 < CORRIDOR) return null;
+    const cx = (x0 + x1) / 2, half = Math.min(PAD, (x1 - x0) / 2);
+    // the vertical spans the marker can't take at this x: anything within PAD of it, and the edges
+    const bans = obs.filter(r => r.l - PAD < cx + half && r.r + PAD > cx - half).map(r => [r.t - PAD, r.b + PAD]);
+    bans.push([-1e9, PAD], [h - PAD, 1e9]); bans.sort((a, b) => a[0] - b[0]);
+    // the free spans, and in them the point nearest the middle of the screen
+    const spans = []; let y = -1e9;
+    for (const [t, b] of bans) { if (t > y) spans.push([y, t]); y = Math.max(y, b); }
+    if (y < 1e9) spans.push([y, 1e9]);
+    let best = null;
+    for (const [a, b] of spans) { if (b - a < MIN_FREE) continue; const cy = Math.max(a + MIN_FREE / 2, Math.min(b - MIN_FREE / 2, h / 2)), d = Math.abs(cy - h / 2); if (!best || d < best.d) best = { a, b, cy, d }; }
+    if (!best) return null;
+    // the open rectangle around the aim, symmetric so a fitted feature centres on it
+    const hw = (x1 - x0) / 2 - Math.min(PAD, (x1 - x0 - MIN_FREE) / 2), hh = Math.min(best.cy - best.a, best.b - best.cy, h / 2);
+    return { free: { x: cx - hw, y: best.cy - hh, w: 2 * hw, h: 2 * hh }, aim: L.point(cx, best.cy) };
+  }
   function layout(i) {
     const key = i + "|" + W() + "|" + H(); if (layoutCache[key]) return layoutCache[key];
     let out = null;
+    for (const s of [1, 0.8, 0.64, 0.5]) {
+      const obs = obstacles(i, s), c = corridor(obs);
+      if (c) { out = { obs, free: c.free, figScale: s, aim: c.aim, corridor: true }; return layoutCache[key] = out; }
+    }
     for (const s of [1, 0.8, 0.64, 0.5, 0]) {
       const obs = obstacles(i, s), free = largestFree(obs);
       out = { obs, free, figScale: s };
@@ -1122,10 +1152,22 @@ LL.story = function (D) {
       const here = stayAt(e, prev);
       v = here ? { center: here, zoom: prev ? entryZoom(prev) : resolve("overview", "center").zoom } : resolve("overview", "center");
     }
-    // the cart sits in the open: the middle of the largest stretch of map nothing covers (aimAt)
+    // the cart sits in the open: the middle of the corridor between the words and the picture (aimAt)
+    const subj = v.center;
     v = aimView(v, aimAt(i, p));
     if (i > 0 && !itOf(i - 1)) v = lerpView(endView(i - 1), v, smooth(p, 0, 0.15));
-    if (a.view) { const w = a.viewAt || [0.45, 0.85]; v = lerpView(v, viewOf(i, a.view), smooth(p, w[0], w[1])); }
+    if (a.view) {
+      // the camera comes down onto the step's own view; the cart slides on screen in a straight line from where it
+      // is to where that view puts it (a plain lerp of the centres swings it across the picture while the zoom
+      // changes); the zoom is the same linear blend, so it still only goes one way
+      const ww = a.viewAt || [0.45, 0.85], w = smooth(p, ww[0], ww[1]);
+      if (w > 0) {
+        const b = viewOf(i, a.view), half = map.getSize().divideBy(2);
+        const scr = u => map.project(subj, u.zoom).subtract(map.project(u.center, u.zoom)).add(half);
+        const A = scr(v), Bp = scr(b), z = v.zoom + (b.zoom - v.zoom) * w, S = A.add(Bp.subtract(A).multiplyBy(w));
+        v = w >= 1 ? b : { center: map.unproject(map.project(subj, z).subtract(S.subtract(half)), z), zoom: z };
+      }
+    }
     if (log) followEntry = e.id;
     return v;
   }

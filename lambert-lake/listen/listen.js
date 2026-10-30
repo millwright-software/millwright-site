@@ -279,6 +279,44 @@ window.LL = window.LL || {};
     const f = flyCache[key] || (flyCache[key] = flyPath(a, b));
     return f(ease(tt / m));
   }
+  // ---------- the traveller's spot when a picture shows: the corridor between the words and the picture ----------
+  // The caption card sits top left and the picture on the right. With both on screen, the marker is aimed at the
+  // middle of the corridor between them: x halfway from the caption's right edge to the picture's left edge, y the
+  // middle of the screen, kept AIM_PAD clear of the edges and the subtitle band. The camera carries the offset, so a
+  // follow scene still holds one zoom (the shift is centre-only) and a centred scene keeps its zoom. A corridor under
+  // CORRIDOR px, or a scene framed on bounds (several places at once), leaves the camera alone; the overlay placement
+  // then keeps the picture off the marker as before.
+  const AIM_PAD = 60, CORRIDOR = 160;
+  function aimOf(i) {
+    const sc = S[i]; if (!sc || !sc.image || !sc.marker || sc.marker.along) return null;
+    if (!sc.marker.at && !sceneViews(i).a.follow) return null;   // a marker riding across a fixed view stays put
+    if (sc.view && (sc.view.fit || sc.view.bounds)) return null;   // a framed view holds several places; shifting it would crop them
+    const W = window.innerWidth, H = window.innerHeight, bar = $("bar").getBoundingClientRect().top, m = 18;
+    const narrow = W <= 760, figW = narrow ? 0.46 * W : Math.min(400, 0.33 * W), figL = W - figW - m;
+    const capR = sc.caption || sc.date ? m + (narrow ? 0.6 * W : Math.min(380, 0.4 * W)) : 0;
+    if (figL - capR < CORRIDOR) return null;
+    const subTop = bar - 14 - 90;                                  // room for two lines of subtitles over the bar
+    const y = Math.max(AIM_PAD, Math.min(subTop - AIM_PAD, H / 2));
+    return L.point((capR + figL) / 2, y);
+  }
+  // the pixel shift that puts scene i's marker on its aim, for that scene's own view at time t
+  function offOf(i, t) {
+    const a = aimOf(i); if (!a) return null;
+    const at = markerAt(i, t); if (!at) return null;
+    const v = inScene(i, t), half = map.getSize().divideBy(2);
+    return a.subtract(map.project(at, v.zoom).subtract(map.project(v.center, v.zoom)).add(half));
+  }
+  // the camera at time t with the aim applied; across a scene change the shift eases with the move
+  function cameraAt(t) {
+    const v = viewAt(t), i = sceneIndex(t), sc = S[i], m = moveOf(i), tt = t - sc.t;
+    let off = offOf(i, Math.max(t, sc.t + (i > 0 ? Math.min(m, tt) : 0)));
+    if (i > 0 && tt < m) {
+      const a = offOf(i - 1, sc.t) || L.point(0, 0), b = off || L.point(0, 0), f = ease(tt / m);
+      off = L.point(a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f);
+    }
+    if (!off || (Math.abs(off.x) < 0.01 && Math.abs(off.y) < 0.01)) return v;
+    return { center: map.unproject(map.project(v.center, v.zoom).subtract(off), v.zoom), zoom: v.zoom };
+  }
   function sceneIndex(t) { let i = 0; for (let k = 0; k < S.length; k++) if (t >= S[k].t) i = k; return i; }
   const asList = v => (v == null ? [] : Array.isArray(v) ? v : [v]);
   function baseMix(i, t) {
@@ -438,7 +476,7 @@ window.LL = window.LL || {};
     setPins(sc.pins);
     setLake(sc.lake || null);
     // camera
-    const v = viewAt(t);
+    const v = cameraAt(t);
     const sig = v.center.lat.toFixed(7) + v.center.lng.toFixed(7) + v.zoom.toFixed(4);
     if (sig !== dbg.lastSig) { dbg.lastSig = sig; applyView(v); }
     // seasons: the real season of the story date; strength = the scene's emphasis, ramped at its edges
@@ -468,7 +506,7 @@ window.LL = window.LL || {};
     setSub(t);
     const mp = at ? map.latLngToContainerPoint(at) : null;
     const fp = map.latLngToContainerPoint(sc.focus ? L.latLng(sc.focus[0], sc.focus[1]) : (at || v.center));
-    dbg.layout = layoutOverlays(mp, fp); dbg.marker = mp; dbg.scene = i; dbg.t = t; dbg.frames++;
+    dbg.aim = aimOf(i); dbg.layout = layoutOverlays(mp, fp); dbg.marker = mp; dbg.scene = i; dbg.t = t; dbg.frames++;
     // the clock
     $("now").textContent = fmtT(t); if (!scrubbing) $("scrub").value = String(t);
   }
@@ -494,7 +532,7 @@ window.LL = window.LL || {};
   function preload(t, force) {
     if (!force && Math.abs(t - lastPre) < 1.5) return; lastPre = t;
     for (let dt = 0; dt <= 16; dt += 2) {
-      const tt = Math.min(DUR || 1e9, t + dt), i = sceneIndex(tt), v = viewAt(tt);
+      const tt = Math.min(DUR || 1e9, t + dt), i = sceneIndex(tt), v = cameraAt(tt);
       for (const k of asList(S[i].base)) { const l = baseLayer(k); if (!l) continue; for (const u of tilesFor(l, v)) if (!fetched.has(u)) { fetched.add(u); const im = new Image(); im.decoding = "async"; im.src = u; } }
     }
   }

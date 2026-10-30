@@ -40,18 +40,28 @@ const PLAYGROUND = [45.01333, -93.07546]; // OSM playground, about 20 m south of
     try { const h = window.Seasons.attach(map, { reducedMotion: RM }); SEAS = h && typeof h.setTime === "function" ? h : window.Seasons; SEAS.setIntensity && SEAS.setIntensity(0); }
     catch (e) { SEAS = null; console.warn("seasons overlay not attached", e); }
   }
-  const seasonOf = y => { const f = ((y % 1) + 1) % 1; return f < 0.2 || f >= 0.92 ? "winter" : f < 0.42 ? "spring" : f < 0.7 ? "summer" : "fall"; };
+  // seasons.js's phase, not a calendar fraction: 0 spring, .25 summer, .5 fall, .75 winter (as on the grown-up page)
+  const NAMES = ["spring", "summer", "fall", "winter"];
+  const seasonOf = f => NAMES[Math.floor((((f % 1) + 1) % 1) * 4) % 4];
+  const phaseOfMs = ms => { const y = new Date(ms).getUTCFullYear(), doy = (ms - Date.UTC(y, 0, 1)) / DAY; return { year: y, phase: (((doy - 59 + 14) / 365) % 1 + 1) % 1 }; };
   const TINT = { winter: "#ffffff", spring: "#b5d98f", summer: "#6e9b46", fall: "#e07b2a" };
   let seasonNow = "", intensityNow = -1;
-  function seasons(yearFloat, intensity) {
-    intensity = RM ? 0 : clamp01(intensity);
-    if (SEAS) { try { SEAS.setTime(yearFloat); SEAS.setIntensity(intensity); } catch (e) { /* the overlay is optional */ } }
-    else {
-      const t = $("tint"), s = seasonOf(yearFloat);
-      if (s !== seasonNow) { t.style.backgroundColor = TINT[s]; }
-      if (intensity !== intensityNow) t.style.opacity = String(0.6 * intensity);
+  // s: { year, phase, I, parts, mood } or null (no season: a bare year has none)
+  function seasons(s) {
+    const I = !s ? 0 : RM ? Math.min(clamp01(s.I), 0.2) : clamp01(s.I);
+    if (SEAS) {
+      try {
+        if (s) SEAS.setTime(s.year + s.phase);
+        if (SEAS.setParticles) SEAS.setParticles(s ? s.parts || 0 : 0);
+        if (SEAS.setMood) SEAS.setMood(s && !RM && s.mood ? s.mood : null);
+        SEAS.setIntensity(I);
+      } catch (e) { /* the overlay is optional */ }
+    } else {
+      const t = $("tint"), n = s ? seasonOf(s.phase) : seasonNow;
+      if (n !== seasonNow) { t.style.backgroundColor = TINT[n]; }
+      if (I !== intensityNow) t.style.opacity = String(0.6 * I);
     }
-    seasonNow = seasonOf(yearFloat); intensityNow = intensity;
+    if (s) seasonNow = seasonOf(s.phase); intensityNow = I;
   }
 
   // ---------- the trees in the medallion: they grow as the years go by and change with the seasons ----------
@@ -61,10 +71,10 @@ const PLAYGROUND = [45.01333, -93.07546]; // OSM playground, about 20 m south of
     ? `<g data-k="${k}" transform="translate(${x} 38)"><rect x="-1.6" y="-6" width="3.2" height="6" fill="#6a4426"/><path class="crown" d="M0-34L-10-6H10Z"/><path class="snow" d="M0-34L-5-20H5Z" fill="#fff"/></g>`
     : `<g data-k="${k}" transform="translate(${x} 38)"><rect x="-1.8" y="-12" width="3.6" height="12" fill="#6a4426"/><circle class="crown" cy="-20" r="11"/><path class="bare" d="M0-12V-26M0-18L-7-25M0-20L6-27" stroke="#6a4426" stroke-width="1.6" fill="none"/></g>`).join("");
   const treeEls = Array.from(treeSvg.querySelectorAll("g"));
-  function trees(growth, yearFloat, on) {
+  function trees(growth, on) {
     treeSvg.classList.toggle("off", !on);
     if (!on) return;
-    let s = seasonOf(yearFloat);
+    let s = seasonNow || "summer";
     if (SEAS && SEAS.state) { try { s = SEAS.state().season || s; } catch (e) { /* keep ours */ } }
     treeEls.forEach((g, k) => {
       const [x, kind, big] = TREES[k], sc = (0.25 + 0.75 * clamp01(growth * 1.3 - k * 0.06)) * big;
@@ -377,13 +387,80 @@ const PLAYGROUND = [45.01333, -93.07546]; // OSM playground, about 20 m south of
       }
       if (pos) V.veh.setLatLng(pos);
       const now = cur.t0 + (cur.t1 - cur.t0) * q, d = new Date(now);
-      const yf = d.getUTCFullYear() + (now - Date.UTC(d.getUTCFullYear(), 0, 1)) / (365.25 * DAY);
       const longStay = cur.kind === "stay" && (cur.t1 - cur.t0) / DAY > 60;
       const n = dayOf(now);
       medal(String(d.getUTCFullYear()), n ? `Day ${fmtN(n)}${longStay && q > 0.5 ? "!" : ""}` : "", cur.id !== lastEntry || (longStay && q > 0.5));
       lastEntry = cur.id;
-      seasons(yf, longStay ? smooth(q, 0, 0.1) * (1 - smooth(q, 0.9, 1)) : 0);
-      trees(longStay ? q : 0, yf, longStay);
+      seasons(seasonAt(actNow, p, { cur, q, now }));
+      trees(longStay ? q : 0, longStay);
+    }
+
+    // ---------- the seasons, from the story's dates (as on the grown-up page) ----------
+    // A dated moment gets a faint tint of its real season; only the story's moments get the strong effects: the
+    // St. Louis winter, the hail year, the cart trail in high summer, the island patent at the March thaw, and
+    // Cloquet in October 1918. A bare year has no season, so most steps show none.
+    const SUBTLE = 0.2;
+    const warp = (p, K) => { for (let k = 1; k < K.length; k++) if (p <= K[k][0]) return K[k - 1][1] + (K[k][1] - K[k - 1][1]) * (p - K[k - 1][0]) / (K[k][0] - K[k - 1][0]); return K[K.length - 1][1]; };
+    const edge = p => smooth(p, 0, 0.1) * (1 - smooth(p, 0.9, 1));
+    const at_ = (ms, o) => Object.assign(phaseOfMs(ms), o);
+    const EMPHASIS = {
+      // the St. Louis winter of 1841-42: the year turns fall, deep winter, then the thaw
+      "j-river2": (p, c) => c && /st-louis-winter/.test(c.cur.id) ? { phase: warp(c.q, [[0, 0.55], [0.18, 0.8], [0.78, 0.87], [1, 0.97]]),
+        I: smooth(c.q, 0, 0.12) * (1 - 0.6 * smooth(c.q, 0.86, 1)), parts: 1 } : null,
+      // 1832-34, cholera and the hungry years; the hail of 1834: a grey storm
+      hard: p => at_(Date.UTC(1834, 6, 10), { I: 0.45 * edge(p), parts: 0, mood: { storm: smooth(p, 0.04, 0.3) * (1 - smooth(p, 0.9, 1)) } }),
+      // the cart trail south in high summer, June and July 1845: warm light
+      "j-trail": p => ({ I: 0.5 * edge(p), parts: 0, mood: { warm: smooth(p, 0.03, 0.15) * (1 - smooth(p, 0.85, 0.97)) } }),
+      // the island patent, 25 March 1849: late winter, the thaw starting
+      island: p => ({ year: 1849, phase: 0.955, I: 0.85 * edge(p), parts: 0.35 }),
+      // Cloquet, October 1918: autumn, and a light haze of smoke
+      cloquet: p => at_(Date.UTC(1918, 9, 12), { I: 0.7 * edge(p), parts: 0.6 * edge(p), mood: { smoke: 0.3 * smooth(p, 0.1, 0.4) * (1 - smooth(p, 0.9, 1)) } })
+    };
+    // act, progress, and on a journey step { cur, q, now } -> the seasons' state
+    function seasonAt(act, p, c) {
+      let s = c && c.now != null ? Object.assign(phaseOfMs(c.now), { I: SUBTLE, parts: 0 }) : null;
+      const e = EMPHASIS[act] && EMPHASIS[act](p, c);
+      if (e) s = Object.assign(s || { year: e.year, phase: 0.3 }, e);
+      return s && s.year != null ? s : null;
+    }
+
+    // ---------- many, many years: one turn of the seasons per generation (data/generations.json) ----------
+    // Gabriel, Louis-Joseph, Louis-Joseph, Joseph and Abraham, each with the same share of the step; a generation
+    // runs from its birth (Gabriel's from 1673, when he inherits) to the next one's; Abraham's is 1792.
+    const yr4 = t => { const m = /\d{4}/.exec(String(t || "")); return m ? +m[0] : null; };
+    const kidName = n => String(n || "").split(/[,(]|\s+Lambert/)[0].trim();
+    const GENS = (Array.isArray(D.generations) ? D.generations : []).filter(g => +g.gen >= 2 && yr4(g.born))
+      .map(g => ({ n: +g.gen, name: kidName(g.name), born: yr4(g.born), died: /^unknown/i.test(String(g.died || "")) ? null : yr4(g.died) }));
+    GENS.forEach((x, k) => { x.from = Math.max(1673, x.born); x.to = k < GENS.length - 1 ? Math.max(x.from, GENS[k + 1].born) : x.from + 0.999; });
+    const G_P0 = 0.05, G_P1 = 0.95, Y0 = 1673, Y1 = 1792;
+    function genAt(p) {
+      const n = GENS.length; if (!n) return null;
+      const u = clamp01((p - G_P0) / (G_P1 - G_P0)) * n, k = Math.min(n - 1, Math.floor(u)), local = Math.min(0.999, u - k), x = GENS[k];
+      return { x, k, local, y: x.from + (x.to - x.from) * local };
+    }
+    const kgen = $("kgen");
+    let genSig = "";
+    function genRibbon(g) {
+      const sig = g ? g.k : ""; if (sig === genSig) return; genSig = sig;
+      if (!kgen) return;
+      if (!g) { kgen.classList.remove("on"); return; }
+      const x = g.x, yrs = x.died ? `${x.born}–${x.died}` : `born ${x.born}`;
+      kgen.innerHTML = `<span class="kg-dots">${[1, 2, 3, 4, 5, 6].map(n => `<i class="${n < x.n ? "was" : n === x.n ? "now" : ""}"></i>`).join("")}</span><b>${x.name}</b><span class="kg-yrs">${yrs}</span>`;
+      // centred under the part of the screen the map has to itself, clear of the words
+      const R = layout(modeOf(cur), picsOf(cur).length > 0).region;
+      kgen.style.left = ((R[0] + R[2]) / 2) + "px";
+      if (portrait()) { kgen.style.top = Math.max(0, R[3] - 58) + "px"; kgen.style.bottom = "auto"; } else { kgen.style.top = ""; kgen.style.bottom = ""; }
+      kgen.classList.add("on");
+    }
+    function generations(p) {
+      const g = RM ? genAt(G_P1 - 1e-6) : genAt(p); if (!g) return false;
+      const end = p >= G_P1;
+      medal(end ? "1792" : String(Math.floor(g.y)), end ? "" : g.x.name, true);
+      genRibbon(end ? null : g);
+      const I = 0.85 * smooth(p, 0.02, G_P0) * (1 - 0.75 * smooth(p, G_P1, 1));
+      seasons({ year: Math.floor(g.y), phase: g.local, I, parts: 0.5 });
+      trees(clamp01((g.y - Y0) / (Y1 - Y0)), true);
+      return true;
     }
 
     // ---------- the layout: where the picture goes, and the part of the screen the map has to itself ----------
@@ -513,7 +590,15 @@ const PLAYGROUND = [45.01333, -93.07546]; // OSM playground, about 20 m south of
       island: { base: ["physical"], years: [1856], view: "ring", vec: ["lake", "island", "lakeLbl"], enter() { lakeWater(LAKE_FILL); },
         progress(p) { islandSet(partial(islandPath, RM ? 1 : smooth(p, 0.1, 0.55))); if ((p > 0.6 || RM) !== map.hasLayer(V.islandFill)) p > 0.6 || RM ? V.islandFill.addTo(map) : map.removeLayer(V.islandFill); } },
       church: { base: ["physical"], years: [1856], view: "littleCanada", vec: ["farm", "farmLbl", "church"] },
-      chair: { base: ["physical"], years: [1856], view: "littleCanada", vec: ["farm", "farmLbl", "church"], progress(p) { steps[cur].classList.toggle("chair-open", p > 0.15); } },
+      // every Sunday, from the farm to the church with his chair, and home again: Abraham walks it as the words scroll
+      // (he shows only while he walks: at home he would sit under the words as they scroll in on a phone)
+      chair: { base: ["physical"], years: [1856], view: "littleCanada", vec: ["farm", "farmLbl", "church"], enter() { vehicle("walk"); },
+        progress(p) {
+          steps[cur].classList.toggle("chair-open", p > 0.15);
+          const f = 0.65 * (RM ? 0.5 : smooth(p, 0.2, 0.5) * (1 - smooth(p, 0.56, 0.86)));
+          V.veh.setLatLng(lerp(farmBounds.getCenter(), churchPt, f));
+          if ((f > 0.02) !== map.hasLayer(V.veh)) f > 0.02 ? V.veh.addTo(map) : map.removeLayer(V.veh);
+        } },
       drain: { base: ["physical"], years: [1856], view: "frame", vec: [...LAKES, "drain"], progress(p) { drainage(1869, 1899, p); } },
       cloquet: { base: ["physical"], view: "cloquet", vec: ["lblCloquet"] },
       hotel: { base: ["physical", "imagery"], view: "hotel", vec: ["hotel"] },
@@ -695,7 +780,7 @@ const PLAYGROUND = [45.01333, -93.07546]; // OSM playground, about 20 m south of
       const set = new Set(on);
       for (const k of ALL) { const has = map.hasLayer(V[k]); if (set.has(k) && !has) V[k].addTo(map); else if (!set.has(k) && has) map.removeLayer(V[k]); }
     }
-    let cur = 0, preloadTimer = 0;
+    let cur = 0, preloadTimer = 0, actNow = "";
     LL.scroller({
       steps,
       onEnter(step, i) {
@@ -716,7 +801,9 @@ const PLAYGROUND = [45.01333, -93.07546]; // OSM playground, about 20 m south of
         plateMode = modeOf(i); plateHas = picsOf(i).length > 0;
         if (!plateHas) picture("", i);
         if (!itOf(i)) { lastEntry = ""; medal(steps[i].dataset.year || "", "", false); }
-        if (!rollOf(i) && !itOf(i)) { seasons(yr(steps[i].dataset.year) || 1800, 0); trees(0, 0, false); }
+        actNow = steps[i].dataset.act;
+        if (actNow !== "years") genRibbon(null);
+        if (!rollOf(i) && !itOf(i)) { seasons(seasonAt(actNow, 0, null)); trees(0, false); }
         placePlate();
       },
       onProgress(step, i, p) {
@@ -726,15 +813,19 @@ const PLAYGROUND = [45.01333, -93.07546]; // OSM playground, about 20 m south of
         if (c.draw) c.draw();
         if (c.pos) { V.ship.setLatLng(c.pos); shipMode(c.mode); }
         const it = itOf(i);
+        actNow = step.dataset.act;
         if (it) itinerary(it, RM ? 1 : p);
+        else if (actNow === "years" && generations(p)) { /* one season turn per generation */ }
         else {
           const r = rollOf(i);
           if (r) {
+            // the rolling year: the medal counts and the trees grow; the season stays the step's own (a bare
+            // year has none), so there is no flicker of a season per year
             const t = RM ? 1 : smooth(p, r.p0, r.p1), yf = r.a + (r.b - r.a) * t, rolling = t > 0 && t < 1;
             medal(rolling ? String(Math.floor(yf)) : (step.dataset.year || String(r.b)), "", false);
-            seasons(yf, rolling ? 1 : 0);
-            trees(t, yf, step.dataset.roll ? t > 0 : rolling);
+            trees(t, step.dataset.roll ? t > 0 : rolling);
           }
+          seasons(seasonAt(actNow, RM ? 0.5 : p, null));
         }
         if (a.progress) a.progress(RM ? 1 : p);
         const pics = picsOf(i);
@@ -745,6 +836,20 @@ const PLAYGROUND = [45.01333, -93.07546]; // OSM playground, about 20 m south of
         }
       }
     });
+    // on a tall screen the words scroll up over the map: they fade out before they reach the traveller (the middle
+    // of the step's map region), so a card never covers him
+    const cards = steps.map(s => s.querySelector(".card")).filter(Boolean);
+    let fadeRaf = 0;
+    function fadeCards() {
+      fadeRaf = 0;
+      const on = portrait(), h = window.innerHeight, R = on ? regionOf(cur) : null, low = on ? (R[1] + R[3]) / 2 + 40 : 0;
+      for (const c of cards) {
+        const t = c.getBoundingClientRect().top, o = on ? clamp01((t - low) / (0.12 * h)) : 1;
+        const v = o >= 1 ? "" : o.toFixed(3); if (c.style.opacity !== v) { c.style.opacity = v; c.style.pointerEvents = o < 0.5 ? "none" : ""; }
+      }
+    }
+    const fadeSoon = () => { if (!fadeRaf) fadeRaf = requestAnimationFrame(fadeCards); };
+    addEventListener("scroll", fadeSoon, { passive: true }); addEventListener("resize", fadeSoon); fadeCards();
     function relayout() {
       map.invalidateSize();
       for (const k in endCache) delete endCache[k];
