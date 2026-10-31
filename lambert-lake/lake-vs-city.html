@@ -40,7 +40,7 @@
     ring.slice(1).forEach(r => L.polyline(r.map(p => [p[1], p[0]]), { color: "#fff", weight: 2, dashArray: "5 5" }).addTo(map));
     L.circleMarker([45.0595622, -93.0891043], { radius: 6, color: "#fff", weight: 2, fillColor: "#8a2a22", fillOpacity: 1 }).addTo(map)
       .bindTooltip("3921 Woodview Ct", { permanent: true, direction: "left", className: "lbl" });
-    L.marker([45.0647845, -93.0762133], { opacity: 0 }).addTo(map)
+    L.marker([45.0647845, -93.0762133], { icon: L.divIcon({ className: "", html: "", iconSize: [0, 0] }) }).addTo(map)
       .bindTooltip("Lambert Lake", { permanent: true, direction: "center", className: "lbl" });
     map.fitBounds(c.getBounds(), { paddingTopLeft: [380, 30], paddingBottomRight: [30, 30] });
   });

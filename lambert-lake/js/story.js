@@ -181,8 +181,8 @@ LL.story = function (D) {
     if (m.caption) parts.push(m.caption);
     else if (m.what_it_shows) parts.push(m.what_it_shows);
     if (m.how_close && m.how_close !== m.caption) parts.push(`<span class="hc">${m.how_close}</span>`);
-    if (m.fit && m.fit !== m.how_close) parts.push(`<span class="hc">${m.fit}</span>`);
-    if (m.credit_line) parts.push(`<span class="cr">${m.credit_line}${m.rights ? ` (${m.rights})` : ""}</span>`);
+    // fit and rights are the picture review's working notes ("OK", "FLAG", Commons templates), not reader text
+    if (m.credit_line) parts.push(`<span class="cr">${m.credit_line}</span>`);
     if (m.source_url) parts.push(`<a href="${m.source_url}" target="_blank" rel="noopener">source</a>`);
     return parts.join(" ");
   }

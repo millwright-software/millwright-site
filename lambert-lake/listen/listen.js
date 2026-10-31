@@ -417,7 +417,7 @@ window.LL = window.LL || {};
       let acc = 0; for (let k = 0; k < chunks.length; k++) { acc += chunks[k].length; if (f <= acc || k === chunks.length - 1) { part = k; text = chunks[k]; break; } }
     }
     const sig = c ? c.cue_id + ":" + part : ""; if (sig === subSig) return; subSig = sig;
-    sub.innerHTML = c ? `${c.speaker !== "NARRATOR" ? `<span class="who">${esc(c.speaker === "FRENCH" ? "En français" : c.speaker.toLowerCase().replace(/\b\w/g, s => s.toUpperCase()))}</span> ` : ""}${esc(text)}` : "";
+    sub.innerHTML = c ? `${c.speaker !== "NARRATOR" ? `<span class="who">${esc(c.speaker === "FRENCH" ? "En français" : c.speaker.toLowerCase().replace(/(^|\s)\S/g, s => s.toUpperCase()).replace("Louis Joseph", "Louis-Joseph"))}</span> ` : ""}${esc(text)}` : "";
     sub.classList.toggle("on", !!c);
   }
 
