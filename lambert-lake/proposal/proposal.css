@@ -1,0 +1,16 @@
+@font-face { font-family: "Caslon"; src: url("../fonts/LibreCaslonText-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Caslon"; src: url("../fonts/LibreCaslonText-400-italic.woff2") format("woff2"); font-style: italic; }
+@font-face { font-family: "Caslon"; src: url("../fonts/LibreCaslonText-700-normal.woff2") format("woff2"); font-weight: 700; }
+:root { --paper: #f3ecda; --paper2: #e9e0c8; --rule: #d3c5a4; --ink: #251e15; --soft: #5b4f3e; --seal: #8a2a22; --water: #5f8793; --green: #5d7f45; --gold: #b38a2e; }
+
+/* map labels, shared by the page and the static renders */
+.tag span { position: absolute; white-space: nowrap; font: 700 14px/1.2 "Caslon", Georgia, serif; color: #fff;
+  text-shadow: 0 0 3px rgba(0,0,0,.95), 0 0 8px rgba(0,0,0,.7); transform: translate(8px, -50%); }
+.tag.left span { transform: translate(calc(-100% - 8px), -50%); }
+.tag.center span { transform: translate(-50%, -50%); }
+.tag.big span { font-size: 22px; font-style: italic; font-weight: 400; }
+.tag.isl span { font-size: 15px; font-style: italic; font-weight: 400; color: #fff7e2; }
+.tag.site span { font-size: 15px; background: rgba(243,236,218,.94); color: var(--ink); text-shadow: none; padding: 3px 8px; border-radius: 2px; box-shadow: 0 1px 4px rgba(0,0,0,.4); }
+.tag.here span { font-size: 15px; background: var(--seal); color: #fff; text-shadow: none; padding: 3px 8px; border-radius: 2px; }
+.lbl { background: rgba(243,236,218,.96); border: none; border-radius: 2px; font: 14px "Caslon", Georgia, serif; color: var(--ink); box-shadow: 0 1px 6px rgba(0,0,0,.35); }
+.leaflet-container { font: 13px "Caslon", Georgia, serif; background: #3a4a3a; }

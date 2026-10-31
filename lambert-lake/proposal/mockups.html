@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Lambert proposal: sign mockups</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="proposal.css">
+<style>
+  /* Source for the PNGs in mockups/. build_proposal.py screenshots every [data-export] element. */
+  body { margin: 0; padding: 40px; background: #e9e0c8; font-family: "Caslon", Georgia, serif; color: #251e15; display: flex; flex-direction: column; gap: 40px; align-items: flex-start; }
+  svg text { font-family: "Caslon", Georgia, serif; }
+  [data-export] { display: block; }
+
+  /* the 36 x 24 in. interpretive panel, drawn at 50 px per inch */
+  .panel { width: 1800px; height: 1200px; box-sizing: border-box; background: #f3ecda; color: #251e15; position: relative;
+    display: grid; grid-template-columns: 1040px 1fr; grid-template-rows: auto 1fr auto; column-gap: 64px; padding: 64px 76px 0; }
+  .panel::before { content: ""; position: absolute; inset: 22px; border: 3px solid #251e15; pointer-events: none; }
+  .panel header { grid-column: 1 / -1; display: flex; align-items: flex-end; gap: 34px; padding-bottom: 26px; border-bottom: 3px solid #8a2a22; margin-bottom: 36px; }
+  .panel header svg { width: 120px; height: 109px; flex: none; }
+  .panel h1 { font-size: 92px; line-height: 1; margin: 0; white-space: nowrap; }
+  .panel header p { margin: 0 0 8px auto; font-style: italic; font-size: 28px; color: #8a2a22; text-align: right; line-height: 1.2; }
+  .panel .map { position: relative; height: 760px; border: 3px solid #251e15; background: url("img/map-panel.jpg") center/cover; }
+  .panel .key { position: absolute; left: 0; bottom: 0; background: rgba(243,236,218,.94); padding: 12px 20px; font-size: 22px; display: flex; gap: 26px; }
+  .panel .key i { display: inline-block; width: 34px; height: 16px; vertical-align: -2px; margin-right: 8px; border: 2px solid #fff; }
+  .panel .text { font-size: 25px; line-height: 1.4; }
+  .panel .text p { margin: 0 0 20px; }
+  .panel .text p:first-child::first-line { font-weight: 700; }
+  .panel figure { margin: 6px 0 0; display: grid; grid-template-columns: 190px 1fr; gap: 22px; align-items: center; }
+  .panel figure img { width: 190px; height: 190px; object-fit: cover; border: 2px solid #251e15; }
+  .panel figcaption { font-size: 20px; line-height: 1.35; font-style: italic; color: #5b4f3e; }
+  .panel footer { grid-column: 1 / -1; font-size: 17px; color: #5b4f3e; padding: 22px 0 46px; display: flex; justify-content: space-between; gap: 40px; }
+  .panel footer b { color: #251e15; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <path id="ring" d="M623.8,5.1 L527.9,0.4 L391.1,63.5 L388.2,106.1 L382.2,112.5 L325.5,102.3 L207.9,68.6 L164.0,71.6 L135.5,80.1 L125.3,90.8 L98.4,165.3 L81.8,192.6 L83.5,210.9 L72.0,212.2 L0.0,331.9 L17.9,404.3 L40.1,448.2 L80.5,584.1 L96.3,598.6 L153.8,614.0 L210.1,613.5 L250.1,621.6 L288.0,670.2 L286.7,764.8 L293.1,832.6 L332.3,872.2 L383.0,900.7 L510.9,885.8 L566.3,832.6 L655.3,733.3 L657.4,723.9 L669.4,725.6 L699.6,706.9 L834.3,714.5 L942.9,649.8 L969.7,625.9 L993.6,590.5 L994.9,579.0 L989.3,573.9 L996.2,557.3 L991.1,542.0 L1000.0,525.8 L992.3,488.7 L979.5,464.4 L891.4,400.1 L875.2,332.8 L856.0,203.2 L771.6,176.4 L757.6,177.2 L754.6,169.6 L710.7,145.3 L697.9,124.4 L675.3,37.5 L656.2,32.0 L651.0,19.6 Z M436.7,279.5 L508.3,357.1 L591.4,367.7 L595.2,425.2 L563.7,544.1 L565.4,620.4 L484.4,681.3 L462.7,678.3 L326.4,606.3 L324.7,575.6 L318.7,567.5 L322.5,554.3 L314.9,539.8 L320.0,527.9 L310.6,487.0 L257.8,389.4 L293.6,373.2 L338.3,327.2 L372.0,303.8 Z" fill-rule="evenodd"/>
+    <path id="island" d="M436.7,279.5 L508.3,357.1 L591.4,367.7 L595.2,425.2 L563.7,544.1 L565.4,620.4 L484.4,681.3 L462.7,678.3 L326.4,606.3 L324.7,575.6 L318.7,567.5 L322.5,554.3 L314.9,539.8 L320.0,527.9 L310.6,487.0 L257.8,389.4 L293.6,373.2 L338.3,327.2 L372.0,303.8 Z"/>
+    <!-- fieldstone base, reused under the city signs -->
+    <g id="stones">
+      <rect x="0" y="0" width="760" height="96" rx="10" fill="#8d877b"/>
+      <g fill="#a7a194" stroke="#6f695e" stroke-width="2">
+        <rect x="8" y="8" width="120" height="38" rx="12"/><rect x="134" y="6" width="96" height="40" rx="14"/><rect x="236" y="9" width="140" height="36" rx="12"/>
+        <rect x="382" y="6" width="104" height="40" rx="14"/><rect x="492" y="8" width="128" height="38" rx="12"/><rect x="626" y="6" width="126" height="40" rx="14"/>
+        <rect x="8" y="52" width="86" height="38" rx="12"/><rect x="100" y="51" width="150" height="40" rx="14"/><rect x="256" y="53" width="104" height="37" rx="12"/>
+        <rect x="366" y="51" width="140" height="40" rx="14"/><rect x="512" y="52" width="92" height="38" rx="12"/><rect x="610" y="51" width="142" height="40" rx="14"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<!-- 1. Lambert Island Park: city entrance sign -->
+<svg data-export="sign-lambert-island-park" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Park entrance sign mockup: Lambert Island Park">
+  <ellipse cx="500" cy="610" rx="430" ry="20" fill="#000" opacity=".18"/>
+  <use href="#stones" x="120" y="508"/>
+  <rect x="166" y="70" width="34" height="450" fill="#5a4330"/><rect x="800" y="70" width="34" height="450" fill="#5a4330"/>
+  <rect x="150" y="96" width="700" height="404" rx="8" fill="#23382f"/>
+  <rect x="166" y="112" width="668" height="372" rx="4" fill="none" stroke="#efe4c6" stroke-width="3"/>
+  <text x="500" y="164" text-anchor="middle" font-size="24" font-style="italic" fill="#efe4c6">City of Vadnais Heights</text>
+  <g transform="translate(451 184) scale(.094)">
+    <use href="#ring" fill="#6f9aa6" stroke="#efe4c6" stroke-width="24"/>
+    <use href="#island" fill="#efe4c6"/>
+  </g>
+  <text x="500" y="342" text-anchor="middle" font-size="56" font-weight="700" fill="#efe4c6">Lambert Island Park</text>
+  <line x1="300" y1="372" x2="700" y2="372" stroke="#c9a24a" stroke-width="3"/>
+  <text x="500" y="414" text-anchor="middle" font-size="20" font-style="italic" fill="#efe4c6">The island in Lambert Lake, first owned by Abraham Lambert, 1849</text>
+  <text x="500" y="456" text-anchor="middle" font-size="19" fill="#c9bf9f">3892 Elmwood Street</text>
+</svg>
+
+<!-- 2. Lambert Lake Park: city entrance sign -->
+<svg data-export="sign-lambert-lake-park" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Park entrance sign mockup: Lambert Lake Park">
+  <ellipse cx="500" cy="610" rx="430" ry="20" fill="#000" opacity=".18"/>
+  <use href="#stones" x="120" y="508"/>
+  <rect x="166" y="70" width="34" height="450" fill="#5a4330"/><rect x="800" y="70" width="34" height="450" fill="#5a4330"/>
+  <rect x="150" y="96" width="700" height="404" rx="8" fill="#23382f"/>
+  <rect x="166" y="112" width="668" height="372" rx="4" fill="none" stroke="#efe4c6" stroke-width="3"/>
+  <text x="500" y="164" text-anchor="middle" font-size="24" font-style="italic" fill="#efe4c6">City of Vadnais Heights</text>
+  <g transform="translate(451 184) scale(.094)">
+    <use href="#ring" fill="#8fc3d1" stroke="#efe4c6" stroke-width="24"/>
+  </g>
+  <text x="500" y="342" text-anchor="middle" font-size="58" font-weight="700" fill="#efe4c6">Lambert Lake Park</text>
+  <line x1="300" y1="372" x2="700" y2="372" stroke="#c9a24a" stroke-width="3"/>
+  <text x="500" y="414" text-anchor="middle" font-size="20" font-style="italic" fill="#efe4c6">On the bed of Lambert Lake, surveyed 1847, drained 1870 to 1930s</text>
+  <text x="500" y="456" text-anchor="middle" font-size="19" fill="#c9bf9f">641 County Road F East</text>
+</svg>
+
+<!-- 3. Interpretive panel for Lambert Lake Park, 36 x 24 in. -->
+<div class="panel" data-export="panel-lambert-lake-park">
+  <header>
+    <svg viewBox="-24 -24 1048 950" aria-hidden="true"><use href="#ring" fill="#8fc3d1" stroke="#251e15" stroke-width="22"/></svg>
+    <h1>There was a lake here</h1>
+    <p>Lambert Lake, as federal<br>surveyors mapped it, 1847</p>
+  </header>
+  <div class="map">
+    <div class="key"><span><i style="background:#8fc3d1"></i>The lake in 1847</span><span><i style="background:#2f6f9c;height:4px;border:0;vertical-align:4px"></i>Lambert Creek today</span><span><i style="background:#5d7f45"></i>City parks</span></div>
+  </div>
+  <div class="text">
+    <p>In 1847 a federal survey crew walked the shore near here and mapped a ring-shaped lake of about 630 acres, with a 97-acre island in the middle. This park sits on the lake's north side, where the water was.</p>
+    <p>In 1849 Abraham Lambert, a French-Canadian farmer who had settled at Little Canada in 1845, bought the island from the United States. By 1867 the county map called the water Lamberts Lake.</p>
+    <p>Then the lake was drained: a water company's canal in 1870, a farmer's ditch in 1893, county ditches from 1916. House lots were sold from the 1930s. What is left runs out as Lambert Creek, to Vadnais Lake and St. Paul's drinking water.</p>
+    <figure>
+      <img src="../img/1855-plat-island-lots-6-7.jpg" alt="The island on the 1847-48 survey plat">
+      <figcaption>The island on the government survey plat, divided into lots 6 and 7: the land in Abraham Lambert's 1849 patent.</figcaption>
+    </figure>
+  </div>
+  <footer>
+    <span><b>Sources:</b> U.S. General Land Office survey plat, T30N R22W, 1847–48, and land patents, 1849; Neill, <i>History of Ramsey County</i>, 1881; <i>Ramsey County History</i>, 1964; <i>Swank v. Barnum</i>, 1896; VLAWMO. Imagery: Esri.</span>
+    <span style="white-space:nowrap">Draft panel, 36 × 24 in.</span>
+  </footer>
+</div>
+
+<!-- 4. Lambert Lake Trail: boardwalk section with the trail marker -->
+<svg data-export="boardwalk-lambert-lake-trail" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-label="Illustrated section of a boardwalk through the old lakebed, with a Lambert Lake Trail marker post">
+  <defs>
+    <pattern id="peat" width="22" height="22" patternUnits="userSpaceOnUse"><rect width="22" height="22" fill="#6a5238"/><path d="M0 16 Q6 10 11 16 T22 16" stroke="#7d6446" stroke-width="2" fill="none"/></pattern>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3ecda"/><stop offset="1" stop-color="#e6e3cf"/></linearGradient>
+    <g id="cattail"><path d="M0 0 Q2 -60 -4 -120" stroke="#6f7f3d" stroke-width="3" fill="none"/><rect x="-9" y="-150" width="9" height="34" rx="4" fill="#5b3b22" transform="rotate(-3)"/></g>
+    <g id="sedge"><path d="M0 0 Q-10 -30 -22 -44 M0 0 Q2 -36 -2 -58 M0 0 Q12 -28 24 -40 M0 0 Q-4 -20 -12 -30" stroke="#7f8d45" stroke-width="2.5" fill="none"/></g>
+  </defs>
+  <rect width="1400" height="760" fill="url(#sky)"/>
+  <!-- 1847 water: a band above today's ground -->
+  <rect x="0" y="444" width="1400" height="96" fill="#8fc3d1" opacity=".28"/>
+  <line x1="0" y1="444" x2="1400" y2="444" stroke="#5f8793" stroke-width="3" stroke-dasharray="14 10"/>
+  <text x="30" y="318" font-size="22" font-style="italic" fill="#3f6470">The lake's surface in 1847, roughly here</text><line x1="60" y1="328" x2="60" y2="440" stroke="#3f6470" stroke-width="2"/>
+  <!-- ground and peat -->
+  <path d="M0 540 Q200 530 400 542 T800 538 T1180 540 L1180 760 L0 760 Z" fill="url(#peat)"/>
+  <path d="M1140 540 Q1200 520 1260 490 L1400 470 L1400 760 L1140 760 Z" fill="#8a7a52"/>
+  <rect x="0" y="536" width="1180" height="10" fill="#4f5a2c" opacity=".7"/>
+  <text x="40" y="738" font-size="22" font-style="italic" fill="#f3ecda">Peat, 10 to 25 feet deep: the old lake bottom</text>
+  <!-- the creek, cut into the bed -->
+  <path d="M560 540 Q590 578 630 578 Q670 578 700 540 Z" fill="#2f6f9c"/>
+  <text x="630" y="612" text-anchor="middle" font-size="20" font-style="italic" fill="#f3ecda">Lambert Creek</text>
+  <!-- wetland plants -->
+  <g><use href="#cattail" x="80" y="540"/><use href="#cattail" x="104" y="542"/><use href="#sedge" x="140" y="540"/><use href="#cattail" x="330" y="540"/>
+     <use href="#sedge" x="380" y="541"/><use href="#cattail" x="520" y="540"/><use href="#sedge" x="740" y="540"/><use href="#cattail" x="790" y="541"/>
+     <use href="#cattail" x="812" y="540"/><use href="#sedge" x="980" y="540"/><use href="#cattail" x="1050" y="540"/><use href="#sedge" x="240" y="540"/></g>
+  <!-- boardwalk: deck, rail, helical piles -->
+  <g>
+    <g stroke="#3a3a36" stroke-width="7"><line x1="180" y1="500" x2="180" y2="690"/><line x1="400" y1="500" x2="400" y2="690"/><line x1="520" y1="500" x2="520" y2="690"/><line x1="740" y1="500" x2="740" y2="690"/><line x1="960" y1="500" x2="960" y2="690"/><line x1="1150" y1="500" x2="1150" y2="690"/></g>
+    <g fill="#3a3a36"><rect x="170" y="684" width="20" height="6"/><rect x="390" y="684" width="20" height="6"/><rect x="510" y="684" width="20" height="6"/><rect x="730" y="684" width="20" height="6"/><rect x="950" y="684" width="20" height="6"/><rect x="1140" y="684" width="20" height="6"/></g>
+    <rect x="130" y="486" width="1050" height="16" fill="#8c6a45"/>
+    <rect x="130" y="502" width="1050" height="8" fill="#6a4f33"/>
+    <rect x="130" y="414" width="1050" height="9" fill="#8c6a45"/>
+    <g fill="#7a5a3a"><rect x="140" y="414" width="10" height="72"/><rect x="340" y="414" width="10" height="72"/><rect x="540" y="414" width="10" height="72"/><rect x="740" y="414" width="10" height="72"/><rect x="940" y="414" width="10" height="72"/><rect x="1160" y="414" width="10" height="72"/></g>
+    <line x1="130" y1="452" x2="1180" y2="452" stroke="#7a5a3a" stroke-width="4"/>
+  </g>
+  <!-- a walker for scale -->
+  <g fill="#251e15" transform="translate(640 0)">
+    <circle cx="0" cy="392" r="11"/><rect x="-13" y="405" width="26" height="44" rx="7"/>
+    <rect x="-11" y="444" width="9" height="42" rx="3"/><rect x="2" y="444" width="9" height="42" rx="3"/>
+    <rect x="-19" y="408" width="7" height="36" rx="3"/><rect x="12" y="408" width="7" height="36" rx="3"/>
+  </g>
+  <!-- trail marker at the boardwalk's land end -->
+  <g transform="translate(1250 300)">
+    <rect x="-14" y="0" width="28" height="196" fill="#6b4c2e"/><path d="M-16 0 L0 -12 L16 0 Z" fill="#5a3f26"/>
+    <rect x="-12" y="16" width="24" height="64" rx="3" fill="#2f5560"/>
+    <g transform="translate(-9 22) scale(.018)"><use href="#ring" fill="#efe4c6"/></g>
+    <circle cx="0" cy="66" r="3" fill="#efe4c6"/>
+  </g>
+  <path d="M1268 330 C1300 300 1310 230 1300 200" stroke="#8a2a22" stroke-width="2" fill="none"/>
+  <!-- labels -->
+  <g font-size="21" fill="#251e15">
+    <text x="30" y="56" font-size="34" font-weight="700">Lambert Lake Trail: a boardwalk across the old lakebed</text>
+    <text x="30" y="92" font-size="22" font-style="italic" fill="#5b4f3e">Illustrative section, not to scale. Deck about two feet above the wet ground; no fill placed in the wetland.</text>
+    <text x="194" y="640" fill="#f3ecda" font-style="italic">Helical piles</text>
+    <text x="1300" y="188" text-anchor="end" font-style="italic" fill="#8a2a22">Trail marker</text>
+  </g>
+</svg>
+
+<!-- 5. The trail marker post, close up -->
+<svg data-export="marker-lambert-lake-trail" width="440" height="900" viewBox="0 0 440 900" role="img" aria-label="Trail marker post mockup: Lambert Lake Trail">
+  <ellipse cx="220" cy="872" rx="150" ry="14" fill="#000" opacity=".18"/>
+  <rect x="150" y="60" width="140" height="810" fill="#6b4c2e"/>
+  <rect x="150" y="60" width="18" height="810" fill="#5a3f26"/>
+  <path d="M140 64 L220 18 L300 64 Z" fill="#5a3f26"/>
+  <rect x="96" y="110" width="248" height="470" rx="14" fill="#2f5560" stroke="#efe4c6" stroke-width="4"/>
+  <g transform="translate(160 140) scale(.115)"><use href="#ring" fill="#8fc3d1" stroke="#efe4c6" stroke-width="30"/></g>
+  <text x="220" y="330" text-anchor="middle" font-size="46" font-weight="700" fill="#efe4c6">Lambert</text>
+  <text x="220" y="382" text-anchor="middle" font-size="46" font-weight="700" fill="#efe4c6">Lake</text>
+  <text x="220" y="434" text-anchor="middle" font-size="46" font-weight="700" fill="#efe4c6">Trail</text>
+  <line x1="140" y1="466" x2="300" y2="466" stroke="#c9a24a" stroke-width="3"/>
+  <text x="220" y="506" text-anchor="middle" font-size="20" font-style="italic" fill="#efe4c6">Lambert Island Park</text>
+  <path d="M196 534 L244 534 M232 522 L246 534 L232 546" stroke="#efe4c6" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="220" y="660" text-anchor="middle" font-size="18" font-style="italic" fill="#e9dcc0">Vadnais Heights</text>
+</svg>
+
+<!-- 6. St. John's Cemetery plaque, cast bronze -->
+<svg data-export="plaque-st-johns-cemetery" width="900" height="640" viewBox="0 0 900 640" role="img" aria-label="Bronze plaque mockup for St. John's Cemetery">
+  <defs>
+    <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a5a2e"/><stop offset=".5" stop-color="#5e4322"/><stop offset="1" stop-color="#43301a"/></linearGradient>
+    <filter id="emboss"><feDropShadow dx="1.5" dy="2" stdDeviation="0.6" flood-color="#1e1409" flood-opacity=".85"/></filter>
+  </defs>
+  <rect x="20" y="20" width="860" height="600" rx="10" fill="url(#bronze)"/>
+  <rect x="40" y="40" width="820" height="560" rx="6" fill="none" stroke="#c9a96a" stroke-width="5" filter="url(#emboss)"/>
+  <rect x="54" y="54" width="792" height="532" rx="4" fill="none" stroke="#c9a96a" stroke-width="1.5" opacity=".7"/>
+  <g fill="#e6cf98" filter="url(#emboss)" text-anchor="middle">
+    <text x="450" y="140" font-size="58" font-weight="700">Abraham Lambert</text>
+    <text x="450" y="186" font-size="30">1792 – 1875</text>
+    <g transform="translate(424 206) scale(.05)"><use href="#ring" fill="none" stroke="#e6cf98" stroke-width="40"/></g>
+    <g font-size="27">
+      <text x="450" y="314">He gave the land for this cemetery, a strip of</text>
+      <text x="450" y="352">about twenty acres along the west line of his</text>
+      <text x="450" y="390">claim, and logs from his farm for the parish's</text>
+      <text x="450" y="428">first church in 1851. His family came from Quebec</text>
+      <text x="450" y="466">and settled at Little Canada in 1845, one of its</text>
+      <text x="450" y="504">founding families. He is buried here.</text>
+    </g>
+    <text x="450" y="560" font-size="22" font-style="italic">St. John the Evangelist Parish</text>
+  </g>
+</svg>
+
+<!-- 7. Lake Gervais County Park: a sign naming both founding families -->
+<svg data-export="sign-gervais-lambert-park" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="County park sign mockup: Gervais-Lambert Park at Lake Gervais">
+  <ellipse cx="500" cy="612" rx="400" ry="18" fill="#000" opacity=".18"/>
+  <rect x="200" y="380" width="40" height="230" fill="#4a3424"/><rect x="760" y="380" width="40" height="230" fill="#4a3424"/>
+  <rect x="120" y="60" width="760" height="420" rx="6" fill="#4b3526"/>
+  <rect x="136" y="76" width="728" height="388" rx="3" fill="none" stroke="#eadcb8" stroke-width="3"/>
+  <text x="500" y="126" text-anchor="middle" font-size="22" font-style="italic" fill="#eadcb8">Ramsey County Parks &amp; Recreation</text>
+  <text x="500" y="214" text-anchor="middle" font-size="56" font-weight="700" fill="#eadcb8">Gervais–Lambert Park</text>
+  <text x="500" y="258" text-anchor="middle" font-size="28" font-style="italic" fill="#eadcb8">at Lake Gervais</text>
+  <line x1="200" y1="290" x2="800" y2="290" stroke="#c9a24a" stroke-width="3"/>
+  <g font-size="21" fill="#eadcb8" text-anchor="middle">
+    <text x="500" y="330">Two founding families of Little Canada, side by side.</text>
+    <text x="500" y="366">Benjamin Gervais, the first settler, came in 1844.</text>
+    <text x="500" y="402">His neighbor Abraham Lambert came in 1845;</text>
+    <text x="500" y="438">more than half of this park is the farm he bought in 1849.</text>
+  </g>
+</svg>
+
+</body>
+</html>

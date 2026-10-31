@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lambert Lake: a proposal for parks, a trail and signs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../img/lambert-lake-logo.svg">
+<link rel="stylesheet" href="../vendor/leaflet.css">
+<link rel="stylesheet" href="proposal.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 19px/1.62 "Caslon", Georgia, serif; }
+  a { color: var(--seal); }
+  a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--water); outline-offset: 3px; }
+  sup { font-size: 12px; line-height: 0; margin-left: 1px; }
+  sup a { text-decoration: none; color: var(--water); font-weight: 700; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+  .prose { max-width: 680px; }
+  h2 { font-size: clamp(34px, 4.4vw, 50px); line-height: 1.08; margin: 0 0 18px; }
+  h3 { font-size: 30px; line-height: 1.15; margin: 0 0 6px; }
+  .lede { font-size: 22px; line-height: 1.5; color: var(--soft); margin: 0 0 34px; }
+  section.band { padding: 96px 0 40px; }
+  figure { margin: 0; }
+  figcaption { font-size: 15px; line-height: 1.45; color: var(--soft); font-style: italic; margin-top: 8px; }
+
+  /* hero: the lake over today */
+  .hero { position: relative; height: 94vh; min-height: 600px; background: #2b3528; }
+  #hero-map { position: absolute; inset: 0; }
+  .hero-card { position: absolute; left: 32px; bottom: 40px; z-index: 500; max-width: 560px; background: rgba(243,236,218,.96); padding: 30px 34px 26px; box-shadow: 0 12px 40px rgba(0,0,0,.4); border-top: 6px solid var(--seal); }
+  .hero-card .for { font-style: italic; color: var(--seal); font-size: 16px; margin: 0 0 10px; }
+  .hero-card h1 { font-size: clamp(46px, 6vw, 74px); line-height: .98; margin: 0 0 16px; }
+  .hero-card p { margin: 0 0 14px; font-size: 18px; }
+  .hero-card .still { font-style: italic; }
+  .toggle { font: 700 15px "Caslon", Georgia, serif; color: var(--paper); background: var(--ink); border: 0; padding: 9px 14px 8px; cursor: pointer; border-radius: 2px; }
+  .toggle[aria-pressed="true"] { background: var(--seal); }
+  .hero-key { position: absolute; right: 22px; top: 22px; z-index: 500; background: rgba(243,236,218,.94); padding: 10px 14px; font-size: 14px; line-height: 1.5; }
+  .sw { display: inline-block; width: 26px; height: 12px; vertical-align: -1px; margin-right: 8px; border: 2px solid #fff; }
+
+  /* who */
+  .who { display: grid; grid-template-columns: minmax(0, 680px) minmax(0, 1fr); gap: 56px; align-items: start; }
+  .facts { list-style: none; margin: 0; padding: 0; }
+  .facts li { padding: 18px 0 18px; border-top: 1px solid var(--rule); }
+  .facts li:last-child { border-bottom: 1px solid var(--rule); }
+  .facts b { display: block; font-size: 22px; line-height: 1.3; margin-bottom: 4px; }
+  .facts p { margin: 0; }
+  .docs { position: sticky; top: 28px; display: grid; gap: 22px; }
+  .docs img { width: 100%; display: block; border: 1px solid var(--rule); }
+  .journey { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 38px; }
+  .journey img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+
+  /* the lake goes */
+  .drain { display: grid; grid-template-columns: minmax(0, 680px) minmax(0, 1fr); gap: 56px; align-items: start; }
+  .years { list-style: none; margin: 0; padding: 0; }
+  .years li { display: grid; grid-template-columns: 112px 1fr; gap: 18px; padding: 12px 0; border-top: 1px solid var(--rule); }
+  .years .y { font-weight: 700; color: var(--seal); font-size: 20px; }
+  .years p { margin: 0; }
+  .drain figure { position: sticky; top: 28px; }
+  .drain figure img { width: 100%; display: block; }
+
+  /* the proposal: items scroll, the map stays */
+  .proposal { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); background: var(--paper2); margin-top: 40px; }
+  .p-items { padding: 0 48px 80px max(32px, calc((100vw - 1160px) / 2 + 32px)); }
+  .p-intro { padding: 96px 0 30px; }
+  .p-map-wrap { position: sticky; top: 0; height: 100vh; }
+  #p-map { position: absolute; inset: 0; }
+  .p-map-ctl { position: absolute; left: 14px; bottom: 30px; z-index: 500; background: rgba(243,236,218,.95); padding: 10px 14px; font-size: 14px; line-height: 1.5; }
+  .p-map-ctl label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+  .item { padding: 54px 0 46px; border-top: 2px solid var(--ink); scroll-margin-top: 20px; }
+  .item h3 button { all: unset; cursor: pointer; }
+  .item h3 button:hover { color: var(--seal); }
+  .item h3 button:focus-visible { outline: 3px solid var(--water); outline-offset: 3px; }
+  .item .now { font-style: italic; color: var(--soft); margin: 0 0 16px; }
+  .item dl { display: grid; grid-template-columns: 128px 1fr; gap: 6px 18px; margin: 0 0 22px; font-size: 17px; }
+  .item dt { font-style: italic; color: var(--soft); }
+  .item dd { margin: 0; }
+  .item p { margin: 0 0 14px; }
+  .mock { margin: 26px 0 6px; }
+  .mock img { width: 100%; display: block; }
+  .mock.signs img { background: #e0d5b8; padding: 22px 26px 6px; }
+  .mock.small img { max-width: 360px; margin: 0 auto; }
+  .mock-pair { display: grid; grid-template-columns: 150px 1fr; gap: 22px; align-items: center; }
+  .mock-pair img { width: 150px; }
+  .legend { font-size: 14px; line-height: 1.6; margin-top: 8px; }
+  .legend .ln { display: inline-block; width: 28px; height: 0; border-top: 5px solid var(--seal); vertical-align: 4px; margin-right: 6px; }
+
+  /* why */
+  .why { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; list-style: none; padding: 0; margin: 0; }
+  .why li { padding: 20px 0; border-top: 1px solid var(--rule); }
+  .why b { display: block; font-size: 22px; margin-bottom: 4px; }
+
+  /* the ask */
+  .asks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; }
+  .ask { padding: 22px 0 10px; border-top: 2px solid var(--ink); }
+  .ask h3 { font-size: 26px; }
+  .ask .via { font-style: italic; color: var(--soft); font-size: 16px; margin: 0 0 10px; }
+  .ask ol { margin: 0 0 18px; padding-left: 24px; }
+  .ask li { margin-bottom: 8px; }
+  .ask li::marker { color: var(--seal); font-weight: 700; }
+  .contact { margin: 46px 0 0; padding: 26px 30px; background: var(--ink); color: var(--paper); display: flex; gap: 28px; align-items: center; }
+  .contact img { width: 84px; flex: none; filter: invert(1) sepia(.3); }
+  .contact p { margin: 0; font-size: 20px; }
+  .contact a { color: #f0c9a8; }
+
+  /* sources */
+  .sources { columns: 2; column-gap: 48px; font-size: 15px; line-height: 1.5; padding-left: 22px; margin: 0; }
+  .sources li { break-inside: avoid; margin-bottom: 10px; }
+  .sources li:target { background: #fff3c4; }
+  footer.end { padding: 40px 0 70px; font-size: 15px; color: var(--soft); }
+
+  @media (max-width: 960px) {
+    .who, .drain { grid-template-columns: 1fr; gap: 30px; }
+    .docs, .drain figure { position: static; }
+    .docs { grid-template-columns: 1fr 1fr; }
+    .proposal { grid-template-columns: 1fr; }
+    .p-map-wrap { position: sticky; top: 0; height: 46vh; order: -1; z-index: 600; }
+    .p-items { padding: 0 24px 60px; }
+    .p-intro { padding-top: 40px; }
+    .why, .asks { grid-template-columns: 1fr; }
+    .sources { columns: 1; }
+    .journey { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 18px; }
+    .wrap { padding: 0 20px; }
+    .hero { height: auto; min-height: 0; display: flex; flex-direction: column; }
+    #hero-map { position: relative; height: 62vh; }
+    .hero-card { position: relative; left: 0; bottom: 0; max-width: none; box-shadow: none; padding: 24px 20px; }
+    .hero-key { display: none; }
+    .item dl { grid-template-columns: 1fr; gap: 0; }
+    .item dt { margin-top: 8px; }
+    .mock-pair { grid-template-columns: 1fr; }
+    .contact { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero" data-shot="1-hook">
+  <div id="hero-map" role="img" aria-label="Satellite map of Vadnais Heights with the 1847 shoreline of Lambert Lake drawn over it: a ring-shaped lake around a large island"></div>
+  <div class="hero-key">
+    <div><span class="sw" style="background:rgba(143,195,209,.6);border-color:#cfe9f1"></span>Lambert Lake, 1847–48 survey</div>
+    <div><span class="sw" style="background:none;border:0;border-top:3px solid #2f6f9c;height:0;vertical-align:4px"></span>Lambert Creek today</div>
+  </div>
+  <div class="hero-card">
+    <p class="for">A proposal for Vadnais Heights, Little Canada, Ramsey County and St. John the Evangelist parish</p>
+    <h1>There was a lake here.</h1>
+    <p>In 1847 federal surveyors mapped a ring-shaped lake of about 630 acres, with a 97-acre island in the middle.<sup><a href="#s2">2</a></sup> It lay where north-central Vadnais Heights is today: its neighborhoods, Community Park, an elementary school and Lambert Creek.</p>
+    <p class="still">The lake was drained between 1870 and the 1930s. Its name survives only on the creek.</p>
+    <button class="toggle" id="plat-toggle" aria-pressed="false">Show the 1847 survey plat</button>
+  </div>
+</header>
+
+<main>
+<section class="band wrap" id="who" data-shot="2-who">
+  <div class="who">
+    <div>
+      <h2>Who Abraham Lambert was</h2>
+      <p class="lede">The lake took its name from the family that first owned its island. Abraham Lambert (1792–1875) was a French-Canadian farmer who settled at Little Canada in 1845.</p>
+      <ul class="facts">
+        <li><b>The first owner of this land.</b><p>On 25 March 1849 the United States issued him two land patents, in the name of President Zachary Taylor: lots 6 and 7 of section 29, which together are the island, and lots 1 and 2 of section 8, his farm on Lake Gervais. The island patent is the earliest at the lake, four years ahead of any other.<sup><a href="#s1">1</a></sup></p></li>
+        <li><b>One of Little Canada's founding families.</b><p>Benjamin Gervais was Little Canada's first settler, in 1844.<sup><a href="#s7">7</a></sup> The Lamberts came the next year with their son-in-law Alexander Ducharme, the second settler, and took up land along the south shore of Lake Gervais as Gervais's neighbors.<sup><a href="#s4">4</a></sup></p></li>
+        <li><b>He gave the land for St. John's Cemetery, and is buried there.</b><p>About twenty acres along the west line of his claim, and logs from his land for the parish's log church of 1851.<sup><a href="#s4">4</a>,<a href="#s5">5</a></sup> He served as an election judge for Little Canada in 1850 and 1851.<sup><a href="#s6">6</a></sup></p></li>
+        <li><b>Remembered as Little Canada's first postmaster.</b><p>An 1857 St. Paul newspaper records the founding of the Little Canada post office "and abraham lambert appointed."<sup><a href="#s6">6</a></sup> We are confirming the date against the National Archives appointment record before the title goes on any sign.</p></li>
+        <li><b>A four-year journey to get here.</b><p>He left Lower Canada in 1841 with his wife, Angélique Demers, and six children. They wintered at St. Louis, went north to the Red River settlement meaning to go on to Oregon, gave that up, and came back south to settle here in 1845.<sup><a href="#s3">3</a></sup></p></li>
+        <li><b>The name.</b><p>By 1867 the county map lettered the water "Lamberts Lake."<sup><a href="#s8">8</a></sup> The 1881 county history credits a Louis Lambert, "who purchased a portion of the island"; the only recorded purchase of the island is Abraham's.<sup><a href="#s3">3</a>,<a href="#s1">1</a></sup></p></li>
+      </ul>
+      <div class="journey">
+        <figure><img src="../img/journey/levis.jpg" alt="Quebec seen from the Lévis shore, about 1838" loading="lazy"><figcaption>Lévis, across from Quebec, where the journey began. W. H. Bartlett, c. 1838.</figcaption></figure>
+        <figure><img src="../img/journey/stlouis-asis.jpg" alt="St. Louis from the Illinois shore, 1840" loading="lazy"><figcaption>St. Louis, their first winter. J. C. Wild, 1840.</figcaption></figure>
+        <figure><img src="../img/journey/redriver-asis.jpg" alt="Fort Garry and St. Boniface on the Red River" loading="lazy"><figcaption>St. Boniface, Red River, 1841–45. Paul Kane, sketched 1846.</figcaption></figure>
+      </div>
+    </div>
+    <div class="docs">
+      <figure><img src="../img/1849-patent-island-page.jpg" alt="The 1849 federal land patent for the island lots, issued to Abraham Lombert" loading="lazy"><figcaption>The island patent, 25 March 1849. The clerk spelled the name "Lombert." Bureau of Land Management, General Land Office Records.</figcaption></figure>
+      <figure><img src="../img/1855-plat-island-lots-6-7.jpg" alt="The island on the government survey plat, lots 6 and 7" loading="lazy"><figcaption>The island on the government survey plat: lots 6 and 7, 58.69 and 35.70 acres, which add up to the patent's 94.39.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band wrap" id="lake" data-shot="3-lake">
+  <div class="drain">
+    <div>
+      <h2>What happened to the lake</h2>
+      <p class="lede">It was drained in stages over sixty years: for the city's water, then for a farm, then for house lots. It is a short, local history of how the suburbs north of St. Paul were made, and every stage left a mark residents can still find.</p>
+      <ul class="years">
+        <li><span class="y">1847–48</span><p>Federal surveyors walk the shore and map a ring lake around an island.<sup><a href="#s2">2</a></sup></p></li>
+        <li><span class="y">1870</span><p>The St. Paul Water Company cuts a canal from Lambert Lake to Vadnais Lake to feed the city's water. The lake sat higher than Vadnais, so the canal drained it.<sup><a href="#s3">3</a></sup></p></li>
+        <li><span class="y">1881</span><p>The county history reports it "drained into Vadnais lake, so much so that a large portion is now occupied as meadow lands."<sup><a href="#s3">3</a></sup></p></li>
+        <li><span class="y">1893–94</span><p>A. K. Barnum, who owned the island and most of the shore, has a 5,963-foot ditch dug to Vadnais "for the purpose of draining" the lake. The bill ends up before the Minnesota Supreme Court.<sup><a href="#s9">9</a></sup></p></li>
+        <li><span class="y">1899</span><p>Government mapmakers find only marsh.<sup><a href="#s10">10</a></sup></p></li>
+        <li><span class="y">1916</span><p>Ramsey County digs County Ditches 13 and 14 through the old bed, with laterals in 1927.<sup><a href="#s11">11</a></sup></p></li>
+        <li><span class="y">1930s–40s</span><p>House lots are platted and sold on the dry ground.<sup><a href="#s12">12</a></sup></p></li>
+        <li><span class="y">1986</span><p>The county ditches pass to the Vadnais Lake Area Water Management Organization (VLAWMO). County Ditch 14 is Lambert Creek.<sup><a href="#s11">11</a></sup></p></li>
+        <li><span class="y">2005, 2021</span><p>VLAWMO builds the Lambert Lake Pond and digs the creek's bends back in. The creek feeds East Vadnais Lake, St. Paul's drinking-water reservoir.<sup><a href="#s11">11</a></sup></p></li>
+        <li><span class="y">Today</span><p>About 440 private lots, Vadnais Heights Elementary, Community Park and Elmwood Park stand on the old bed.<sup><a href="#s15">15</a></sup> Less than an acre of open water is still listed by the state as Lambert Lake.<sup><a href="#s13">13</a></sup></p></li>
+      </ul>
+    </div>
+    <figure>
+      <img src="../img/lambert-basin-lidar.png" alt="Shaded elevation map showing the hollow of the old lake basin and the hill of the island" loading="lazy">
+      <figcaption>The basin today, from Minnesota's LiDAR elevation survey: the hollow of the ring and the hill of the island are still in the ground.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="proposal" id="proposal">
+  <div class="p-items">
+    <div class="p-intro prose" data-step="all">
+      <h2>The proposal</h2>
+      <p class="lede">Five places, each on public or church land, each on the old lake or on Abraham Lambert's 1849 land. Four ask only for a name or a sign. The fifth asks the city to name a trail it is already planning, and to consider carrying it across the old lakebed.</p>
+    </div>
+
+    <article class="item" id="island-park" data-step="elmwood" data-shot="4a-island-park">
+      <h3><button data-fly="elmwood">Lambert Island Park</button></h3>
+      <p class="now">Today: Elmwood Park, City of Vadnais Heights</p>
+      <dl>
+        <dt>Where</dt><dd>3892 Elmwood St, 0.69 acres, on the old island</dd>
+        <dt>Decides</dt><dd>Park, Recreation &amp; Trails Commission, then City Council</dd>
+        <dt>The ask</dt><dd>Rename the park. Smaller versions: name the new shelter, or add a "Lambert Island, 1849" panel.</dd>
+      </dl>
+      <p>Elmwood Park is the only public land on the island Abraham Lambert bought in 1849.<sup><a href="#s15">15</a></sup> The city's park plan adds a picnic shelter here, due in fall 2026,<sup><a href="#s14">14</a></sup> so a new sign can go in with work already scheduled. "Elmwood" is the street; "Lambert Island" names the place.</p>
+      <figure class="mock signs"><img src="mockups/sign-lambert-island-park.png" alt="Mockup of a park entrance sign reading Lambert Island Park, City of Vadnais Heights" loading="lazy"><figcaption>Entrance sign mockup. The style is generic; the city's own sign standard would apply.</figcaption></figure>
+    </article>
+
+    <article class="item" id="lake-park" data-step="community" data-shot="4b-lake-park">
+      <h3><button data-fly="community">Lambert Lake Park</button></h3>
+      <p class="now">Today: Community Park, City of Vadnais Heights</p>
+      <dl>
+        <dt>Where</dt><dd>641 County Rd F E, about 35 acres, 34.7 of them inside the old lake</dd>
+        <dt>Decides</dt><dd>Park, Recreation &amp; Trails Commission, then City Council</dd>
+        <dt>The ask</dt><dd>Rename the park, and put up an interpretive panel showing the old shoreline.</dd>
+      </dl>
+      <p>The largest public piece of the lakebed. The city's plan notes that the park "was constructed on poor soils and landfill materials":<sup><a href="#s14">14</a></sup> that is the old lake bottom. "Community Park" is a generic name, so the rename costs residents nothing they are attached to, and gives the park a story.</p>
+      <figure class="mock signs"><img src="mockups/sign-lambert-lake-park.png" alt="Mockup of a park entrance sign reading Lambert Lake Park" loading="lazy"></figure>
+      <figure class="mock"><img src="mockups/panel-lambert-lake-park.png" alt="Mockup of a 36 by 24 inch interpretive panel titled There was a lake here, with a map of the 1847 lake over today's satellite image" loading="lazy"><figcaption>Interpretive panel mockup, 36 × 24 in.: the 1847 lake over today, three short paragraphs, the survey plat and credits.</figcaption></figure>
+    </article>
+
+    <article class="item" id="trail" data-step="trail" data-shot="4c-trail">
+      <h3><button data-fly="trail">Lambert Lake Trail</button></h3>
+      <p class="now">A route across the old lakebed, about 2.3 km (1.5 miles)</p>
+      <dl>
+        <dt>Route</dt><dd>From Community Park, where the city's planned boardwalk to Kohler Meadows begins, along the city's strips beside County Rd F; sidewalk past two stretches of house lots (about 450 m and 210 m); through Lambert Island Park; boardwalk along Lambert Creek on 45 acres of city land.</dd>
+        <dt>Decides</dt><dd>City of Vadnais Heights, with VLAWMO (the creek is County Ditch 14) and, for any wetland work, the DNR and the Army Corps of Engineers</dd>
+        <dt>The ask</dt><dd>Name the planned boardwalk and its links the Lambert Lake Trail, and add the route across the lakebed to the plan's long-term list.</dd>
+      </dl>
+      <p>The city's 2025 plan sets the goal to "add boardwalks to access wetlands as an amenity," and residents named "connecting trails/boardwalks through the wetland north of Community Park" among their most popular routes. The January 2026 addendum plans the link from Community Park to Kohler Meadows.<sup><a href="#s14">14</a></sup> Most of this route is already city land. Where houses stand on the old lake, it follows sidewalks.<sup><a href="#s15">15</a></sup></p>
+      <p class="legend"><span class="ln"></span>proposed trail and boardwalk <span class="ln" style="border-top:4px dotted #fff;background:#6b6b6b;margin-left:14px"></span>sidewalk link past house lots. Toggle the city's own 2025 trail priorities on the map.</p>
+      <figure class="mock"><img src="mockups/boardwalk-lambert-lake-trail.png" alt="Illustrated section of a boardwalk on helical piles over the old lakebed, with the 1847 water level marked above it and a trail marker post" loading="lazy"><figcaption>Boardwalk section mockup. The dashed line is roughly where the lake's surface stood in 1847.</figcaption></figure>
+      <figure class="mock mock-pair"><img src="mockups/marker-lambert-lake-trail.png" alt="Trail marker post reading Lambert Lake Trail with the ring-lake logo" loading="lazy"><figcaption>Trail marker mockup: the ring-lake shape from the 1847 survey as the trail's mark, with a pointer to the next named stop.</figcaption></figure>
+    </article>
+
+    <article class="item" id="cemetery" data-step="cemetery" data-shot="4d-cemetery">
+      <h3><button data-fly="cemetery">A plaque at St. John's Cemetery</button></h3>
+      <p class="now">St. John the Evangelist parish, Little Canada</p>
+      <dl>
+        <dt>Where</dt><dd>The cemetery, 19.2 acres; 19.0 of them lie on Abraham Lambert's 1849 lots</dd>
+        <dt>Decides</dt><dd>The parish</dd>
+        <dt>The ask</dt><dd>A plaque marking his gift of the land.</dd>
+      </dl>
+      <p>He gave the land for the cemetery and is buried in it.<sup><a href="#s4">4</a>,<a href="#s5">5</a>,<a href="#s15">15</a></sup> This is church land, so it needs no public action.</p>
+      <figure class="mock small"><img src="mockups/plaque-st-johns-cemetery.png" alt="Mockup of a bronze plaque for Abraham Lambert at St. John's Cemetery" loading="lazy" style="max-width:520px"></figure>
+    </article>
+
+    <article class="item" id="county-park" data-step="county-park" data-shot="4e-county-park">
+      <h3><button data-fly="county-park">Gervais–Lambert Park</button></h3>
+      <p class="now">Today: Lake Gervais County Park, Ramsey County</p>
+      <dl>
+        <dt>Where</dt><dd>2394 Edgerton St, Little Canada, 4.15 acres; 2.48 of them are Abraham Lambert's 1849 farm</dd>
+        <dt>Decides</dt><dd>Ramsey County Parks &amp; Recreation, the Parks &amp; Recreation Commission, then the County Board</dd>
+        <dt>The ask</dt><dd>Name the playground for the Lambert farm and add a sign about both founding families. Or, larger: add the Lambert name beside Gervais's, "Gervais–Lambert Park."</dd>
+      </dl>
+      <p>More than half of this park is the farm Abraham Lambert bought in 1849.<sup><a href="#s15">15</a></sup> The proposal does not take Gervais's name off anything. It puts two founding families of Little Canada side by side on one shore: the first settler and his neighbor.</p>
+      <figure class="mock signs"><img src="mockups/sign-gervais-lambert-park.png" alt="Mockup of a county park sign reading Gervais-Lambert Park at Lake Gervais" loading="lazy"></figure>
+    </article>
+  </div>
+  <div class="p-map-wrap">
+    <div id="p-map" role="img" aria-label="Map of the five proposed sites, the proposed trail and the 1847 lake"></div>
+    <div class="p-map-ctl">
+      <label><input type="checkbox" id="plan-toggle"> City's 2025 trail priorities (Fig. 6.1, placed approximately)</label>
+    </div>
+  </div>
+</section>
+
+<section class="band wrap" id="why" data-shot="5-why">
+  <h2>Why it's worth doing</h2>
+  <p class="lede prose">This is a request for names and signs, not land or a new program.</p>
+  <ul class="why">
+    <li><b>It costs little.</b>Every site is already public or church land. The asks are names, signs, a panel and a plaque.</li>
+    <li><b>It rides on work already planned.</b>The Elmwood Park shelter is due in fall 2026. The Community Park boardwalk and the Kohler Meadows link are in the 2025 plan and its 2026 addendum.<sup><a href="#s14">14</a></sup></li>
+    <li><b>It gives schools a story they can walk to.</b>Vadnais Heights Elementary stands on 9.2 acres of the old lakebed.<sup><a href="#s15">15</a></sup> A survey line, a canal, a ditch, a lawsuit and a creek given its bends back are local history, geography and water science in one walk.</li>
+    <li><b>It gives a new trail an identity.</b>A named route with a story is easier to sign, map and promote than a connector. The name is already on the creek, a street and a plat; no park in either city carries it.</li>
+    <li><b>Grant money exists for it.</b>Minnesota's Legacy Amendment (the Arts &amp; Cultural Heritage Fund) pays for local historical markers, usually with a local historical society applying.<sup><a href="#s17">17</a></sup></li>
+    <li><b>The partners are already here.</b>The Little Canada Historical Society, VLAWMO, which is restoring Lambert Creek, and the Ramsey County Historical Society, which published the 1964 history this rests on.</li>
+  </ul>
+</section>
+
+<section class="band wrap" id="ask" data-shot="6-ask">
+  <h2>The ask</h2>
+  <p class="lede prose">Each body is asked only for what is in its hands. The smaller versions are listed too; any one of them is worth doing.</p>
+  <div class="asks">
+    <div class="ask">
+      <h3>City of Vadnais Heights</h3>
+      <p class="via">Park, Recreation &amp; Trails Commission, then City Council</p>
+      <ol>
+        <li>Rename Elmwood Park "Lambert Island Park," timed with the new shelter. Or name the shelter, or add a panel.</li>
+        <li>Rename Community Park "Lambert Lake Park," with an interpretive panel showing the 1847 shoreline.</li>
+        <li>Name the planned boardwalk and its links the "Lambert Lake Trail," and add the route across the old lakebed to the plan's long-term list.</li>
+      </ol>
+    </div>
+    <div class="ask">
+      <h3>Ramsey County</h3>
+      <p class="via">Parks &amp; Recreation, the Parks &amp; Recreation Commission, the County Board</p>
+      <ol>
+        <li>Name the Lake Gervais playground for the Lambert farm, and add a sign about the Gervais and Lambert families.</li>
+        <li>Consider "Gervais–Lambert Park" as the park's name.</li>
+      </ol>
+    </div>
+    <div class="ask">
+      <h3>City of Little Canada</h3>
+      <p class="via">City Council</p>
+      <ol>
+        <li>A resolution or letter supporting the county request at Lake Gervais.</li>
+      </ol>
+    </div>
+    <div class="ask">
+      <h3>St. John the Evangelist parish</h3>
+      <p class="via">Little Canada</p>
+      <ol>
+        <li>Permission for a plaque at the cemetery marking Abraham Lambert's gift of the land.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="contact">
+    <img src="../img/lambert-lake-logo.svg" alt="">
+    <p>Eric Richey, a descendant of Abraham Lambert who lives next to the old lake. [contact]<br>The full story, with every map: <a href="https://millwrightsoftware.com/lambert-lake/">millwrightsoftware.com/lambert-lake</a></p>
+  </div>
+</section>
+
+<section class="band wrap" id="sources" data-shot="7-sources">
+  <h2>Sources</h2>
+  <p class="lede prose">Every claim above traces to one of these. Where the record is unsettled, the text says so.</p>
+  <ol class="sources">
+    <li id="s1">Bureau of Land Management, General Land Office Records: patent to "Abraham Lombert," lots 6 and 7, sec. 29, T30N R22W, 94.39 acres, Falls St. Croix certificate 137, 25 March 1849 (accession MN2090__.032); patent to Abraham Lambert, lots 1 and 2, sec. 8, T29N R22W, 91.25 acres, certificate 59, same day (MN2090__.005). Every other federal patent in the four sections around the lake dates from 1853 to 1856. <a href="https://glorecords.blm.gov/">glorecords.blm.gov</a></li>
+    <li id="s2">Government survey plat of T30N R22W, surveyed 1847–48 (MnGeo georeferenced GLO plats; Minnesota Historical Society). The traced shoreline encloses about 530 acres of water and a 97-acre island; the island lots are 58.69 and 35.70 acres.</li>
+    <li id="s3">Edward D. Neill, <i>History of Ramsey County and the City of St. Paul</i> (1881), p. 281 (the lake's name; "drained into Vadnais lake… meadow lands"), p. 289 (the family's route, 1841–45), p. 434 (the St. Paul Water Company's 1870 canal). <a href="https://archive.org/details/historyoframseyc00warn">archive.org</a></li>
+    <li id="s4">Margaret Whitney Wall, "Little Canada: Heritage from the French," <i>Ramsey County History</i> 1:2 (Fall 1964), pp. 10–12: Gervais the founder, Ducharme the second settler, the Lamberts' arrival with the Ducharmes, the cemetery gift, the church timbers. <a href="https://rchs.com/wp-content/uploads/2015/11/RCHS_Fall1964_Wall.pdf">rchs.com (PDF)</a></li>
+    <li id="s5">Abraham Lambert's gravestone, St. John the Evangelist Cemetery, Little Canada, as transcribed on Find a Grave, memorial 50657843: the "20 acre strip of land along the west line of his claim," the logs for the 1851 church. <a href="https://www.findagrave.com/memorial/50657843/abraham-lambert">findagrave.com</a></li>
+    <li id="s6"><i>Minnesota Pioneer</i>, 10 April 1850, p. 3, and <i>Minnesotian</i>, 17 January 1852, p. 3 (election judge); <i>Weekly Minnesotian</i>, 1 August 1857, p. 4 (the Little Canada post office). Library of Congress, Chronicling America. <a href="https://www.loc.gov/resource/sn83016750/1857-08-01/ed-1/?sp=4">loc.gov</a>. The National Archives postmaster appointment record is still to be checked.</li>
+    <li id="s7">Warren Upham, <i>Minnesota Place Names</i> (Minnesota Historical Society): "the first settler was … Benjamin Gervais, who came in 1844." Also City of Little Canada, Historical Society page.</li>
+    <li id="s8">L. G. Bennett, <i>Map of Ramsey County</i> (1867), University of Minnesota Libraries, UMedia.</li>
+    <li id="s9"><i>Swank v. Barnum</i>, 63 Minn. 447 (1896), Minnesota Supreme Court: the 5,963-foot ditch of 1893–94.</li>
+    <li id="s10">U.S. Geological Survey, White Bear 1:62,500 topographic quadrangle (surveyed 1899, published 1902).</li>
+    <li id="s11">Vadnais Lake Area Water Management Organization: watershed plan, Appendix B (County Ditches 13 and 14, 1916; laterals 1927); Lambert Creek, Lambert Lake Pond and history pages (the 1986 transfer, the 2005 pond, the 2020–21 meander). <a href="https://www.vlawmo.org/explore/waterbodies/lambert-creek">vlawmo.org</a></li>
+    <li id="s12">Minnesota Historical Society, Davidson Company papers (Stockdale Farms plats, about 1933–48); <i>Atlas of Ramsey County</i>, St. Paul Real Estate Board (1931).</li>
+    <li id="s13">Minnesota DNR Public Waters Inventory, basin 62-30, Lambert Lake (0.68 acre).</li>
+    <li id="s14">City of Vadnais Heights, <i>Parks &amp; Trail System Plan</i>, approved 1 April 2025, and its addendum of 6 January 2026: Elmwood Park's shelter ($93,500, fall 2026), Community Park's soils and boardwalk, the system goals, the public-engagement results, Figure 6.1. <a href="https://www.cityvadnaisheights.com/992/Parks-Trail-System-Plan">cityvadnaisheights.com</a></li>
+    <li id="s15">Ramsey County parcel data (ParcelData/AttributedData), queried October 2026, clipped to the 1847–48 shoreline and to Abraham Lambert's 1849 lots: ownership and acreage of every site above. Trail lengths are measured on the same data and are approximate.</li>
+    <li id="s16">Ramsey County Parks &amp; Recreation, Lake Gervais County Park page. <a href="https://www.ramseycountymn.gov/residents/parks-recreation/parks-trails/find-park/lake-gervais-county-park">ramseycountymn.gov</a></li>
+    <li id="s17">Minnesota's Legacy Amendment, Arts &amp; Cultural Heritage Fund: local historical marker grants, e.g. the White Bear Lake Area Historical Society's markers. <a href="https://www.legacy.mn.gov/node/10025016">legacy.mn.gov</a></li>
+  </ol>
+  <p style="font-size:15px;color:var(--soft);margin-top:24px">Images: W. H. Bartlett, "Quebec, from the opposite shore of the St. Lawrence," in N. P. Willis, <i>Canadian Scenery Illustrated</i> (1842), Internet Archive; J. C. Wild, "Southeast View of St. Louis from the Illinois Shore," 1840, Missouri Historical Society; Paul Kane, "Fort Garry and St. Boniface," c. 1851–56, National Gallery of Canada. Satellite imagery: Esri. Elevation: Minnesota LiDAR. Sign, panel, plaque and boardwalk drawings are mockups for discussion.</p>
+</section>
+</main>
+
+<footer class="end wrap">The full story of the Lamberts and the lake: <a href="https://millwrightsoftware.com/lambert-lake/">millwrightsoftware.com/lambert-lake</a></footer>
+
+<script src="../vendor/leaflet.js"></script>
+<script src="map.js"></script>
+<script>
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Hero: the 1847 lake over today, with the survey plat on demand
+const hero = L.map("hero-map", { scrollWheelZoom: false, zoomSnap: 0.25, zoomControl: true });
+satellite(hero);
+const plat = plat1856();
+loadLayers(hero, { trail: false, lots: false, tooltips: false, creekLand: false, fill: .45 }).then(H => {
+  const fit = () => {
+    const narrow = innerWidth < 600, mid = innerWidth < 1100;
+    hero.fitBounds(H.lake.getBounds(), narrow ? { padding: [16, 16] } : { paddingTopLeft: [mid ? 360 : 560, 40], paddingBottomRight: [40, 40] });
+  };
+  fit();
+  label(hero, [45.0592, -93.0752], "the island", "isl", "center");
+  label(hero, [45.0548, -93.0660], "Lambert Creek", "isl", "right");
+  const btn = document.getElementById("plat-toggle");
+  btn.onclick = () => {
+    const on = btn.getAttribute("aria-pressed") !== "true";
+    btn.setAttribute("aria-pressed", on);
+    btn.textContent = on ? "Show today's satellite" : "Show the 1847 survey plat";
+    if (on) { plat.addTo(hero); H.lake.setStyle({ fillOpacity: 0 }); } else { hero.removeLayer(plat); H.lake.setStyle({ fillOpacity: .45 }); }
+  };
+});
+
+// The proposal map: the five sites and the trail; it follows the reader
+const pm = L.map("p-map", { scrollWheelZoom: false, zoomSnap: 0.25 });
+satellite(pm);
+const planImg = L.imageOverlay("../img/plan/vh-trail-priorities-fig06-1.jpg", [[45.033409, -93.112526], [45.080577, -93.026266]], { opacity: .8 });
+document.getElementById("plan-toggle").onchange = e => e.target.checked ? planImg.addTo(pm) : pm.removeLayer(planImg);
+loadLayers(pm, { lots: true }).then(P => {
+  const views = {
+    all: L.featureGroup([P.lake, ...Object.values(P.sites)]).getBounds(),
+    elmwood: P.sites.elmwood.getBounds().pad(5),
+    community: P.lake.getBounds().pad(-.05),
+    trail: L.featureGroup([P.trail]).getBounds().pad(.25),
+    cemetery: L.featureGroup([P.sites.cemetery, P.sites["county-park"]]).getBounds().pad(.25),
+    "county-park": L.featureGroup([P.sites.cemetery, P.sites["county-park"]]).getBounds().pad(.25),
+  };
+  const pins = [
+    ["community", [45.0672, -93.0742], "right"], ["elmwood", [45.0598, -93.0720], "left"],
+    ["creek", [45.0622, -93.0655], "left"], ["cemetery", [45.0190, -93.0800], "right"], ["county-park", [45.0135, -93.0757], "left"]];
+  pins.forEach(([k, at, dir]) => label(pm, at, SITES[k].name, "site", dir));
+  label(pm, [45.0630, -93.0872], "Lambert Lake, 1847", "big", "center");
+  let current = null;
+  const go = step => {
+    if (!views[step] || step === current) return;
+    current = step;
+    reduce ? pm.fitBounds(views[step]) : pm.flyToBounds(views[step], { duration: 1.1, maxZoom: 17 });
+  };
+  pm.fitBounds(views.all);
+  current = "all";
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && go(e.target.dataset.step)),
+    { rootMargin: "-40% 0px -50% 0px" });
+  document.querySelectorAll("[data-step]").forEach(el => io.observe(el));
+  document.querySelectorAll("[data-fly]").forEach(b => b.onclick = () => { current = null; go(b.dataset.fly); });
+  window.READY = true;
+});
+</script>
+</body>
+</html>
