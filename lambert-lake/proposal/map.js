@@ -4,7 +4,7 @@ const C = { paper: "#f3ecda", ink: "#251e15", seal: "#8a2a22", water: "#5f8793",
 
 const SITES = {
   elmwood:      { name: "Lambert Island Park", now: "Elmwood Park" },
-  community:    { name: "Lambert Lake Park", now: "Community Park" },
+  community:    { name: "Lambert Meadows Park", now: "Community Park" },
   creek:        { name: "Lambert Lake Trail", now: "along Lambert Creek" },
   cemetery:     { name: "St. John's Cemetery", now: "a plaque" },
   "county-park":{ name: "Gervais–Lambert Park", now: "Lake Gervais County Park" },
