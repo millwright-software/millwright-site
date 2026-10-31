@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lambert Lake and Vadnais Heights</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<style>
+  @font-face { font-family: "Caslon"; src: url("fonts/LibreCaslonText-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Caslon"; src: url("fonts/LibreCaslonText-700-normal.woff2") format("woff2"); font-weight: 700; }
+  html, body, #map { height: 100%; margin: 0; }
+  .card { position: absolute; z-index: 1000; top: 18px; left: 18px; max-width: 340px; background: rgba(243,236,218,.95);
+    color: #251e15; font: 16px/1.5 "Caslon", Georgia, serif; padding: 16px 20px; border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+  .card h1 { font-size: 22px; margin: 0 0 8px; }
+  .key { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .sw { width: 26px; height: 0; border-top: 4px solid; }
+  .num { color: #5b4f3e; font-size: 14px; margin-top: 10px; }
+  .lbl { background: none; border: none; box-shadow: none; font: 700 14px "Caslon", Georgia, serif; color: #fff; text-shadow: 0 0 4px #000, 0 0 2px #000; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="card">
+  <h1>Lambert Lake and Vadnais Heights</h1>
+  <div class="num" style="margin:-4px 0 8px"><a href="./" style="color:#8a2a22">← Lambert Lake home</a></div>
+  <div class="key"><span class="sw" style="border-color:#e8b33c"></span> Vadnais Heights city limits</div>
+  <div class="key"><span class="sw" style="border-color:#4fb3d9"></span> Lambert Lake, 1847 survey shoreline</div>
+  <div class="key"><span class="sw" style="border-color:#fff;border-top-style:dashed"></span> the island</div>
+  <div class="num">The city is 8.2 square miles (about 5,300 acres). The lake and its island together covered about 630 acres, 12% of today's city. The water alone was about 530 acres, 10%, around a 97-acre island. All of it lies inside the city limits.</div>
+</div>
+<script src="vendor/leaflet.js"></script>
+<script>
+  const map = L.map("map", { zoomSnap: 0.25 }).setView([45.055, -93.08], 13);
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    { maxZoom: 19, attribution: "Imagery: Esri · City limits: OpenStreetMap · Shoreline: 1847 GLO survey" }).addTo(map);
+  Promise.all(["data/vadnais-heights.geojson", "data/lake-1855.geojson"].map(u => fetch(u).then(r => r.json()))).then(([city, lake]) => {
+    const c = L.geoJSON(city, { style: { color: "#e8b33c", weight: 4, fill: true, fillOpacity: 0.08 } }).addTo(map);
+    const ring = lake.features[0].geometry.coordinates;
+    L.polygon(ring.map(r => r.map(p => [p[1], p[0]])), { color: "#4fb3d9", weight: 3, fillColor: "#4fb3d9", fillOpacity: 0.45 }).addTo(map);
+    ring.slice(1).forEach(r => L.polyline(r.map(p => [p[1], p[0]]), { color: "#fff", weight: 2, dashArray: "5 5" }).addTo(map));
+    L.circleMarker([45.0595622, -93.0891043], { radius: 6, color: "#fff", weight: 2, fillColor: "#8a2a22", fillOpacity: 1 }).addTo(map)
+      .bindTooltip("3921 Woodview Ct", { permanent: true, direction: "left", className: "lbl" });
+    L.marker([45.0647845, -93.0762133], { opacity: 0 }).addTo(map)
+      .bindTooltip("Lambert Lake", { permanent: true, direction: "center", className: "lbl" });
+    map.fitBounds(c.getBounds(), { paddingTopLeft: [380, 30], paddingBottomRight: [30, 30] });
+  });
+</script>
+</body>
+</html>

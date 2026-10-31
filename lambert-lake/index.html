@@ -22,6 +22,8 @@
   .lede { color: var(--soft); margin: 0 auto; max-width: 600px; }
   main { max-width: 1120px; margin: -40px auto 0; padding: 0 22px 70px; position: relative; }
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .card.wide { grid-column: 1 / -1; flex-direction: row; }
+  .card.wide .pic { aspect-ratio: auto; flex: 0 0 34%; border-bottom: none; border-right: 4px solid var(--seal); }
   .card { display: flex; flex-direction: column; background: var(--paper); border-radius: 6px; overflow: hidden; text-decoration: none; color: inherit;
     box-shadow: 0 10px 30px rgba(37,30,21,.18); transition: transform .2s, box-shadow .2s; }
   .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(37,30,21,.25); }
@@ -35,7 +37,7 @@
   .note a { color: var(--seal); }
   footer { text-align: center; color: var(--soft); font-size: 14px; padding: 0 0 40px; }
   footer a { color: inherit; }
-  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } main { margin-top: -20px; } }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } main { margin-top: -20px; } .card.wide { flex-direction: column; } .card.wide .pic { aspect-ratio: 4 / 3; border-right: none; border-bottom: 4px solid var(--seal); } }
 </style>
 </head>
 <body>
@@ -74,6 +76,15 @@
         <h2>For Kids</h2>
         <p>Big pictures, short words, a ship, a canoe, steamboats and squeaky ox carts, a folding chair, and the island in the ring-shaped lake. Can you find it when you walk by the creek?</p>
         <div class="go">Start the adventure →</div>
+      </div>
+    </a>
+    <a class="card wide" href="lake-vs-city.html">
+      <div class="pic" style="background-image:url('img/journey/arrive-asis.jpg')"></div>
+      <div class="body">
+        <div class="kicker">One map</div>
+        <h2>The Lake and the City</h2>
+        <p>The lake's 1847 shoreline laid over Vadnais Heights today. With its island, Lambert Lake covered about 630 acres, an eighth of the city.</p>
+        <div class="go">See the map →</div>
       </div>
     </a>
   </div>
