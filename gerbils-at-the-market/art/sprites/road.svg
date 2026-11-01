@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<!-- The Gerbil Market: a winding road across a grassy patch, with a road sign (a shared thing). CC0 (hand-authored).
+     Palette only. Sits on y=496. Drawn lit; the loader makes the dark grey-blue "off" version from this one. -->
+<defs>
+  <linearGradient id="grass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a6d47e"/><stop offset="1" stop-color="#6ea44c"/></linearGradient>
+  <linearGradient id="road" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4e2b8"/><stop offset="1" stop-color="#d9bb80"/></linearGradient>
+</defs>
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M20 470 C 20 380 120 330 256 330 C 392 330 492 380 492 470 C 492 488 470 496 440 496 L 72 496 C 42 496 20 488 20 470 Z" fill="url(#grass)" stroke-width="10"/>
+  <path d="M120 496 C 150 450 330 450 300 404 C 280 374 190 380 214 340 L 252 334 C 236 360 330 364 350 400 C 382 458 210 462 214 496 Z" fill="url(#road)" stroke-width="9"/>
+  <g stroke="#f2c230" stroke-width="10" fill="none"><path d="M176 482 C 196 470 226 462 250 456"/><path d="M296 444 C 316 434 326 420 320 410"/><path d="M290 392 C 276 386 258 380 246 372"/><path d="M230 356 L 236 346"/></g>
+  <rect x="402" y="214" width="16" height="190" fill="#a8743f" stroke-width="7"/>
+  <path d="M410 120 L 468 178 L 410 236 L 352 178 Z" fill="#f2c230" stroke-width="10"/>
+  <path d="M386 196 C 386 166 406 154 426 160 M 416 146 L 430 160 L 416 174" fill="none" stroke-width="10"/>
+  <g fill="#4f9440" stroke-width="7"><circle cx="72" cy="420" r="28"/><circle cx="106" cy="404" r="22"/><circle cx="440" cy="448" r="22"/></g>
+  <g fill="#d7262c" stroke-width="4"><circle cx="76" cy="410" r="7"/><circle cx="108" cy="396" r="6"/></g>
+  <path d="M60 372 C 100 350 150 340 190 338" fill="none" stroke="#ffffff" stroke-width="10" opacity=".55"/>
+</g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<!-- The Gerbil Market: a coin. CC0 (hand-authored). -->
+<g stroke="#3b2516" stroke-linejoin="round">
+  <circle cx="128" cy="128" r="112" fill="#e9a823" stroke-width="10"/>
+  <circle cx="128" cy="128" r="84" fill="#f8cf45" stroke-width="6"/>
+  <path d="M128 70 L 144 110 L 188 112 L 154 138 L 166 182 L 128 156 L 90 182 L 102 138 L 68 112 L 112 110 Z" fill="#fff0a6" stroke-width="6"/>
+  <path d="M60 96 C 72 66 98 48 128 44" fill="none" stroke="#ffffff" stroke-width="10" opacity=".6" stroke-linecap="round"/>
+</g>
+</svg>

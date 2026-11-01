@@ -1,0 +1,814 @@
+{
+  "_about": "Every number and quote the game shows, with where it came from. Net worths move by billions a day; the game rounds and says so. Lego set = $20 (the boys' unit). One money bag = $434 million (21.7 million Lego sets), chosen so Trump's fortune is exactly 15 bags, the number the market needs. Each quote carries a kid_text: our simpler words for a 5- and 7-year-old, shown as 'in kid words' with his exact words underneath. Each boss carries net_worth_as_of: the figures come from different dates (Trump's from March 2026, the others from September and October), so the game shows the date. gain.usd_per_day is how fast a heap grows in the game; it is 0 for a boss whose fortune shrank over the year. The four bosses added 10/31 (Zuckerberg, Page, Walton, Bloomberg) all use the Forbes 400 2026 figure (wealth as of September 4, 2026), and each carries a story object: the one thing he did, in kid words, with its source. Round 3 (10/31): a boss may carry display_name, the name shown and said in play (only walton: 'Rob Walton and family'); on-screen names use display_name || name. Every gate_true item and quote whose words hold a number above ten (a dollar figure, a year, million/billion) also carries play_text and play_why: the same fact with no number, for the voice and the screen in play (the number rule in docs/LESSON-PLAN.md). The original text and why stay as the grown-ups' record on the sources page.",
+  "lego_set_usd": 20,
+  "as_of": "2026-10-31",
+  "bosses": [
+    {
+      "id": "trump",
+      "name": "Donald Trump",
+      "net_worth_usd": 6500000000,
+      "net_worth_label": "$6.5 billion",
+      "net_worth_source": {
+        "title": "Forbes World's Billionaires List 2026 (March 2026)",
+        "url": "https://www.forbes.com/sites/chasewithorn/2026/03/10/forbes-worlds-billionaires-list-2026-the-top-200/",
+        "date": "2026-03-10",
+        "note": "Listed at $6.5B, real estate."
+      },
+      "quotes": [],
+      "gain": {
+        "usd_per_day": 0,
+        "line": "Over the year to September 2026 his pile got smaller: down about $0.3 billion. So in the game his heap does not grow.",
+        "from_usd": 7300000000.0,
+        "to_usd": 7000000000.0,
+        "from_date": "2025-09",
+        "to_date": "2026-09-04",
+        "source": {
+          "title": "The Forbes 400 2026 (Forbes Australia)",
+          "url": "https://www.forbes.com.au/news/billionaires/inside-forbes-ranking-of-the-richest-us-billionaires/",
+          "date": "2026-09-16",
+          "note": "Forbes 400: \"Trump is now worth an estimated $7 billion, down from $7.3 billion a year ago.\" (net worths with share prices from September 4, 2026; the 'a year ago' figure is the 2025 Forbes 400). Confirmed on the page 2026-10-31. Both figures (now and a year ago) are in that one article.",
+          "accessed": "2026-10-31",
+          "url_from": "https://www.forbes.com.au/news/billionaires/inside-forbes-ranking-of-the-richest-us-billionaires/"
+        },
+        "note": "Forbes has him down over the full year, so the heap does not grow (usd_per_day is 0). An earlier version used his March-to-September rise, which made a fortune that shrank over the year look like it was growing."
+      },
+      "media": [
+        {
+          "who": "Donald Trump",
+          "line": "sued CBS over a 60 Minutes interview. In 2025 the company that owned CBS paid him $16 million to end it.",
+          "spoken": "Donald Trump sued CBS over a Sixty Minutes interview. In 2025, the company that owned CBS paid him sixteen million dollars to end it",
+          "source": {
+            "title": "Associated Press (via News4JAX): Paramount and Skydance close their $8 billion merger",
+            "url": "https://www.news4jax.com/business/2025/08/07/paramount-and-skydance-close-their-8-billion-merger-kicking-off-reign-of-new-entertainment-giant/",
+            "date": "2025-08-07",
+            "note": "\"Paramount agreed to pay a $16 million settlement to the president in early July.\" The case was Trump's complaint about a \"60 Minutes\" \"interview with his Democratic opponent,\" then-Vice President Kamala Harris. AP: \"Critics of the settlement lambasted it as a veiled bribe to appease Trump.\" Variety (2025-08-08) also: Paramount agreed to pay $16 million to \"settle his lawsuit against CBS.\" This is the news paying him, not him buying the news; Truth Social was left out because his share of Trump Media is reported at different percentages on different dates."
+          }
+        }
+      ],
+      "net_worth_as_of": "2026-03-01",
+      "gate_true": [
+        {
+          "text": "A TV news company paid him 16 million dollars to end his court case.",
+          "play_text": "A TV news company paid him a giant pile of money to end his court case.",
+          "why": "True. In 2025 the company that owned CBS paid him $16 million to end his lawsuit.",
+          "play_why": "True. The company that owned CBS News paid him a giant pile of money to end his lawsuit.",
+          "from": "bosses.trump.media[0]",
+          "source": {
+            "title": "Associated Press (via News4JAX): Paramount and Skydance close their $8 billion merger",
+            "url": "https://www.news4jax.com/business/2025/08/07/paramount-and-skydance-close-their-8-billion-merger-kicking-off-reign-of-new-entertainment-giant/",
+            "date": "2025-08-07"
+          }
+        },
+        {
+          "text": "He put only 750 dollars in the jar in 2016.",
+          "play_text": "One year he put only a tiny bit in the jar.",
+          "why": "True. The New York Times found he paid $750 of federal income tax in 2016, and again in 2017.",
+          "play_why": "True. A newspaper found he put only a tiny bit of income tax in the jar, and the next year he did it again.",
+          "from": "taxes.items[2]",
+          "source": {
+            "title": "The New York Times, Long-Concealed Records Show Trump's Chronic Losses and Years of Tax Avoidance",
+            "url": "https://www.nytimes.com/interactive/2020/09/27/us/trump-taxes.html",
+            "date": "2020-09-27"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bloomberg",
+      "name": "Michael Bloomberg",
+      "net_worth_usd": 94900000000,
+      "net_worth_label": "$94.9 billion",
+      "net_worth_source": {
+        "title": "Forbes 400 2026, top 50 as reported by Lee Enterprises: Who are the richest Americans today? Forbes drops 2026 ranking",
+        "url": "https://news.lee.net/news/nation-world/business/who-are-the-richest-americans-today-forbes-drops-2026-ranking/article_949accca-08b2-4427-bd60-f5c5d1a667d9.html",
+        "date": "2026-09-27",
+        "note": "Table row: \"16 Michael Bloomberg 84 $94.9 billion Bloomberg LP New York\". \"Forbes formed its 2026 list of the 400 richest Americans using estimates of each person's wealth as of Sept. 4\". Read 2026-10-31. Bloomberg LP is a private company, so Forbes estimates its value.",
+        "accessed": "2026-10-31"
+      },
+      "quotes": [],
+      "gain": {
+        "usd_per_day": 0,
+        "line": "Over the year to September 2026 his pile got smaller: down about $14 billion. So in the game his heap does not grow.",
+        "from_usd": 109000000000.0,
+        "to_usd": 94900000000.0,
+        "from_date": "2025-09-01",
+        "to_date": "2026-09-04",
+        "source": {
+          "title": "Forbes 400 2025 (Patch) and Forbes 400 2026 (Lee Enterprises)",
+          "url_from": "https://patch.com/new-york/across-ny/amp/32928381/56-new-york-billionaires-among-americas-richest-people-see-new-list",
+          "url": "https://news.lee.net/news/nation-world/business/who-are-the-richest-americans-today-forbes-drops-2026-ranking/article_949accca-08b2-4427-bd60-f5c5d1a667d9.html",
+          "date": "2026-09-27",
+          "note": "Patch, 2025-09-09: \"Former New York City mayor Michael Bloomberg, who is worth an estimated $109 billion, is the richest person in New York, according to the Forbes 400 ranking of the wealthiest Americans released Tuesday.\" Forbes 400 2026: \"16 Michael Bloomberg 84 $94.9 billion\" (as of Sept. 4, 2026). $109B - $94.9B = $14.1B down, so usd_per_day is 0. Forbes' World's Billionaires list also had him at $109 billion on March 1, 2026. Read 2026-10-31.",
+          "accessed": "2026-10-31"
+        },
+        "note": "Forbes has him down over the full year, so the heap does not grow (usd_per_day is 0)."
+      },
+      "media": [],
+      "net_worth_as_of": "2026-09-04",
+      "gate_true": [
+        {
+          "text": "He spent more than 1 billion dollars of his own money trying to be president.",
+          "play_text": "He spent a giant pile of his own money trying to be president.",
+          "why": "True. In 2020 he spent more than $1 billion of his own money in about 100 days. That is 50 million Lego sets.",
+          "play_why": "True. He spent a giant pile of his own money in about three months.",
+          "from": "bosses.bloomberg.story",
+          "source": {
+            "title": "ABC News (via KFKA): Mike Bloomberg spent more than $1B on four-month presidential campaign",
+            "url": "https://1310kfka.com/abc-news/politics/04/mike-bloomberg-spent-more-than-1b-on-four-month-presidential-campaign/",
+            "date": "2020-04-21"
+          }
+        },
+        {
+          "text": "After all that money, he won the vote in only one place: American Samoa, islands in the Pacific Ocean.",
+          "why": "True. He won just one contest, in American Samoa, and then he quit.",
+          "from": "bosses.bloomberg.story",
+          "source": {
+            "title": "ABC News (via KFKA): Mike Bloomberg spent more than $1B on four-month presidential campaign",
+            "url": "https://1310kfka.com/abc-news/politics/04/mike-bloomberg-spent-more-than-1b-on-four-month-presidential-campaign/",
+            "date": "2020-04-21"
+          }
+        }
+      ],
+      "story": {
+        "lesson": "He spent more than 1 billion dollars of his own money trying to be president, in about 100 days, and won only one place, American Samoa.",
+        "spoken": "Michael Bloomberg spent more than one billion dollars of his own money trying to be president, in about one hundred days. He won only one place, American Samoa, some islands in the Pacific Ocean.",
+        "place": "A giant campaign stage: TV screens and billboards everywhere, every one showing his face, and balloons and confetti cannons around the heap.",
+        "look": "Short and trim, bald on top with a gray fringe, navy suit and tie; carries a giant megaphone and a stack of VOTE signs with his face on them.",
+        "source": {
+          "title": "ABC News (via KFKA): Mike Bloomberg spent more than $1B on four-month presidential campaign",
+          "url": "https://1310kfka.com/abc-news/politics/04/mike-bloomberg-spent-more-than-1b-on-four-month-presidential-campaign/",
+          "date": "2020-04-21",
+          "note": "Benjamin Siegel and Soo Rin Kim, ABC News: \"Former New York City Mayor Mike Bloomberg spent more than $1 billion on his roughly 100-day presidential run\"; \"Bloomberg poured more than $1 billion of his own money into his White House bid\"; he \"won just 55 delegates in the primary, and only one contest, in American Samoa\". NBC News (2020-03-20) had $936,225,041.67 spent through February, before the final bills. He also gives a great deal away: \"Michael Bloomberg, biggest donor of 2025, tops Philanthropy 50 list for third year in a row\", with $4.3 billion given in 2025 (Chronicle of Philanthropy via AP, 2026-03-10, https://www.news4jax.com/business/2026/03/10/michael-bloomberg-biggest-donor-of-2025-tops-philanthropy-50-list-for-third-year-in-a-row/)."
+        }
+      }
+    },
+    {
+      "id": "walton",
+      "name": "Rob Walton",
+      "display_name": "Rob Walton and family",
+      "net_worth_usd": 132000000000,
+      "net_worth_label": "$132 billion",
+      "net_worth_source": {
+        "title": "Forbes 400 2026, top 50 as reported by Lee Enterprises: Who are the richest Americans today? Forbes drops 2026 ranking",
+        "url": "https://news.lee.net/news/nation-world/business/who-are-the-richest-americans-today-forbes-drops-2026-ranking/article_949accca-08b2-4427-bd60-f5c5d1a667d9.html",
+        "date": "2026-09-27",
+        "note": "Table row: \"11 Rob Walton & family 81 $132 billion Walmart Arkansas\". \"Forbes formed its 2026 list of the 400 richest Americans using estimates of each person's wealth as of Sept. 4\". Read 2026-10-31. Forbes counts him \"& family\". His sister Alice ($118 billion) and brother Jim ($128 billion) are on the same list; the game uses Rob, the eldest son, alone.",
+        "accessed": "2026-10-31"
+      },
+      "quotes": [],
+      "gain": {
+        "usd_per_day": 0,
+        "line": "From March to September 2026 his pile got smaller: down about $14 billion. So in the game his heap does not grow.",
+        "from_usd": 146000000000.0,
+        "to_usd": 132000000000.0,
+        "from_date": "2026-03-01",
+        "to_date": "2026-09-04",
+        "source": {
+          "title": "Forbes World's Billionaires 2026 (Forbes Australia) and Forbes 400 2026 (Lee Enterprises)",
+          "url_from": "https://www.forbes.com.au/news/billionaires/the-forbes-billionaires-list-top-200/",
+          "url": "https://news.lee.net/news/nation-world/business/who-are-the-richest-americans-today-forbes-drops-2026-ranking/article_949accca-08b2-4427-bd60-f5c5d1a667d9.html",
+          "date": "2026-09-27",
+          "note": "World's Billionaires: \"#11 Rob Walton & family, net worth $146 billion\" (\"We used stock prices and exchange rates from March 1, 2026.\"). Forbes 400: \"11 Rob Walton & family 81 $132 billion\" (as of Sept. 4, 2026). $146B - $132B = $14B down, so usd_per_day is 0. His 2025 Forbes 400 figure could not be confirmed (secondary reports differ), so the full-year change is not used; Forbes 400 2026 says Walmart shares were \"up more than 10% since last year,\" so over the full year he may have gained. Read 2026-10-31.",
+          "accessed": "2026-10-31"
+        },
+        "note": "Down from March to September 2026, so the heap does not grow (usd_per_day is 0). The full-year change could not be sourced."
+      },
+      "media": [],
+      "net_worth_as_of": "2026-09-04",
+      "gate_true": [
+        {
+          "text": "His dad started Walmart. He was born into the family that owns it.",
+          "why": "True. Rob Walton is the eldest son of Walmart's founder, Sam Walton. The news calls him a Walmart heir: someone who gets money from their family.",
+          "from": "bosses.walton.story",
+          "source": {
+            "title": "Associated Press (via KOMO News): Walmart heir Rob Walton agrees to buy Broncos in record deal",
+            "url": "https://komonews.com/news/entertainment/walmart-heir-rob-walton-agrees-to-buy-broncos-in-record-deal-nfl-denver-broncos-pro-football-hall-of-fame",
+            "date": "2022-06-08"
+          }
+        },
+        {
+          "text": "Some people who work at Walmart need help from the jar to buy food.",
+          "play_text": "Some people who work at Walmart need help from the jar to buy food.",
+          "why": "True. A 2020 government study looked at nine states. In every one, Walmart was one of the top four employers of workers who got food help (SNAP).",
+          "play_why": "True. A government study looked at nine states. In every one, Walmart was one of the top four employers of workers who got food help.",
+          "from": "bosses.walton.story",
+          "source": {
+            "title": "CNBC: Walmart and McDonald's among top employers of Medicaid and food stamp beneficiaries",
+            "url": "https://www.cnbc.com/2020/11/19/walmart-and-mcdonalds-among-top-employers-of-medicaid-and-food-stamp-beneficiaries.html",
+            "date": "2020-11-19"
+          }
+        },
+        {
+          "text": "He bought a football team, the Denver Broncos, for about 4.65 billion dollars.",
+          "play_text": "He bought a whole football team, the Denver Broncos.",
+          "why": "True. In 2022 the Waltons bought the Broncos, then the most expensive deal for a sports team anywhere. That is 232 million Lego sets.",
+          "play_why": "True. The Walton family bought the Broncos. Nobody had ever paid more for a sports team.",
+          "from": "bosses.walton.story",
+          "source": {
+            "title": "Associated Press (via KOMO News): Walmart heir Rob Walton agrees to buy Broncos in record deal",
+            "url": "https://komonews.com/news/entertainment/walmart-heir-rob-walton-agrees-to-buy-broncos-in-record-deal-nfl-denver-broncos-pro-football-hall-of-fame",
+            "date": "2022-06-08"
+          }
+        }
+      ],
+      "story": {
+        "lesson": "His dad started Walmart, and Rob was born into the family that owns it, while some people who work in its stores need help from the jar to buy food.",
+        "spoken": "Rob Walton's dad started Walmart, and Rob was born into the family that owns it. But some people who work in its stores need help from the jar to buy food.",
+        "place": "A giant superstore: endless aisles, a checkout belt, shelves stacked to the sky, and the heap behind the big smiley price sign.",
+        "look": "White hair, glasses, a navy blazer over a blue vest; pushes a giant shopping cart, with an orange-and-blue football in the child seat.",
+        "source": {
+          "title": "Associated Press (via KOMO News): Walmart heir Rob Walton agrees to buy Broncos in record deal, and CNBC on the 2020 GAO report",
+          "url": "https://komonews.com/news/entertainment/walmart-heir-rob-walton-agrees-to-buy-broncos-in-record-deal-nfl-denver-broncos-pro-football-hall-of-fame",
+          "date": "2022-06-08",
+          "note": "AP (Arnie Stapleton): Rob Walton \"is the eldest son of founder Sam Walton and Helen Walton\"; the Waltons won the Broncos \"in the most expensive deal for a sports franchise anywhere in the world\" (KUSA-TV reported $4.65 billion). Forbes 2026: \"Rob Walton is the eldest son of Walmart founder Sam Walton\", who died in 1992. CNBC, 2020-11-19 (https://www.cnbc.com/2020/11/19/walmart-and-mcdonalds-among-top-employers-of-medicaid-and-food-stamp-beneficiaries.html), on \"a study by the nonpartisan Government Accountability Office\" of SNAP data from \"agencies in nine states\": Walmart \"was the top employer of SNAP recipients in five states\" and \"one of the top four employers in the remaining four states.\" \"About 70% of the 21 million federal aid beneficiaries worked full time.\" Walmart's answer: it is the country's largest employer, and \"If not for the employment access Walmart and other companies provide... many more people would be dependent on government assistance.\" SNAP is food help paid from taxes: the jar."
+        }
+      }
+    },
+    {
+      "id": "ellison",
+      "name": "Larry Ellison",
+      "net_worth_usd": 204000000000,
+      "net_worth_label": "$204 billion",
+      "net_worth_source": {
+        "title": "Forbes Australia: The Forbes 400 list of wealthiest Americans: facts and figures (Forbes 400, September 2026)",
+        "url": "https://www.forbes.com.au/news/billionaires/inside-forbes-ranking-of-the-richest-us-billionaires/",
+        "date": "2026-09-04",
+        "note": "\"Just 81 of them are poorer than last year, including biggest dollar-loser Larry Ellison ($204 billion), who is down by $72 billion as Oracle investors have cooled on his software firm's debt-fueled AI investment spree.\" \"Forbes calculated net worths using share prices from September 4, 2026.\" Oracle's share price moves his figure by billions; the game rounds."
+      },
+      "quotes": [],
+      "gain": {
+        "usd_per_day": 0,
+        "line": "Over the year to September 2026 his pile got smaller: down about $72 billion. So in the game his heap does not grow.",
+        "from_usd": 276000000000.0,
+        "to_usd": 204000000000.0,
+        "from_date": "2025-09",
+        "to_date": "2026-09-04",
+        "source": {
+          "title": "The Forbes 400 2026 (Forbes Australia)",
+          "url": "https://www.forbes.com.au/news/billionaires/inside-forbes-ranking-of-the-richest-us-billionaires/",
+          "date": "2026-09-16",
+          "note": "Forbes 400: \"biggest dollar-loser Larry Ellison ($204 billion), who is down by $72 billion as Oracle investors have cooled on his software firm's debt-fueled AI investment spree.\" (net worths with share prices from September 4, 2026; the 'a year ago' figure is the 2025 Forbes 400). Confirmed on the page 2026-10-31. Both figures (now and a year ago) are in that one article.",
+          "accessed": "2026-10-31",
+          "url_from": "https://www.forbes.com.au/news/billionaires/inside-forbes-ranking-of-the-richest-us-billionaires/"
+        },
+        "note": "Forbes has him down over the full year, so the heap does not grow (usd_per_day is 0). An earlier version used his March-to-September rise, which made a fortune that shrank over the year look like it was growing."
+      },
+      "media": [
+        {
+          "who": "Larry Ellison",
+          "line": "and his son's company bought Paramount, the owner of CBS News, in 2025, for $8 billion.",
+          "spoken": "Larry Ellison and his son's company bought Paramount, the owner of CBS News, in 2025, for eight billion dollars",
+          "source": {
+            "title": "Variety: Skydance Closes $8 Billion Paramount Acquisition",
+            "url": "https://au.variety.com/2025/biz/news/paramount-skydance-deal-closes-26271/",
+            "date": "2025-08-08",
+            "note": "\"Skydance Media has closed its $8 billion merger with Paramount Global\". David Ellison (\"Larry Ellison (father of David Ellison)\") became chairman and CEO. Larry Ellison, with Skydance and RedBird Capital, bought Shari Redstone's shares of National Amusements, Paramount's controlling owner, as the deal closed (Variety, paraphrased). AP the same day: CBS is \"the crown jewel of Paramount\"."
+          }
+        },
+        {
+          "who": "Larry Ellison",
+          "line": "led the money when that company bought Warner Bros., the owner of CNN, in 2026. The deal was worth $111 billion.",
+          "spoken": "Larry Ellison led the money when that company bought Warner Brothers, the owner of CNN, in 2026. The deal was worth one hundred and eleven billion dollars",
+          "source": {
+            "title": "Variety: Paramount and Warner Bros. Discovery merger officially closes",
+            "url": "https://au.variety.com/2026/film/news/paramount-warner-bros-merger-officially-closes-skydance-david-ellison-41035/",
+            "date": "2026-10-07",
+            "note": "\"It's official: Paramount and Warner Bros. Discovery are now a single company\". \"The deal, valued at $111 billion including the assumption of WBD debt\". Its networks include \"CBS, CNN, Comedy Central, MTV and TBS\". \"The merger creating Skydance was funded with $47 billion of investment in Class B common stock, led by Larry Ellison\" (with RedBird, LionTree and Saudi, Qatari and Abu Dhabi funds). The $111B includes debt the company took on."
+          }
+        },
+        {
+          "who": "Larry Ellison",
+          "line": "started the company Oracle. In 2026, Oracle got 15% of TikTok in America.",
+          "spoken": "Larry Ellison started the company Oracle. In 2026, Oracle got fifteen percent of TikTok in America",
+          "source": {
+            "title": "Fox Business: TikTok avoids US ban by finalizing historic Trump-backed American majority ownership deal",
+            "url": "https://foxbusiness.com/technology/tiktok-avoids-us-ban-finalizing-historic-trump-backed-american-majority-ownership-deal",
+            "date": "2026-01-22",
+            "note": "Oracle, Silver Lake and MGX \"will serve as managing investors, each holding a 15% stake.\" Oracle's own quarterly filing confirmed it (Benzinga via Yahoo Finance, 2026-03-14: \"confirming a 15% ownership stake following the restructuring of the platform's American operations\"; \"The company hosts TikTok's U.S. user data.\")."
+          }
+        }
+      ],
+      "net_worth_as_of": "2026-09-04",
+      "gate_true": [
+        {
+          "text": "His family's company bought CBS News.",
+          "play_text": "His family's company bought CBS News.",
+          "why": "True. In 2025 Larry Ellison and his son's company bought Paramount, the owner of CBS News.",
+          "play_why": "True. Larry Ellison and his son's company bought Paramount, the owner of CBS News.",
+          "from": "bosses.ellison.media[0]",
+          "source": {
+            "title": "Variety: Skydance Closes $8 Billion Paramount Acquisition",
+            "url": "https://au.variety.com/2025/biz/news/paramount-skydance-deal-closes-26271/",
+            "date": "2025-08-08"
+          }
+        },
+        {
+          "text": "His company Oracle owns part of TikTok.",
+          "play_text": "His company Oracle owns part of TikTok.",
+          "why": "True. In 2026 Oracle got 15% of TikTok in America.",
+          "play_why": "True. His company Oracle got a piece of TikTok in America.",
+          "from": "bosses.ellison.media[2]",
+          "source": {
+            "title": "Fox Business: TikTok avoids US ban by finalizing historic Trump-backed American majority ownership deal",
+            "url": "https://foxbusiness.com/technology/tiktok-avoids-us-ban-finalizing-historic-trump-backed-american-majority-ownership-deal",
+            "date": "2026-01-22"
+          }
+        }
+      ]
+    },
+    {
+      "id": "zuckerberg",
+      "name": "Mark Zuckerberg",
+      "net_worth_usd": 212000000000,
+      "net_worth_label": "$212 billion",
+      "net_worth_source": {
+        "title": "Forbes 400 2026, top 50 as reported by Lee Enterprises: Who are the richest Americans today? Forbes drops 2026 ranking",
+        "url": "https://news.lee.net/news/nation-world/business/who-are-the-richest-americans-today-forbes-drops-2026-ranking/article_949accca-08b2-4427-bd60-f5c5d1a667d9.html",
+        "date": "2026-09-27",
+        "note": "Table row: \"6 Mark Zuckerberg 42 $212 billion Facebook California\". \"Forbes formed its 2026 list of the 400 richest Americans using estimates of each person's wealth as of Sept. 4\". Read 2026-10-31. Meta's share price moves this by billions: Forbes' top ten of October 1, 2026 had him at $251 billion (Forbes Australia, https://www.forbes.com.au/news/billionaires/the-top-10-richest-people-in-the-world-august-2026/). The game uses the Forbes 400 figure so all four new bosses share one date.",
+        "accessed": "2026-10-31"
+      },
+      "quotes": [],
+      "gain": {
+        "usd_per_day": 0,
+        "line": "Over the year to September 2026 his pile got smaller: down about $41 billion. So in the game his heap does not grow.",
+        "from_usd": 253000000000.0,
+        "to_usd": 212000000000.0,
+        "from_date": "2025-09-01",
+        "to_date": "2026-09-04",
+        "source": {
+          "title": "Forbes 400 2025 (Forbes Australia) and Forbes 400 2026 (Lee Enterprises)",
+          "url_from": "https://www.forbes.com.au/news/billionaires/the-forbes-400-list-ranking-americas-richest-people/",
+          "url": "https://news.lee.net/news/nation-world/business/who-are-the-richest-americans-today-forbes-drops-2026-ranking/article_949accca-08b2-4427-bd60-f5c5d1a667d9.html",
+          "date": "2026-09-27",
+          "note": "Forbes 400 2025: Zuckerberg \"worth $253 billion\" (\"Forbes calculated net worths using share prices from September 1, 2025.\"). Forbes 400 2026: \"6 Mark Zuckerberg 42 $212 billion\" (wealth as of Sept. 4, 2026). $253B - $212B = $41B down, so usd_per_day is 0. (From March 1, 2026, $222B on the World's Billionaires list, he was also down by September.) Read 2026-10-31.",
+          "accessed": "2026-10-31"
+        },
+        "note": "Forbes has him down over the full year, so the heap does not grow (usd_per_day is 0)."
+      },
+      "media": [
+        {
+          "who": "Mark Zuckerberg",
+          "line": "and his company bought Instagram in 2012 for $1 billion, and then WhatsApp, a messaging app, for $22 billion.",
+          "spoken": "Mark Zuckerberg and his company bought Instagram in 2012, for one billion dollars, and then WhatsApp, a messaging app, for twenty-two billion dollars",
+          "source": {
+            "title": "Associated Press (via News4JAX): Meta prevails in historic FTC antitrust case, won't have to break off WhatsApp, Instagram",
+            "url": "https://www.news4jax.com/news/politics/2025/11/18/meta-prevails-in-historic-ftc-antitrust-case-wont-have-to-break-off-whatsapp-instagram/",
+            "date": "2025-11-18",
+            "note": "Barbara Ortutay, AP: \"Facebook bought Instagram — then a scrappy photo-sharing app with no ads and a small cult following — in 2012.\" \"The $1 billion cash and stock purchase price was eye-popping at the time.\" \"Two years later, it did it again with the messaging app WhatsApp, which it purchased for $22 billion.\" (The 2014 announced price was $19 billion; AP gives the final $22 billion.) The same article: the FTC cited his 2008 line \"It is better to buy than compete,\" and Judge James Boasberg ruled in November 2025 that the FTC had not shown Meta holds a monopoly today, so Meta keeps both apps. $1 billion = 50 million Lego sets; $22 billion = 1.1 billion Lego sets."
+          }
+        }
+      ],
+      "net_worth_as_of": "2026-09-04",
+      "gate_true": [
+        {
+          "kind": "quote",
+          "text": "It's better to buy the other team than to play against them.",
+          "play_text": "It's better to buy the other team than to play against them.",
+          "said": "It is better to buy than compete.",
+          "exact": true,
+          "where": "His own words, written in 2008, quoted by the government in court",
+          "why": "True. He wrote \"It is better to buy than compete\" in 2008. Then his company bought Instagram and WhatsApp.",
+          "play_why": "True. He wrote \"It is better to buy than compete.\" Then his company bought the apps that might have beaten it.",
+          "from": "bosses.zuckerberg.media[0]",
+          "source": {
+            "title": "Associated Press (via News4JAX): Meta prevails in historic FTC antitrust case",
+            "url": "https://www.news4jax.com/news/politics/2025/11/18/meta-prevails-in-historic-ftc-antitrust-case-wont-have-to-break-off-whatsapp-instagram/",
+            "date": "2025-11-18"
+          }
+        },
+        {
+          "text": "When Instagram got popular, his company bought it for 1 billion dollars.",
+          "play_text": "When a photo app got popular, his company bought it.",
+          "why": "True. Facebook bought Instagram in 2012 for $1 billion. That is 50 million Lego sets.",
+          "play_why": "True. His company bought the photo app for a giant pile of money.",
+          "from": "bosses.zuckerberg.media[0]",
+          "source": {
+            "title": "Associated Press (via News4JAX): Meta prevails in historic FTC antitrust case",
+            "url": "https://www.news4jax.com/news/politics/2025/11/18/meta-prevails-in-historic-ftc-antitrust-case-wont-have-to-break-off-whatsapp-instagram/",
+            "date": "2025-11-18"
+          }
+        }
+      ],
+      "story": {
+        "lesson": "When new apps got popular, he bought them: Instagram for 1 billion dollars and WhatsApp for 22 billion.",
+        "spoken": "When new apps got popular, Mark Zuckerberg bought them. Instagram, for one billion dollars. And WhatsApp, for twenty-two billion.",
+        "place": "A giant phone: the gerbil climbs app icons like building blocks, and the heap is inside the screen.",
+        "look": "Short curly hair, a plain gray T-shirt, a thin gold chain; carries a giant phone he keeps scrolling. Big grin.",
+        "source": {
+          "title": "Associated Press (via News4JAX): Meta prevails in historic FTC antitrust case, won't have to break off WhatsApp, Instagram",
+          "url": "https://www.news4jax.com/news/politics/2025/11/18/meta-prevails-in-historic-ftc-antitrust-case-wont-have-to-break-off-whatsapp-instagram/",
+          "date": "2025-11-18",
+          "note": "\"Facebook bought Instagram ... in 2012.\" \"The $1 billion cash and stock purchase price was eye-popping at the time.\" \"Two years later, it did it again with the messaging app WhatsApp, which it purchased for $22 billion.\" Fair to him: a judge ruled in 2025 that Meta is not a monopoly now (\"The Court's verdict today determines that the FTC has not done so.\"). The lesson says only what he bought and for how much."
+        }
+      }
+    },
+    {
+      "id": "page",
+      "name": "Larry Page",
+      "net_worth_usd": 278000000000,
+      "net_worth_label": "$278 billion",
+      "net_worth_source": {
+        "title": "Forbes 400 2026, top 50 as reported by Lee Enterprises: Who are the richest Americans today? Forbes drops 2026 ranking",
+        "url": "https://news.lee.net/news/nation-world/business/who-are-the-richest-americans-today-forbes-drops-2026-ranking/article_949accca-08b2-4427-bd60-f5c5d1a667d9.html",
+        "date": "2026-09-27",
+        "note": "Table row: \"3 Larry Page 53 $278 billion Google California\". \"Forbes formed its 2026 list of the 400 richest Americans using estimates of each person's wealth as of Sept. 4\". Read 2026-10-31. Forbes Australia's Forbes 400 article says the same: \"Alphabet cofounder Larry Page ranks third on this year's list, worth $278 billion,\" after \"a nearly 60% rise in shares of the Google parent company.\"",
+        "accessed": "2026-10-31"
+      },
+      "quotes": [],
+      "gain": {
+        "usd_per_day": 112299465,
+        "line": "From March to September 2026, his pile grew by about $112 million every day. That is 5.6 million Lego sets a day.",
+        "from_usd": 257000000000.0,
+        "to_usd": 278000000000.0,
+        "from_date": "2026-03-01",
+        "to_date": "2026-09-04",
+        "source": {
+          "title": "Forbes World's Billionaires 2026 (Forbes Australia) and Forbes 400 2026 (Lee Enterprises)",
+          "url_from": "https://www.forbes.com.au/news/billionaires/the-forbes-billionaires-list-top-200/",
+          "url": "https://news.lee.net/news/nation-world/business/who-are-the-richest-americans-today-forbes-drops-2026-ranking/article_949accca-08b2-4427-bd60-f5c5d1a667d9.html",
+          "date": "2026-09-27",
+          "note": "Two Forbes figures, same method as Musk's: World's Billionaires entry \"#2 Larry Page, net worth $257 billion\" (\"We used stock prices and exchange rates from March 1, 2026.\") and Forbes 400 \"3 Larry Page 53 $278 billion\" (wealth as of Sept. 4, 2026). Arithmetic: ($278B - $257B) / 187 days (2026-03-01 to 2026-09-04) = $112,299,465 a day = 5,614,973 Lego sets a day = 0.26 money bags a day. Over the full year he grew too: Forbes credits \"a nearly 60% rise in shares\" of Alphabet (Forbes Australia, Forbes 400 2026); an Italian report of the 2025 Forbes 400 (LaPresse, 2025-09-10) gives him $179 billion then, not checked against Forbes itself. Read 2026-10-31.",
+          "accessed": "2026-10-31"
+        }
+      },
+      "media": [
+        {
+          "who": "Larry Page",
+          "line": "and Google bought YouTube in 2006 for $1.65 billion.",
+          "spoken": "Larry Page and Google bought YouTube in 2006, for one point six five billion dollars",
+          "source": {
+            "title": "Al Jazeera: Google buys YouTube",
+            "url": "https://www.aljazeera.com/news/2006/10/10/google-buys-youtube",
+            "date": "2006-10-10",
+            "note": "\"Web search leader Google has agreed to acquire top video entertainment site YouTube for $1.65 billion in stock\". Page cofounded Google with Sergey Brin in 1998 and stays \"a board member and controlling shareholder\" (Forbes World's Billionaires 2026). $1.65 billion = 82.5 million Lego sets."
+          }
+        }
+      ],
+      "net_worth_as_of": "2026-09-04",
+      "gate_true": [
+        {
+          "text": "Google paid Apple about 20 billion dollars in one year, so iPhones would use Google.",
+          "play_text": "Google paid Apple a giant pile of money so iPhones would use Google.",
+          "why": "True. A judge found that Google paid Apple an estimated $20 billion in 2022 to be the search on iPhones. That is 1 billion Lego sets.",
+          "play_why": "True. A judge found that Google paid Apple a giant pile of money to be the search on iPhones.",
+          "from": "bosses.page.story",
+          "source": {
+            "title": "Associated Press (via Anchorage Daily News): Google loses massive antitrust case over its search dominance",
+            "url": "https://www.adn.com/nation-world/2024/08/05/google-loses-massive-antitrust-case-over-its-search-dominance/",
+            "date": "2024-08-05"
+          }
+        },
+        {
+          "text": "A judge said Google is a monopoly: it has almost all the searching to itself.",
+          "play_text": "A judge said Google is a monopoly: it has almost all the searching to itself.",
+          "why": "True. In 2024 a judge wrote \"Google is a monopolist.\" About 9 of every 10 searches were on Google.",
+          "play_why": "True. A judge wrote \"Google is a monopolist.\" About nine of every ten searches were on Google.",
+          "from": "bosses.page.story",
+          "source": {
+            "title": "Associated Press (via Anchorage Daily News): Google loses massive antitrust case over its search dominance",
+            "url": "https://www.adn.com/nation-world/2024/08/05/google-loses-massive-antitrust-case-over-its-search-dominance/",
+            "date": "2024-08-05"
+          }
+        }
+      ],
+      "story": {
+        "lesson": "His company, Google, paid Apple about 20 billion dollars in one year so iPhones would use Google, and a judge said Google is a monopoly: it has almost all the searching to itself.",
+        "spoken": "Larry Page's company, Google, paid Apple about twenty billion dollars in one year, so iPhones would use Google. A judge said Google is a monopoly. It has almost all the searching to itself.",
+        "place": "A giant search box: a magnifying-glass tower over a maze of YouTube-style screens, every road leading back to the same door.",
+        "look": "Short dark hair going gray, short beard stubble, plain sweater; carries a giant magnifying glass. Quiet, watching.",
+        "source": {
+          "title": "Associated Press (via Anchorage Daily News): Google loses massive antitrust case over its search dominance",
+          "url": "https://www.adn.com/nation-world/2024/08/05/google-loses-massive-antitrust-case-over-its-search-dominance/",
+          "date": "2024-08-05",
+          "note": "Matthew Barakat and Michael Liedtke, AP. Judge Amit Mehta: \"Google is a monopolist, and it has acted as one to maintain its monopoly.\" \"Google paid Apple an estimated $20 billion in 2022, doubling from 2020.\" \"In 2021 alone, Google spent more than $26 billion to lock in those default agreements\". Google \"enjoys an 89.2% share of the market for general search services, which increases to 94.9% on mobile devices.\" Google said it would appeal. Page stepped down as Alphabet CEO in 2019 and remains \"a board member and controlling shareholder\" (Forbes World's Billionaires 2026), so the lesson says \"his company\"."
+        }
+      }
+    },
+    {
+      "id": "bezos",
+      "name": "Jeff Bezos",
+      "net_worth_usd": 370000000000,
+      "net_worth_label": "$370 billion",
+      "net_worth_source": {
+        "title": "Forbes Australia, the top 10 richest people in the world (October 2026)",
+        "url": "https://www.forbes.com.au/news/billionaires/the-top-10-richest-people-in-the-world-august-2026/",
+        "date": "2026-10-26",
+        "note": "\"Jeff Bezos' fortune soared by an estimated $102 billion over the past month, to $370 billion\"; \"He overtook Google's Larry Page as the world's second richest person in September.\" Net worths as of October 1, 2026, 12 a.m. ET. Re-read 2026-10-31: the game said $300 billion here before, which this article does not say; corrected to its figure.",
+        "accessed": "2026-10-31"
+      },
+      "quotes": [],
+      "gain": {
+        "usd_per_day": 682242991,
+        "line": "From March to October 2026, his pile grew by about $682 million every day. That is 34 million Lego sets a day.",
+        "from_usd": 224000000000.0,
+        "to_usd": 370000000000.0,
+        "from_date": "2026-03-01",
+        "to_date": "2026-10-01",
+        "source": {
+          "title": "Forbes World's Billionaires 2026 (Scripps News) and Forbes Australia, the top 10 richest people in the world (October 2026)",
+          "url": "https://www.forbes.com.au/news/billionaires/the-top-10-richest-people-in-the-world-august-2026/",
+          "url_from": "https://www.scrippsnews.com/world/forbes-2026-worlds-billionaires-list-is-here-some-rankings-may-surprise-you",
+          "date": "2026-10-26",
+          "note": "Two Forbes figures: Scripps list entry \"4. Jeff Bezos — $224B (Amazon)\" (World's Billionaires list, share prices as of March 1, 2026) and Forbes Australia: \"Jeff Bezos' fortune soared by an estimated $102 billion over the past month, to $370 billion\" (as of October 1, 2026). Arithmetic: ($370B - $224B) / 214 days (2026-03-01 to 2026-10-01) = $682,242,991 a day = 34,112,149 Lego sets a day = 1.57 money bags a day. The Forbes 400 (share prices of September 4, 2026; CNN 2026-09-19) gave $378 billion, which does not fit the same Forbes article's 'up $102 billion over the past month' (that would put him near $268 billion on September 1). The two Forbes figures cannot be reconciled, so the game uses the lower one, $370 billion, for both his net worth and this growth line. Checked 2026-10-31.",
+          "accessed": "2026-10-31"
+        }
+      },
+      "media": [
+        {
+          "who": "Jeff Bezos",
+          "line": "bought The Washington Post newspaper in 2013 for $250 million.",
+          "spoken": "Jeff Bezos bought The Washington Post newspaper in 2013, for two hundred and fifty million dollars",
+          "source": {
+            "title": "Poynter: Washington Post sold to Jeff Bezos",
+            "url": "https://www.poynter.org/reporting-editing/2013/washington-post-sold-to-jeff-bezos/",
+            "date": "2013-08-05",
+            "note": "\"Amazon.com owner Jeff Bezos has purchased The Washington Post, the company announced Monday.\" \"The purchase price is $250 million, the Post says in a release.\" He bought it himself, not Amazon: \"The purchaser is an entity that belongs to Mr. Bezos in his individual capacity and is not Amazon.com, Inc.\" $250 million = 12.5 million Lego sets."
+          }
+        }
+      ],
+      "net_worth_as_of": "2026-10-01",
+      "gate_true": [
+        {
+          "text": "He bought a big newspaper, The Washington Post.",
+          "play_text": "He bought a big newspaper, The Washington Post.",
+          "why": "True. He bought it in 2013 for $250 million. That is 12.5 million Lego sets.",
+          "play_why": "True. He bought it with a giant pile of money.",
+          "from": "bosses.bezos.media[0]",
+          "source": {
+            "title": "Poynter: Washington Post sold to Jeff Bezos",
+            "url": "https://www.poynter.org/reporting-editing/2013/washington-post-sold-to-jeff-bezos/",
+            "date": "2013-08-05"
+          }
+        },
+        {
+          "text": "One year he put zero dollars in the jar.",
+          "play_text": "One year he put zero dollars in the jar.",
+          "why": "True. He paid $0 of federal income tax in 2007, and again in 2011.",
+          "play_why": "True. One year he put zero dollars of income tax in the jar, and later he did it again.",
+          "from": "taxes.items[1]",
+          "source": {
+            "title": "ProPublica, The Secret IRS Files (same article)",
+            "url": "https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax",
+            "date": "2021-06-08"
+          }
+        }
+      ]
+    },
+    {
+      "id": "musk",
+      "name": "Elon Musk",
+      "net_worth_usd": 1000000000000,
+      "net_worth_label": "$1 trillion",
+      "net_worth_source": {
+        "title": "Forbes real-time billionaires (October 2026) and the Bloomberg Billionaires Index",
+        "url": "https://www.forbes.com/real-time-billionaires/",
+        "date": "2026-10",
+        "note": "Forbes' real-time figure ran $900 billion to $1 trillion through October 2026 (about $989B on 10/22, $1.012T on 10/9). Bloomberg's index has had him above $1 trillion. The game rounds to one trillion."
+      },
+      "quotes": [
+        {
+          "text": "Don't worry about squirreling money away for retirement in 10 or 20 years. It won't matter.",
+          "play_text": "Don't bother saving money for when you're old. It won't matter.",
+          "where": "Moonshots with Peter Diamandis (podcast)",
+          "date": "2026-01",
+          "source": {
+            "title": "Fortune: Elon Musk says saving for retirement is irrelevant because AI is going to create a world of abundance",
+            "url": "https://fortune.com/article/elon-musk-ceo-tech-billionaires-dont-save-for-retirement-ai-future-of-work-american-workers/"
+          },
+          "trick": true,
+          "why_trick": "He has 50 billion Lego sets saved up. He is telling you not to save for one.",
+          "play_why": "He has a giant pile of money saved up. He is telling you not to save for one Lego set.",
+          "kid_text": "Don't bother saving money for when you're old. It won't matter.",
+          "clip": "v_musk_q1",
+          "exact": true
+        },
+        {
+          "text": "It's not clear to me that money will even matter in the future.",
+          "play_text": "Maybe someday money won't even matter.",
+          "where": "China Media Group interview",
+          "date": "2026-09-26",
+          "source": {
+            "title": "Fortune: Elon Musk says money might 'not even matter' in the future",
+            "url": "https://fortune.com/2026/09/28/elon-musk-money-wont-matter-gen-z-education-advice-study-arts-sciences-engineering-promot-humanoid-robots-billioniare-tesla-spacex-ceo/"
+          },
+          "trick": true,
+          "why_trick": "If money didn't matter to him, he would not keep a trillion of it.",
+          "play_why": "If money didn't matter to him, he would not keep such a giant pile of it.",
+          "kid_text": "Maybe someday money won't even matter.",
+          "clip": "v_musk_q2",
+          "exact": true
+        },
+        {
+          "text": "Saving money won't be necessary. There will be universal high income.",
+          "play_text": "You won't need to save money. Everyone will just get lots of it.",
+          "where": "On X, about the Trump savings accounts for newborns (paraphrased by the reporter)",
+          "date": "2025-12-17",
+          "source": {
+            "title": "Fox Business: Musk predicts AI will create 'universal high income' and make saving money unnecessary",
+            "url": "https://www.foxbusiness.com/economy/musk-predicts-ai-create-universal-high-income-make-saving-money-unnecessary"
+          },
+          "trick": true,
+          "why_trick": "He keeps 50 billion Lego sets saved up for himself. And in 2018 he put $0 of federal income tax in the jar.",
+          "play_why": "He keeps a giant pile of money saved up for himself. And one year he put zero dollars in the jar.",
+          "kid_text": "You won't need to save money. Everyone will just get lots of it.",
+          "exact": false,
+          "clip": "v_musk_q3"
+        }
+      ],
+      "gain": {
+        "usd_per_day": 368983957,
+        "line": "From March to September 2026, his pile grew by about $369 million every day. That is 18 million Lego sets a day.",
+        "from_usd": 839000000000.0,
+        "to_usd": 908000000000.0,
+        "from_date": "2026-03-01",
+        "to_date": "2026-09-04",
+        "source": {
+          "title": "Forbes World's Billionaires 2026 (Scripps News) and the Forbes 400 2026 (Forbes Australia)",
+          "url": "https://www.forbes.com.au/news/billionaires/inside-forbes-ranking-of-the-richest-us-billionaires/",
+          "url_from": "https://www.scrippsnews.com/world/forbes-2026-worlds-billionaires-list-is-here-some-rankings-may-surprise-you",
+          "date": "2026-09-16",
+          "note": "Two Forbes figures, same method: Scripps list entry \"1. Elon Musk — $839B (Tesla SpaceX)\" (World's Billionaires list, share prices as of March 1, 2026) and Forbes 400: \"Musk is now worth an estimated $908 billion\" (Forbes 400, 'Forbes calculated net worths using share prices from September 4, 2026.'). Arithmetic: ($908B - $839B) / 187 days (2026-03-01 to 2026-09-04) = $368,983,957 a day = 18,449,198 Lego sets a day = 0.85 money bags a day. Over the full year Forbes 400 to Forbes 400 he went from $428B to $908B (\"Elon Musk was already the richest American of all-time last year, with a fortune of $428 billion.\")."
+        }
+      },
+      "media": [
+        {
+          "who": "Elon Musk",
+          "line": "bought Twitter in 2022 for $44 billion, and renamed it X.",
+          "spoken": "Elon Musk bought Twitter in 2022, for forty-four billion dollars, and renamed it X",
+          "source": {
+            "title": "CNBC (via NBC Bay Area): Elon Musk rebrands Twitter to X, replaces iconic bird logo",
+            "url": "https://www.nbcbayarea.com/news/business/money-report/elon-musk-rebrands-twitter-to-x-replaces-iconic-bird-logo/3279187/",
+            "date": "2023-07-24",
+            "note": "Musk \"officially changed the company's famous bird logo to an 'X' on Monday as part of a sweeping rebrand.\" He \"acquired the platform for $44 billion late last year.\" The deal closed October 27-28, 2022 (Armenpress/CNN, 2022-10-28: \"Elon Musk has completed his $44 billion deal to buy Twitter\"). $44 billion = 2.2 billion Lego sets."
+          }
+        }
+      ],
+      "net_worth_as_of": "2026-10",
+      "gate_true": [
+        {
+          "text": "He bought Twitter and gave it a new name, X.",
+          "play_text": "He bought Twitter and gave it a new name, X.",
+          "why": "True. He paid $44 billion for it in 2022. That is 2.2 billion Lego sets.",
+          "play_why": "True. He paid a giant pile of money for it.",
+          "from": "bosses.musk.media[0]",
+          "source": {
+            "title": "CNBC (via NBC Bay Area): Elon Musk rebrands Twitter to X, replaces iconic bird logo",
+            "url": "https://www.nbcbayarea.com/news/business/money-report/elon-musk-rebrands-twitter-to-x-replaces-iconic-bird-logo/3279187/",
+            "date": "2023-07-24"
+          }
+        },
+        {
+          "text": "One year he put zero dollars in the jar.",
+          "play_text": "One year he put zero dollars in the jar.",
+          "why": "True. He paid $0 of federal income tax in 2018.",
+          "play_why": "True. One year he put zero dollars of income tax in the jar. The rules let him.",
+          "from": "taxes.items[0]",
+          "source": {
+            "title": "ProPublica, The Secret IRS Files: Trove of Never-Before-Seen Records Reveal How the Wealthiest Avoid Income Tax",
+            "url": "https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax",
+            "date": "2021-06-08"
+          }
+        }
+      ]
+    }
+  ],
+  "ordinary": [
+    {
+      "id": "kid",
+      "name": "A kid's savings",
+      "usd": 20,
+      "years": 0,
+      "source": {
+        "title": "The boys' own unit: one Lego set",
+        "url": ""
+      }
+    },
+    {
+      "id": "teacher",
+      "name": "A teacher",
+      "usd": 72030,
+      "per": "year",
+      "life_years": 40,
+      "source": {
+        "title": "NEA Rankings and Estimates (April 2025): national average public school teacher salary, 2023-24",
+        "url": "https://www.nea.org/resource-library/educator-pay-and-student-spending-how-does-your-state-rank",
+        "date": "2025-04"
+      }
+    },
+    {
+      "id": "family",
+      "name": "A typical family",
+      "usd": 83730,
+      "per": "year",
+      "life_years": 40,
+      "source": {
+        "title": "U.S. Census Bureau, Income in the United States: 2024 (P60-286): median household income $83,730",
+        "url": "https://www.census.gov/library/publications/2025/demo/p60-286.html",
+        "date": "2025-09-09"
+      }
+    }
+  ],
+  "bag_usd": 434000000,
+  "taxes": {
+    "_about": "The jar is the game's word for taxes. These are the sourced facts behind the prologue's 'this part is true' line and the jar card in the town square.",
+    "kid_text": "Everybody puts a little in the jar. The jar pays for the school, the road and the fountain. That is what taxes are.",
+    "trick_text": "The billionaires did tricks so they put in almost nothing. This part is true:",
+    "ordinary_line": "A teacher puts in a piece of every paycheck.",
+    "items": [
+      {
+        "who": "Elon Musk",
+        "line": "put in $0 of federal income tax in 2018.",
+        "spoken": "Elon Musk put in zero dollars of federal income tax in 2018",
+        "source": {
+          "title": "ProPublica, The Secret IRS Files: Trove of Never-Before-Seen Records Reveal How the Wealthiest Avoid Income Tax",
+          "url": "https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax",
+          "date": "2021-06-08",
+          "note": "\"In 2018, Tesla founder Elon Musk, the second-richest person in the world, also paid no federal income taxes.\" Federal income tax; ProPublica's figures come from IRS records it obtained."
+        }
+      },
+      {
+        "who": "Jeff Bezos",
+        "line": "put in $0 of federal income tax in 2007, and again in 2011.",
+        "spoken": "Jeff Bezos put in zero dollars of federal income tax in 2007, and again in 2011",
+        "source": {
+          "title": "ProPublica, The Secret IRS Files (same article)",
+          "url": "https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax",
+          "date": "2021-06-08",
+          "note": "\"In 2007, Jeff Bezos, then a multibillionaire and now the world's richest man, did not pay a penny in federal income taxes. He achieved the feat again in 2011.\" In 2011 he also claimed a $4,000 tax credit for his children."
+        }
+      },
+      {
+        "who": "Donald Trump",
+        "line": "put in $750 of federal income tax in 2016, and $750 in 2017.",
+        "spoken": "Donald Trump put in seven hundred and fifty dollars of federal income tax in 2016, and seven hundred and fifty dollars in 2017",
+        "source": {
+          "title": "The New York Times, Long-Concealed Records Show Trump's Chronic Losses and Years of Tax Avoidance",
+          "url": "https://www.nytimes.com/interactive/2020/09/27/us/trump-taxes.html",
+          "date": "2020-09-27",
+          "note": "$750 in federal income taxes in 2016 and again in 2017; no federal income tax in 10 of the 15 years before that. Mr. Trump called the report false; his lawyer said most of the facts appeared inaccurate. The figures come from tax-return data the Times obtained."
+        }
+      }
+    ],
+    "ordinary_note": "A teacher at the NEA average salary ($72,030) has federal income tax withheld from every paycheck; the game says 'a piece of every paycheck' rather than a figure, because the amount depends on the household."
+  },
+  "market": {
+    "_about": "The Gerbil Market stands for the stock market and the whole economy. It got bigger; most of the new money went to the people who already had the most. Wealth groups are households ranked by wealth (Federal Reserve Distributional Financial Accounts). The DFA cannot single out billionaires, so these items say 'richest' and give the group size.",
+    "kid_text": "The market got bigger and bigger. But most of the new money went to the richest people.",
+    "items": [
+      {
+        "id": "stocks_owned",
+        "line": "Out of every $10 of stock that families own, the richest 1 family in 10 owns about $9. The poorer half of all families own 6 cents.",
+        "spoken": "Out of every ten dollars of stock that families own, the richest one family in ten owns about nine dollars. The poorer half of all families own six cents.",
+        "source": {
+          "title": "Federal Reserve, Distributional Financial Accounts: distribution of household wealth by wealth percentile, 2026:Q2 (released September 2026)",
+          "url": "https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/",
+          "date": "2026-09",
+          "note": "2026:Q2 table, column 'Corporate equities and mutual fund shares': TopPt1 25.0, RemainingTop1 25.9, Next9 37.2, Next40 11.4, Bottom50 0.6 (percent). Top 1% = 25.0 + 25.9 = 50.9% (≈ $5 of $10); top 10% = 88.1%; bottom 50% = 0.6% (6 cents of $10). The Fed's definition excludes stock held inside 401(k)-type plans: 'Holdings of corporate equities and mutual fund shares excluding equities and mutual fund shares owned through DC pensions'. Read from the Fed's full CSV (dfa-networth-shares.csv)."
+        }
+      },
+      {
+        "id": "grew_vs_pay",
+        "line": "From 2017 to 2025: if the stock market was 10 coins, it became 19. A family's pay went from 10 coins to 11.",
+        "spoken": "From 2017 to 2025: if the stock market was ten coins, it became nineteen. A family's pay went from ten coins to eleven.",
+        "source": {
+          "title": "S&P 500 annual average (FRED series SP500), CPI-U (BLS, FRED series CPIAUCSL), real median household income (Census, FRED series MEHOINUSA672N)",
+          "url": "https://fred.stlouisfed.org/graph/?id=SP500,MEHOINUSA672N",
+          "date": "2026-09-15",
+          "note": "Both after prices. S&P 500 annual average: 2017 2449.08, 2025 6216.87 (x2.538). CPI-U annual average: 2017 245.121, 2025 321.962, so in 2025 dollars the market grew 2.538 x 245.121 / 321.962 = 1.933, +93% (about $9 per $10). Real median household income (2025 dollars, Census, released 2026-09-15): 2017 $78,600, 2025 $87,460: +11.3% (about $1 per $10). Census 2026-09-15: 'Real median household income in 2025 was $87,460', a record. The S&P figure is the price index without dividends, so the true stock gain is larger. 2017 is the earliest year of FRED's ten-year S&P 500 series; that is why the span starts there. In coins (10 at the start): market 10 x 1.933 = 19.3, pay 10 x 87,460 / 78,600 = 11.1; rounded to 19 and 11."
+        },
+        "coins": {
+          "start": 10,
+          "market": 19,
+          "pay": 11,
+          "market_exact": 19.3,
+          "pay_exact": 11.1,
+          "from_year": 2017,
+          "to_year": 2025
+        }
+      },
+      {
+        "id": "wealth_share",
+        "line": "Out of every $10 that families own, the richest 1 family in 10 has about $7. The poorer half of all families, together, have 23 cents.",
+        "spoken": "Out of every ten dollars that families own, the richest one family in ten has about seven dollars. The poorer half of all families, all together, have twenty-three cents.",
+        "source": {
+          "title": "Federal Reserve, Distributional Financial Accounts, 2026:Q2 (released September 2026)",
+          "url": "https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/",
+          "date": "2026-09",
+          "note": "2026:Q2 table, column 'Net worth' share: TopPt1 15.0, RemainingTop1 17.5, Next9 36.4, Next40 28.8, Bottom50 2.3 (percent). Top 1% = 15.0 + 17.5 = 32.5% (about $3 of $10); bottom 50% = 2.3% (23 cents of $10). In 1989:Q3, the first quarter in the series, the top 1% had 22.8% and the bottom 50% had 3.5%. Top 10% = 15.0 + 17.5 + 36.4 = 68.9% (about $7 of $10)."
+        }
+      },
+      {
+        "id": "new_money",
+        "line": "Since 2015 families got $102 trillion of new money. For every $10 of it, the richest 1 family in 10 got $7. The poorer half of all families got 33 cents.",
+        "spoken": "Since 2015, families got one hundred and two trillion dollars of new money. For every ten dollars of it, the richest one family in ten got seven dollars. The poorer half of all families got thirty-three cents.",
+        "source": {
+          "title": "Federal Reserve, Distributional Financial Accounts, net worth levels 2015:Q2 and 2026:Q2",
+          "url": "https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/",
+          "date": "2026-09",
+          "note": "Net worth levels, millions of dollars (dfa-networth-levels.csv). Total household net worth rose $102.46 trillion from 2015:Q2 to 2026:Q2. Top 10% (TopPt1 + RemainingTop1 + Next9) rose $69.77T = 68.1% of the increase (about $7 of $10); top 1% alone $34.88T = 34.0%; bottom 50% rose $3.36T = 3.3% (33 cents of $10). Not inflation-adjusted; the shares are the same either way."
+        }
+      }
+    ]
+  }
+}

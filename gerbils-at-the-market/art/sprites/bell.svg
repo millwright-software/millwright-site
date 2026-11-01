@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<!-- The Gerbil Market: the town bell in its wooden frame (a shared thing). CC0 (hand-authored). Palette only. Sits on y=496.
+     Drawn lit (a golden bell); the loader makes the dark grey-blue "off" version from this one. -->
+<defs>
+  <linearGradient id="bell" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbe08a"/><stop offset=".5" stop-color="#f2c230"/><stop offset="1" stop-color="#c8951a"/></linearGradient>
+  <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c08a52"/><stop offset="1" stop-color="#8a5a2b"/></linearGradient>
+</defs>
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M104 496 L 124 132 L 156 132 L 150 496 Z" fill="url(#wood)" stroke-width="9"/>
+  <path d="M362 496 L 356 132 L 388 132 L 408 496 Z" fill="url(#wood)" stroke-width="9"/>
+  <path d="M84 102 L 256 34 L 428 102 Z" fill="#d7262c" stroke-width="10"/>
+  <rect x="92" y="100" width="328" height="38" rx="8" fill="url(#wood)" stroke-width="9"/>
+  <rect x="236" y="136" width="40" height="30" rx="6" fill="#a8743f" stroke-width="7"/>
+  <path d="M256 164 C 206 164 186 200 184 250 C 182 310 168 350 146 376 L 366 376 C 344 350 330 310 328 250 C 326 200 306 164 256 164 Z" fill="url(#bell)" stroke-width="10"/>
+  <rect x="138" y="370" width="236" height="24" rx="12" fill="#e0ad22" stroke-width="9"/>
+  <circle cx="256" cy="414" r="18" fill="#a8743f" stroke-width="8"/>
+  <path d="M300 394 C 312 420 306 446 312 470" fill="none" stroke-width="16"/>
+  <path d="M300 394 C 312 420 306 446 312 470" fill="none" stroke="#fbf0d4" stroke-width="7"/>
+  <path d="M302 466 L 322 466 L 326 490 L 298 490 Z" fill="#d7262c" stroke-width="6"/>
+  <path d="M208 220 C 206 270 200 310 190 340" fill="none" stroke="#ffffff" stroke-width="12" opacity=".45"/>
+  <ellipse cx="226" cy="198" rx="18" ry="9" fill="#ffffff" opacity=".35" stroke="none" transform="rotate(-30 226 198)"/>
+</g>
+</svg>

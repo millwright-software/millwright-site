@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640">
+<!-- The Gerbil Market: the town jar, front layer (outline, shine, lid, label). CC0 (hand-authored). Same frame as jar.svg;
+     sits on y=620. The label rectangle is x 176-336, y 300-380: the loader writes the words there in Fredoka. -->
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M150 214 C 128 236 120 270 120 330 L 120 556 C 120 590 148 612 190 612 L 322 612 C 364 612 392 590 392 556 L 392 330 C 392 270 384 236 362 214 Z" fill="none" stroke-width="10"/>
+  <path d="M148 300 L 148 560" stroke="#ffffff" stroke-width="16" opacity=".75" fill="none"/>
+  <path d="M176 256 L 176 280" stroke="#ffffff" stroke-width="10" opacity=".75" fill="none"/>
+  <path d="M364 330 L 364 520" stroke="#ffffff" stroke-width="7" opacity=".6" fill="none"/>
+  <rect x="160" y="168" width="192" height="52" rx="12" fill="#c99a52" stroke-width="9"/>
+  <path d="M178 176 L 178 212 M 202 176 L 202 212 M 226 176 L 226 212 M 286 176 L 286 212 M 310 176 L 310 212 M 334 176 L 334 212" stroke-width="4" opacity=".4"/>
+  <rect x="226" y="186" width="60" height="12" rx="6" fill="#3b2516" stroke="none"/>
+  <rect x="176" y="300" width="160" height="80" rx="10" fill="#fbf3dc" stroke-width="7"/>
+</g>
+</svg>

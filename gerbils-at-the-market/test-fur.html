@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>fur.js test — The Gerbil Market</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:#000} canvas{display:block} #info{position:fixed;left:8px;top:8px;color:#fff;font:13px monospace;text-shadow:0 1px 2px #000;white-space:pre}</style>
+</head>
+<body>
+<div id="info"></div>
+<script type="module">
+// ?cam=front|side|top|close   ?boss=1 (scale 5, beard)   ?bloom=1 (EffectComposer + UnrealBloom)   ?speed=3   ?still=1   ?layers=12 ?len=0.012 ?density=7
+import * as THREE from 'three';
+import { loadHamster, gerbilFrom } from './js/parts.js';
+import { furify, addPaws, animateGerbil } from './js/fur.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const q = new URLSearchParams(location.search);
+const cam = q.get('cam') || 'side', boss = q.get('boss') === '1', S = boss ? 5 : 1;
+const speed = q.get('still') ? 0 : Number(q.get('speed') ?? 3);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xbfd9ea);
+const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, .02, 200);
+const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; document.body.prepend(renderer.domElement);
+
+// warm key + hemisphere + a soft fill
+const key = new THREE.DirectionalLight(0xfff1dc, 2.4); key.position.set(2 * S, 3 * S, 1.5 * S); key.castShadow = true; key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.left = key.shadow.camera.bottom = -1.2 * S; key.shadow.camera.right = key.shadow.camera.top = 1.2 * S; key.shadow.camera.near = .5 * S; key.shadow.camera.far = 8 * S; key.shadow.bias = -0.0005; key.shadow.normalBias = 0.002 * S; scene.add(key);
+scene.add(new THREE.HemisphereLight(0xcfe6ff, 0x8a6a40, 0.9));
+const fill = new THREE.DirectionalLight(0xdfe8ff, 0.5); fill.position.set(-2 * S, 1 * S, -1 * S); scene.add(fill);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(40 * S, 40 * S), new THREE.MeshStandardMaterial({ color: 0xb9ad94, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+
+await loadHamster();
+const color = boss ? 0xe0b23a : 0xd9b07a;
+const plain = gerbilFrom({ color, scale: S, beard: boss }); scene.add(plain);
+const furry = gerbilFrom({ color, scale: S, beard: boss }); scene.add(furry);
+const furOpts = { color, length: Number(q.get('len') ?? 0.012), layers: Number(q.get('layers') ?? 12), density: Number(q.get('density') ?? 5), windStrength: 1, shading: q.get('shading') || 'toon' };
+const fur = furify(furry, furOpts); addPaws(furry, {});
+
+// side: camera on +x looking -x, gerbils spread along z (left = plain, right = furry on screen)
+// front/close/top: camera on +z, gerbils spread along x
+const gap = (cam === 'close' ? 0.17 : 0.32) * S;
+if (cam === 'side') { plain.position.set(0, 0, gap); furry.position.set(0, 0, -gap); } else { plain.position.set(-gap, 0, 0); furry.position.set(gap, 0, 0); }
+const d = 1.2 * S, eye = 0.16 * S, look = new THREE.Vector3(0, 0.1 * S, 0);
+if (cam === 'side') camera.position.set(d, eye, 0);
+else if (cam === 'front') camera.position.set(0, eye, d);
+else if (cam === 'top') { camera.position.set(0, d, 0.001); }
+else if (cam === 'close') { camera.position.set(0.35 * S, 0.18 * S, 0.5 * S); look.set(0.1 * S, 0.1 * S, 0); }
+camera.lookAt(look);
+
+let post = null;
+if (q.get('bloom')) { post = new EffectComposer(renderer); post.addPass(new RenderPass(scene, camera)); const b = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.35, 0.6, 0.85); post.addPass(b); post.addPass(new OutputPass()); }
+
+const info = document.getElementById('info'); renderer.info.autoReset = false;
+let last = null, frames = 0, airT = 0;
+function tick(now) {
+  const dt = last === null ? 1 / 60 : Math.max(0, Math.min(.05, (now - last) / 1000)); last = now;
+  // hop every 2.2 s so the landing squash shows when ?hop=1
+  let airborne = false; if (q.get('hop')) { airT += dt; const t = airT % 2.2; airborne = t > 1.6 && t < 2.0; for (const g of [plain, furry]) g.position.y = airborne ? Math.sin((t - 1.6) / 0.4 * Math.PI) * 0.12 * S : 0; }
+  for (const g of [plain, furry]) animateGerbil(g, { speed, airborne, dt, now });
+  renderer.info.reset();
+  if (post) post.render(dt); else renderer.render(scene, camera);
+  if (++frames === 3) { const r = renderer.info.render; const msg = `FUR tris/frame ${r.triangles} calls ${r.calls} | fur shells tris ${fur ? fur.triangles : 0} | layers ${furOpts.layers} len ${furOpts.length} density ${furOpts.density} shading ${furOpts.shading} | cam ${cam} boss ${boss}`; console.log(msg); info.textContent = msg; }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); post?.setSize(innerWidth, innerHeight); });
+</script>
+</body>
+</html>

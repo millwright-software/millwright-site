@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>env.js test — The Gerbil Market</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:#000} canvas{display:block} #info{position:fixed;left:8px;top:8px;color:#fff;font:13px monospace;text-shadow:0 1px 2px #000;white-space:pre}</style>
+</head>
+<body>
+<div id="info"></div>
+<script type="module">
+// ?cam=far  high distant camera   ?x=NNN  put the runner camera at x   ?run=1  move the camera down the road   ?plain=1  no composer
+import * as THREE from 'three';
+import { buildEnvironment, makeComposer } from './js/env.js';
+import * as P from './js/props.js';
+import { legoBoxTexture } from './js/parts.js';
+
+const q = new URLSearchParams(location.search);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, .15, 7000);
+const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; document.body.prepend(renderer.domElement);
+P.setArtMode?.(q.get('art') === 'paper' ? 'paper' : 'old'); try { await P.preloadArt?.(renderer); } catch (e) { console.warn('preloadArt', e); } if (P.artMode?.() === 'paper') renderer.toneMapping = THREE.NeutralToneMapping;   // ?art=paper: the round-3 look
+
+const roadEnd = 3600, arenas = [[300, 520], [1200, 2000], [2300, 3500]];
+const cubes = [{ x: 400, w: 50, z: 30, d: 50 }, { x: 60, w: 12, z: 2.6, d: 12 }];
+const t0 = performance.now();
+const env = buildEnvironment(scene, renderer, { roadEnd, arenas, laneHalf: 1.6, cubeZones: cubes });
+const buildMs = performance.now() - t0;
+for (const c of cubes) { const m = new THREE.Mesh(new THREE.BoxGeometry(c.w, c.w, c.d), new THREE.MeshStandardMaterial({ map: legoBoxTexture(Math.round(c.w / 3)), roughness: .8 })); m.position.set(c.x + c.w / 2, c.w / 2, c.z + c.d / 2); m.castShadow = m.receiveShadow = true; scene.add(m); }
+// a stand-in gerbil so the shadow and scale read
+const gerbil = new THREE.Mesh(new THREE.CapsuleGeometry(.14, .25, 4, 10), new THREE.MeshStandardMaterial({ color: 0xd9b07a, roughness: .7 })); gerbil.rotation.z = Math.PI / 2; gerbil.position.set(12.6, .18, 0); gerbil.castShadow = true; scene.add(gerbil);
+
+const player = new THREE.Vector3(Number(q.get('x') ?? 12.6), 0, 0);
+const far = q.get('cam') === 'far';
+const post = q.get('plain') ? null : makeComposer(renderer, scene, camera);
+const info = document.getElementById('info');
+renderer.info.autoReset = false;
+let last = performance.now(), frames = 0;
+function tick(now) {
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  if (q.get('run')) { player.x += 4.5 * dt; gerbil.position.x = player.x; }
+  env.update(dt, now, player);
+  if (far) { camera.position.set(200, 120, 300); camera.lookAt(400, 0, 0); }
+  else { camera.position.set(player.x - 2.6, 1.0, 0); camera.lookAt(player.x + 1.4, .4, 0); }
+  renderer.info.reset();
+  if (post) post.render(dt); else renderer.render(scene, camera);
+  if (++frames === 3) { const r = renderer.info.render; console.log(`ENV build ${buildMs.toFixed(0)} ms | calls ${r.calls} tris ${r.triangles} | objects ${scene.children.length}`); info.textContent = `calls ${r.calls}  tris ${r.triangles}  build ${buildMs.toFixed(0)}ms`; }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); post?.setSize(innerWidth, innerHeight); });
+</script>
+</body>
+</html>

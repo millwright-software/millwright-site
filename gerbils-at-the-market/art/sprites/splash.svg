@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 384">
+<!-- The Gerbil Market: the fountain's spray, drawn as solid cartoon water. CC0 (hand-authored). Base y=376. -->
+<g stroke="#2a5d86" stroke-linejoin="round" stroke-linecap="round" stroke-width="7">
+  <path d="M192 376 C 176 290 176 170 192 40 C 208 170 208 290 192 376 Z" fill="#8fd3f5"/>
+  <path d="M188 120 C 140 60 70 80 40 200 C 38 214 52 214 56 202 C 80 130 130 110 186 150 Z" fill="#8fd3f5"/>
+  <path d="M196 120 C 244 60 314 80 344 200 C 346 214 332 214 328 202 C 304 130 254 110 198 150 Z" fill="#8fd3f5"/>
+  <g fill="#ffffff" stroke="none"><ellipse cx="188" cy="140" rx="5" ry="40"/><ellipse cx="96" cy="120" rx="14" ry="5" transform="rotate(-30 96 120)"/><ellipse cx="290" cy="120" rx="14" ry="5" transform="rotate(30 290 120)"/></g>
+  <g fill="#bfe8fb"><circle cx="40" cy="244" r="12"/><circle cx="344" cy="244" r="12"/><circle cx="66" cy="282" r="8"/><circle cx="318" cy="282" r="8"/><circle cx="192" cy="22" r="12"/></g>
+</g>
+</svg>

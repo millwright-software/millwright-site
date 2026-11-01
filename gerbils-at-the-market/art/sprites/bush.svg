@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 192">
+<!-- The Gerbil Market: a flower bush. CC0 (hand-authored). Sits on y=184. -->
+<g stroke-linejoin="round">
+  <g fill="#3b2516" stroke="#3b2516" stroke-width="12"><circle cx="80" cy="124" r="56"/><circle cx="176" cy="124" r="56"/><circle cx="128" cy="96" r="64"/><rect x="40" y="120" width="176" height="64" rx="30"/></g>
+  <g fill="#4f9440"><circle cx="80" cy="124" r="56"/><circle cx="176" cy="124" r="56"/><circle cx="128" cy="96" r="64"/><rect x="40" y="120" width="176" height="64" rx="30"/></g>
+  <g fill="#78bb59"><circle cx="104" cy="74" r="28"/><circle cx="60" cy="112" r="18"/></g>
+  <g stroke="#3b2516" stroke-width="4"><circle cx="90" cy="100" r="11" fill="#f05a8a"/><circle cx="150" cy="70" r="11" fill="#ffd23a"/><circle cx="180" cy="122" r="11" fill="#f05a8a"/><circle cx="120" cy="140" r="11" fill="#ffffff"/><circle cx="64" cy="148" r="11" fill="#ffd23a"/><circle cx="200" cy="160" r="10" fill="#ffffff"/></g>
+  <g fill="#7a4a10"><circle cx="90" cy="100" r="4"/><circle cx="150" cy="70" r="4"/><circle cx="180" cy="122" r="4"/><circle cx="120" cy="140" r="4"/><circle cx="64" cy="148" r="4"/></g>
+</g>
+</svg>

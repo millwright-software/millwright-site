@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>narrate.js test — The Gerbil Market</title>
+<style>
+  @font-face { font-family: 'Fredoka'; src: url('fonts/Fredoka-latin.woff2') format('woff2'); font-weight: 300 700; }
+  html,body { margin:0; background:#fff8e7; color:#2b2418; font-family:'Fredoka',sans-serif; }
+  body { display:grid; grid-template-columns: 440px 1fr; min-height:100vh; }
+  #panel { padding:14px; border-right:3px solid #e2d4b2; }
+  h2 { margin:12px 0 6px; font-size:17px; color:#7a6a50; font-weight:600; }
+  .grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:6px; }
+  button { font:inherit; font-size:15px; font-weight:600; padding:8px 6px; border-radius:12px; border:2px solid #e2d4b2; background:#fff; color:#2b2418; cursor:pointer; }
+  button:hover { border-color:#3b8f4a; } button.on { background:#3b8f4a; color:#fff; border-color:#3b8f4a; } button.go { background:#f2c230; }
+  #right { padding:14px; }
+  #ask { background:#fff; border:3px solid #e2d4b2; border-radius:18px; padding:14px 18px; max-width:620px; }
+  #ask.hidden { display:none; } #askBody .quote { font-size:20px; font-weight:700; margin:8px 0; } #askBody .byline, #askBody .foot, #askBody .sub { color:#7a6a50; font-size:14px; }
+  #askChoices { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  #toast { margin:12px 0; padding:10px 14px; background:#2b2418; color:#fff8e7; border-radius:14px; max-width:620px; } #toast small { display:block; opacity:.8; }
+  #hint { margin:8px 0; color:#7a6a50; } kbd { background:#eee; border-radius:4px; padding:0 4px; }
+  #hint .touchOnly { display:none; } @media (pointer:coarse) { #hint .touchOnly { display:inline; } #hint .mouseOnly { display:none; } }
+  #log { font:12px/1.45 monospace; white-space:pre-wrap; color:#444; margin-top:12px; max-height:420px; overflow:auto; background:#fffdf6; border:1px solid #e2d4b2; padding:8px; }
+  .hit { color:#3b8f4a; } .miss { color:#b5541b; }
+</style>
+</head>
+<body>
+<div id="panel">
+  <p style="margin:0 0 6px;font-size:14px;color:#b5541b">Click anything first: browsers block audio before a gesture. Green lines have a Kokoro clip; orange ones fall back to the browser voice.</p>
+  <h2>Hub cards</h2><div class="grid">
+    <button id="sign">Road sign</button><button id="facts">Facts board</button><button id="jar">The jar</button><button id="bell">Ring the bell</button></div>
+  <h2>Level cards</h2><div class="grid">
+    <button id="gate">The gate (Musk)</button><button id="trick">Spot the trick (Trump)</button><button id="endFight">The market is built</button><button id="unrollEnd">The whole row (Bezos)</button><button id="ending">Alex's ending</button><button id="whole">The market is whole</button></div>
+  <h2>Toasts</h2><div class="grid">
+    <button id="egg">Egg found</button><button id="freed">Friend freed</button><button id="bonk">Bonk!</button><button id="burst">Three toasts at once</button></div>
+  <h2>Hints</h2><div class="grid">
+    <button id="hHub">hub</button><button id="hRoad">road</button><button id="hFight">fight</button><button id="hHub2">hub again (silent)</button></div>
+  <h2>Queue, fallback, toggle</h2><div class="grid">
+    <button id="behind">Story clip, then a card (waits)</button><button id="dyn">A dynamic line (fallback)</button>
+    <button id="plain">narrate() plain text</button><button id="twice">Same text twice (once)</button>
+    <button id="stop">stopNarration()</button><button id="toggle" class="on">Narration: on</button></div>
+  <div id="log"></div>
+</div>
+<div id="right">
+  <div id="hint"></div>
+  <div id="toast" style="display:none"></div>
+  <div id="ask" class="screen hidden"><h2 id="askTitle" style="font-size:22px;color:#2b2418"></h2><div id="askBody"></div><div id="askChoices"></div></div>
+</div>
+<script type="module">
+import { narrate, narrateCard, narrateToast, narrateHint, stopNarration, setNarration, narrationOn, watchCard, setDucking, narrationMisses, sentencesOf, cardSentences, toastSentences, hintSentences, clipKey } from './js/narrate.js';
+import { play, hush } from './js/speech.js';
+const $ = id => document.getElementById(id);
+const data = await (await fetch('data/billionaires.json')).json();
+const clips = await fetch('audio/render/cards.json').then(r => r.json()).catch(() => ({}));
+setDucking(on => log(`  duck ${on ? 'on' : 'off'}`));
+function log(s, cls = '') { const d = document.createElement('div'); d.textContent = s; if (cls) d.className = cls; $('log').prepend(d); }
+function show(sentences, what) { log('— ' + what); for (const s of sentences.slice().reverse()) { const k = clipKey(s); log(`${clips[k] ? '● ' + k : '○ fallback  '} ${s}`, clips[k] ? 'hit' : 'miss'); } }
+// the game's own card() / toast(), minus the 3D, plus the narrate calls main.js will make
+function card(title, bodyHTML, choices) {
+  $('askTitle').textContent = title; $('askBody').innerHTML = bodyHTML; const box = $('askChoices'); box.innerHTML = '';
+  for (const c of choices) { const b = document.createElement('button'); b.innerHTML = c.label; if (c.go) b.classList.add('go'); b.onclick = () => c.on(b); box.appendChild(b); }
+  $('ask').classList.remove('hidden'); show(cardSentences(title, bodyHTML, choices), `card: ${title}`); narrateCard(title, bodyHTML, choices);
+}
+const closeCard = () => { $('ask').classList.add('hidden'); stopNarration(); };
+function toast(text, { sub = '' } = {}) { const t = $('toast'); t.style.display = ''; t.innerHTML = text + (sub ? `<small>${sub}</small>` : ''); show(toastSentences(text, sub), 'toast'); narrateToast(text, sub); }
+watchCard($('askBody'), $('askChoices'));
+const HINTS = {
+  hub: '<span class="mouseOnly">Point where to walk · <kbd>two fingers</kbd> to run · <kbd>click</kbd> to look at things</span><span class="touchOnly">Touch where to walk · <kbd>two fingers</kbd> to run · <kbd>tap</kbd> to look at things</span> · follow the arrows ➜',
+  road: 'Walk up the road · <span class="mouseOnly"><kbd>click</kbd></span><span class="touchOnly"><kbd>tap</kbd></span> to free a friend',
+  fight: 'Run into the pile to grab bags · carry them to the glowing stall · <span class="mouseOnly"><kbd>click</kbd></span><span class="touchOnly"><kbd>tap</kbd></span> to bonk him',
+};
+function setHint(k) { $('hint').innerHTML = HINTS[k]; show(hintSentences(HINTS[k], matchMedia('(pointer:coarse)').matches), `hint: ${k}`); narrateHint(HINTS[k], k); }
+
+const B = Object.fromEntries(data.bosses.map(b => [b.id, b])), bagUSD = data.bag_usd, teacher = data.ordinary.find(o => o.id === 'teacher'), family = data.ordinary.find(o => o.id === 'family');
+const bags = b => Math.round(b.net_worth_usd / bagUSD);
+const back = [{ label: 'Watch what happened', on: closeCard }, { label: 'Back to the square', go: true, on: closeCard }];
+$('sign').onclick = () => card('Which billionaire has the market\'s money?', `<p class="sub">Up the road: the Golden Tower, the Warehouse, the Rocket Yard. One bag is ${(bagUSD / 1e6).toFixed(0)} million dollars. The market needs 15.</p>`,
+  [...data.bosses.map(b => ({ label: `<b>${b.name}</b><br><span>${b.net_worth_label} · ${bags(b).toLocaleString()} bags</span>`, go: true, on: closeCard })), { label: 'Not yet', on: closeCard }]);
+$('facts').onclick = () => {
+  const money = n => n >= 1e12 ? `$${+(n / 1e12).toFixed(1)} trillion` : n >= 1e9 ? `$${+(n / 1e9).toFixed(1)} billion` : `$${Math.round(n).toLocaleString()}`, big = n => n >= 1e6 ? `${(n / 1e6).toFixed(1)} million` : Math.round(n).toLocaleString();
+  const rows = data.bosses.map(b => `<tr><td>${b.name}</td><td>${b.net_worth_label}</td><td>${bags(b).toLocaleString()} bags</td><td>${big(b.net_worth_usd / teacher.usd)} years</td></tr>`).join('');
+  const ord = [teacher, family].map(o => `<tr><td>${o.name}</td><td>${money(o.usd)} a year</td><td>${(o.usd / bagUSD).toFixed(4)} bags</td><td>1 year</td></tr>`).join('');
+  card('The facts board', `<p class="sub">How much each billionaire swept up, in money bags and in years of a teacher's pay. One bag = ${money(bagUSD)}.</p><table><tr><th></th><th>Money</th><th>Bags</th><th>Teacher years</th></tr>${rows}${ord}</table><p class="foot">Every number has a source: <a href="sources.html">where the facts came from</a>.</p>`, back);
+};
+$('jar').onclick = () => { const tx = data.taxes; card('The jar', `<p class="sub">${tx.kid_text}</p><p>The jar is a third full. ${tx.trick_text}</p><ul>${tx.items.map(x => `<li><b>${x.who}</b> ${x.line}</li>`).join('')}</ul><p class="sub">${tx.ordinary_line}</p><p class="foot">Every number has a source: <a href="sources.html#taxes">where the facts came from</a>.</p>`, back); };
+$('bell').onclick = () => toast('Ding dong!', { sub: 'Gerbil Street has 5 homes — 10 to go' });
+function trickCard(title, intro, q, tail, goLabel) {
+  card(title, `<p>${intro}</p><div class="quote">“${q.text}”</div><div class="byline">${q.exact ? `in kid words. What he actually said: “${q.exact}” · ` : ''}${q.where}</div><p>Is that <b>true</b>, or a <b>trick</b>?${tail}</p>`, [
+    { label: 'True', on: b => answer(b, false) }, { label: 'Trick!', on: b => answer(b, true) }]);
+  function answer(b, saidTrick) {
+    if (saidTrick !== q.trick) { b.disabled = true; toast('Look again.'); return; }
+    $('askBody').innerHTML += `<p><b>${q.trick ? 'Trick.' : 'True.'}</b> ${q.why} He's dizzy. Grab the bags!</p>`;   // what fight.js does: watchCard speaks it
+    $('askChoices').innerHTML = ''; const n = document.createElement('button'); n.className = 'go'; n.textContent = goLabel; n.onclick = closeCard; $('askChoices').appendChild(n);
+  }
+}
+$('gate').onclick = () => { const q0 = B.musk.quotes[0]; play(q0.clip || 'v_musk_q1'); trickCard('The gate', `${B.musk.name} blocks his door and says:`, { text: q0.kid_text, exact: q0.text, where: `${q0.where}, ${q0.date}`, trick: true, why: q0.why_trick }, ' The right answer opens the door.', 'Open the door!'); };
+$('trick').onclick = () => { trickCard('Spot the trick', `${B.trump.name} stops and says:`, { text: 'I only have ten times more Lego sets than you.', where: 'the billionaire, just now', trick: true, why: 'He has 325 million. You have one. That is 325 million times more, not ten.' }, '', 'Go!'); };
+$('endFight').onclick = () => card('The market is built. Elon Musk still has 2,289 bags.', `<p>You carried <b>15 bags</b>, 325.5 million Lego sets, and built the whole market.</p><p>His heap barely changed: <b>2,289 bags</b> left, 49.7 billion Lego sets.</p><p>The market's money is yours now. What do you do with it?</p>`,
+  ['Free cars for everyone', 'A house with stairs for everyone', 'Free Legos for everyone', 'Give it back to the market'].map(label => ({ label, go: true, on: closeCard })));
+$('unrollEnd').onclick = () => card('691 bags. A teacher would need 4.2 million years.', `<p>That row was <b>Jeff Bezos</b>'s money: <b>15 billion Lego sets</b>.</p><p>A teacher earning $72,030 a year would need <b>4.2 million years</b> to earn it. A typical family, <b>3.6 million years</b>. The pyramids were built 4,500 years ago.</p><p class="sub">The market needed 15 bags. The two specks at the start were a whole working life each.</p>`, [{ label: 'Next suit', go: true, on: closeCard }]);
+$('ending').onclick = () => card("Alex's ending", `<p>You buy every tube, metal piece and robot piece in the store and build a little house with stairs in it, for everyone in the world.</p><p style="font-size:40px;font-weight:800">325.5 million</p><p class="sub">Lego sets back in the market.</p>`, [{ label: 'See his whole pile', go: true, on: closeCard }]);
+$('whole').onclick = () => card('The market is whole.', `<p><b>Molly</b> went up the road and brought the valley's money home.</p><p><b>60</b> bags carried · <b>1.3 billion</b> Lego sets back in the market<br><b>9</b> friends freed · <b>4</b> secrets found</p><p class="sub">The street is whole, the fountain runs, and everyone is home.</p>`, [{ label: 'Back to the market', on: closeCard }, { label: 'Play again', go: true, on: closeCard }]);
+$('egg').onclick = () => { play('found'); toast('You found a doorbell!', { sub: 'Ding dong. Nobody answers. Fifteen billion Lego sets up the road and not one gerbil home. Secret 3 of 10.' }); };
+$('freed').onclick = () => toast('You freed Granny Thimble, the baker!', { sub: 'They follow you. Find the others.' });
+$('bonk').onclick = () => toast("Bonk! He's dizzy. Grab bags while you can.");
+$('burst').onclick = () => { toast('A bag came loose! Run over it.'); toast('Got one! Carry it to a stall.'); toast('Cheeks full. Run to a stall!'); };
+$('hHub').onclick = () => setHint('hub'); $('hRoad').onclick = () => setHint('road'); $('hFight').onclick = () => setHint('fight');
+$('hHub2').onclick = () => { setHint('hub'); log('  (hub again: silent if it was the last hint, or spoken under 30 s ago)'); };
+$('behind').onclick = () => { log('— play(p_valley), then a card: the card waits for the clip'); play('p_valley', 'Gerbil Valley, before the billionaires came.'); setTimeout(() => $('jar').onclick(), 300); };
+$('dyn').onclick = () => { const s = 'While you carried 15 bags, his pile grew by 3 bags: 41 days of what he gains.'; show(sentencesOf(s), 'narrate (dynamic)'); narrate(s); };
+$('plain').onclick = () => { const s = 'Look how big his pile is. Press Look any time to see it again.'; show(sentencesOf(s), 'narrate'); narrate(s); };
+$('twice').onclick = () => { const s = 'Follow the arrows up the road.'; narrate(s); const again = narrate(s); log(`— narrate twice within 4 s: second call ${again ? 'spoke' : 'was skipped'}`); };
+$('stop').onclick = () => { stopNarration(); hush(); log('— stopNarration() + hush()'); };
+$('toggle').onclick = () => { setNarration(!narrationOn()); $('toggle').classList.toggle('on', narrationOn()); $('toggle').textContent = `Narration: ${narrationOn() ? 'on' : 'off'}`; };
+$('toggle').classList.toggle('on', narrationOn()); $('toggle').textContent = `Narration: ${narrationOn() ? 'on' : 'off'}`;
+log(`cards.json: ${Object.keys(clips).length} clips`);
+window.__test = { narrationMisses };
+// ?auto=1: a headless smoke run (Chrome with --autoplay-policy=no-user-gesture-required)
+if (new URLSearchParams(location.search).get('auto')) { $('sign').click(); setTimeout(() => $('trick').click(), 400); setTimeout(() => { $('askChoices').querySelectorAll('button')[1]?.click(); setTimeout(() => console.log('QUEUE-AFTER-ANSWER ' + JSON.stringify(window.__narrate.queue())), 200); }, 900); setTimeout(() => { $('egg').click(); setHint('hub'); $('dyn').click(); }, 1400);
+  setTimeout(() => console.log('NARRATE-LOG\n' + $('log').innerText + '\nMISSES ' + JSON.stringify(narrationMisses())), 6000); }
+</script>
+</body>
+</html>

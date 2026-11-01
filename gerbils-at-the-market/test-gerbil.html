@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>gerbil gait test — The Gerbil Market</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:#000} canvas{display:block} #info{position:fixed;left:8px;top:8px;color:#fff;font:13px monospace;text-shadow:0 1px 2px #000;white-space:pre;pointer-events:none}</style>
+</head>
+<body>
+<div id="info"></div>
+<script type="module">
+// The player's gait and the townsfolk's, through the game's own code: stick.js's stepMove drives her, fur.js animates.
+//   ?auto=1          the script: a walked square, a run, a stop, idle (stand-up scan, groom), turns on the spot, a hop; loops
+//   (no auto)        drive her yourself: arrows / WASD, Shift runs, Space hops
+//   ?pose=walk|run|idle|stand|groom|turn|hop    hold one state for a still (the camera frames her close)
+//   ?cam=game|side|close|front   game = the town's follow camera; side / close / front for the gait itself
+//   ?t=<s>           with ?pose, how long to run it before the shot is ready (default 2)
+// The row behind her: six townsfolk at 0, 0.5, 1, 1.5, 2.2 and 3 m/s on treadmills (they walk in place on the spot, the
+// ground under them is scrolled by their speed so the feet can be checked against it), plus one undressed, unfurred one.
+import * as THREE from 'three';
+import { loadHamster, gerbilFrom } from './js/parts.js';
+import { dressGerbil } from './js/props.js';
+import { furify, addPaws, animateGerbil, gerbilHop, GAIT } from './js/fur.js';
+import { moveState, stepMove, RUN_MPS } from './js/stick.js';
+
+const q = new URLSearchParams(location.search);
+const auto = q.get('auto') === '1', pose = q.get('pose'), camMode = q.get('cam') || (pose ? 'close' : 'game');
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xbfdcf0); scene.fog = new THREE.Fog(0xbfdcf0, 18, 40);
+const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, .02, 200);
+const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; document.body.prepend(renderer.domElement);
+const key = new THREE.DirectionalLight(0xfff1dc, 2.6); key.position.set(3, 6, 2); key.castShadow = true; key.shadow.mapSize.set(2048, 2048);
+Object.assign(key.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: .5, far: 20 }); key.shadow.bias = -.0005; scene.add(key, key.target);
+scene.add(new THREE.HemisphereLight(0xcfe6ff, 0x8a6a40, 1.0));
+// a checker floor so sliding feet show
+const c = document.createElement('canvas'); c.width = c.height = 64; const g2 = c.getContext('2d'); g2.fillStyle = '#d9c9a6'; g2.fillRect(0, 0, 64, 64); g2.fillStyle = '#c4b28c'; g2.fillRect(0, 0, 32, 32); g2.fillRect(32, 32, 32, 32);
+const ftex = new THREE.CanvasTexture(c); ftex.wrapS = ftex.wrapT = THREE.RepeatWrapping; ftex.repeat.set(200, 200); ftex.magFilter = THREE.NearestFilter; ftex.colorSpace = THREE.SRGBColorSpace;
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), new THREE.MeshStandardMaterial({ map: ftex, roughness: 1 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+
+await loadHamster();
+// the player, made the way main.js makes her
+const her = gerbilFrom({ color: 0xf0d2a0 }); dressGerbil(her, { color: 0xf0d2a0 }); furify(her, { color: 0xf0d2a0 }); addPaws(her); scene.add(her);
+her.userData.gaitDriver = true;
+// the row: townsfolk as the hub and the city make them (gerbilFrom only), each on its own treadmill strip
+const SPEEDS = [0, .5, 1, 1.5, 2.2, 3]; const folk = [];
+SPEEDS.forEach((v, i) => {
+  const f = gerbilFrom({ color: [0xc08a52, 0xe8d0a8, 0x8a5a32, 0xd9b07a, 0xf0dcc0, 0xb07040][i], scale: .9 }); f.position.set(-2.4, 0, -1.5 + i * .55); f.rotation.y = Math.PI / 2; scene.add(f);
+  const strip = new THREE.Mesh(new THREE.PlaneGeometry(1.4, .4), new THREE.MeshStandardMaterial({ map: ftex.clone(), roughness: 1 })); strip.material.map.repeat.set(5.6, 1.6); strip.material.map.needsUpdate = true;
+  strip.rotation.x = -Math.PI / 2; strip.position.set(-2.4, .002, f.position.z); strip.receiveShadow = true; scene.add(strip);
+  folk.push({ f, v, strip });
+});
+const plain = gerbilFrom({ color: 0xd9b07a }); plain.position.set(-2.4, 0, -2.1); plain.rotation.y = Math.PI / 2; scene.add(plain);   // no dress, no fur: the bare model rigged
+
+// ---------- driving her ----------
+const m = moveState(Math.PI / 2); const keys = new Set();
+addEventListener('keydown', e => { keys.add(e.code); if (e.code === 'Space') gerbilHop(her); });
+addEventListener('keyup', e => keys.delete(e.code));
+// the script: [seconds, wx, wz, run, label]  (screen: up = +x, right = +z, as in the game)
+const SCRIPT = [
+  [1.6, 1, 0, false, 'walk up'], [1.6, 0, 1, false, 'walk right'], [1.6, -1, 0, false, 'walk down'], [1.6, 0, -1, false, 'walk left'],
+  [.9, 0, 0, false, 'stop'], [2.2, 1, 0, true, 'run up'], [.6, -1, 0, true, 'reverse'], [1.0, 0, 0, false, 'stop'],
+  [.5, 0, 1, false, 'turn on the spot'], [.0, 0, 0, false, ''], [.6, 0, 0, false, 'still'], [.35, -1, 0, false, 'turn back'], [.4, 0, 0, false, 'still'],
+  [.5, .7, .7, false, 'diagonal'], [1.2, 0, 0, false, 'hop'], [9, 0, 0, false, 'idle (look, groom, stand)'],
+];
+let si = 0, st = 0, label = '';
+const POSES = { walk: [1, 0, false], run: [1, 0, true], idle: [0, 0, false], stand: [0, 0, false], groom: [0, 0, false], hop: [0, 0, false], turn: null };
+function input(dt) {
+  if (pose) { const p = POSES[pose]; if (pose === 'turn') { const k = Math.floor(T / .55) % 2; return [k ? -1 : 1, 0, false, 'turn on the spot (reversals)']; } return [p[0], p[1], p[2], pose]; }
+  if (auto) {
+    st += dt; while (st > SCRIPT[si][0]) { st -= SCRIPT[si][0]; si = (si + 1) % SCRIPT.length; if (SCRIPT[si][4] === 'hop') gerbilHop(her); }
+    const s = SCRIPT[si]; return [s[1], s[2], s[3], s[4]];
+  }
+  const x = (keys.has('ArrowUp') || keys.has('KeyW') ? 1 : 0) - (keys.has('ArrowDown') || keys.has('KeyS') ? 1 : 0), z = (keys.has('ArrowRight') || keys.has('KeyD') ? 1 : 0) - (keys.has('ArrowLeft') || keys.has('KeyA') ? 1 : 0);
+  return [x, z, keys.has('ShiftLeft') || keys.has('ShiftRight'), 'keys'];
+}
+// a still for a pose: idle states forced so the shot shows them
+function forcePose(rig) { if (!rig) return; const g = rig.g; if (pose === 'stand' || pose === 'groom') { g.still = 99; g.act = pose; g.actT = .5; } if (pose === 'hop' && g.hopT < 0 && T > 1) { gerbilHop(her); } }
+
+// ---------- loop ----------
+let last = performance.now(), T = 0, frames = 0; const info = document.getElementById('info'); const camLead = new THREE.Vector3(), camAim = new THREE.Vector3();
+const STEPS_PER_SHOT = Number(q.get('t') || 2);
+function step(dt) {
+  T += dt; let [wx, wz, run, lab] = input(dt); label = lab; const l = Math.hypot(wx, wz); if (l) { wx /= l; wz /= l; }
+  const p0x = her.position.x, p0z = her.position.z;
+  if (pose === 'walk') m.sameT = 0;   // the still is of the walk: no auto-run
+  stepMove(m, wx, wz, l ? 1 : 0, run, dt); her.position.x += m.vx * RUN_MPS * dt; her.position.z += m.vz * RUN_MPS * dt;
+  if (pose === 'walk' || pose === 'run' || pose === 'turn') { her.position.x = her.position.z = 0; }   // a treadmill for the stills
+  her.rotation.y = m.heading;
+  if (pose) forcePose(her.userData.rig);
+  animateGerbil(her, { speed: m.speed, dt, now: T * 1000, turn: m.turn, driver: true });
+  if (pose === 'walk' || pose === 'run') ftex.offset.y -= 0;
+  for (const F of folk) { animateGerbil(F.f, { speed: F.v, dt, now: T * 1000 }); F.strip.material.map.offset.y += F.v * dt * 4; }
+  animateGerbil(plain, { speed: 0, dt, now: T * 1000 });
+  return [p0x, p0z];
+}
+function frameCam(dt) {
+  const P = her.position;
+  if (camMode === 'game') { camLead.lerp(new THREE.Vector3(m.vx, 0, m.vz).multiplyScalar(RUN_MPS * .45).clampLength(0, 1.2), 1 - Math.exp(-dt * 2.5)); camAim.lerp(P, 1 - Math.exp(-dt * 10));
+    camera.position.lerp(camAim.clone().add(camLead).add(new THREE.Vector3(-3, 1.75, 0)), 1 - Math.exp(-dt * 8)); camera.lookAt(camAim.clone().add(camLead).add(new THREE.Vector3(2.5, .3, 0))); }
+  else if (camMode === 'side') { camera.position.set(P.x, .22, P.z + 1.0); camera.lookAt(P.x, .09, P.z); }
+  else if (camMode === 'front') { camera.position.set(P.x + 1.0, .2, P.z); camera.lookAt(P.x, .1, P.z); }
+  else { camera.position.set(P.x + .55, .32, P.z + .7); camera.lookAt(P.x, .1, P.z); }
+  key.position.set(P.x + 3, 6, P.z + 2); key.target.position.copy(P);
+}
+function tick(now) {
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  if (pose && T < STEPS_PER_SHOT) { const n = Math.ceil((STEPS_PER_SHOT - T) / (1 / 60)); for (let i = 0; i < Math.min(n, 400); i++) { step(1 / 60); frameCam(1); } }
+  else step(dt);
+  frameCam(dt); renderer.render(scene, camera); frames++;
+  const g = her.userData.rig?.g;
+  info.textContent = `${label}  speed ${m.speed.toFixed(2)} m/s  turn ${m.turn.toFixed(1)} rad/s  heading ${(m.heading * 180 / Math.PI).toFixed(0)}°\n` +
+    `gait: bound ${g ? g.bound.toFixed(2) : '-'}  phase ${g ? g.phase.toFixed(2) : '-'}  act ${g?.act || '-'}  stand ${g ? g.wStand.toFixed(2) : '-'} groom ${g ? g.wGroom.toFixed(2) : '-'}\n` +
+    `row: ${SPEEDS.join(' / ')} m/s · walk stride ${GAIT.walkStride.join('-')} m, bound ${GAIT.boundStride} m · ?auto=1 ?pose=walk|run|idle|stand|groom|turn|hop ?cam=game|side|close|front`;
+  window.__frames = frames; window.__shotReady = !pose || T >= STEPS_PER_SHOT;
+  requestAnimationFrame(tick);
+}
+window.__her = her; window.__m = m;
+requestAnimationFrame(tick);
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+</script>
+</body>
+</html>

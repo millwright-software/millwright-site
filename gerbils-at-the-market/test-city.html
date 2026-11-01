@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>city test</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>
+  @font-face { font-family: 'Fredoka'; src: url('fonts/Fredoka-latin.woff2') format('woff2'); font-weight: 300 700; font-display: block; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #cfe3f2; font-family: Fredoka, sans-serif; }
+  canvas { display: block; }
+  #label { position: fixed; left: 12px; top: 10px; font-size: 20px; color: #2b2418; background: rgba(255,248,231,.85); padding: 6px 12px; border-radius: 10px; }
+  #label small { display: block; font-size: 13px; color: #7a6a50; }
+  #ctl { position: fixed; left: 12px; bottom: 12px; background: rgba(255,248,231,.85); padding: 8px 12px; border-radius: 10px; font-size: 15px; color: #2b2418; display: flex; gap: 10px; align-items: center; }
+  #ctl input[type=range] { width: 260px; }
+</style>
+</head>
+<body>
+<div id="label"></div>
+<div id="ctl"><label>homes <input id="n" type="range" min="0" max="15" step="1" value="0"></label><span id="nv">0</span>
+  <select id="cam"><option>street</option><option>high</option><option>square</option><option>house</option><option>far</option></select></div>
+<script type="module">
+import * as THREE from 'three';
+import { loadHamster, gerbilFrom, spawnBurst, updateBursts } from './js/parts.js';
+import * as P from './js/props.js';
+import { createCity } from './js/city.js';
+
+const q = new URLSearchParams(location.search); const HOUSES = 15;
+const n0 = +(q.get('n') || 0), pre = +(q.get('t') || 0), auto = q.get('auto') === '1'; let cam = q.get('cam') || 'street';
+try { await document.fonts.load('700 40px Fredoka'); } catch (e) { console.warn('font', e); }
+const hamsterReady = loadHamster(); await hamsterReady;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; renderer.info.autoReset = false; document.body.prepend(renderer.domElement);
+P.setArtMode?.(q.get('art') === 'paper' ? 'paper' : 'old'); try { await P.preloadArt?.(renderer); } catch (e) { console.warn('preloadArt', e); } if (P.artMode?.() === 'paper') renderer.toneMapping = THREE.NeutralToneMapping;   // ?art=paper: the round-3 look
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xa8dcf7); scene.environment = P.makeEnvironment(renderer); scene.environmentIntensity = .45; scene.fog = new THREE.Fog(0xcfe3f2, 60, 160);
+scene.add(new THREE.HemisphereLight(0xdfefff, 0x6a8a3a, .9));
+const sun = new THREE.DirectionalLight(0xfff1d6, 2.2); sun.position.set(-14, 22, -4); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0005; sun.shadow.normalBias = .03; sun.target.position.set(0, 0, 10);
+sun.shadow.camera.left = -22; sun.shadow.camera.right = 22; sun.shadow.camera.top = 18; sun.shadow.camera.bottom = -18; sun.shadow.camera.near = 1; sun.shadow.camera.far = 70; scene.add(sun, sun.target);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ color: 0xb9c7a0, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+// a sand road where the arena would be (z < 0), so the entrance reads
+const road = new THREE.Mesh(new THREE.PlaneGeometry(400, 8), new THREE.MeshStandardMaterial({ color: 0xd8c39a, roughness: 1 })); road.rotation.x = -Math.PI / 2; road.position.set(0, .004, -6); road.receiveShadow = true; scene.add(road);
+
+const city = createCity({ scene, hamsterReady: true, gerbilFrom, spawnBurst, sfx: null });
+city.build(new THREE.Vector3(0, 0, 0), { houses: HOUSES, facing: 0, seed: 7 });
+await new Promise(r => setTimeout(r, 0));   // the townsfolk are created once hamsterReady settles
+
+const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, .05, 500); scene.add(camera);
+const CAMS = {
+  street: [[0, 1.7, -7.5], [0, 1.0, 11]],
+  high: [[-17, 17, -14], [0, 0, 10]],
+  square: [[-2.1, 2.0, 6.2], [.4, .5, 13.2]],
+  house: () => { const l = city.lots[0]; const sn = Math.sin(l.ry), cs = Math.cos(l.ry); return [[l.x + sn * 5.2 - cs * 2.4, 2.0, l.z + cs * 5.2 + sn * 2.4], [l.x, 1.2, l.z]]; },
+  far: [[22, 9, -8], [0, 0, 12]],
+};
+function setCam(name) { cam = name; let c = CAMS[name] || CAMS.street; if (typeof c === 'function') c = c(); camera.position.set(...c[0]); camera.lookAt(...c[1]); }
+setCam(cam);
+
+const tris = () => { let n = 0; scene.traverse(m => { if (m.isMesh && m.geometry && m.visible) { const g = m.geometry; const c = g.index ? g.index.count / 3 : g.attributes.position.count / 3; n += m.isInstancedMesh ? c * m.count : c; } }); return Math.round(n); };
+const label = document.getElementById('label'), slider = document.getElementById('n'), nv = document.getElementById('nv'), camSel = document.getElementById('cam'); camSel.value = cam;
+slider.oninput = () => { city.setProgress(+slider.value); nv.textContent = slider.value; }; camSel.onchange = () => setCam(camSel.value);
+
+// pre-roll: step the simulation deterministically before the first frame (auto: one house every 2 s from t=0)
+let simT = 0; const SIM_DT = 1 / 60; const autoN = t => Math.min(HOUSES, Math.floor(t / 2));
+function stepSim(dt, now) { if (auto) city.setProgress(autoN(simT)); city.update(dt, now); updateBursts(dt); simT += dt; }
+if (!auto) city.setProgress(n0);
+const t0 = performance.now(); for (let k = 0; k < Math.round(pre / SIM_DT); k++) stepSim(SIM_DT, t0 + simT * 1000);
+slider.value = city.progress; nv.textContent = city.progress;
+
+let frames = 0; const clock = new THREE.Clock();
+function frame() {
+  const dt = Math.min(.05, clock.getDelta()); const now = t0 + simT * 1000; stepSim(dt, now);
+  if (auto) { slider.value = city.progress; nv.textContent = city.progress; }
+  renderer.info.reset(); renderer.render(scene, camera); frames++;
+  if (frames === 2) { const i = { calls: renderer.info.render.calls, triangles: renderer.info.render.triangles }; const sh = renderer.shadowMap.enabled; renderer.shadowMap.enabled = false; renderer.info.reset(); renderer.render(scene, camera); const base = renderer.info.render.calls; renderer.shadowMap.enabled = sh;
+    label.innerHTML = `Gerbil Street · ${city.progress} homes · mood ${city.mood().toFixed(2)} <small>${base} draw calls (${i.calls} with shadows) · ${i.triangles.toLocaleString()} tris rendered · ${tris().toLocaleString()} tris in scene · cam ${cam} · t=${simT.toFixed(1)}s</small>`;
+    const st = {}; for (const t of city.townsfolk) st[t.state] = (st[t.state] || 0) + 1; console.log(`[city] progress ${city.progress} calls ${base} (with shadows ${i.calls}) tris ${i.triangles} townsfolk ${JSON.stringify(st)}`);
+    if (q.get('cycle')) { city.dispose(); city.build(new THREE.Vector3(3, 0, 2), { houses: 15, facing: .3, seed: 11 }); city.setProgress(15); for (let k = 0; k < 120; k++) city.update(1 / 60, now + k * 16); city.dispose(); city.build(new THREE.Vector3(0, 0, 0), { houses: HOUSES, facing: 0, seed: 7 }); city.setProgress(5); console.log('[city] cycle ok, scene children', scene.children.length); } }
+  else if (frames % 30 === 0) label.firstChild.textContent = `Gerbil Street · ${city.progress} homes · mood ${city.mood().toFixed(2)} `;
+  requestAnimationFrame(frame);
+}
+frame();
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+window.__city = city;
+</script>
+</body>
+</html>

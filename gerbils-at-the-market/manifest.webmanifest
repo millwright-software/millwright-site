@@ -1,0 +1,16 @@
+{
+  "name": "The Gerbil Market",
+  "short_name": "Gerbil Market",
+  "description": "The Gerbil Market: a free 3D game for kids about fair shares and how big a billionaire's pile is.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#a8dcf7",
+  "theme_color": "#a8dcf7",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640">
+<!-- The Gerbil Market: the town jar, back layer (the glass only). CC0 (hand-authored). Same frame as jar.svg; sits on y=620.
+     Layered: jar-back, then the coins (drawn by the loader, they rise with the fill), then jar-front. -->
+<defs><linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#bfe3f2"/><stop offset=".5" stop-color="#e6f6fb"/><stop offset="1" stop-color="#a8d4e8"/></linearGradient></defs>
+<path d="M150 214 C 128 236 120 270 120 330 L 120 556 C 120 590 148 612 190 612 L 322 612 C 364 612 392 590 392 556 L 392 330 C 392 270 384 236 362 214 Z" fill="url(#glass)" stroke="#3b2516" stroke-width="10" stroke-linejoin="round"/>
+</svg>

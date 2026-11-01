@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>places test</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>
+  @font-face { font-family: 'Fredoka'; src: url('fonts/Fredoka-latin.woff2') format('woff2'); font-weight: 300 700; font-display: block; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #cfe3f2; font-family: Fredoka, sans-serif; }
+  canvas { display: block; }
+  #label { position: fixed; left: 12px; top: 10px; font-size: 18px; color: #2b2418; background: rgba(255,248,231,.85); padding: 6px 12px; border-radius: 10px; }
+  #label small { display: block; font-size: 13px; color: #7a6a50; }
+  #label a { color: #2d6fd3; margin-right: 8px; }
+</style>
+</head>
+<body>
+<div id="label"></div>
+<script type="module">
+import * as THREE from 'three';
+import * as P from './js/props.js';
+import { createPlace } from './js/places.js';
+
+// ?who=trump|bezos|musk  &cam=player|high|back|side  &heap=R (metres, the heap's radius; 0 = no heap)  &zones=0 hides the no-go dummies
+const q = new URLSearchParams(location.search); const who = q.get('who') || 'trump'; const cam = q.get('cam') || 'player'; const R = q.has('heap') ? +q.get('heap') : 8; const zones = q.get('zones') !== '0';
+try { await document.fonts.load('700 40px Fredoka'); await document.fonts.load('900 40px Fredoka'); } catch (e) { console.warn('font', e); }
+
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; renderer.info.autoReset = false; document.body.prepend(renderer.domElement);
+P.setArtMode?.(q.get('art') === 'paper' ? 'paper' : 'old'); try { await P.preloadArt?.(renderer); } catch (e) { console.warn('preloadArt', e); } if (P.artMode?.() === 'paper') renderer.toneMapping = THREE.NeutralToneMapping;   // ?art=paper: the round-3 look
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xa8dcf7); scene.environment = P.makeEnvironment(renderer); scene.environmentIntensity = .45; scene.fog = new THREE.Fog(0xcfe3f2, 90, 260);
+scene.add(new THREE.HemisphereLight(0xbfd8ff, 0x7f9150, .55));
+const pile = new THREE.Vector3(130 - 9, 0, 0);   // Trump's stop: stop.x = 130
+const sunDir = new THREE.Vector3(-0.52, 0.6, 0.6).normalize();
+const sun = new THREE.DirectionalLight(0xffdcae, 2.6); sun.position.copy(pile).addScaledVector(sunDir, 60); sun.target.position.copy(pile); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0003; sun.shadow.normalBias = .03; sun.shadow.radius = 3;
+sun.shadow.camera.left = sun.shadow.camera.bottom = -34; sun.shadow.camera.right = sun.shadow.camera.top = 34; sun.shadow.camera.near = 1; sun.shadow.camera.far = 140; scene.add(sun, sun.target);
+
+// the arena as fight.js lays it out: flat ground, the road along +x, the plaza disc, the three stalls, the heap, the street
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(600, 600), new THREE.MeshStandardMaterial({ color: 0x8aa65a, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.position.set(pile.x, 0, 0); ground.receiveShadow = true; scene.add(ground);
+const road = new THREE.Mesh(new THREE.PlaneGeometry(600, 4.8), new THREE.MeshStandardMaterial({ color: 0xc9b58e, roughness: 1 })); road.rotation.x = -Math.PI / 2; road.position.set(pile.x, .04, 0); road.receiveShadow = true; scene.add(road);
+const plaza = new THREE.Mesh(new THREE.CircleGeometry(4.5, 40), new THREE.MeshStandardMaterial({ color: 0xd8c39a, roughness: 1 })); plaza.rotation.x = -Math.PI / 2; plaza.position.set(pile.x, .06, 0); plaza.receiveShadow = true; scene.add(plaza);
+const dummy = new THREE.MeshStandardMaterial({ color: 0xff4fa0, transparent: true, opacity: .45, roughness: .8 });
+const bagMat = new THREE.MeshStandardMaterial({ color: 0x9c6a3a, roughness: .95 });
+for (let i = 0; i < 15; i++) { const a = i * 2.4, r = i ? .55 + .35 * (i % 3) : 0; const b = new THREE.Mesh(new THREE.SphereGeometry(.24, 10, 8), bagMat); b.position.set(pile.x + Math.cos(a) * r, .24, Math.sin(a) * r); b.castShadow = true; scene.add(b); }
+if (zones) {
+  for (const [x, z] of [[-11, -4.5], [-12, 3.5], [6, -5.5]]) { const s = new THREE.Mesh(new THREE.BoxGeometry(5, 3.6, 3), dummy); s.position.set(pile.x + x, 1.8, z); s.lookAt(pile.x, 1.8, 0); scene.add(s); }
+  if (R > 0) { const h = new THREE.Mesh(new THREE.SphereGeometry(R, 24, 16), dummy); h.position.set(pile.x + 14 + R, 0, R + 2.5); h.scale.y = Math.min(1, 7 / R); scene.add(h); }
+  const st = new THREE.Mesh(new THREE.BoxGeometry(30, 3, 20), dummy); st.position.set(pile.x - 3, 1.5, 9 + 9.5); scene.add(st);
+}
+const place = createPlace({ scene });
+if (q.get('rebuild') === '1') { for (const w of ['trump', 'bezos', 'musk']) { place.build(w, pile, { streetOrigin: new THREE.Vector3(pile.x - 3, 0, 9) }); place.update(.016, 1000); place.dispose(); } console.log('[place] rebuild: built and disposed all three, scene children', scene.children.length); }   // ?rebuild=1: exercise build/dispose
+const t0 = performance.now();
+place.build(who, pile, { streetOrigin: new THREE.Vector3(pile.x - 3, 0, 9), heapCenter: R > 0 ? new THREE.Vector3(pile.x + 14 + R, 0, R + 2.5) : null, heapRadius: R });
+const buildMs = performance.now() - t0;
+
+const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, .3, 900); scene.add(camera);
+const px = pile.x - 6;   // the player's start
+const CAMS = { player: [[px - 3.2, 1.9, 0], [px + 2.5, .3, 0]], high: [[pile.x - 26, 30, 34], [pile.x + 6, 2, -6]], back: [[pile.x + 12, 9, 34], [pile.x + 6, 7, -12]], side: [[pile.x + 34, 6, 10], [pile.x + 2, 3, -6]], far: [[pile.x - 40, 4, 12], [pile.x + 6, 6, -8]] };
+const c = CAMS[cam] || CAMS.player; camera.position.set(...c[0]); camera.lookAt(...c[1]);
+
+// draw calls and triangles of the place alone: one render with it, one without
+function stats() { renderer.info.reset(); renderer.render(scene, camera); const a = { calls: renderer.info.render.calls, tris: renderer.info.render.triangles }; place.group.visible = false; renderer.info.reset(); renderer.render(scene, camera); const b = { calls: renderer.info.render.calls, tris: renderer.info.render.triangles }; place.group.visible = true; return { calls: a.calls - b.calls, tris: a.tris - b.tris }; }
+let tris = 0, meshes = 0; place.group.traverse(m => { if ((m.isMesh || m.isPoints) && m.geometry) { meshes++; const g = m.geometry; const n = g.index ? g.index.count / 3 : g.attributes.position.count / 3; tris += m.isInstancedMesh ? n * m.count : n; } });
+const s = stats(); console.log(`[place] ${who}: ${s.calls} draw calls in view (${meshes} meshes total), ${s.tris} tris in view (${Math.round(tris)} tris total), built in ${buildMs.toFixed(0)} ms`);
+document.getElementById('label').innerHTML = `${who} · ${cam} <small>${s.calls} draw calls · ${Math.round(tris).toLocaleString()} tris · heap R ${R}</small><small>${['trump', 'bezos', 'musk'].map(w => `<a href="?who=${w}&cam=${cam}&heap=${R}">${w}</a>`).join('')} · ${Object.keys(CAMS).map(k => `<a href="?who=${who}&cam=${k}&heap=${R}">${k}</a>`).join('')}</small>`;
+
+const clock = new THREE.Clock();
+function frame() { const dt = Math.min(.05, clock.getDelta()); place.update(dt, performance.now()); renderer.render(scene, camera); requestAnimationFrame(frame); }
+frame();
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+window.__place = place;
+</script>
+</body>
+</html>

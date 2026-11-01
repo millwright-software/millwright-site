@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<!-- The Gerbil Market: the town fountain (a shared thing). CC0 (hand-authored). Palette only. Sits on y=496.
+     Drawn lit (running water); the loader makes the dark grey-blue "off" version from this one. -->
+<defs>
+  <linearGradient id="stone" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4cec4"/><stop offset="1" stop-color="#948c80"/></linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fb0ec"/><stop offset="1" stop-color="#2f66bb"/></linearGradient>
+</defs>
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M256 150 C 196 150 150 210 118 300" fill="none" stroke-width="30"/>
+  <path d="M256 150 C 316 150 362 210 394 300" fill="none" stroke-width="30"/>
+  <path d="M256 150 C 196 150 150 210 118 300" fill="none" stroke="#7fb0ec" stroke-width="16"/>
+  <path d="M256 150 C 316 150 362 210 394 300" fill="none" stroke="#7fb0ec" stroke-width="16"/>
+  <path d="M248 160 C 206 166 172 206 150 256" fill="none" stroke="#fbf0d4" stroke-width="5"/>
+  <path d="M240 236 L 240 392 L 272 392 L 272 236 Z" fill="url(#stone)" stroke-width="9"/>
+  <path d="M174 226 C 174 262 212 278 256 278 C 300 278 338 262 338 226 Z" fill="url(#stone)" stroke-width="9"/>
+  <ellipse cx="256" cy="226" rx="82" ry="18" fill="url(#water)" stroke-width="8"/>
+  <path d="M244 226 C 244 190 248 160 256 120 C 264 160 268 190 268 226 Z" fill="#7fb0ec" stroke-width="8"/>
+  <path d="M254 214 C 254 190 255 168 256 140" fill="none" stroke="#fbf0d4" stroke-width="5"/>
+  <path d="M56 392 C 60 456 120 496 256 496 C 392 496 452 456 456 392 Z" fill="url(#stone)" stroke-width="10"/>
+  <ellipse cx="256" cy="392" rx="200" ry="40" fill="#b9b2a6" stroke-width="10"/>
+  <ellipse cx="256" cy="392" rx="170" ry="26" fill="url(#water)" stroke-width="7"/>
+  <path d="M160 392 C 180 384 200 384 220 392 M 290 396 C 310 388 330 388 350 396" fill="none" stroke="#fbf0d4" stroke-width="5"/>
+  <g fill="#7fb0ec" stroke-width="5"><circle cx="112" cy="330" r="10"/><circle cx="400" cy="330" r="10"/><circle cx="138" cy="356" r="7"/><circle cx="372" cy="356" r="7"/></g>
+  <path d="M110 430 C 140 456 200 470 256 472" fill="none" stroke-width="5" opacity=".35"/>
+  <ellipse cx="140" cy="420" rx="30" ry="11" fill="#ffffff" opacity=".3" stroke="none" transform="rotate(-20 140 420)"/>
+</g>
+</svg>

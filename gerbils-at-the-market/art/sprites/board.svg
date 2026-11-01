@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 224">
+<!-- The Gerbil Market: a painted shop board. CC0 (hand-authored). The loader writes the words across the middle in Fredoka. -->
+<defs><linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c78b4e"/><stop offset="1" stop-color="#9c6532"/></linearGradient></defs>
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M28 40 C 28 24 40 14 56 14 L 712 14 C 728 14 740 24 740 40 L 744 184 C 744 200 732 210 716 210 L 52 210 C 36 210 24 200 24 184 Z" fill="url(#wood)" stroke-width="11"/>
+  <path d="M52 40 L 716 40 L 718 184 L 50 184 Z" fill="#fbf0d4" stroke-width="7"/>
+  <g fill="#3b2516" stroke="none"><circle cx="40" cy="30" r="7"/><circle cx="728" cy="30" r="7"/><circle cx="40" cy="196" r="7"/><circle cx="728" cy="196" r="7"/></g>
+  <path d="M70 52 L 700 52" stroke="#ffffff" stroke-width="6" opacity=".7" fill="none"/>
+</g>
+</svg>

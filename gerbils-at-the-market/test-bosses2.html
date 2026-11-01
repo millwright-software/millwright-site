@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>bosses2 test</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #cfe3f2; font-family: Fredoka, "Arial Rounded MT Bold", sans-serif; }
+  canvas { display: block; }
+  #label { position: fixed; left: 12px; top: 10px; font-size: 18px; color: #2b2418; background: rgba(255,248,231,.88); padding: 6px 12px; border-radius: 10px; line-height: 1.35; }
+  #label small { display: block; font-size: 13px; color: #7a6a50; }
+</style>
+</head>
+<body>
+<div id="label"></div>
+<script type="module">
+import * as THREE from 'three';
+import { loadBosses2, makeBoss2, BOSS_IDS } from './js/bosses2.js';
+import { makeBoss } from './js/bosses.js';
+
+// ?who=trump|bezos|musk  ?anim=idle|walk|run|dizzy|cheer|laugh|fall  ?cam=front|side|close|back|low  ?t=<seconds to pre-roll>  ?speed=<m/s>  ?old=1 (the bosses.js fallback beside each)
+const q = new URLSearchParams(location.search); const who = q.get('who'); const anim = q.get('anim'); const cam = q.get('cam') || 'front'; const preroll = parseFloat(q.get('t') || '0'); const speed = parseFloat(q.get('speed') || '1.9'); const old = q.get('old') === '1'; const raw = q.get('raw') === '1';   // raw=1: the mannequin as shipped (own head, palette texture)
+const ok = await loadBosses2(); console.log('loadBosses2 ->', ok);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xcfe3f2);
+scene.add(new THREE.HemisphereLight(0xdfefff, 0x8a9a6a, 1.0));
+const sun = new THREE.DirectionalLight(0xfff1d6, 2.4); sun.position.set(-5, 9, 7); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0005; sun.shadow.normalBias = .02; sun.shadow.camera.left = sun.shadow.camera.bottom = -6; sun.shadow.camera.right = sun.shadow.camera.top = 6; scene.add(sun, sun.target);
+const fill = new THREE.DirectionalLight(0xcfe3ff, .5); fill.position.set(6, 4, -4); scene.add(fill);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), new THREE.MeshStandardMaterial({ color: 0xc9c2b2, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+const grid = new THREE.GridHelper(60, 60, 0xa8a090, 0xb8b0a0); grid.position.y = .002; grid.material.opacity = .35; grid.material.transparent = true; scene.add(grid);
+
+const tris = o => { let n = 0; o.traverse(m => { if (m.isMesh && m.visible && m.geometry) { const g = m.geometry; n += g.index ? g.index.count / 3 : g.attributes.position.count / 3; } }); return Math.round(n); };
+const ids = who ? [who] : BOSS_IDS; const bosses = []; const gap = 2.4;
+ids.forEach((id, i) => { const b = ok ? makeBoss2(id, { raw }) : makeBoss(id); b.position.x = (i - (ids.length - 1) / 2) * gap; scene.add(b); bosses.push(b); b.userData.boss.setSpeed(speed);
+  if (old && ok) { const o = makeBoss(id); o.position.set(b.position.x, 0, -1.6); scene.add(o); bosses.push(o); o.userData.boss.setSpeed(speed); } });
+console.log('tris', bosses.map(b => `${b.userData.boss.name}=${tris(b)}`).join(' '));
+// 0.4 m reference capsule: the hero hamster's length, lying along z like the hamster does
+const ref = new THREE.Mesh(new THREE.CapsuleGeometry(.09, .22, 4, 12), new THREE.MeshStandardMaterial({ color: 0xd9b07a, roughness: .9 })); ref.rotation.x = Math.PI / 2; ref.position.set(-gap / 2, .09, 1.3); ref.castShadow = true; scene.add(ref);
+
+const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, .05, 100);
+const views = { front: [[0, 1.6, 7.2], [0, 1.05, 0]], side: [[7.4, 1.6, .6], [0, 1.05, 0]], back: [[0, 1.8, -7.2], [0, 1.05, 0]], close: [[.3, 1.9, 2.6], [0, 1.7, 0]], low: [[0, .6, 7], [0, 1.0, 0]] };
+if (who) { views.front[0][2] = 4.8; views.side[0][0] = 5; views.close = [[.25, 1.9, 1.6], [0, 1.7, 0]]; views.arm = [[1.3, 1.5, 1.6], [.5, 1.3, 0]]; }
+const v = views[cam] || views.front; camera.position.fromArray(v[0]); camera.lookAt(new THREE.Vector3().fromArray(v[1]));
+
+const cycle = ['idle', 'walk', 'run', 'dizzy', 'cheer', 'fall']; const STEP = 3; let clock = preroll, last = performance.now(); let step = -1, playing = null;
+const wantAt = c => anim || cycle[Math.min(cycle.length - 1, Math.floor(c / STEP))];
+const label = document.getElementById('label');
+label.innerHTML = `<b>${anim || 'cycle'}</b> · ${ok ? 'bosses2 (KayKit rig)' : 'FALLBACK bosses.js'} · ${bosses.map(b => `${b.userData.boss.name} ${tris(b).toLocaleString()} tris`).join(' · ')}<small>?who=trump|bezos|musk &amp;anim=idle|walk|run|dizzy|cheer|laugh|fall &amp;cam=front|side|close|back|low &amp;t=sec &amp;old=1 · capsule = 0.4 m hero</small>`;
+function tick(now) {
+  const dt = Math.min(.1, Math.max(0, (now - last) / 1000)); last = now; clock += dt;
+  const want = wantAt(clock); if (want !== playing) { playing = want; for (const b of bosses) b.userData.boss.play(want); label.firstElementChild.textContent = want; }
+  for (const b of bosses) b.userData.boss.update(dt);
+  renderer.render(scene, camera); requestAnimationFrame(tick);
+}
+if (preroll > 0) { // replay the cycle up to the pre-roll so the pose at ?t= is deterministic
+  let c = 0; while (c < preroll) { const want = wantAt(c); if (want !== playing) { playing = want; for (const b of bosses) b.userData.boss.play(want); } for (const b of bosses) b.userData.boss.update(1 / 60); c += 1 / 60; } }
+requestAnimationFrame(tick);
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+</script>
+</body>
+</html>

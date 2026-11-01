@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<!-- The Gerbil Market: a painted road arrow, pointing right (+x along the road). Laid flat as a decal. CC0 (hand-authored). -->
+<g stroke="#3b2516" stroke-linejoin="round" stroke-width="10">
+  <path d="M28 96 L 140 96 L 140 44 L 232 128 L 140 212 L 140 160 L 28 160 Z" fill="#fff4c2"/>
+  <path d="M40 108 L 128 108" stroke="#f2c230" stroke-width="12" stroke-linecap="round" fill="none"/>
+</g>
+</svg>

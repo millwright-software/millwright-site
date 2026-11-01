@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 768">
+<!-- The Gerbil Market: a billionaire, as a CARICATURE (never a likeness): giant egg body, tiny legs, huge head, one trait
+     exaggerated (here the swoop of hair and the long tie). CC0 (hand-authored). Recolour per giant: hair #f4cd48, skin #f1a96b,
+     suit #26365f, tie #d42a2a. Ink #3b2516. Feet on y=752. -->
+<defs>
+  <linearGradient id="suit" x1="0" y1="0" x2=".4" y2="1"><stop offset="0" stop-color="#3a4d80"/><stop offset=".6" stop-color="#26365f"/><stop offset="1" stop-color="#1a2443"/></linearGradient>
+  <linearGradient id="skin" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#f7c08a"/><stop offset=".7" stop-color="#f1a96b"/><stop offset="1" stop-color="#d98a52"/></linearGradient>
+  <linearGradient id="hair" x1="0" y1="0" x2="1" y2=".6"><stop offset="0" stop-color="#fbe58a"/><stop offset=".6" stop-color="#f4cd48"/><stop offset="1" stop-color="#d9a726"/></linearGradient>
+  <radialGradient id="blush"><stop offset="0" stop-color="#e8505a" stop-opacity=".55"/><stop offset="1" stop-color="#e8505a" stop-opacity="0"/></radialGradient>
+</defs>
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <!-- legs and shoes -->
+  <path d="M206 600 L 200 724 L 240 724 L 244 600 Z" fill="#1a2443" stroke-width="8"/>
+  <path d="M268 600 L 272 724 L 312 724 L 306 600 Z" fill="#1a2443" stroke-width="8"/>
+  <path d="M168 744 C 168 722 196 714 240 718 L 244 750 L 172 752 Z" fill="#1d1a16" stroke-width="8"/>
+  <path d="M344 744 C 344 722 316 714 272 718 L 268 750 L 340 752 Z" fill="#1d1a16" stroke-width="8"/>
+  <!-- the arm behind, down at his side -->
+  <path d="M146 368 C 104 408 92 460 100 510" fill="none" stroke-width="56"/>
+  <path d="M146 368 C 104 408 92 460 100 510" fill="none" stroke="#26365f" stroke-width="40"/>
+  <circle cx="102" cy="522" r="25" fill="url(#skin)" stroke-width="7"/>
+  <!-- body -->
+  <path d="M256 296 C 372 296 424 398 414 500 C 406 592 342 634 256 634 C 170 634 106 592 98 500 C 88 398 140 296 256 296 Z" fill="url(#suit)" stroke-width="9"/>
+  <!-- shirt, lapels, tie -->
+  <path d="M206 304 L 256 456 L 306 304 Z" fill="#fbf7ee" stroke-width="7"/>
+  <path d="M206 304 L 256 456 L 222 392 L 176 330 Z" fill="#1a2443" stroke-width="7"/>
+  <path d="M306 304 L 256 456 L 290 392 L 336 330 Z" fill="#1a2443" stroke-width="7"/>
+  <path d="M243 318 L 269 318 L 274 346 L 284 586 L 256 618 L 228 586 L 238 346 Z" fill="#d42a2a" stroke-width="7"/>
+  <path d="M243 318 L 269 318 L 274 346 L 238 346 Z" fill="#a81e1e" stroke-width="6"/>
+  <path d="M250 360 L 262 360 L 268 560" fill="none" stroke="#ff6a5a" stroke-width="6" opacity=".7"/>
+  <ellipse cx="190" cy="390" rx="40" ry="70" fill="#ffffff" opacity=".1" stroke="none" transform="rotate(20 190 390)"/>
+  <!-- the arm in front, raised, one finger up: "MINE" -->
+  <path d="M366 368 C 414 340 438 300 444 258" fill="none" stroke-width="56"/>
+  <path d="M366 368 C 414 340 438 300 444 258" fill="none" stroke="#26365f" stroke-width="40"/>
+  <path d="M432 240 C 430 222 444 214 456 222 C 466 230 466 250 456 258 C 446 264 434 256 432 240 Z" fill="url(#skin)" stroke-width="7"/>
+  <rect x="444" y="186" width="16" height="44" rx="8" fill="url(#skin)" stroke-width="7"/>
+  <!-- ears -->
+  <ellipse cx="148" cy="214" rx="17" ry="27" fill="url(#skin)" stroke-width="7"/>
+  <ellipse cx="364" cy="214" rx="17" ry="27" fill="url(#skin)" stroke-width="7"/>
+  <!-- head with jowls -->
+  <path d="M150 196 C 150 128 196 90 256 90 C 316 90 362 128 362 196 C 362 250 352 300 318 318 C 292 332 220 332 194 318 C 160 300 150 250 150 196 Z" fill="url(#skin)" stroke-width="9"/>
+  <path d="M206 304 C 236 320 276 320 306 304" fill="none" stroke-width="5" opacity=".6"/>
+  <!-- face: smug squint, raised brows, pursed mouth -->
+  <path d="M190 172 C 210 156 236 158 248 168" fill="none" stroke-width="9"/>
+  <path d="M322 166 C 304 152 280 156 268 166" fill="none" stroke-width="9"/>
+  <path d="M200 200 C 214 190 230 190 242 200" fill="none" stroke-width="8"/>
+  <path d="M270 200 C 282 190 298 190 312 200" fill="none" stroke-width="8"/>
+  <ellipse cx="196" cy="246" rx="28" ry="17" fill="url(#blush)" stroke="none"/>
+  <ellipse cx="316" cy="246" rx="28" ry="17" fill="url(#blush)" stroke="none"/>
+  <path d="M244 214 C 238 236 240 248 256 250 C 272 248 274 236 268 214" fill="#e59a5e" stroke-width="6"/>
+  <ellipse cx="256" cy="278" rx="17" ry="11" fill="#9a3b2e" stroke-width="6"/>
+  <!-- the hair: one big swoop, the caricature's trait -->
+  <path d="M146 206 C 128 124 182 70 256 64 C 336 58 392 98 394 158 C 396 190 382 206 368 212 C 370 170 338 142 296 144 C 252 146 224 168 196 154 C 180 172 170 192 168 218 Z" fill="url(#hair)" stroke-width="9"/>
+  <g fill="none" stroke-width="5" opacity=".55"><path d="M190 110 C 240 86 310 90 356 124"/><path d="M178 140 C 220 116 290 110 340 138"/></g>
+  <ellipse cx="236" cy="92" rx="44" ry="12" fill="#ffffff" opacity=".35" stroke="none" transform="rotate(-8 236 92)"/>
+</g>
+</svg>

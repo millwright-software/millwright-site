@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>celebration test</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>
+  @font-face { font-family: 'Fredoka'; src: url('fonts/Fredoka-latin.woff2') format('woff2'); font-weight: 300 700; font-display: block; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #cfe3f2; font-family: Fredoka, sans-serif; }
+  canvas { display: block; }
+  #label { position: fixed; left: 12px; top: 10px; font-size: 20px; color: #2b2418; background: rgba(255,248,231,.85); padding: 6px 12px; border-radius: 10px; }
+  #label small { display: block; font-size: 13px; color: #7a6a50; }
+  #ask { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(43,36,24,.35); }
+  #ask .box { background: #fffdf7; border-radius: 22px; padding: 26px 32px; max-width: 560px; font-size: 20px; color: #2b2418; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+  #ask h2 { margin: 0 0 10px; font-size: 32px; } #ask .sub { color: #7a6a50; font-size: 16px; }
+  #ask button { font: inherit; font-size: 20px; font-weight: 600; padding: 10px 18px; border-radius: 14px; border: 3px solid #e2d4b2; background: #fff; margin: 6px 8px 0 0; cursor: pointer; }
+  #ask button.go { background: #3b8f4a; color: #fff; border-color: #3b8f4a; }
+  #toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); background: rgba(43,36,24,.86); color: #fff8e7; font-size: 22px; padding: 10px 24px; border-radius: 30px; opacity: 0; transition: opacity .3s; text-align: center; }
+  #toast.show { opacity: 1; } #toast small { display: block; font-size: 14px; opacity: .85; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id="label"></div>
+<div id="toast" class="hidden"></div>
+<div id="ask" class="hidden"><div class="box"><h2 id="askTitle"></h2><div id="askBody"></div><div id="askChoices"></div></div></div>
+<script type="module">
+import * as THREE from 'three';
+import { loadHamster, gerbilFrom, spawnBurst, updateBursts, textSprite } from './js/parts.js';
+import * as P from './js/props.js';
+import { createCity } from './js/city.js';
+import { createCelebration, TIMELINE } from './js/celebration.js';
+import { sfx } from './js/sfx.js';
+
+const q = new URLSearchParams(location.search); const HOUSES = 15, CITY_AT = new THREE.Vector3(0, 0, 8);
+const pre = +(q.get('t') || 0); let cam = q.get('cam') || 'auto';
+try { await document.fonts.load('700 40px Fredoka'); } catch (e) { console.warn('font', e); }
+await loadHamster();
+
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xa8dcf7); scene.environment = P.makeEnvironment(renderer); scene.environmentIntensity = .45; scene.fog = new THREE.Fog(0xcfe3f2, 70, 180);
+scene.add(new THREE.HemisphereLight(0xdfefff, 0x6a8a3a, .9));
+const sun = new THREE.DirectionalLight(0xfff1d6, 2.2); sun.position.set(-14, 22, 4); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0005; sun.shadow.normalBias = .03; sun.target.position.set(0, 0, 18);
+sun.shadow.camera.left = -24; sun.shadow.camera.right = 24; sun.shadow.camera.top = 22; sun.shadow.camera.bottom = -22; sun.shadow.camera.near = 1; sun.shadow.camera.far = 80; scene.add(sun, sun.target);
+// flat ground, warm; a sand road where the arena side would be; a dry fountain disc at the origin (the arena's)
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ color: 0xb9c7a0, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+const road = new THREE.Mesh(new THREE.PlaneGeometry(400, 8), new THREE.MeshStandardMaterial({ color: 0xd8c39a, roughness: 1 })); road.rotation.x = -Math.PI / 2; road.position.set(0, .004, 0); road.receiveShadow = true; scene.add(road);
+const disc = new THREE.Mesh(new THREE.CircleGeometry(1.4, 32), new THREE.MeshStandardMaterial({ color: 0x9c968c, roughness: 1 })); disc.rotation.x = -Math.PI / 2; disc.position.y = .006; scene.add(disc);
+
+// the hub city, whole: 15 homes, everyone already home (16 s of the city's own clock)
+const city = createCity({ scene, hamsterReady: true, gerbilFrom, spawnBurst, sfx: null });
+city.build(CITY_AT, { houses: HOUSES, facing: 0, seed: 7 });
+await new Promise(r => setTimeout(r, 0));
+city.setProgress(HOUSES); const t0 = performance.now(); let simT = 0; const SIM_DT = 1 / 60;
+for (let k = 0; k < 16 * 60; k++) { city.update(SIM_DT, t0 + simT * 1000); simT += SIM_DT; }
+
+// the kid at the street entrance, facing up the street
+const player = gerbilFrom({ color: 0xd9b07a }); P.dressGerbil(player, { color: 0xd9b07a }); player.position.set(0, 0, 6); scene.add(player);
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, .05, 500); scene.add(camera);
+
+// a card + toast shell like the game's
+const $ = id => document.getElementById(id);
+function card(title, body, choices) { $('askTitle').textContent = title; $('askBody').innerHTML = body; const box = $('askChoices'); box.innerHTML = ''; for (const c of choices) { const b = document.createElement('button'); b.textContent = c.label; if (c.go) b.classList.add('go'); b.onclick = () => c.on(b); box.appendChild(b); } $('ask').classList.remove('hidden'); console.log('[celebration] card:', title, body.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()); }
+function closeCard() { $('ask').classList.add('hidden'); }
+let toastT = 0; function toast(text, { sub = '', ms = 2600 } = {}) { const el = $('toast'); el.innerHTML = text + (sub ? `<small>${sub}</small>` : ''); el.classList.remove('hidden'); requestAnimationFrame(() => el.classList.add('show')); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), ms); }
+// the data (eight bosses), a hub stub that logs the shared things (C4), and with ?lr=1 a Long Road stub (C2) whose lookout looks down the street
+const data = await fetch('data/billionaires.json').then(r => r.json()).catch(() => null);
+const shared = {}; const hub = { sharedKinds: ['school', 'lamps', 'fountain', 'bell'], setShared(k, on, o) { shared[k] = on; console.log('[celebration] setShared', k, on, o?.instant ? 'instant' : ''); }, sharedOn: k => !!shared[k], hillTop: new THREE.Vector3(-25, 2.2, -18) };
+const longRoad = q.get('lr') ? { restore: ids => console.log('[celebration] longRoad.restore', ids.join(',')), setVisible: v => console.log('[celebration] longRoad.setVisible', v), lookoutShot: () => ({ pos: new THREE.Vector3(-14, 14, -6), look: new THREE.Vector3(0, 2, 22) }) } : null;
+const state = { player: 'alex', beaten: { trump: {}, bezos: {}, musk: {} }, eggs: { a: 1, b: 1, c: 1, d: 1 }, friends: { trump: ['the teacher', 'the builder'], bezos: ['the mechanic'], musk: ['the kid with the house with stairs'] } };
+let ended = null;
+const cel = createCelebration({ scene, player, camera, city, gerbilFrom, spawnBurst, textSprite, sfx, play: (id, text) => console.log('[celebration] say', id, text), caption: (a, b) => toast(a, { sub: b, ms: 4000 }), card, closeCard, toast, state, data, hub, longRoad: () => longRoad, hillTop: hub.hillTop, savePicture: () => console.log('[celebration] save picture'), NAMES: { alex: 'Molly', william: 'William' } });
+cel.start({ onDone: res => { ended = res; console.log('[celebration] done', JSON.stringify(res)); } });
+
+const HIGH = [new THREE.Vector3(-17, 17, -6), new THREE.Vector3(0, 0, 18)];
+function placeCamera(snap, dt) { if (cam === 'high') { camera.position.copy(HIGH[0]); camera.lookAt(HIGH[1]); return; } const ct = cel.cameraTarget(); if (!ct) return; if (snap) camera.position.copy(ct.pos); else camera.position.lerp(ct.pos, 1 - Math.exp(-dt * 3)); camera.lookAt(ct.look); }
+
+// pre-roll: step everything deterministically before the first frame
+function stepSim(dt, now) { city.update(dt, now); cel.update(dt, now); updateBursts(dt); P.animateGerbil(player, { speed: 0, now, dt }); simT += dt; }
+let celT = 0; for (let k = 0; k < Math.round(pre / SIM_DT); k++) { stepSim(SIM_DT, t0 + simT * 1000); celT += SIM_DT; }
+placeCamera(true, 0);
+
+const label = $('label'); let frames = 0; const clock = new THREE.Clock();
+function frame() {
+  const dt = Math.min(.05, clock.getDelta()); const now = t0 + simT * 1000; stepSim(dt, now); celT += dt; placeCamera(false, dt);
+  renderer.render(scene, camera); frames++;
+  const phase = Object.entries(TIMELINE).filter(([, v]) => v <= celT).pop()?.[0];
+  if (frames === 2) { console.log(`[celebration] t=${celT.toFixed(1)} phase ${phase} calls ${renderer.info.render.calls} tris ${renderer.info.render.triangles} active ${cel.active} done ${cel.done}`); }
+  if (frames % 15 === 0 || frames === 2) label.innerHTML = `Celebration · t=${celT.toFixed(1)}s · ${phase} <small>${renderer.info.render.calls} draw calls · ${renderer.info.render.triangles.toLocaleString()} tris · cam ${cam} · ?t= pre-roll · ?cam=auto|high · ?lr=1 Long Road stub</small>`;
+  requestAnimationFrame(frame);
+}
+frame();
+addEventListener('keydown', e => { if (e.code === 'Space') cel.skip(); if (e.code === 'KeyC') cam = cam === 'auto' ? 'high' : 'auto'; });
+addEventListener('pointerdown', () => sfx.init());
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+window.__cel = cel; window.__city = city;
+</script>
+</body>
+</html>

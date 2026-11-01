@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<!-- The Gerbil Market: gerbil, sitting up, facing right. CC0 (hand-authored). Recolour by swapping the four fur hexes:
+     #e8bb80 light, #c98f4e base, #93602f dark, #f7e8cc belly. Ink #3b2516. Light comes from the upper left. Feet on y=492. -->
+<defs>
+  <linearGradient id="fur" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#e8bb80"/><stop offset=".5" stop-color="#c98f4e"/><stop offset="1" stop-color="#93602f"/></linearGradient>
+  <linearGradient id="head" x1="0" y1="0" x2=".2" y2="1"><stop offset="0" stop-color="#e8bb80"/><stop offset=".75" stop-color="#c98f4e"/></linearGradient>
+  <radialGradient id="blush"><stop offset="0" stop-color="#f27e92" stop-opacity=".75"/><stop offset="1" stop-color="#f27e92" stop-opacity="0"/></radialGradient>
+</defs>
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <!-- tail: ink stroke under a fur stroke, then the tuft -->
+  <path d="M168 462 C 96 478 44 446 42 386 C 40 342 62 318 50 282" fill="none" stroke-width="26"/>
+  <path d="M168 462 C 96 478 44 446 42 386 C 40 342 62 318 50 282" fill="none" stroke="#93602f" stroke-width="11"/>
+  <ellipse cx="50" cy="270" rx="17" ry="25" fill="#93602f" stroke-width="7" transform="rotate(-12 50 270)"/>
+  <!-- back foot -->
+  <ellipse cx="196" cy="482" rx="40" ry="13" fill="#c98f4e" stroke-width="7"/>
+  <!-- body -->
+  <path d="M152 476 C 104 470 92 398 116 340 C 140 282 206 250 262 254 C 326 258 368 302 372 364 C 378 434 344 478 292 482 Z" fill="url(#fur)" stroke-width="8"/>
+  <!-- belly -->
+  <path d="M310 300 C 352 316 366 372 356 422 C 348 460 316 474 290 470 C 306 424 312 356 310 300 Z" fill="#f7e8cc" stroke="none"/>
+  <!-- haunch -->
+  <path d="M168 452 C 168 392 214 360 262 372 C 296 382 306 420 300 450" fill="none" stroke-width="5" opacity=".55"/>
+  <!-- front foot -->
+  <ellipse cx="318" cy="484" rx="48" ry="14" fill="#e8bb80" stroke-width="7"/>
+  <!-- back ear -->
+  <ellipse cx="282" cy="126" rx="31" ry="40" fill="#c98f4e" stroke-width="7" transform="rotate(-24 282 126)"/>
+  <ellipse cx="283" cy="130" rx="17" ry="25" fill="#e9a0a8" stroke="none" transform="rotate(-24 283 130)"/>
+  <!-- head -->
+  <path d="M240 232 C 224 162 270 110 332 108 C 388 106 424 140 444 176 C 458 200 466 216 459 234 C 452 252 428 264 398 272 C 352 286 290 292 262 272 C 250 264 243 250 240 232 Z" fill="url(#head)" stroke-width="8"/>
+  <ellipse cx="416" cy="232" rx="42" ry="28" fill="#f7e8cc" stroke="none"/>
+  <ellipse cx="306" cy="146" rx="42" ry="17" fill="#ffffff" opacity=".28" stroke="none" transform="rotate(-14 306 146)"/>
+  <!-- front ear -->
+  <ellipse cx="350" cy="104" rx="30" ry="40" fill="#c98f4e" stroke-width="7" transform="rotate(14 350 104)"/>
+  <ellipse cx="350" cy="108" rx="17" ry="25" fill="#e9a0a8" stroke="none" transform="rotate(14 350 108)"/>
+  <!-- eye: big and glossy -->
+  <ellipse cx="376" cy="184" rx="23" ry="26" fill="#1d120b" stroke="none"/>
+  <circle cx="384" cy="174" r="9" fill="#ffffff" stroke="none"/>
+  <circle cx="368" cy="196" r="4.5" fill="#ffffff" stroke="none"/>
+  <!-- cheek, nose, mouth, whiskers -->
+  <ellipse cx="392" cy="240" rx="28" ry="16" fill="url(#blush)" stroke="none"/>
+  <ellipse cx="456" cy="218" rx="12" ry="10" fill="#e9798c" stroke-width="5"/>
+  <path d="M452 232 C 450 244 440 248 430 242" fill="none" stroke-width="5"/>
+  <g stroke-width="3" opacity=".6" fill="none"><path d="M440 226 L 496 210"/><path d="M440 232 L 498 234"/><path d="M438 238 L 490 256"/></g>
+  <!-- front paws at the chest -->
+  <ellipse cx="368" cy="318" rx="17" ry="13" fill="#e8bb80" stroke-width="6"/>
+  <ellipse cx="346" cy="330" rx="16" ry="12" fill="#e8bb80" stroke-width="6"/>
+</g>
+</svg>

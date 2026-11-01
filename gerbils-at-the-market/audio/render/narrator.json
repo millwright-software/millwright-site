@@ -1,0 +1,12 @@
+{
+ "go": ["af_heart", 0.95, "Go!"],
+ "pile_gone": ["af_heart", 0.95, "The pile is gone. It is all back in the market."],
+ "td_count_1": ["af_heart", 0.95, "One."],
+ "td_count_2": ["af_heart", 0.95, "Two."],
+ "td_count_3": ["af_heart", 0.95, "Three."],
+ "friends_first": ["af_heart", 0.95, "Free your friends first!"],
+ "pouch5": ["af_heart", 0.95, "Mr. Nib made your cheeks bigger. Five bags a trip."],
+ "market_built_r3": ["af_heart", 0.95, "Look how much he still has."],
+ "lr3_pebble": ["af_heart", 0.95, "This is one gerbil family's whole life of work. It's the tiny pebble in the ring."],
+ "market_built_all": ["af_heart", 0.95, "That was his whole pile. Even the smallest one had a whole street's worth."]
+}

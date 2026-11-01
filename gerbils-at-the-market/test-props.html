@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>props test: old vs paper</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>
+  @font-face { font-family: 'Fredoka'; src: url('fonts/Fredoka-latin.woff2') format('woff2'); font-weight: 300 700; font-display: block; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #cfe3f2; font-family: Fredoka, sans-serif; }
+  canvas { display: block; }
+  #label { position: fixed; left: 12px; top: 10px; font-size: 20px; color: #3b2516; background: rgba(251,240,212,.9); padding: 6px 12px; border-radius: 10px; z-index: 2; }
+  #label small { display: block; font-size: 13px; color: #7a6a50; }
+  .tag { position: fixed; transform: translate(-50%, 0); font: 600 12px Fredoka, sans-serif; color: #3b2516; background: rgba(251,240,212,.85); padding: 1px 6px; border-radius: 6px; white-space: nowrap; pointer-events: none; }
+  .row { position: fixed; left: 12px; font: 700 16px Fredoka, sans-serif; color: #fbf0d4; background: #3b2516; padding: 3px 10px; border-radius: 8px; }
+</style>
+</head>
+<body>
+<div id="label"></div>
+<script type="module">
+// ?art=paper | old  one gallery in that mode;  no ?art  both, old (back row) and paper (front row), side by side
+// ?focus=<name> frames one item (az, el, zoom as before).  window.__ready turns true after the first frames.
+import * as THREE from 'three';
+import { loadHamster, legoBoxTexture, textSprite } from './js/parts.js';
+import * as P from './js/props.js';
+import { createTrail } from './js/trail.js';
+
+const q = new URLSearchParams(location.search); const art = q.get('art'); const focus = q.get('focus');
+const az = parseFloat(q.get('az') || '0'), el = parseFloat(q.get('el') || '0.42'), zoom = parseFloat(q.get('zoom') || '1');
+try { await document.fonts.load('700 40px Fredoka'); await document.fonts.load('600 40px Fredoka'); } catch (e) { console.warn('font', e); }
+await loadHamster();
+
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const paperish = art !== 'old'; renderer.toneMapping = paperish ? THREE.NeutralToneMapping : THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = paperish ? 1 : 1.05; document.body.prepend(renderer.domElement);
+const t0 = performance.now(); const pre = await P.preloadArt(renderer); console.log('[preload]', JSON.stringify(pre), Math.round(performance.now() - t0) + ' ms');
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xcfe3f2); scene.environment = P.makeEnvironment(renderer); scene.environmentIntensity = .45;
+scene.add(new THREE.HemisphereLight(0xfff4e2, 0x8aa868, 1.2));
+const sun = new THREE.DirectionalLight(0xfff0d6, 2.3); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0005; sun.shadow.normalBias = .02; scene.add(sun, sun.target);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshLambertMaterial({ color: 0x8cc067 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+
+const items = [], trails = [];
+const tris = o => { let n = 0; o.traverse(m => { if (m.isMesh && m.geometry && m.visible) { const g = m.geometry; const c = g.index ? g.index.count / 3 : g.attributes.position.count / 3; n += m.isInstancedMesh ? c * m.count : c; } }); return Math.round(n); };
+function gallery(mode, z0, everything) {
+  P.setArtMode(mode);
+  const rowA = [], rowB = [];
+  const add = (row, name, obj, width, top) => { row.push({ name: `${name}`, obj, width, top, mode }); return obj; };
+  for (const k of ['lego', 'cars', 'house']) { const s = P.makeStall(k); s.userData.reveal(6); add(rowA, 'stall ' + k, s, 4.4, 5.2); }
+  add(rowA, 'makeSign', P.makeSign(['The Market', 'Run and see']), 2.2, 2);
+  const lt = new THREE.Mesh(new THREE.BoxGeometry(.8, .8, .8), new THREE.MeshStandardMaterial({ map: legoBoxTexture(1), roughness: .8 })); lt.position.y = .4; const ltg = new THREE.Group(); ltg.add(lt); add(rowA, 'legoBoxTexture', ltg, 1.2, 1);
+  const ts = textSprite(['Free them!', 'two words'], { scale: .8, size: 56 }); ts.position.y = 1.0; const tsg = new THREE.Group(); tsg.add(ts); add(rowA, 'textSprite', tsg, 2.2, 1.6);
+  add(rowB, 'makeBag', P.makeBag(1), .9, .7); add(rowB, 'makeBag .55', P.makeBag(.55), .7, .5);
+  add(rowB, 'makeCrate', P.makeCrate(.5), .9, .9); add(rowB, 'makeBrick', P.makeBrick(), .5, .3); add(rowB, 'makeBar', P.makeBar(1.2), 1.2, .9);
+  const tg = new THREE.Group(); const tr = createTrail(tg, { max: 6, pitch: .9, size: .7 }).set(-1.4, 1.4, 0).show(true); trails.push(tr); add(rowB, 'trail', tg, 3, .3);
+  if (everything) {
+    add(rowA, 'makeJarSprite .6', (() => { const j = P.makeJarSprite(); j.userData.setFill(.6); return j; })(), 1.4, 1.6);
+    add(rowA, 'makeTree', P.makeTree(1), 2.4, 3.1);
+    for (const k of ['school', 'lamp', 'fountain', 'road', 'bell']) { const s = P.makeSharedThing(k); s.userData.setLit(true); add(rowA, k + ' lit', s, 1.6, 1.7); }
+    { const s = P.makeSharedThing('school'); s.userData.setLit(false); add(rowA, 'school off', s, 1.6, 1.7); }
+    { const s = P.makeSharedThing('bell'); s.userData.setLit(false); add(rowA, 'bell off', s, 1.6, 1.7); }
+    add(rowB, 'makeCoin', P.makeCoin(), .6, .4); add(rowB, 'makeBush', P.makeBush(1), 1.2, .8); add(rowB, 'makeArrow', P.makeArrow(), 1.7, .2);
+    const inst = P.spriteInstanced('bush', 3, { height: .6, cross: true }); const m4 = new THREE.Matrix4(); for (let i = 0; i < 3; i++) inst.setMatrixAt(i, m4.makeTranslation(-.5 + i * .5, 0, 0)); const ig = new THREE.Group(); ig.add(inst); add(rowB, 'spriteInstanced', ig, 1.8, .7);
+    for (const k of P.APP_ICONS) { const t = new THREE.CanvasTexture(P.appIconCanvas(k, 256)); t.colorSpace = THREE.SRGBColorSpace; const m = new THREE.Mesh(new THREE.PlaneGeometry(.55, .55), new THREE.MeshBasicMaterial({ map: t, transparent: true })); m.position.y = .45; const g = new THREE.Group(); g.add(m); add(rowB, 'icon ' + k, g, .7, .8); }
+    const toon = new THREE.Mesh(new THREE.TorusKnotGeometry(.25, .09, 80, 12), P.toonMat(P.PAL.red)); toon.position.y = .45; toon.castShadow = true; P.addInk(toon); const tk = new THREE.Group(); tk.add(toon); add(rowB, 'toonMat+addInk', tk, .9, .8);
+  }
+  // wrap into lines at most MAXW wide, front line at z0, each later line further back by its tallest item
+  const all = [...rowB, ...rowA], lines = [[]]; let x = 0, widest = 0;
+  for (const it of all) { if (x + it.width > MAXW && lines[lines.length - 1].length) { lines.push([]); x = 0; } lines[lines.length - 1].push(it); x += it.width + .4; }
+  let z = z0;
+  for (const line of lines) { let lx = 0; for (const it of line) { lx += it.width / 2; it.x = lx; lx += it.width / 2 + .4; } widest = Math.max(widest, lx); const off = -lx / 2, top = Math.max(...line.map(i => i.top));
+    for (const it of line) { it.obj.position.x += it.x + off; it.obj.position.z += z; scene.add(it.obj); items.push(it); console.log(`[tris] ${mode} ${it.name}: ${tris(it.obj)}`); }
+    z -= Math.max(1.6, top * .75 + .6); }
+  depth = Math.max(depth, -z);
+  return widest;
+}
+const MAXW = +(q.get('w') || 13); let depth = 0;
+let span;
+if (art === 'old' || art === 'paper') span = gallery(art, 0, art === 'paper');
+else { const a = gallery('paper', 0, true); const zb = -depth - 1; span = Math.max(a, gallery('old', zb, false)); }
+if (q.get('fill')) for (const it of items) it.obj.userData.setFill?.(+q.get('fill'));
+
+const camera = new THREE.PerspectiveCamera(40, innerWidth / innerHeight, .05, 500); scene.add(camera);
+const label = document.getElementById('label'); let target;
+if (focus) {
+  const it = items.find(i => i.name === focus) || items[0]; const box = new THREE.Box3().setFromObject(it.obj); const size = box.getSize(new THREE.Vector3()); const c = box.getCenter(new THREE.Vector3());
+  const r = Math.max(size.x, size.y, size.z) * .55 + .05; const dist = r / Math.tan(camera.fov / 2 * Math.PI / 180) * 1.15 * zoom;
+  camera.position.set(c.x + Math.sin(az) * dist * Math.cos(el), c.y + dist * Math.sin(el), c.z + Math.cos(az) * dist * Math.cos(el)); target = c;
+  label.innerHTML = `${it.name} <small>${it.mode} · ${tris(it.obj)} tris · ${size.x.toFixed(2)} × ${size.y.toFixed(2)} × ${size.z.toFixed(2)} m</small>`;
+} else {
+  const zc = -depth / 2 + .8; const dist = Math.max((span / 2) / camera.aspect, depth * .62) / Math.tan(camera.fov / 2 * Math.PI / 180) * 1.05 * zoom;
+  target = new THREE.Vector3(0, .9, zc); camera.position.set(Math.sin(az) * dist * Math.cos(el), .9 + dist * Math.sin(el), zc + Math.cos(az) * dist * Math.cos(el));
+  label.innerHTML = art ? `art=${art} <small>every factory in ${art} mode${art === 'paper' ? ' (the new sprite factories at the right ends)' : ''}</small>` : `old (back) vs paper (front) <small>?art=old | ?art=paper for one at a time</small>`;
+}
+camera.lookAt(target);
+sun.position.set(target.x - 14, 22, target.z + 16); sun.target.position.copy(target); Object.assign(sun.shadow.camera, { left: -span / 2 - 4, right: span / 2 + 4, top: 14, bottom: -14, near: 1, far: 80 }); sun.shadow.camera.updateProjectionMatrix();
+
+// a small tag under each item (HTML, so it never enters the picture's own text)
+const tags = items.map(it => { const d = document.createElement('div'); d.className = 'tag'; d.textContent = (art ? '' : it.mode + ' · ') + it.name; document.body.appendChild(d); return d; });
+const _p = new THREE.Vector3();
+function placeTags() { items.forEach((it, i) => { _p.set(it.obj.position.x, -.05, it.obj.position.z); _p.project(camera); const d = tags[i]; d.style.left = ((_p.x + 1) / 2 * innerWidth) + 'px'; d.style.top = ((1 - _p.y) / 2 * innerHeight + 2) + 'px'; d.style.display = _p.z < 1 && !focus ? '' : 'none'; }); }
+let frames = 0; const clock = new THREE.Clock();
+function frame() { const dt = Math.min(.05, clock.getDelta()); const now = performance.now();
+  for (const tr of trails) tr.update(now); P.updateArt?.(camera); renderer.render(scene, camera); placeTags();
+  if (++frames === 20) { window.__ready = true; console.log('[info]', JSON.stringify(renderer.info.render), 'textures', renderer.info.memory.textures, 'geometries', renderer.info.memory.geometries); }
+  requestAnimationFrame(frame); }
+frame();
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+window.__items = items; window.__P = P;
+</script>
+</body>
+</html>

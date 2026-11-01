@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+<!-- The Gerbil Market: a street lamp (a shared thing). CC0 (hand-authored). Palette only. Sits on y=496.
+     Drawn lit (yellow lantern); the loader makes the dark grey-blue "off" version from this one. -->
+<defs>
+  <linearGradient id="post" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a94e0"/><stop offset="1" stop-color="#2c63b4"/></linearGradient>
+  <radialGradient id="glow" cx=".4" cy=".4" r=".7"><stop offset="0" stop-color="#fbf0d4"/><stop offset=".55" stop-color="#f2c230"/><stop offset="1" stop-color="#d9a21c"/></radialGradient>
+</defs>
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M84 496 L 96 448 L 160 448 L 172 496 Z" fill="url(#post)" stroke-width="9"/>
+  <rect x="116" y="196" width="24" height="254" fill="url(#post)" stroke-width="8"/>
+  <rect x="104" y="300" width="48" height="14" rx="5" fill="#3a7bd5" stroke-width="6"/>
+  <rect x="96" y="184" width="64" height="18" rx="5" fill="#3a7bd5" stroke-width="7"/>
+  <path d="M90 92 L 166 92 L 156 186 L 100 186 Z" fill="url(#glow)" stroke-width="9"/>
+  <path d="M128 92 L 128 186 M 95 140 L 161 140" stroke-width="5" opacity=".6"/>
+  <path d="M76 96 L 128 48 L 180 96 Z" fill="#3a7bd5" stroke-width="9"/>
+  <circle cx="128" cy="38" r="12" fill="#f2c230" stroke-width="6"/>
+  <ellipse cx="108" cy="116" rx="9" ry="16" fill="#ffffff" opacity=".55" stroke="none"/>
+  <path d="M122 214 L 122 440" stroke="#ffffff" stroke-width="5" opacity=".3" fill="none"/>
+</g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<!-- The Gerbil Market: a money bag. CC0 (hand-authored). Ink #3b2516. Sits on y=496. -->
+<defs>
+  <radialGradient id="sack" cx=".38" cy=".35" r=".75"><stop offset="0" stop-color="#ecc98c"/><stop offset=".6" stop-color="#d1a265"/><stop offset="1" stop-color="#a87a42"/></radialGradient>
+</defs>
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M256 172 C 158 172 92 282 96 372 C 100 452 168 496 256 496 C 344 496 412 452 416 372 C 420 282 354 172 256 172 Z" fill="url(#sack)" stroke-width="10"/>
+  <path d="M206 170 C 172 126 194 78 228 100 C 238 66 276 66 286 100 C 320 78 342 126 306 170 Z" fill="#d1a265" stroke-width="9"/>
+  <path d="M228 102 C 236 126 240 146 240 166 M 286 102 C 278 126 274 146 274 166" fill="none" stroke-width="5" opacity=".5"/>
+  <ellipse cx="256" cy="172" rx="62" ry="18" fill="#8a5a2b" stroke-width="8"/>
+  <path d="M300 178 C 330 196 336 226 322 246" fill="none" stroke="#8a5a2b" stroke-width="12"/>
+  <circle cx="256" cy="350" r="86" fill="#f6e6bf" stroke-width="7"/>
+  <path d="M298 306 C 296 276 214 274 216 312 C 218 350 300 340 300 386 C 300 428 212 426 210 392" fill="none" stroke="#2f6a2a" stroke-width="24"/>
+  <path d="M256 262 L 256 440" fill="none" stroke="#2f6a2a" stroke-width="14"/>
+  <path d="M130 430 C 190 470 322 470 382 430" fill="none" stroke-width="5" stroke-dasharray="14 12" opacity=".5"/>
+  <ellipse cx="182" cy="262" rx="34" ry="20" fill="#ffffff" opacity=".35" stroke="none" transform="rotate(-35 182 262)"/>
+</g>
+</svg>

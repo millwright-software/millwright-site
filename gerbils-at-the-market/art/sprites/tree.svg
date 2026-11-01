@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640">
+<!-- The Gerbil Market: a round town tree. CC0 (hand-authored). Silhouette-only ink (the ink pass is drawn first, wider). Trunk foot y=624. -->
+<g stroke-linejoin="round" stroke-linecap="round">
+  <path d="M218 624 C 232 560 236 500 236 430 L 276 430 C 276 500 280 560 296 624 Z" fill="#7a4a26" stroke="#3b2516" stroke-width="9"/>
+  <path d="M256 470 L 214 420 M 260 470 L 304 410" stroke="#3b2516" stroke-width="20" fill="none"/>
+  <path d="M256 470 L 214 420 M 260 470 L 304 410" stroke="#7a4a26" stroke-width="8" fill="none"/>
+  <g fill="#3b2516" stroke="#3b2516" stroke-width="18">
+    <circle cx="256" cy="200" r="130"/><circle cx="150" cy="300" r="104"/><circle cx="362" cy="300" r="104"/><circle cx="256" cy="350" r="110"/>
+  </g>
+  <g fill="#4f9440" stroke="none">
+    <circle cx="256" cy="200" r="130"/><circle cx="150" cy="300" r="104"/><circle cx="362" cy="300" r="104"/><circle cx="256" cy="350" r="110"/>
+  </g>
+  <path d="M60 330 C 100 420 200 470 256 460 C 330 470 420 420 452 330 C 400 400 320 430 256 424 C 190 430 110 400 60 330 Z" fill="#3a7434"/>
+  <g fill="#78bb59"><circle cx="210" cy="150" r="58"/><circle cx="128" cy="262" r="42"/><circle cx="300" cy="240" r="40"/></g>
+  <g fill="#a3d977"><circle cx="196" cy="132" r="26"/><circle cx="118" cy="250" r="18"/></g>
+  <g fill="#e8433f" stroke="#3b2516" stroke-width="4"><circle cx="330" cy="330" r="11"/><circle cx="180" cy="370" r="11"/><circle cx="280" cy="140" r="11"/></g>
+</g>
+</svg>

@@ -1,0 +1,253 @@
+/* The Gerbil Market — the HTML shell's look. Mobile first; the JS only toggles .hidden / .show and fills text. */
+@font-face { font-family: 'Fredoka'; src: url('../fonts/Fredoka-latin.woff2') format('woff2'); font-weight: 300 700; font-display: swap; }
+
+:root {
+  --paper:#fff8e7; --ink:#2b2418; --soft:#7a6a50; --go:#3b8f4a; --go-dark:#2f7a3d; --card:#fffdf7; --line:#e2d4b2; --warn:#b5541b; --gold:#e0b53a; --sky:#a8dcf7;
+  --gap:14px;
+  --sa-t:env(safe-area-inset-top,0px); --sa-r:env(safe-area-inset-right,0px); --sa-b:env(safe-area-inset-bottom,0px); --sa-l:env(safe-area-inset-left,0px);
+  --top:calc(var(--gap) + var(--sa-t)); --right:calc(var(--gap) + var(--sa-r)); --bottom:calc(var(--gap) + var(--sa-b)); --left:calc(var(--gap) + var(--sa-l));
+  --ctrl:48px;            /* the bottom controls' height: the toast sits above it */
+  --btns-w:80px;          /* room the bottom-right buttons take on a wide screen; the hint stops short of it */
+  --above:120px;          /* what the hint bar takes at the bottom: the toast, the captions and the speed bar sit above it */
+}
+* { box-sizing:border-box; }
+html, body { margin:0; height:100%; overflow:hidden; background:var(--sky); font-family:'Fredoka',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:var(--ink); -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; }
+body > canvas { display:block; position:fixed; inset:0; touch-action:none; user-select:none; -webkit-user-select:none; }
+a { color:var(--go); }
+.visually-hidden { position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; border:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.hidden { display:none !important; }
+
+/* ---------- buttons ---------- */
+button { font:inherit; font-size:20px; font-weight:600; padding:12px 20px; min-height:var(--ctrl); min-width:120px; border-radius:16px; border:3px solid var(--line); background:#fff; color:var(--ink); cursor:pointer; touch-action:manipulation; transition:transform .08s ease, border-color .15s ease, box-shadow .15s ease; }
+button:hover { border-color:var(--go); }
+button:active { transform:scale(.97); }
+button:focus-visible { outline:3px solid var(--go); outline-offset:2px; }
+button:disabled { opacity:.55; cursor:default; transform:none; }
+button.go { background:var(--go); color:#fff; border-color:var(--go); }
+button.go:hover { background:var(--go-dark); border-color:var(--go-dark); }
+button.wrong { border-color:var(--warn); color:var(--warn); background:#fff6f0; }
+button.right { background:var(--go); color:#fff; border-color:var(--go); }
+
+/* ---------- HUD ---------- */
+#hud { position:fixed; inset:0; pointer-events:none; z-index:5; }
+.panel { position:absolute; background:rgba(255,248,231,.9); border:3px solid var(--line); border-radius:18px; padding:8px 14px; font-size:17px; line-height:1.3; box-shadow:0 6px 18px rgba(60,40,10,.12); }
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  .panel, .btns button { -webkit-backdrop-filter:blur(10px) saturate(1.3); backdrop-filter:blur(10px) saturate(1.3); background:rgba(255,248,231,.74); }
+  #toast { -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+}
+#who { top:var(--top); left:var(--left); max-width:44vw; }
+#who b { font-size:22px; }
+#whoSecrets { color:var(--soft); font-size:14px; }
+#stop { top:var(--top); right:var(--right); text-align:right; max-width:50vw; }
+#stop .money { font-size:30px; font-weight:700; line-height:1.1; }
+#stop .sets { color:var(--soft); font-size:15px; }
+#stopNote { font-size:15px; }
+#stopNote:empty { display:none; }
+
+/* the one-line how-to: always on, big enough to read from the couch */
+#hint { position:absolute; bottom:var(--bottom); left:var(--left); right:calc(var(--right) + var(--btns-w)); padding:9px 18px; background:rgba(43,36,24,.84); color:#fff; border-radius:18px; font-size:clamp(19px, 2vw, 26px); font-weight:600; line-height:1.3; box-shadow:0 6px 18px rgba(0,0,0,.2); text-shadow:0 1px 2px rgba(0,0,0,.3); }
+#hint:empty { display:none; }
+#hint kbd { background:var(--gold); border-radius:8px; padding:0 8px; margin:0 1px; font-family:inherit; font-size:inherit; font-weight:700; color:var(--ink); text-shadow:none; }
+#hint .touchOnly { display:none; }
+@media (pointer:coarse) { #hint .touchOnly { display:inline; } #hint .mouseOnly { display:none; } }
+
+
+.btns { position:absolute; right:var(--right); bottom:var(--bottom); display:flex; gap:8px; pointer-events:auto; }
+.btns button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:var(--ctrl); min-width:var(--ctrl); font-size:15px; font-weight:600; padding:0 14px 0 11px; border:2px solid var(--line); border-radius:14px; background:rgba(255,248,231,.9); color:var(--ink); cursor:pointer; white-space:nowrap; }
+.btns button::before { content:''; width:22px; height:22px; flex:none; background:currentColor; -webkit-mask:var(--icon) center/contain no-repeat; mask:var(--icon) center/contain no-repeat; }
+/* console-style controls (Eric 10/31): only the menu on a desktop; A and B too on a touch screen */
+.btns #menuBtn, .btns #aBtn, .btns #bBtn { padding:0; gap:0; justify-content:center; font-weight:800; }
+.btns #menuBtn::before, .btns #aBtn::before, .btns #bBtn::before { display:none; }
+.btns #menuBtn { width:var(--ctrl); font-size:24px; }
+.btns .touchCtl { display:none; }
+body.touch .btns { align-items:flex-end; gap:14px; }
+body.touch .btns .touchCtl { display:inline-flex; border-radius:50%; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.35); touch-action:none; user-select:none; -webkit-user-select:none; }
+body.touch .btns #aBtn { width:88px; height:88px; font-size:36px; background:rgba(58,150,72,.88); border-color:#2c6e37; }
+body.touch .btns #bBtn { width:66px; height:66px; font-size:28px; background:rgba(214,72,60,.86); border-color:#9a3128; margin-bottom:30px; }
+body.touch .btns .touchCtl.down { transform:scale(.92); filter:brightness(1.15); }
+body.touch { --btns-w:250px; }
+.mouseOnly { } .touchOnly { display:none; }
+body.touch .mouseOnly { display:none !important; } body.touch .touchOnly { display:inline !important; } body.touch #hint .touchOnly { display:inline; }
+/* the joystick (stick.js): a faint pad at rest in its corner, under the thumb while it steers */
+.stick { position:fixed; z-index:5; width:120px; height:120px; border-radius:50%; background:rgba(255,248,231,.22); border:3px solid rgba(255,248,231,.75); box-shadow:0 4px 14px rgba(60,40,10,.18); pointer-events:none; }
+.stick.left { left:calc(var(--left) + 18px); bottom:calc(var(--bottom) + 76px); }
+.stick.live { right:auto; bottom:auto; background:rgba(255,248,231,.32); }
+.stick .knob { position:absolute; left:29px; top:29px; width:56px; height:56px; border-radius:50%; border:3px solid rgba(255,255,255,.85); opacity:.92; }
+/* the highlighted choice on a card or the title: Move picks it, A presses it */
+.choices button.sel, #title .gerbils button.sel { outline:5px solid var(--gold); outline-offset:3px; }
+#title .controls { display:flex; flex-wrap:wrap; justify-content:center; gap:10px 18px; margin:16px 0 0; font-size:15px; font-weight:600; color:var(--soft); }
+#title .ctl { display:inline-flex; align-items:center; gap:7px; }
+#title .pic { display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:30px; padding:0 8px; border-radius:8px; background:var(--gold); color:var(--ink); font-weight:800; font-size:14px; }
+#title .pic.round { border-radius:999px; }
+#title .stickPic { width:30px; min-width:30px; padding:0; border-radius:50%; background:radial-gradient(circle, var(--gold) 0 35%, rgba(224,181,58,.35) 37% 100%); }
+
+#toast { position:absolute; left:50%; top:calc(var(--top) + 78px); transform:translateX(-50%); background:rgba(43,36,24,.86); color:var(--paper); font-size:24px; font-weight:600; line-height:1.25; padding:12px 26px; border-radius:30px; opacity:0; transition:opacity .35s; text-align:center; max-width:min(92vw, 640px); box-shadow:0 10px 30px rgba(0,0,0,.25); }
+#toast.show { opacity:1; }
+#toast small { display:block; font-size:17px; font-weight:500; margin-top:2px; }
+/* the prologue's captions: fade in low on the screen, never a pop-up */
+#caption { position:absolute; left:50%; top:calc(var(--top) + 64px); transform:translateX(-50%); width:max-content; max-width:min(92vw, 860px); box-sizing:border-box; text-align:center; color:#fff; background:rgba(43,36,24,.84); padding:12px 26px 14px; border-radius:28px; text-shadow:0 1px 3px rgba(0,0,0,.5); opacity:0; transition:opacity .9s; pointer-events:none; }   /* (verify) on the toasts' dark pill: white over a bright scene or a sign washed out */
+#caption.show { opacity:1; }
+#caption b { display:block; font-size:clamp(24px, 4.2vw, 42px); font-weight:700; line-height:1.15; }
+#caption small { display:block; font-size:clamp(15px, 2.2vw, 22px); font-weight:500; opacity:.95; margin-top:6px; line-height:1.3; }
+
+/* ---------- loading ---------- */
+#loading { position:fixed; top:var(--top); left:50%; transform:translateX(-50%); z-index:30; background:rgba(43,36,24,.78); color:var(--paper); font-size:14px; font-weight:600; padding:7px 16px; border-radius:999px; pointer-events:none; white-space:nowrap; transition:opacity .4s; }
+#loading::after { content:''; display:inline-block; width:1.4em; text-align:left; animation:dots 1.2s steps(4) infinite; }
+@keyframes dots { 0% { content:''; } 25% { content:'.'; } 50% { content:'..'; } 75% { content:'...'; } }
+body.loaded #loading { opacity:0; visibility:hidden; }
+
+/* ---------- screens + cards ---------- */
+.screen { position:fixed; inset:0; z-index:10; display:flex; overflow:auto; -webkit-overflow-scrolling:touch; padding:var(--top) var(--right) var(--bottom) var(--left); background:rgba(60,40,10,.38); }
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { .screen { -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px); } }
+.card { margin:auto; background:var(--card); border:3px solid var(--line); border-radius:26px; padding:26px 30px; width:min(720px, 100%); box-shadow:0 24px 70px rgba(0,0,0,.28); pointer-events:auto; }
+.card h1 { margin:0 0 6px; font-size:46px; line-height:1; letter-spacing:-.5px; font-weight:700; }
+.card h2 { margin:0 0 10px; font-size:28px; line-height:1.15; font-weight:700; }
+.card p { font-size:19px; line-height:1.4; margin:8px 0; }
+.card .sub { color:var(--soft); font-size:17px; }
+.card .foot { color:var(--soft); font-size:14px; margin:18px 0 0; }
+.choices { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.choices button { flex:1 1 160px; }
+.quote { font-size:22px; font-style:italic; line-height:1.4; background:#fffaf0; border-left:6px solid var(--gold); padding:12px 16px; border-radius:10px; margin:12px 0 6px; }
+.byline { color:var(--soft); font-size:15px; margin:0 0 6px 22px; }
+
+/* ---------- the level screen: three cards ---------- */
+.levels { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; margin-top:14px; }
+.levels button { position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:flex-start; gap:6px; text-align:left; line-height:1.25; padding:18px 18px 16px; min-width:0; min-height:150px; border-radius:20px; background:#fff; }
+.levels button:hover { transform:translateY(-2px); box-shadow:0 12px 28px rgba(60,40,10,.16); }
+.levels button b { font-size:22px; line-height:1.1; }
+.levels button span { display:block; font-size:15px; font-weight:400; color:var(--soft); }
+.levels button span + span { display:inline-block; font-weight:600; color:var(--ink); background:#f3ecd9; border-radius:999px; padding:2px 10px; font-size:14px; margin-top:auto; }
+.levels button em { position:absolute; top:0; left:0; right:0; font-style:normal; font-size:13px; font-weight:600; letter-spacing:.2px; background:var(--go); color:#fff; text-align:center; padding:5px 8px; }
+.levels button em::before { content:'✓ '; }
+.levels button:has(em) { padding-top:44px; border-color:var(--go); background:#f4faf3; }
+
+/* ---------- the title screen ---------- */
+#title { background:linear-gradient(#6fbfee 0%, #a8dcf7 45%, #d9eefb 75%, #e9f3dc 100%); }
+#title .sky { position:fixed; inset:0; overflow:hidden; pointer-events:none; }
+#title .sun { position:absolute; top:-6vmin; right:-6vmin; width:28vmin; height:28vmin; border-radius:50%; background:radial-gradient(circle, #fff6c4 0 45%, rgba(255,246,196,.35) 60%, transparent 72%); }
+#title .ground { position:absolute; left:0; right:0; bottom:0; height:18vh; background:linear-gradient(transparent, rgba(123,180,90,.5)); }
+.cloud { position:absolute; width:220px; height:110px; fill:#fff; opacity:.92; animation:drift linear infinite; will-change:transform; }
+.cloud.c1 { top:6%; animation-duration:70s; animation-delay:-5s; }
+.cloud.c2 { top:22%; width:150px; height:75px; opacity:.75; animation-duration:95s; animation-delay:-40s; }
+.cloud.c3 { top:48%; width:260px; height:130px; opacity:.6; animation-duration:120s; animation-delay:-70s; }
+.cloud.c4 { top:14%; width:120px; height:60px; opacity:.6; animation-duration:85s; animation-delay:-20s; }
+@keyframes drift { from { transform:translateX(-30vw); } to { transform:translateX(105vw); } }
+.bag { position:absolute; width:44px; height:52px; animation:bob 3.4s ease-in-out infinite alternate; will-change:transform; filter:drop-shadow(0 6px 6px rgba(60,40,10,.18)); }
+.bag.b1 { left:6%; bottom:14%; } .bag.b2 { right:8%; bottom:22%; width:34px; height:40px; animation-duration:4.1s; animation-delay:-1.2s; } .bag.b3 { left:14%; top:30%; width:28px; height:33px; opacity:.8; animation-duration:5s; animation-delay:-2.5s; } .bag.b4 { right:16%; top:36%; width:38px; height:45px; animation-duration:3.8s; animation-delay:-.7s; }
+@keyframes bob { from { transform:translateY(0) rotate(-7deg); } to { transform:translateY(-16px) rotate(7deg); } }
+@media (prefers-reduced-motion:reduce) { .cloud, .bag, #loading::after { animation:none; } }
+
+#title .card { text-align:center; width:min(640px, 100%); position:relative; }
+#title h1 { font-size:clamp(36px, 8vw, 60px); color:var(--ink); text-shadow:0 3px 0 #fff, 0 5px 0 var(--line); }
+#title h1 .at { display:block; font-size:.42em; font-weight:500; color:var(--soft); letter-spacing:1px; text-shadow:none; margin:4px 0 2px; }
+#title h1 .market { color:var(--go); }
+#title .tag { font-size:21px; font-weight:600; margin:10px 0 4px; }
+#title .story { font-size:16px; margin:6px auto 0; max-width:520px; }
+#title .who { margin:18px 0 0; font-size:18px; font-weight:600; color:var(--ink); }
+.gerbils { display:flex; gap:16px; margin-top:12px; }
+.gerbils button { flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; gap:4px; padding:16px 12px 14px; font-size:26px; line-height:1.1; border-radius:22px; background:#fff; box-shadow:0 6px 0 var(--line); }
+.gerbils button:hover { border-color:var(--go); transform:translateY(-3px); box-shadow:0 9px 0 var(--line), 0 14px 30px rgba(60,40,10,.15); }
+.gerbils button:active { transform:translateY(2px); box-shadow:0 2px 0 var(--line); }
+.gerbils button svg { width:92px; height:92px; margin-bottom:4px; }
+.gerbils small { display:block; font-size:15px; font-weight:400; color:var(--soft); }
+#title .foot { margin-top:18px; }
+
+/* ---------- compact: phones, and anything short (phone landscape) ---------- */
+@media (max-width:640px), (max-height:520px) {
+  :root { --gap:8px; }
+  .panel { padding:6px 10px; font-size:14px; border-width:2px; border-radius:14px; }
+  #who { max-width:40vw; } #who b { font-size:16px; } #whoSecrets { font-size:12px; }
+  #stop { max-width:50vw; } #stop .money { font-size:20px; } #stop .sets, #stopNote { font-size:12px; }
+  :root { --above:150px; }
+  #hint { left:var(--left); right:var(--right); bottom:calc(var(--bottom) + var(--ctrl) + 8px); padding:7px 12px; font-size:17px; border-radius:14px; }
+  .btns { gap:6px; }
+  .btns button { width:var(--ctrl); padding:0; font-size:0; gap:0; }
+  .btns button::before { width:24px; height:24px; }
+  #toast { font-size:17px; padding:8px 16px; border-radius:20px; top:calc(var(--top) + 58px); max-width:min(92vw, 520px); }
+  #toast small { font-size:13px; }
+  #loading { font-size:12px; padding:5px 12px; }
+  .screen { padding:calc(var(--sa-t) + 8px) calc(var(--sa-r) + 8px) calc(var(--sa-b) + 8px) calc(var(--sa-l) + 8px); }
+  .card { padding:18px 16px; border-radius:20px; border-width:2px; }
+  .card h1 { font-size:34px; } .card h2 { font-size:22px; } .card p { font-size:16px; } .card .sub { font-size:15px; }
+  .quote { font-size:18px; padding:10px 12px; } .byline { font-size:13px; margin-left:16px; }
+  .choices { gap:8px; margin-top:14px; } .choices button { font-size:18px; padding:10px 14px; flex:1 1 120px; }
+  .levels button { min-height:0; padding:14px 14px 12px; } .levels button b { font-size:19px; } .levels button:has(em) { padding-top:40px; }
+  #title .tag { font-size:17px; } #title .story { font-size:14px; } #title .who { font-size:16px; margin-top:12px; }
+  .gerbils { gap:10px; } .gerbils button { font-size:21px; padding:12px 8px 10px; border-radius:18px; } .gerbils button svg { width:64px; height:64px; } .gerbils small { font-size:13px; }
+  #title .foot, .card .foot { font-size:12px; margin-top:12px; }
+  .cloud { width:140px; height:70px; } .cloud.c3 { width:170px; height:85px; }
+}
+/* phone portrait: the three suits stack */
+@media (max-width:640px) { .levels { grid-template-columns:1fr; gap:10px; } }
+/* phone landscape: the title card goes two-up so it needs no scrolling */
+@media (max-height:520px) and (min-width:640px) {
+  #title .card { display:grid; grid-template-columns:1fr 1fr; column-gap:20px; align-items:center; text-align:left; width:min(760px, 100%); padding:14px 22px; }
+  #title h1 { font-size:34px; } #title h1 .at { display:inline; font-size:.5em; margin:0 4px; }
+  #title .story { margin:4px 0 0; } #title .who { grid-column:2; grid-row:1; margin:0; text-align:center; align-self:end; }
+  .gerbils { grid-column:2; grid-row:2 / span 3; margin:0; flex-direction:row; align-self:start; }
+  #title .foot { grid-column:1 / -1; margin-top:8px; }
+}
+#title .pic.touchOnly { display:none; } body.touch #title .pic.mouseOnly { display:none !important; } body.touch #title .pic.touchOnly { display:inline-flex !important; }
+#askBody .menuHelp kbd { background:var(--gold); border-radius:7px; padding:0 7px; font-family:inherit; font-weight:700; color:var(--ink); }
+#askBody .menuHelp .touchOnly { display:none; } body.touch #askBody .menuHelp .touchOnly { display:inline; }
+
+/* the story, the payoff and the homecoming: no money panel over the picture (main.js puts .cine on <body>) */
+body.cine #stop { display:none !important; }
+/* hold A to skip: a ring fills round the skip icon in the bottom-right corner while A is held (1.2 s) */
+#skipHold { position:absolute; right:var(--right); bottom:calc(var(--bottom) + var(--ctrl) + 12px); display:flex; flex-direction:column; align-items:center; gap:2px; color:#fff; font-size:14px; font-weight:700; text-shadow:0 1px 3px rgba(0,0,0,.6); opacity:.55; transition:opacity .2s; pointer-events:none; }
+#skipHold.holding { opacity:1; }
+#skipHold svg { width:56px; height:56px; }
+#skipHold .track { fill:rgba(43,36,24,.55); stroke:rgba(255,255,255,.35); stroke-width:5; }
+#skipHold .fill { fill:none; stroke:var(--gold); stroke-width:5; stroke-linecap:round; stroke-dasharray:100; stroke-dashoffset:100; }
+#skipHold .icon { fill:#fff; }
+body.touch #skipHold { bottom:calc(var(--bottom) + 104px); }
+/* a card's buttons fade in over the 900 ms that A is ignored (main.js CARD_GRACE) */
+#ask:not(.hidden) .choices button { animation:cardIn .9s ease-out both; }
+@keyframes cardIn { 0% { opacity:0; transform:translateY(6px); } 60% { opacity:.35; } 100% { opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce) { #ask:not(.hidden) .choices button { animation:cardInFlat .9s step-end both; } @keyframes cardInFlat { 0% { opacity:.4; } 100% { opacity:1; } } }
+/* the trackpad stick (stick.js createPad): a ring in the bottom-left with the neutral zone marked; the dot is the stick */
+.tpad { position:fixed; z-index:5; left:calc(var(--left) + 18px); bottom:calc(var(--bottom) + 72px); width:132px; height:132px; border-radius:50%; background:rgba(255,248,231,.18); border:3px solid rgba(255,248,231,.7); box-shadow:0 4px 14px rgba(60,40,10,.18); pointer-events:none; }
+.tpad .tpadDead { position:absolute; left:50%; top:50%; width:54px; height:54px; transform:translate(-50%,-50%); border-radius:50%; border:2px dashed rgba(255,255,255,.75); background:rgba(255,255,255,.12); }
+.tpad .tpadDot { position:absolute; left:calc(50% - 22px); top:calc(50% - 22px); width:44px; height:44px; border-radius:50%; border:3px solid rgba(255,255,255,.9); opacity:.9; box-shadow:0 2px 6px rgba(0,0,0,.25); transition:box-shadow .15s, opacity .15s; }
+.tpad.neutral .tpadDot { opacity:.7; }
+.tpad.full { border-color:rgba(255,236,150,.95); }
+.tpad.full .tpadDot { opacity:1; box-shadow:0 0 0 5px rgba(255,236,150,.55), 0 0 22px 8px rgba(255,214,90,.85); }
+body.touch .tpad { display:none !important; }
+/* trackpad words (body.pad: the trackpad was the last thing used) */
+.padWord { display:none; } body.pad .padWord { display:inline; } body.pad .keyWord { display:none; }
+
+/* ---------- Round 3 ---------- */
+/* the goal line (main.js #goal): top centre on the road and in the heist; in the town (.town) top-left under the 'who'
+   panel, so it never covers the road sign's boards (decision 15) */
+#goal { top:var(--top); left:50%; transform:translateX(-50%); max-width:min(44vw,600px); text-align:center; font-size:clamp(20px,2.4vw,32px); font-weight:700; line-height:1.15; padding:10px 22px; pointer-events:none; z-index:5; }
+#goal.town { top:calc(var(--top) + 78px); left:var(--left); transform:none; text-align:left; max-width:min(34vw,420px); font-size:clamp(18px,1.9vw,26px); padding:8px 16px; }
+@media (max-width:640px), (max-height:520px) { #goal { font-size:16px; padding:6px 12px; max-width:56vw; } #goal.town { top:calc(var(--top) + 52px); max-width:46vw; font-size:14px; } }
+/* the title's first control: the trackpad glide */
+#title .padPic { padding:0 4px; min-width:44px; }
+#title .padPic svg { width:36px; height:24px; display:block; }
+#title .ctl small { font-size:12px; font-weight:500; margin-left:2px; color:var(--soft); }
+#title .controls { gap:8px 12px; }
+body.touch #title .ctl.glide { display:none !important; }
+/* the title's small, silent "For grown-ups" button, bottom-right corner */
+#grownupsBtn { position:fixed; right:var(--right); bottom:var(--bottom); z-index:11; min-width:0; min-height:0; padding:5px 12px; font-size:13px; font-weight:600; border-width:2px; border-radius:999px; background:rgba(255,248,231,.82); color:var(--soft); box-shadow:0 3px 10px rgba(60,40,10,.12); }
+#grownupsBtn:hover { color:var(--ink); }
+/* the grown-ups' parts of a card: collapsed, small, a soft colour; the summary is a small pill. Never read aloud (narrate.js). */
+details.grownups { margin:12px 0 2px; font-size:14px; line-height:1.4; color:var(--soft); }
+details.grownups > summary { display:inline-block; cursor:pointer; list-style:none; font-size:12px; font-weight:600; padding:2px 10px; border:2px solid var(--line); border-radius:999px; background:#fff; color:var(--soft); user-select:none; }
+details.grownups > summary::-webkit-details-marker { display:none; }
+details.grownups > summary:hover { color:var(--ink); border-color:var(--soft); }
+details.grownups[open] > summary { margin-bottom:6px; }
+details.grownups p, details.grownups li, details.grownups td, details.grownups th { font-size:14px; }
+details.grownups table { border-collapse:collapse; width:100%; } details.grownups td, details.grownups th { border-bottom:1px solid var(--line); padding:3px 6px; text-align:left; }
+/* a wide table on a card (the grown-ups' figures) scrolls inside the card instead of running off it */
+#askBody { max-width:100%; overflow-x:auto; }
+#askBody table { max-width:100%; font-size:15px; }
+@media (max-width:640px) { #askBody table { font-size:13px; } }
+
+/* (verify round 3) A with no button picked: every choice pulses once */
+#askChoices button.pulse { animation: choicePulse .6s ease-out; }
+@keyframes choicePulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(242,194,48,.9); } 40% { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(242,194,48,.45); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(242,194,48,0); } }
+
+/* (verify round 3) a tall card (the grown-ups' page) never runs off the screen: it scrolls inside, and its buttons stay in view */
+#ask .card { max-height:calc(100dvh - var(--top) - var(--bottom) - 8px); overflow:auto; overscroll-behavior:contain; box-sizing:border-box; }
+#ask .card #askChoices { position:sticky; bottom:-26px; background:var(--card); padding-bottom:12px; margin-bottom:-12px; box-shadow:0 -10px 14px -10px rgba(0,0,0,.18); }

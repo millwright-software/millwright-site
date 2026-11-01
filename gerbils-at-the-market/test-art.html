@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>art test — the town square, current look vs paper theatre</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<link rel="stylesheet" href="css/game.css">
+<style>
+  html, body { margin: 0; overflow: hidden; background: #000; }
+  .tag { position: fixed; top: 10px; z-index: 5; font: 700 17px Fredoka, sans-serif; color: #2b2418; background: rgba(255,248,231,.9); padding: 5px 12px; border-radius: 10px; }
+  #tagL { left: 10px; } #tagR { right: 10px; }
+  #ctl { position: fixed; left: 50%; bottom: 10px; transform: translateX(-50%); z-index: 5; font: 600 14px Fredoka, sans-serif; background: rgba(255,248,231,.9); padding: 6px 12px; border-radius: 10px; display: flex; gap: 8px; align-items: center; }
+  #ctl button { font: inherit; padding: 3px 10px; border-radius: 8px; border: 2px solid #7a4e26; background: #fbf0d4; cursor: pointer; }
+  #ctl button.on { background: #f2c230; }
+  #err { position: fixed; left: 10px; bottom: 54px; z-index: 6; color: #fff; background: #b3261e; padding: 6px 10px; border-radius: 8px; font: 13px sans-serif; display: none; max-width: 45vw; }
+  #hud, #toast { display: none; }
+</style>
+</head>
+<body>
+<div id="tagL" class="tag"></div><div id="tagR" class="tag"></div>
+<div id="ctl"><button data-look="old">current</button><button data-look="split">side by side</button><button data-look="new">paper theatre</button>
+  <select id="cam"><option>square</option><option>low</option><option>close</option><option>high</option></select><span>T toggles · drag to orbit</span></div>
+<div id="err"></div>
+<div id="hud"><div id="toast" class="hidden"></div></div>
+<div id="ask" class="screen hidden"><div class="card"><h2 id="askTitle"></h2><div id="askBody"></div><div class="choices" id="askChoices"></div></div></div>
+<script type="module">
+// ?look=split|old|new  ?cam=square|low|close|high  ?t=<seconds to pre-roll>  ?old=0 (skip building the current look)
+import * as THREE from 'three';
+import { buildPaperSquare } from './js/art/paper-square.js';
+
+const q = new URLSearchParams(location.search); let look = q.get('look') || 'split'; const $ = id => document.getElementById(id);
+try { await document.fonts.load('700 40px Fredoka'); await document.fonts.load('600 40px Fredoka'); } catch (e) {}
+
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; document.body.prepend(renderer.domElement);
+
+// ---------- the new look ----------
+const paper = await buildPaperSquare(renderer);
+
+// ---------- the current look: the game's own modules, as test-hub.html builds them ----------
+let old = null;
+const fail = (e) => { console.warn('current look failed', e); $('err').style.display = 'block'; $('err').textContent = 'The current look did not build (its modules may be mid-edit): ' + (e?.message || e); };
+if (q.get('old') !== '0') try {
+  const { loadHamster, gerbilFrom, spawnBurst, updateBursts, textSprite, legoBoxTexture } = await import('./js/parts.js');
+  const P = await import('./js/props.js'); const { createCity } = await import('./js/city.js'); const { createHub } = await import('./js/hub.js');
+  const B2 = await import('./js/bosses2.js');
+  await loadHamster(); const bossOK = await B2.loadBosses2();
+  const data = await (await fetch('data/billionaires.json')).json();
+  const sfx = new Proxy({}, { get: () => () => {} });   // never any audio here
+  const scene = new THREE.Scene(); scene.background = new THREE.Color(0xa8dcf7); scene.environment = P.makeEnvironment(renderer); scene.environmentIntensity = .45; scene.fog = new THREE.Fog(0xcfe3f2, 90, 220);
+  scene.add(new THREE.HemisphereLight(0xdfefff, 0x6a8a3a, .9));
+  const sun = new THREE.DirectionalLight(0xfff1d6, 2.2); sun.position.set(-18, 30, -10); sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096); sun.shadow.bias = -.0004; sun.shadow.normalBias = .03;
+  Object.assign(sun.shadow.camera, { left: -45, right: 45, top: 40, bottom: -40, near: 1, far: 110 }); scene.add(sun, sun.target);
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(600, 600), new THREE.MeshStandardMaterial({ color: 0x9fbb78, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+  const road = new THREE.Mesh(new THREE.PlaneGeometry(400, 3.2), new THREE.MeshStandardMaterial({ color: 0xd8c39a, roughness: 1 })); road.rotation.x = -Math.PI / 2; road.position.set(140, .025, 0); road.receiveShadow = true; scene.add(road);
+  const state = { player: 'alex', beaten: {}, eggs: {}, returned: 0 };
+  const player = gerbilFrom({ color: 0xd9b07a }); P.dressGerbil(player, { color: 0xd9b07a }); scene.add(player);
+  const city = createCity({ scene, hamsterReady: true, gerbilFrom, spawnBurst, sfx });
+  const noop = () => {};
+  const hub = createHub({ scene, player, state, save: noop, gerbilFrom, spawnBurst, textSprite, card: noop, closeCard: noop, toast: noop, play: noop, sfx, data, city, savePicture: noop, onPick: noop });
+  hub.build(); hub.enter(); await new Promise(r => setTimeout(r, 0));
+  const t0 = performance.now(); for (let k = 0; k < 360; k++) { hub.update(1 / 60, t0 + k * 1000 / 60); updateBursts(1 / 60); }
+  // the same cast as the new look, at the same spots
+  player.position.set(-1.6, 0, -2.4); player.rotation.y = Math.PI / 2;
+  for (const [c, x, z, ry] of [[0xb0aaa0, 2.2, -4.4, -1], [0xf4ecdc, -3.2, -4.6, 2], [0x5e4433, 1.4, .9, 0]]) { const g = gerbilFrom({ color: c }); P.dressGerbil(g, { color: c }); g.position.set(x, 0, z); g.rotation.y = ry; scene.add(g); }
+  let boss = null; if (bossOK) { boss = B2.makeBoss2('trump'); boss.position.set(4.2, 0, -2.0); boss.rotation.y = Math.PI; scene.add(boss); boss.userData.boss.play('idle'); }
+  for (const [x, z] of [[5.3, -2.8], [5.9, -2.1], [5.1, -1.2], [6.2, -3.0]]) { const b = P.makeBag(); b.position.set(x, 0, z); scene.add(b); }
+  const lt = legoBoxTexture(1); for (const [x, y, z] of [[-4.6, 0, 1.9], [-5.4, 0, 2.3], [-5.0, .62, 2.1]]) { const m = new THREE.Mesh(new THREE.BoxGeometry(.62, .62, .62), new THREE.MeshStandardMaterial({ map: lt })); m.position.set(x, y + .31, z); m.castShadow = m.receiveShadow = true; scene.add(m); }
+  old = { scene, update: (dt, t) => { hub.update(dt, performance.now()); boss?.userData.boss.update(dt); } };
+} catch (e) { fail(e); }
+
+// ---------- cameras (one per half, same pose) ----------
+const CAMS = { square: [[0, 5.4, -13.5], [0, 1.1, 1.2]], low: [[2.5, 2.2, -10.5], [0, 1.2, 0]], close: [[3.6, 2.6, -7.2], [3.2, 1.1, -1.5]], high: [[0, 16, -22], [0, 0, 1]] };
+const camN = new THREE.PerspectiveCamera(42, 1, .05, 600), camO = camN.clone();
+let pose = { pos: new THREE.Vector3(), look: new THREE.Vector3() };
+function setCam(n) { const c = CAMS[n] || CAMS.square; pose.pos.fromArray(c[0]); pose.look.fromArray(c[1]); $('cam').value = n; }
+setCam(q.get('cam') || 'square'); $('cam').onchange = e => setCam(e.target.value);
+let drag = null; renderer.domElement.onpointerdown = e => drag = { x: e.clientX, y: e.clientY }; onpointerup = () => drag = null;
+onpointermove = e => { if (!drag) return; const dx = (e.clientX - drag.x) * .005, dy = (e.clientY - drag.y) * .01; drag = { x: e.clientX, y: e.clientY };
+  const off = pose.pos.clone().sub(pose.look); off.applyAxisAngle(new THREE.Vector3(0, 1, 0), -dx); off.y = Math.max(.8, off.y + dy * 3); pose.pos.copy(pose.look).add(off); };
+
+function setLook(l) { look = l; document.querySelectorAll('#ctl button').forEach(b => b.classList.toggle('on', b.dataset.look === l));
+  $('tagL').textContent = l === 'new' ? 'Paper theatre (proposal)' : 'Current look'; $('tagR').textContent = 'Paper theatre (proposal)'; $('tagR').style.display = l === 'split' ? '' : 'none'; }
+document.querySelectorAll('#ctl button').forEach(b => b.onclick = () => setLook(b.dataset.look)); setLook(look);
+onkeydown = e => { if (e.key === 't' || e.key === 'T') setLook({ split: 'new', new: 'old', old: 'split' }[look]); };
+
+// pre-roll the new look so the gerbils are mid-walk
+let T = +(q.get('t') || 3); for (let k = 0; k < T * 60; k++) paper.update(1 / 60, k / 60, camN);
+const clock = new THREE.Clock(); window.__frames = 0;
+function view(cam, scene, x, w, h, tone) { cam.position.copy(pose.pos); cam.lookAt(pose.look); cam.aspect = w / h; cam.updateProjectionMatrix();
+  renderer.toneMapping = tone; renderer.toneMappingExposure = tone === THREE.ACESFilmicToneMapping ? 1.05 : 1.0;
+  renderer.setViewport(x, 0, w, h); renderer.setScissor(x, 0, w, h); renderer.render(scene, cam); }
+function frame() {
+  const dt = Math.min(.05, clock.getDelta()); T += dt; const W = innerWidth, H = innerHeight;
+  renderer.setScissorTest(true);
+  const showOld = look !== 'new' && old, showNew = look !== 'old';
+  if (showOld) old.update(dt, T);
+  if (look === 'split') { const hw = Math.floor(W / 2); if (old) view(camO, old.scene, 0, hw, H, THREE.ACESFilmicToneMapping); camN.position.copy(pose.pos); camN.lookAt(pose.look); paper.update(dt, T, camN); view(camN, paper.scene, hw, W - hw, H, THREE.NeutralToneMapping); }
+  else if (showNew) { camN.position.copy(pose.pos); camN.lookAt(pose.look); paper.update(dt, T, camN); view(camN, paper.scene, 0, W, H, THREE.NeutralToneMapping); }
+  else if (showOld) view(camO, old.scene, 0, W, H, THREE.ACESFilmicToneMapping);
+  window.__frames++; requestAnimationFrame(frame);
+}
+frame();
+addEventListener('resize', () => renderer.setSize(innerWidth, innerHeight));
+console.log('[art] ready', renderer.info.render.calls, 'calls');
+</script>
+</body>
+</html>

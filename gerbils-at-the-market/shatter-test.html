@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>shatter test</title>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #cfe3f2; font-family: Fredoka, sans-serif; }
+  canvas { display: block; }
+  #label { position: fixed; left: 12px; top: 10px; font-size: 20px; color: #2b2418; background: rgba(255,248,231,.85); padding: 6px 12px; border-radius: 10px; }
+  #label small { display: block; font-size: 13px; color: #7a6a50; }
+  #toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); background: rgba(43,36,24,.86); color: #fff8e7; font-size: 22px; padding: 10px 24px; border-radius: 30px; opacity: 0; transition: opacity .3s; text-align: center; }
+  #toast.show { opacity: 1; } #toast small { display: block; font-size: 14px; opacity: .85; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id="label"></div>
+<div id="toast" class="hidden"></div>
+<script type="module">
+// ?t=<seconds> pre-rolls the set piece before the first frame; ?count=15 is the Trump case (no heap, the 15-bag ring, 16 blocks); default is a 600-bag heap at R 6.
+import * as THREE from 'three';
+import { spawnBurst, updateBursts } from './js/parts.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { createShatter, TIMELINE } from './js/shatter.js';
+
+const q = new URLSearchParams(location.search); const pre = +(q.get('t') || 0); const total = +(q.get('count') || 600); const heapCount = Math.max(0, total - 15); const R_OVERRIDE = +(q.get('R') || 6);   // the brief's test heap: 600 sacks at R 6 (fight.js would size it 9.4; ?R=0 uses its formula)
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xa8dcf7); scene.fog = new THREE.Fog(0xcfe3f2, 90, 220);
+scene.add(new THREE.HemisphereLight(0xdfefff, 0x6a8a3a, .9));
+const sun = new THREE.DirectionalLight(0xfff1d6, 2.2); sun.position.set(-14, 26, 10); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); sun.shadow.bias = -.0005; sun.shadow.normalBias = .03;
+sun.shadow.camera.left = -40; sun.shadow.camera.right = 40; sun.shadow.camera.top = 40; sun.shadow.camera.bottom = -40; sun.shadow.camera.near = 1; sun.shadow.camera.far = 120; scene.add(sun, sun.target);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(600, 600), new THREE.MeshStandardMaterial({ color: 0xb9c7a0, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+const road = new THREE.Mesh(new THREE.PlaneGeometry(600, 8), new THREE.MeshStandardMaterial({ color: 0xd8c39a, roughness: 1 })); road.rotation.x = -Math.PI / 2; road.position.y = .004; road.receiveShadow = true; scene.add(road);
+
+// the heap, as fight.js builds it: a cone of sack instances in .36 m layers, rings .5 m apart; centre at (x, 0, R + 2.5)
+let R = 1.1, heap = null; const center = new THREE.Vector3(0, 0, 0);
+if (heapCount > 0) {
+  const sack = new THREE.SphereGeometry(.22, 8, 6); sack.scale(1, 1.15, 1); sack.translate(0, .24, 0); const neck = new THREE.CylinderGeometry(.06, .1, .12, 6); neck.translate(0, .5, 0);
+  const geo = mergeGeometries([sack, neck]); heap = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ color: 0x9c6a3a, roughness: .95 }), heapCount); heap.castShadow = true;
+  R = R_OVERRIDE || Math.max(1.2, Math.sqrt(heapCount * .42 / Math.PI) + .6); center.set(0, 0, R + 2.5);
+  const m = new THREE.Matrix4(), qt = new THREE.Quaternion(), v = new THREE.Vector3(), sc = new THREE.Vector3(1, 1, 1), up = new THREE.Vector3(0, 1, 0); let k = 0;
+  for (let layer = 0; k < heapCount; layer++) { const r = R - (layer % Math.floor(R / .42)) * .42; if (r < .5) continue; /* wraps so a forced R still holds every sack (a denser cone) */ const n = Math.max(1, Math.floor(r * 2 * Math.PI / .5)); for (let i = 0; i < n && k < heapCount; i++) { const a = i / n * Math.PI * 2 + layer * .3, rr = r - Math.random() * .3;
+    v.set(center.x + Math.cos(a) * rr, layer * .36, center.z + Math.sin(a) * rr); qt.setFromAxisAngle(up, a); m.compose(v, qt, sc); heap.setMatrixAt(k++, m); } }
+  heap.count = k; scene.add(heap);
+} else {   // the Trump case: the 15-bag ring stands in for the heap
+  const g = new THREE.SphereGeometry(.22, 8, 6); g.scale(1, 1.15, 1); g.translate(0, .24, 0); heap = new THREE.InstancedMesh(g, new THREE.MeshStandardMaterial({ color: 0x9c6a3a, roughness: .95 }), 15); const m = new THREE.Matrix4();
+  let i = 0; for (let ring = 0; i < 15; ring++) { const n = ring === 0 ? 1 : ring * 6; for (let k = 0; k < n && i < 15; k++, i++) { const a = k / n * Math.PI * 2, r = ring * .55; m.makeTranslation(center.x + Math.cos(a) * r, 0, center.z + Math.sin(a) * r); heap.setMatrixAt(i, m); } }
+  scene.add(heap);
+}
+// the stand-in gerbil: a 0.4 m capsule, 10 m down the road
+const player = new THREE.Mesh(new THREE.CapsuleGeometry(.14, .25, 4, 12), new THREE.MeshStandardMaterial({ color: 0xd9b07a, roughness: .8 })); player.position.set(center.x - 10, .27, 0); player.castShadow = true; scene.add(player);
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, .05, 500); scene.add(camera);
+
+const $ = id => document.getElementById(id); let toastT = 0;
+function toast(text, { sub = '', ms = 2600 } = {}) { const el = $('toast'); el.innerHTML = text + (sub ? `<small>${sub}</small>` : ''); el.classList.remove('hidden'); requestAnimationFrame(() => el.classList.add('show')); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), ms); console.log('[shatter] toast:', text, sub); }
+const sfx = { play: (name, o) => console.log('[shatter] sfx', name, o ? JSON.stringify(o) : '') };
+const sh = createShatter({ scene, sfx, spawnBurst, toast });
+sh.start({ heap, center, radius: R, count: heapCount, roadDir: new THREE.Vector3(-1, 0, 0), player, onDone: () => console.log('[shatter] done at', sh.t.toFixed(2)) });
+
+function placeCamera(snap, dt) { const c = sh.cameraTarget(); if (snap) camera.position.copy(c.pos); else camera.position.lerp(c.pos, 1 - Math.exp(-dt * 3)); camera.lookAt(c.look); }
+const SIM_DT = 1 / 60; for (let k = 0; k < Math.round(pre / SIM_DT); k++) { sh.update(SIM_DT); updateBursts(SIM_DT); } placeCamera(true, 0);
+const stage = () => sh.t < TIMELINE.split ? '1 burst: big blocks' : sh.t < TIMELINE.river ? '2 split: small cubes' : sh.t < TIMELINE.end ? '3 river: Lego boxes' : 'done';
+const label = $('label'); const clock = new THREE.Clock(); let frames = 0, fpsT = 0, fps = 0;
+function frame() { requestAnimationFrame(frame); const dt = Math.min(clock.getDelta(), .05); sh.update(dt); updateBursts(dt); placeCamera(false, dt); renderer.render(scene, camera);
+  frames++; fpsT += dt; if (fpsT > .5) { fps = Math.round(frames / fpsT); frames = 0; fpsT = 0; }
+  label.innerHTML = `shatter · t ${sh.t.toFixed(1)} s · stage ${stage()}<small>${heapCount ? `${heapCount} bags, R ${R.toFixed(1)} m` : 'the 15-bag ring'} · ${fps} fps · ?t=&lt;s&gt; pre-rolls, ?count=15 for Trump</small>`; }
+frame();
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+</script>
+</body>
+</html>

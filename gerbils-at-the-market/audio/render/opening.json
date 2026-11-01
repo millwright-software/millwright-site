@@ -1,0 +1,122 @@
+{
+ "o_buy": [
+  "af_heart",
+  0.95,
+  "Buy a Lego set at the Lego store. You have twenty dollars."
+ ],
+ "o_bought": [
+  "af_heart",
+  0.95,
+  "Twenty dollars is one Lego set. Yay!"
+ ],
+ "o_coin": [
+  "af_heart",
+  0.95,
+  "Put a coin in the jar. Everybody puts a little in."
+ ],
+ "o_school": [
+  "af_heart",
+  0.95,
+  "Your coin helps pay for the school. Ding! A light comes on."
+ ],
+ "o_leave": [
+  "af_heart",
+  0.95,
+  "They took all the money up the road."
+ ],
+ "o_fall": [
+  "af_heart",
+  0.95,
+  "With the jar empty, the street fell down."
+ ],
+ "o_call_alex": [
+  "af_heart",
+  0.95,
+  "Molly, go get it back. Follow the arrows up the road."
+ ],
+ "o_call_william": [
+  "af_heart",
+  0.95,
+  "William, go get it back. Follow the arrows up the road."
+ ],
+ "o_press_touch": [
+  "af_heart",
+  0.95,
+  "Tap the A button, and you walk there."
+ ],
+ "o_press_keys": [
+  "af_heart",
+  0.95,
+  "Press Space, and you walk there."
+ ],
+ "cel_taxes": [
+  "af_heart",
+  0.95,
+  "That is what taxes are for."
+ ],
+ "o3_jar": [
+  "af_heart",
+  0.95,
+  "Everybody puts a little in the jar. Press, and the next gerbil puts a coin in."
+ ],
+ "o3_lit_school": [
+  "af_heart",
+  0.95,
+  "The school!"
+ ],
+ "o3_lit_lamps": [
+  "af_heart",
+  0.95,
+  "The lamps!"
+ ],
+ "o3_lit_fountain": [
+  "af_heart",
+  0.95,
+  "The fountain!"
+ ],
+ "o3_lit_bell": [
+  "af_heart",
+  0.95,
+  "The bell!"
+ ],
+ "o3_your_turn": [
+  "af_heart",
+  0.95,
+  "Now you. Put your coin in."
+ ],
+ "o3_taxes": [
+  "af_heart",
+  0.95,
+  "This jar has a grown-up name: taxes."
+ ],
+ "o3_share_1": [
+  "af_heart",
+  0.95,
+  "In our story, everybody puts in a piece of what they have."
+ ],
+ "o3_share_2": [
+  "af_heart",
+  0.95,
+  "One stack, one coin. Two stacks, two coins."
+ ],
+ "o3_look": [
+  "af_heart",
+  0.95,
+  "Look in the jar."
+ ],
+ "o3_empty": [
+  "af_heart",
+  0.95,
+  "The jar is empty."
+ ],
+ "cel3_sentence": [
+  "af_heart",
+  0.95,
+  "When everybody puts a little in the jar, there's enough for everybody. A few billionaires have way more than anybody needs, and they used tricks to put almost nothing in."
+ ],
+ "cel3_share": [
+  "af_heart",
+  0.95,
+  "In our story, this time everybody put in their share."
+ ]
+}

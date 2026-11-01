@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Gerbil Market — where the facts came from</title>
+<meta name="theme-color" content="#a8dcf7">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+  @font-face { font-family: 'Fredoka'; src: url('fonts/Fredoka-latin.woff2') format('woff2'); font-weight: 300 700; font-display: swap; }
+  :root { --paper:#fff8e7; --ink:#2b2418; --soft:#7a6a50; --go:#3b8f4a; --card:#fffdf7; --line:#e2d4b2; --warn:#b5541b; --gold:#e0b53a; }
+  * { box-sizing:border-box; }
+  html { background:var(--paper) linear-gradient(#a8dcf7, #d9eefb 70%, var(--paper)) no-repeat; background-size:100% 200px; min-height:100%; }
+  body { max-width:840px; margin:0 auto; padding:max(28px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); font-family:'Fredoka',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:var(--ink); line-height:1.45; font-size:17px; font-weight:400; -webkit-text-size-adjust:100%; }
+  h1 { font-size:clamp(30px, 6vw, 40px); line-height:1.05; margin:0 0 12px; font-weight:700; letter-spacing:-.3px; }
+  h2 { font-size:24px; margin:34px 0 8px; padding-bottom:4px; border-bottom:3px solid var(--line); }
+  p { margin:8px 0; }
+  .q { background:#fff; border-left:6px solid var(--gold); padding:12px 16px; border-radius:10px; margin:12px 0; font-style:italic; font-size:19px; box-shadow:0 4px 14px rgba(60,40,10,.08); }
+  .q .meta { font-style:normal; font-size:15px; margin-top:6px; }
+  .meta { color:var(--soft); font-size:15px; }
+  .todo { color:var(--warn); }
+  a { color:var(--go); text-decoration-thickness:2px; text-underline-offset:2px; }
+  a[href="./"] { display:inline-flex; align-items:center; min-height:44px; padding:0 18px; border:3px solid var(--line); border-radius:14px; background:#fff; color:var(--ink); text-decoration:none; font-weight:600; margin:4px 0 8px; }
+  a[href="./"]:hover { border-color:var(--go); }
+  table.road { border-collapse:collapse; width:100%; margin:10px 0; font-size:16px; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 14px rgba(60,40,10,.08); }
+  table.road th, table.road td { padding:7px 10px; border-bottom:1px solid var(--line); text-align:right; }
+  table.road th:first-child, table.road td:first-child { text-align:left; }
+  table.road th { background:#f6eedb; font-weight:600; }
+  .bar { height:8px; background:var(--gold); border-radius:4px; min-width:2px; }
+</style>
+</head>
+<body>
+<h1>Where the facts came from</h1>
+<p>Everything the game says about a real person is listed here with its source. Net worths move by billions of dollars in a day, so the game rounds them and says so. One Lego set is $20 because that is what the two boys who named this game save up for.</p>
+<p><a href="./">← back to the game</a></p>
+<div id="out">Loading…</div>
+<h2>Credits</h2>
+<p>The gerbil is the low-poly <a href="https://poly.pizza/m/3YtzEQ5TVUP">Hamster by Poly by Google</a>, CC-BY, tinted. <a href="https://threejs.org">three.js</a> (MIT). The <a href="https://fonts.google.com/specimen/Fredoka">Fredoka</a> typeface (SIL Open Font License). Everything else in the game is public domain, CC0, by the two boys who named it and their dad.</p>
+<script>
+const fmt = n => n >= 1e12 ? `$${(n/1e12).toLocaleString()} trillion` : n >= 1e9 ? `$${(n/1e9).toLocaleString()} billion` : `$${n.toLocaleString()}`;
+const sets = n => { const s = n/20; return s >= 1e9 ? `${(s/1e9).toLocaleString(undefined,{maximumFractionDigits:1})} billion` : s >= 1e6 ? `${(s/1e6).toLocaleString(undefined,{maximumFractionDigits:1})} million` : s.toLocaleString(); };
+fetch('data/billionaires.json').then(r => r.json()).then(d => {
+  let h = `<p class="meta">Page updated ${d.as_of}. Each fortune shows the date its figure is from: they come from different lists on different days.</p>`;
+  for (const b of d.bosses) {
+    h += `<h2>${b.display_name ? `${b.display_name} <span class="meta">(${b.name}; the game shows “${b.display_name}”)</span>` : b.name}</h2><p><b>${b.net_worth_label}</b>${b.net_worth_as_of ? ` <span class="meta">(as of ${b.net_worth_as_of})</span>` : ''} ≈ ${fmt(b.net_worth_usd)} ≈ <b>${sets(b.net_worth_usd)} Lego sets</b>.<br><span class="meta">${b.net_worth_source.title} (${b.net_worth_source.date}). ${b.net_worth_source.note || ''} ${b.net_worth_source.url ? `<a href="${b.net_worth_source.url}">link</a>` : ''}${b.net_worth_source.accessed ? ` (checked ${b.net_worth_source.accessed})` : ''}</span></p>`;
+    if (b.gain) { const g = b.gain, gs = g.source; h += `<p><b>How fast it grew:</b> ${g.line}<br><span class="meta">${g.usd_per_day ? `${fmt(g.usd_per_day)} a day ≈ ${(g.usd_per_day / d.bag_usd).toLocaleString(undefined,{maximumFractionDigits:2})} money bags a day. ` : `${g.note || ''} `}${fmt(g.from_usd)} (${g.from_date}) → ${fmt(g.to_usd)} (${g.to_date}). ${gs.title} (${gs.date}). ${gs.note || ''} ${gs.url_from && gs.url_from !== gs.url ? `<a href="${gs.url_from}">first figure</a> · ` : ''}<a href="${gs.url}">${gs.url_from && gs.url_from !== gs.url ? 'second figure' : 'link'}</a>${gs.accessed ? ` (checked ${gs.accessed})` : ''}</span></p>`; }
+    if (b.story?.lesson) { const st = b.story, ss = st.source || {}; h += `<p><b>What the game says he did:</b> ${st.lesson}<br><span class="meta">${st.place ? `His place in the game: ${st.place} ` : ''}${ss.title || ''}${ss.date ? ` (${ss.date})` : ''}. ${ss.note || ''} ${ss.url ? `<a href="${ss.url}">link</a>` : ''}</span></p>`; }
+    for (const q of b.quotes) h += `<div class="q">“${q.text}”${q.exact === false ? `<div class="meta">Not his exact words: this is how the reporter wrote what he said.</div>` : ''}${q.kid_text ? `<div class="meta">In the game, in kid words: “${q.kid_text}”</div>` : ''}<div class="meta">${q.where}, ${q.date}. <a href="${q.source.url}">${q.source.title}</a></div><div class="meta">Why the game calls it a trick: ${q.why_trick}</div></div>`;
+    if (b.gate_true?.length) { h += `<p><b>True things the game says about him:</b></p>`; for (const t of b.gate_true) h += `<p>“${t.text}” <span class="meta">${t.why} ${t.source?.title || ''}${t.source?.date ? ` (${t.source.date})` : ''}. ${t.source?.url ? `<a href="${t.source.url}">link</a>` : ''}</span></p>`; }
+  }
+  // The Long Road: one row of equal money bags per billionaire, every bag the same size with the same gap, so the rows'
+  // lengths keep the real ratios. Computed here from the same json the game reads.
+  { const SP = .5, rows = d.bosses.map(b => ({ b, bags: Math.round(b.net_worth_usd / d.bag_usd) })), trump = rows.find(r => r.b.id === 'trump') || rows[0], maxBags = Math.max(...rows.map(r => r.bags));
+    const x = v => v >= 10 ? Math.round(v).toLocaleString() : v.toLocaleString(undefined, { maximumFractionDigits: 2 });
+    h += `<h2 id="long-road">The Long Road</h2><p>After each level, the billionaire's money is laid out as one row of money bags up the valley, beside the rows before it. Every bag is the same ($${(d.bag_usd / 1e6).toLocaleString()} million), with the same ${SP} m gap, and every row stays. No number is shown or said in the game: the kids see how long the walk takes, how high the camera climbs, and the earlier rows shrinking to stubs.</p>`;
+    h += `<table class="road"><tr><th>Row</th><th>Bags</th><th>Length</th><th>× Trump's row</th><th>× the row before</th><th style="width:28%"></th></tr>`;
+    rows.forEach((r, i) => { const prev = rows[i - 1]; h += `<tr><td>${r.b.display_name || r.b.name}</td><td>${r.bags.toLocaleString()}</td><td>${(r.bags * SP).toLocaleString()} m</td><td>${x(r.bags / trump.bags)}</td><td>${prev ? x(r.bags / prev.bags) : '—'}</td><td><div class="bar" style="width:${(100 * r.bags / maxBags).toFixed(2)}%"></div></td></tr>`; });
+    h += `</table><p class="meta">Bags = net worth ÷ one bag, rounded. Length = bags × ${SP} m. “15 bags fixes the street” is a story unit: one bag was chosen so Trump's fortune is exactly 15 bags. Only the ratios between rows are real.</p>`; }
+  h += `<h2>Ordinary people</h2>`;
+  for (const o of d.ordinary) { const bagYears = o.per === 'year' ? Math.round(d.bag_usd / o.usd) : null; h += `<p><b>${o.name}</b>: ${fmt(o.usd)}${o.per ? ' a ' + o.per : ''} ≈ ${sets(o.usd)} Lego sets${bagYears ? `. One money bag ($${(d.bag_usd/1e6).toLocaleString()} million) is ${bagYears.toLocaleString()} years of that` : ''}. <span class="meta">${o.source.title}${o.source.url ? ` <a href="${o.source.url}">link</a>` : ''}</span></p>`; }
+  if (d.taxes) { const tx = d.taxes; h += `<h2 id="taxes">The jar (taxes)</h2><p>${tx.kid_text}</p><p class="meta">${tx._about}</p>`;
+    for (const x of tx.items) h += `<p><b>${x.who}</b> ${x.line}<br><span class="meta">${x.source.title} (${x.source.date}). ${x.source.note || ''} <a href="${x.source.url}">link</a></span></p>`;
+    h += `<p>${tx.ordinary_line} <span class="meta">${tx.ordinary_note || ''}</span></p>`; }
+  const media = d.bosses.filter(b => b.media && b.media.length);
+  if (media.length) { h += `<h2 id="media">Buying the news</h2><p class="meta">Newspapers, TV news and apps where people get their news, and what the bosses paid.</p>`;
+    for (const b of media) for (const x of b.media) h += `<p><b>${x.who}</b> ${x.line}<br><span class="meta">${x.source.title} (${x.source.date}). ${x.source.note || ''} <a href="${x.source.url}">link</a></span></p>`; }
+  if (d.market) { const mk = d.market; h += `<h2 id="market">The market (the whole economy)</h2><p>${mk.kid_text}</p><p class="meta">${mk._about || ''}</p>`;
+    for (const x of mk.items) h += `<p id="market-${x.id}">${x.line}<br><span class="meta">${x.source.title} (${x.source.date}). ${x.source.note || ''} <a href="${x.source.url}">link</a></span></p>`; }
+  document.getElementById('out').innerHTML = h;
+  if (location.hash) { const el = document.querySelector(location.hash); if (el) el.scrollIntoView(); }
+});
+</script>
+</body>
+</html>

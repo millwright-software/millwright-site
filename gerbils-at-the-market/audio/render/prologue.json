@@ -1,0 +1,172 @@
+{
+ "p_valley": [
+  "af_heart",
+  1.0,
+  "Gerbil Valley, before the billionaires came. Everybody had a little, and the fountain ran."
+ ],
+ "p_jar": [
+  "af_heart",
+  0.95,
+  "Everybody put a little in the jar. The jar paid for the school, the road, and the fountain. That is what taxes are."
+ ],
+ "p_giants2": [
+  "af_heart",
+  0.95,
+  "And each one went to a stall."
+ ],
+ "p_prices_trump": [
+  "af_heart",
+  0.95,
+  "In our story, Trump made houses cost more."
+ ],
+ "p_jartake2": [
+  "af_heart",
+  0.95,
+  "In our story, they took the jar's money too."
+ ],
+ "p_before": [
+  "af_heart",
+  0.95,
+  "Before, at the market..."
+ ],
+ "p3_prices_trump": [
+  "af_heart",
+  0.95,
+  "In our story, Trump made things cost more. Your twenty dollars buys less now."
+ ],
+ "p3_market_go": [
+  "af_heart",
+  0.95,
+  "Grow the market at the crate."
+ ],
+ "p3_market": [
+  "af_heart",
+  0.95,
+  "This part is true: when the market grew, the richest gerbils got most of the new coins. Seven went up the hill. Three went down the street."
+ ],
+ "p3_fair_decide": [
+  "af_heart",
+  0.95,
+  "You get to decide. Lots of grown-ups argue about it."
+ ],
+ "p3_news_bezos_1": [
+  "af_heart",
+  0.95,
+  "This part is true: Jeff Bezos bought a newspaper."
+ ],
+ "p3_news_bezos_2": [
+  "af_heart",
+  0.95,
+  "In our story, his paper said the jar was fine."
+ ],
+ "p3_news_go": [
+  "af_heart",
+  0.95,
+  "Look at the real jar."
+ ],
+ "p3_news_look": [
+  "af_heart",
+  0.95,
+  "The real jar is empty!"
+ ],
+ "p3_news_fixed": [
+  "af_heart",
+  0.95,
+  "Now the paper shows the real jar."
+ ],
+ "p3_jar_musk": [
+  "af_heart",
+  0.95,
+  "This part is true. One year, Elon Musk put in zero dollars. The rules let him."
+ ],
+ "p3_story_bloomberg_1": [
+  "af_heart",
+  0.95,
+  "This part is true. Michael Bloomberg spent a giant pile of his own money trying to be president, in just a few months."
+ ],
+ "p3_story_bloomberg_2": [
+  "af_heart",
+  0.95,
+  "He won only one place: some little islands far out in the ocean."
+ ],
+ "p3_story_walton_1": [
+  "af_heart",
+  0.95,
+  "This part is true. Rob Walton's dad started Walmart, and Rob was born into the family that owns it."
+ ],
+ "p3_story_walton_2": [
+  "af_heart",
+  0.95,
+  "But some people who work in its stores need help from the jar to buy food."
+ ],
+ "p3_story_zuckerberg_1": [
+  "af_heart",
+  0.95,
+  "This part is true. When new apps got popular, Mark Zuckerberg bought them."
+ ],
+ "p3_story_zuckerberg_2": [
+  "af_heart",
+  0.95,
+  "He bought a photo app, and then a chat app, for giant piles of money."
+ ],
+ "p3_story_page_1": [
+  "af_heart",
+  0.95,
+  "This part is true. Larry Page's company, Google, paid Apple a giant pile of money, so iPhones would use Google."
+ ],
+ "p3_story_page_2": [
+  "af_heart",
+  0.95,
+  "A judge said Google is a monopoly. It has almost all the searching to itself."
+ ],
+ "p3_giants_story": [
+  "af_heart",
+  0.95,
+  "Then, in our story, the billionaires came down the road."
+ ],
+ "p3_catchup": [
+  "af_heart",
+  0.95,
+  "In our story, the billionaires took the money from the jar, and the street fell down."
+ ],
+ "p3_tag3_trump": [
+  "af_heart",
+  0.95,
+  "In our story, Donald Trump took his money to the Golden Tower. Go get him!"
+ ],
+ "p3_tag3_ellison": [
+  "af_heart",
+  0.95,
+  "In our story, Larry Ellison took his money to the Data Harbor. Go get him!"
+ ],
+ "p3_tag3_bezos": [
+  "af_heart",
+  0.95,
+  "In our story, Jeff Bezos took his money to the Warehouse. Go get him!"
+ ],
+ "p3_tag3_musk": [
+  "af_heart",
+  0.95,
+  "In our story, Elon Musk took his money to the Rocket Yard. Go get him!"
+ ],
+ "p3_tag3_bloomberg": [
+  "af_heart",
+  0.95,
+  "In our story, Michael Bloomberg took his money to the Campaign Stage. Go get him!"
+ ],
+ "p3_tag3_walton": [
+  "af_heart",
+  0.95,
+  "In our story, Rob Walton and family took their money to the Superstore. Go get them!"
+ ],
+ "p3_tag3_zuckerberg": [
+  "af_heart",
+  0.95,
+  "In our story, Mark Zuckerberg took his money to the Giant Phone. Go get him!"
+ ],
+ "p3_tag3_page": [
+  "af_heart",
+  0.95,
+  "In our story, Larry Page took his money to the Search Tower. Go get him!"
+ ]
+}

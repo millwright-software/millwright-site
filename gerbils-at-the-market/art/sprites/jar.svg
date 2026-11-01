@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640">
+<!-- The Gerbil Market: the town jar ("everybody puts in a little"). Glass, coins inside, a label for runtime text.
+     CC0 (hand-authored). The label rectangle is x 176-336, y 300-380: the loader writes the words there in Fredoka. Sits on y=620. -->
+<defs>
+  <clipPath id="inside"><path d="M150 214 C 128 236 120 270 120 330 L 120 556 C 120 590 148 612 190 612 L 322 612 C 364 612 392 590 392 556 L 392 330 C 392 270 384 236 362 214 Z"/></clipPath>
+  <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#bfe3f2"/><stop offset=".5" stop-color="#e6f6fb"/><stop offset="1" stop-color="#a8d4e8"/></linearGradient>
+</defs>
+<g stroke="#3b2516" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M150 214 C 128 236 120 270 120 330 L 120 556 C 120 590 148 612 190 612 L 322 612 C 364 612 392 590 392 556 L 392 330 C 392 270 384 236 362 214 Z" fill="url(#glass)" stroke="none"/>
+  <g clip-path="url(#inside)" stroke-width="5">
+    <path d="M100 470 C 160 440 200 452 256 444 C 320 436 360 450 420 440 L 420 640 L 100 640 Z" fill="#e9a823"/>
+    <g fill="#f8cf45">
+      <ellipse cx="170" cy="470" rx="34" ry="11"/><ellipse cx="236" cy="456" rx="34" ry="11"/><ellipse cx="306" cy="452" rx="34" ry="11"/><ellipse cx="362" cy="462" rx="30" ry="10"/>
+      <ellipse cx="200" cy="520" rx="34" ry="11"/><ellipse cx="282" cy="512" rx="34" ry="11"/><ellipse cx="350" cy="530" rx="30" ry="10"/><ellipse cx="150" cy="560" rx="30" ry="10"/><ellipse cx="240" cy="572" rx="34" ry="11"/><ellipse cx="320" cy="586" rx="34" ry="11"/>
+    </g>
+    <ellipse cx="270" cy="430" rx="30" ry="10" fill="#f8cf45" transform="rotate(-25 270 430)"/>
+  </g>
+  <path d="M150 214 C 128 236 120 270 120 330 L 120 556 C 120 590 148 612 190 612 L 322 612 C 364 612 392 590 392 556 L 392 330 C 392 270 384 236 362 214 Z" fill="none" stroke-width="10"/>
+  <path d="M148 300 L 148 560" stroke="#ffffff" stroke-width="16" opacity=".75" fill="none"/>
+  <path d="M176 256 L 176 280" stroke="#ffffff" stroke-width="10" opacity=".75" fill="none"/>
+  <path d="M364 330 L 364 520" stroke="#ffffff" stroke-width="7" opacity=".5" fill="none"/>
+  <rect x="160" y="168" width="192" height="52" rx="12" fill="#c99a52" stroke-width="9"/>
+  <path d="M178 176 L 178 212 M 202 176 L 202 212 M 226 176 L 226 212 M 286 176 L 286 212 M 310 176 L 310 212 M 334 176 L 334 212" stroke-width="4" opacity=".4"/>
+  <rect x="226" y="186" width="60" height="12" rx="6" fill="#3b2516" stroke="none"/>
+  <rect x="176" y="300" width="160" height="80" rx="10" fill="#fbf3dc" stroke-width="7"/>
+</g>
+</svg>
